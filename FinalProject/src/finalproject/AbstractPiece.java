@@ -1,6 +1,7 @@
 package finalproject;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import javax.swing.ImageIcon;
 
 abstract public class AbstractPiece implements Piece {
@@ -23,11 +24,11 @@ abstract public class AbstractPiece implements Piece {
         this.isWhite = isWhite;
     }
 
-    public int getxPos() {
+    public int getXPos() {
         return xPos;
     }
 
-    public int getyPos() {
+    public int getYPos() {
         return yPos;
     }
 
@@ -43,11 +44,11 @@ abstract public class AbstractPiece implements Piece {
         return value;
     }
 
-    public void setxPos(int xPos) {
+    public void setXPos(int xPos) {
         this.xPos = xPos;
     }
 
-    public void setyPos(int yPos) {
+    public void setYPos(int yPos) {
         this.yPos = yPos;
     }
 
@@ -70,9 +71,10 @@ abstract public class AbstractPiece implements Piece {
     public void setValidMoves(ArrayList<Move> validMoves) {
         this.validMoves = validMoves;
     }
-
+    abstract public ArrayList<Move> getValidMoves(ArrayList<Piece> pieces);
+    
     abstract public void searchDirection(ArrayList<Move> moves, ArrayList<Piece> pieces, int currentX, int currentY, int dx, int dy);
-
+    
     public boolean isInsideBoard(int x, int y) {
         return (xPos>= 0 && xPos<= 7 && yPos>= 0 && yPos <= 7);
     }
@@ -90,5 +92,40 @@ abstract public class AbstractPiece implements Piece {
     public static int getNumPieces() {
         return numPieces;
     }
+
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final AbstractPiece other = (AbstractPiece) obj;
+        if (this.xPos != other.xPos) {
+            return false;
+        }
+        if (this.yPos != other.yPos) {
+            return false;
+        }
+        if (this.isWhite != other.isWhite) {
+            return false;
+        }
+        if (this.value != other.value) {
+            return false;
+        }
+        if (!Objects.equals(this.validMoves, other.validMoves)) {
+            return false;
+        }
+        return Objects.equals(this.sprite, other.sprite);
+    }
+
+    public String toString() {
+        return "AbstractPiece{" + "validMoves=" + validMoves + ", xPos=" + xPos + ", yPos=" + yPos + ", isWhite=" + isWhite + ", value=" + value + '}';
+    }
+    
+    
 
 }

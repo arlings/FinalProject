@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
 public interface Piece {    
-    public ArrayList<Move> getValidMoves();
+    public ArrayList<Move> getValidMoves(ArrayList<Piece> pieces);
     abstract public void setValidMoves(ArrayList<Move> moves);
-    public ImageIcon getImage();
-    public void setImage(ImageIcon image);
+    public ImageIcon getSprite();
+    public void setSprite(ImageIcon image);
     public int getXPos();
     public int getYPos();
     public void setXPos(int xPos);
