@@ -29,13 +29,25 @@ public class MainWindow extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         newGameBtn = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        fileBtn = new javax.swing.JButton();
+        newBtn = new javax.swing.JButton();
+        customizeBtn = new javax.swing.JButton();
+        helpBtn = new javax.swing.JButton();
+        exitBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         newGameBtn.setText("New Game");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/GoldChessPieces.jpg"))); // NOI18N
+        fileBtn.setText("File");
+
+        newBtn.setText("New");
+
+        customizeBtn.setText("Customize");
+
+        helpBtn.setText("Help");
+
+        exitBtn.setText("Exit");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -44,17 +56,31 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(newGameBtn)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(fileBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(newBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(customizeBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(helpBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(exitBtn)
+                .addGap(0, 27, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(newGameBtn))
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fileBtn)
+                    .addComponent(newBtn)
+                    .addComponent(customizeBtn)
+                    .addComponent(helpBtn)
+                    .addComponent(exitBtn))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
+                .addComponent(newGameBtn)
                 .addGap(68, 68, 68))
         );
 
@@ -110,8 +136,12 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton customizeBtn;
+    private javax.swing.JButton exitBtn;
+    private javax.swing.JButton fileBtn;
+    private javax.swing.JButton helpBtn;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton newBtn;
     private javax.swing.JButton newGameBtn;
     // End of variables declaration//GEN-END:variables
 }
