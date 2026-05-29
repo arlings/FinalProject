@@ -30,12 +30,36 @@ public class King extends AbstractPiece{
     
     @Override
     public ArrayList<Move> getValidMoves(ArrayList<Piece> pieces) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<Move> moves = new ArrayList();
+
+        searchDirection(moves, pieces, xPos + 1, yPos, 1, 0);
+        searchDirection(moves, pieces, xPos - 1, yPos, -1, 0);
+        searchDirection(moves, pieces, xPos, yPos + 1, 0, 1);
+        searchDirection(moves, pieces, xPos, yPos - 1, 0, -1);
+
+        searchDirection(moves, pieces, xPos + 1, yPos + 1, 1, 1);
+        searchDirection(moves, pieces, xPos - 1, yPos + 1, -1, 1);
+        searchDirection(moves, pieces, xPos + 1, yPos - 1, 1, -1);
+        searchDirection(moves, pieces, xPos - 1, yPos - 1, -1, -1);
+
+        return moves;
     }
 
     @Override
     public void searchDirection(ArrayList<Move> moves, ArrayList<Piece> pieces, int currentX, int currentY, int dx, int dy) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (!isInsideBoard(currentX, currentY)) {
+            return;
+        }
+
+        Piece piece = getPieceAt(currentX, currentY, pieces);
+
+        if (piece == null) {
+            moves.add(new Move(currentX, currentY));
+        } else {
+            if (piece.isWhite() != this.isWhite()) {
+                moves.add(new Move(currentX, currentY));
+            }
+        }
     }
 
     public static int getNumKings() {

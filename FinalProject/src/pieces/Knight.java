@@ -29,8 +29,10 @@ public class Knight extends AbstractPiece{
 
     @Override
     public void searchDirection(ArrayList<Move> moves, ArrayList<Piece> pieces, int currentX, int currentY, int dx, int dy) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
     }
+    
+   
 
     public static int getNumKnights() {
         return numKnights;
