@@ -80,7 +80,22 @@ abstract public class AbstractPiece implements Piece {
     }
     abstract public ArrayList<Move> getValidMoves(ArrayList<Piece> pieces);
     
-    abstract public void searchDirection(ArrayList<Move> moves, ArrayList<Piece> pieces, int currentX, int currentY, int dx, int dy);
+    public void searchDirection(ArrayList<Move> moves, ArrayList<Piece> pieces, int currentX, int currentY, int dx, int dy){
+        if (!isInsideBoard(currentX, currentY)) {
+            return;
+        }
+
+        Piece piece = getPieceAt(currentX, currentY, pieces);
+
+        if (piece == null) {
+            moves.add(new Move(currentX, currentY));
+            searchDirection(moves, pieces, currentX + dx, currentY + dy, dx, dy);
+        } else {
+            if (piece.isWhite() != this.isWhite()) {
+                moves.add(new Move(currentX, currentY));
+            }
+        }
+    }
     
     public boolean isInsideBoard(int x, int y) {
         return (xPos>= 0 && xPos<= 7 && yPos>= 0 && yPos <= 7);

@@ -25,24 +25,7 @@ public class Queen extends AbstractPiece {
         numQueens++;
     }
 
-    @Override
-    public void searchDirection(ArrayList<Move> moves, ArrayList<Piece> pieces, int currentX, int currentY, int dx, int dy) {
-        if (!isInsideBoard(currentX, currentY)) {
-            return;
-        }
-
-        Piece piece = getPieceAt(currentX, currentY, pieces);
-
-        if (piece == null) {
-            moves.add(new Move(currentX, currentY));
-            searchDirection(moves, pieces, currentX + dx, currentY + dy, dx, dy);
-        } else {
-            if (piece.isWhite() != this.isWhite()) {
-                moves.add(new Move(currentX, currentY));
-            }
-        }
-    }
-
+   
     @Override
     public ArrayList<Move> getValidMoves(ArrayList<Piece> pieces) {
         ArrayList<Move> moves = new ArrayList();
@@ -58,7 +41,6 @@ public class Queen extends AbstractPiece {
         searchDirection(moves, pieces, xPos - 1, yPos - 1, -1, -1);
 
         return moves;
-
     }
 
     public static int getNumQueens() {
