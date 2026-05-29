@@ -1,14 +1,57 @@
 package finalproject;
 
+import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Scanner;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class MainWindow extends javax.swing.JFrame {
 
     private SandboxWindow sandboxWindow;
     
+    // https://stackoverflow.com/questions/16046824/making-a-java-swing-frame-movable-and-setundecorated
+    public void MoveJFrame() {
+        this.setUndecorated(true);
+        FrameDragListener frameDragListener = new FrameDragListener(this);
+        this.addMouseListener(frameDragListener);
+        this.addMouseMotionListener(frameDragListener);
+        this.pack();
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+    }
+    
     public MainWindow() {
+        MoveJFrame();
         initComponents();
+    }
+    
+    public static class FrameDragListener extends MouseAdapter {
+        private final JFrame frame;
+        private Point mouseDownCompCoords = null;
+
+        public FrameDragListener(JFrame frame) {
+            this.frame = frame;
+        }
+
+        public void mouseReleased(MouseEvent e) {
+            mouseDownCompCoords = null;
+        }
+
+        public void mousePressed(MouseEvent e) {
+            mouseDownCompCoords = e.getPoint();
+        }
+
+        public void mouseDragged(MouseEvent e) {
+            Point currCoords = e.getLocationOnScreen();
+            frame.setLocation(currCoords.x - mouseDownCompCoords.x, currCoords.y - mouseDownCompCoords.y);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -100,6 +143,11 @@ public class MainWindow extends javax.swing.JFrame {
         newMenu.setText("New");
 
         newUserMenuItem.setText("New User");
+        newUserMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newUserMenuItemActionPerformed(evt);
+            }
+        });
         newMenu.add(newUserMenuItem);
 
         newGameMenuItem.setText("New Game...");
@@ -146,20 +194,27 @@ public class MainWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void importGameMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importGameMenuItemActionPerformed
-        JFileChooser chooser = new JFileChooser();
-        
-        // 2. Set the default directory (optional, "." is current project folder)
-        chooser.setCurrentDirectory(new File(".")); 
-
-        // 3. Show the dialog and get the user's response
-        int result = chooser.showOpenDialog(this);
-
-        // 4. Check if the user clicked "Open"
-        if (result == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = chooser.getSelectedFile();
+        // Used some ai to help with this
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                "Text File (*.txt)", "txt");
+        fileChooser.setFileFilter(filter);
+        int userSelection = fileChooser.showOpenDialog(null);
+        Scanner s = new Scanner("");
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
             System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+            try (InputStream is = new FileInputStream(selectedFile)) {
+                
+            } catch (IOException e) {
+                System.err.println("Error reading the file: " + e.getMessage());
+            }
         }
     }//GEN-LAST:event_importGameMenuItemActionPerformed
+
+    private void newUserMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newUserMenuItemActionPerformed
+        
+    }//GEN-LAST:event_newUserMenuItemActionPerformed
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
