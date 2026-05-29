@@ -1,5 +1,8 @@
 package finalproject;
 
+import java.io.File;
+import javax.swing.JFileChooser;
+
 public class MainWindow extends javax.swing.JFrame {
 
     private SandboxWindow sandboxWindow;
@@ -82,6 +85,11 @@ public class MainWindow extends javax.swing.JFrame {
         fileMenu.setText("File");
 
         importGameMenuItem.setText("Import Game...");
+        importGameMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                importGameMenuItemActionPerformed(evt);
+            }
+        });
         fileMenu.add(importGameMenuItem);
 
         exportGameMenuItem.setText("Export Game...");
@@ -136,6 +144,22 @@ public class MainWindow extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void importGameMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importGameMenuItemActionPerformed
+        JFileChooser chooser = new JFileChooser();
+        
+        // 2. Set the default directory (optional, "." is current project folder)
+        chooser.setCurrentDirectory(new File(".")); 
+
+        // 3. Show the dialog and get the user's response
+        int result = chooser.showOpenDialog(this);
+
+        // 4. Check if the user clicked "Open"
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = chooser.getSelectedFile();
+            System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+        }
+    }//GEN-LAST:event_importGameMenuItemActionPerformed
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
