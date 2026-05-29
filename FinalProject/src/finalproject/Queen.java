@@ -14,15 +14,18 @@ import javax.swing.ImageIcon;
 
 public class Queen extends AbstractPiece {
     
-    
+    private static int numQueens = 0;
     public Queen() {
         super();
+        numQueens++;
     }
 
     public Queen(int xPos, int yPos, ImageIcon sprite, boolean isWhite) {
         super(xPos, yPos, sprite, isWhite);
+        numQueens++;
     }
 
+    @Override
     public void searchDirection(ArrayList<Move> moves, ArrayList<Piece> pieces, int currentX, int currentY, int dx, int dy) {
         if (!isInsideBoard(currentX, currentY)) {
             return;
@@ -40,6 +43,7 @@ public class Queen extends AbstractPiece {
         }
     }
 
+    @Override
     public ArrayList<Move> getValidMoves(ArrayList<Piece> pieces) {
         ArrayList<Move> moves = new ArrayList();
 
@@ -57,10 +61,14 @@ public class Queen extends AbstractPiece {
 
     }
 
-    public boolean equals() {
-        return true; //finish later
+    public static int getNumQueens() {
+        return numQueens;
     }
 
-
-
+    @Override
+    public String toString() {
+        return ("Piece Type: Queen"
+                + super.toString());
+    }
+    
 }

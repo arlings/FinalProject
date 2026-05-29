@@ -7,7 +7,7 @@ import javax.swing.ImageIcon;
 
 public interface Piece {    
     public ArrayList<Move> getValidMoves(ArrayList<Piece> pieces);
-    abstract public void setValidMoves(ArrayList<Move> moves);
+    public void setValidMoves(ArrayList<Move> moves);
     public ImageIcon getSprite();
     public void setSprite(ImageIcon image);
     public int getXPos();
@@ -20,7 +20,7 @@ public interface Piece {
     abstract public void searchDirection(ArrayList<Move> moves, ArrayList<Piece> pieces, int currentX, int currentY, int dx, int dy);
     public boolean isInsideBoard(int x, int y);
     public Piece getPieceAt(int x, int y, ArrayList<Piece> pieces);
-    public boolean equals();
+    public boolean equals(Piece p);
     public String toString();
 
 }

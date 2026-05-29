@@ -39,6 +39,13 @@ abstract public class AbstractPiece implements Piece {
     public boolean isWhite() {
         return isWhite;
     }
+    
+    public String getTeam(){
+        if(isWhite){
+            return "White";
+        }
+        return "Black";
+    }
 
     public int getValue() {
         return value;
@@ -93,39 +100,33 @@ abstract public class AbstractPiece implements Piece {
         return numPieces;
     }
 
-    public boolean equals(Object obj) {
-        if (this == obj) {
+    public boolean equals(Piece p) {
+        if (this == p) {
             return true;
         }
-        if (obj == null) {
+        if (p == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (getClass() != p.getClass()) {
             return false;
         }
-        final AbstractPiece other = (AbstractPiece) obj;
-        if (this.xPos != other.xPos) {
-            return false;
-        }
-        if (this.yPos != other.yPos) {
-            return false;
-        }
+        final AbstractPiece other = (AbstractPiece) p;
         if (this.isWhite != other.isWhite) {
             return false;
         }
         if (this.value != other.value) {
             return false;
         }
-        if (!Objects.equals(this.validMoves, other.validMoves)) {
-            return false;
-        }
         return Objects.equals(this.sprite, other.sprite);
     }
 
     public String toString() {
-        return "AbstractPiece{" + "validMoves=" + validMoves + ", xPos=" + xPos + ", yPos=" + yPos + ", isWhite=" + isWhite + ", value=" + value + '}';
+        return("Piece Information"
+                + "\nX Position: " + xPos
+                + "\nX Position: " + xPos
+                + "\nTeam: " + this.getTeam()
+                + "\nNumber of Valid Moves: " + validMoves
+                + "\nValue: " + value);
     }
-    
-    
 
 }
