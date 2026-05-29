@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package finalproject;
+package pieces;
 
+import pieces.Move;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
@@ -11,17 +12,21 @@ import javax.swing.ImageIcon;
  *
  * @author NeWan5443
  */
-public class Rook extends AbstractPiece{
-    private static int numRooks;
+
+public class Queen extends AbstractPiece {
     
-    public Rook() {
+    private static int numQueens = 0;
+    public Queen() {
         super();
+        numQueens++;
     }
 
-    public Rook(int xPos, int yPos, ImageIcon sprite, boolean isWhite) {
+    public Queen(int xPos, int yPos, ImageIcon sprite, boolean isWhite) {
         super(xPos, yPos, sprite, isWhite);
+        numQueens++;
     }
-    
+
+   
     @Override
     public ArrayList<Move> getValidMoves(ArrayList<Piece> pieces) {
         ArrayList<Move> moves = new ArrayList();
@@ -31,18 +36,21 @@ public class Rook extends AbstractPiece{
         searchDirection(moves, pieces, xPos, yPos + 1, 0, 1);
         searchDirection(moves, pieces, xPos, yPos - 1, 0, -1);
 
+        searchDirection(moves, pieces, xPos + 1, yPos + 1, 1, 1);
+        searchDirection(moves, pieces, xPos - 1, yPos + 1, -1, 1);
+        searchDirection(moves, pieces, xPos + 1, yPos - 1, 1, -1);
+        searchDirection(moves, pieces, xPos - 1, yPos - 1, -1, -1);
+
         return moves;
     }
 
-    
-
-    public static int getNumRooks() {
-        return numRooks;
+    public static int getNumQueens() {
+        return numQueens;
     }
-    
+
     @Override
     public String toString() {
-        return ("Piece Type: Rook"
+        return ("Piece Type: Queen"
                 + super.toString());
     }
     

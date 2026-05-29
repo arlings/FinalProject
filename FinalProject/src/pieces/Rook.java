@@ -2,47 +2,49 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package finalproject;
+package pieces;
 
+import pieces.Move;
 import java.util.ArrayList;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
 /**
  *
  * @author NeWan5443
  */
-public class Bishop extends AbstractPiece{
-    private static int numBishop = 0;
-    public Bishop() {
+public class Rook extends AbstractPiece{
+    private static int numRooks;
+    
+    public Rook() {
         super();
-        numBishop++;
     }
 
-    public Bishop(int xPos, int yPos, ImageIcon sprite, boolean isWhite) {
+    public Rook(int xPos, int yPos, ImageIcon sprite, boolean isWhite) {
         super(xPos, yPos, sprite, isWhite);
-        numBishop++;
     }
     
     @Override
     public ArrayList<Move> getValidMoves(ArrayList<Piece> pieces) {
         ArrayList<Move> moves = new ArrayList();
 
-        searchDirection(moves, pieces, xPos + 1, yPos + 1, 1, 1);
-        searchDirection(moves, pieces, xPos - 1, yPos + 1, -1, 1);
-        searchDirection(moves, pieces, xPos + 1, yPos - 1, 1, -1);
-        searchDirection(moves, pieces, xPos - 1, yPos - 1, -1, -1);
+        searchDirection(moves, pieces, xPos + 1, yPos, 1, 0);
+        searchDirection(moves, pieces, xPos - 1, yPos, -1, 0);
+        searchDirection(moves, pieces, xPos, yPos + 1, 0, 1);
+        searchDirection(moves, pieces, xPos, yPos - 1, 0, -1);
 
         return moves;
     }
-   
-    public static int getNumBishop() {
-        return numBishop;
+
+    
+
+    public static int getNumRooks() {
+        return numRooks;
     }
     
     @Override
     public String toString() {
-        return ("Piece Type: Bishop"
+        return ("Piece Type: Rook"
                 + super.toString());
     }
+    
 }

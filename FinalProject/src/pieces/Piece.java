@@ -1,6 +1,7 @@
 
-package finalproject;
+package pieces;
 
+import pieces.Move;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;

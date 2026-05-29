@@ -2,38 +2,32 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package finalproject;
+package pieces;
 
+import pieces.Move;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
 /**
  *
  * @author NeWan5443
  */
-
-public class Queen extends AbstractPiece {
-    
-    private static int numQueens = 0;
-    public Queen() {
+public class Bishop extends AbstractPiece{
+    private static int numBishop = 0;
+    public Bishop() {
         super();
-        numQueens++;
+        numBishop++;
     }
 
-    public Queen(int xPos, int yPos, ImageIcon sprite, boolean isWhite) {
+    public Bishop(int xPos, int yPos, ImageIcon sprite, boolean isWhite) {
         super(xPos, yPos, sprite, isWhite);
-        numQueens++;
+        numBishop++;
     }
-
-   
+    
     @Override
     public ArrayList<Move> getValidMoves(ArrayList<Piece> pieces) {
         ArrayList<Move> moves = new ArrayList();
-
-        searchDirection(moves, pieces, xPos + 1, yPos, 1, 0);
-        searchDirection(moves, pieces, xPos - 1, yPos, -1, 0);
-        searchDirection(moves, pieces, xPos, yPos + 1, 0, 1);
-        searchDirection(moves, pieces, xPos, yPos - 1, 0, -1);
 
         searchDirection(moves, pieces, xPos + 1, yPos + 1, 1, 1);
         searchDirection(moves, pieces, xPos - 1, yPos + 1, -1, 1);
@@ -42,15 +36,14 @@ public class Queen extends AbstractPiece {
 
         return moves;
     }
-
-    public static int getNumQueens() {
-        return numQueens;
-    }
-
-    @Override
-    public String toString() {
-        return ("Piece Type: Queen"
-                + super.toString());
+   
+    public static int getNumBishop() {
+        return numBishop;
     }
     
+    @Override
+    public String toString() {
+        return ("Piece Type: Bishop"
+                + super.toString());
+    }
 }
