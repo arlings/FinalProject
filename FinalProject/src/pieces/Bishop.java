@@ -4,10 +4,9 @@
  */
 package pieces;
 
+import java.awt.image.BufferedImage;
 import pieces.Move;
 import java.util.ArrayList;
-import java.util.logging.Logger;
-import javax.swing.ImageIcon;
 
 /**
  *
@@ -20,7 +19,7 @@ public class Bishop extends AbstractPiece{
         numBishop++;
     }
 
-    public Bishop(int xPos, int yPos, ImageIcon sprite, boolean isWhite) {
+    public Bishop(int xPos, int yPos, BufferedImage sprite, boolean isWhite) {
         super(xPos, yPos, sprite, isWhite);
         numBishop++;
     }

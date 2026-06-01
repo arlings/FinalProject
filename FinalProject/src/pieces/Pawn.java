@@ -4,8 +4,8 @@
  */
 package pieces;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import javax.swing.ImageIcon;
 
 /**
  *
@@ -18,7 +18,7 @@ public class Pawn extends AbstractPiece {
     public Pawn() {
     }
 
-    public Pawn(int xPos, int yPos, ImageIcon sprite, boolean isWhite) {
+    public Pawn(int xPos, int yPos, BufferedImage sprite, boolean isWhite) {
         super(xPos, yPos, sprite, isWhite);
     }
 

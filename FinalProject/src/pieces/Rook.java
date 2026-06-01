@@ -4,9 +4,8 @@
  */
 package pieces;
 
-import pieces.Move;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import javax.swing.ImageIcon;
 
 /**
  *
@@ -19,7 +18,7 @@ public class Rook extends AbstractPiece{
         super();
     }
 
-    public Rook(int xPos, int yPos, ImageIcon sprite, boolean isWhite) {
+    public Rook(int xPos, int yPos, BufferedImage sprite, boolean isWhite) {
         super(xPos, yPos, sprite, isWhite);
     }
     

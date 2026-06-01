@@ -4,9 +4,8 @@
  */
 package pieces;
 
-import pieces.Move;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import javax.swing.ImageIcon;
 
 /**
  *
@@ -21,7 +20,7 @@ public class Queen extends AbstractPiece {
         numQueens++;
     }
 
-    public Queen(int xPos, int yPos, ImageIcon sprite, boolean isWhite) {
+    public Queen(int xPos, int yPos, BufferedImage sprite, boolean isWhite) {
         super(xPos, yPos, sprite, isWhite);
         numQueens++;
     }

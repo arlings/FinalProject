@@ -4,8 +4,8 @@
  */
 package pieces;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import javax.swing.ImageIcon;
 
 /**
  *
@@ -22,7 +22,7 @@ public class King extends AbstractPiece{
         inCheckMate = false;
     }
 
-    public King(int xPos, int yPos, ImageIcon sprite, boolean isWhite, boolean inCheck, boolean inCheckMate) {
+    public King(int xPos, int yPos, BufferedImage sprite, boolean isWhite, boolean inCheck, boolean inCheckMate) {
         super(xPos, yPos, sprite, isWhite);
         this.inCheck = inCheck;
         this.inCheckMate = inCheckMate;

@@ -1,5 +1,6 @@
 package pieces;
 
+import java.awt.image.BufferedImage;
 import pieces.Move;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -10,7 +11,7 @@ abstract public class AbstractPiece implements Piece {
     protected ArrayList<Move> validMoves;
     protected int xPos;
     protected int yPos;
-    protected ImageIcon sprite;
+    protected BufferedImage sprite;
     protected boolean isWhite;
     protected static int numPieces;
     protected int value;
@@ -18,7 +19,7 @@ abstract public class AbstractPiece implements Piece {
     public AbstractPiece() {
     }
 
-    public AbstractPiece(int xPos, int yPos, ImageIcon sprite, boolean isWhite) {
+    public AbstractPiece(int xPos, int yPos, BufferedImage sprite, boolean isWhite) {
         this.xPos = xPos;
         this.yPos = yPos;
         this.sprite = sprite;
@@ -33,7 +34,7 @@ abstract public class AbstractPiece implements Piece {
         return yPos;
     }
 
-    public ImageIcon getSprite() {
+    public BufferedImage getSprite() {
         return sprite;
     }
 
@@ -60,7 +61,7 @@ abstract public class AbstractPiece implements Piece {
         this.yPos = yPos;
     }
 
-    public void setSprite(ImageIcon sprite) {
+    public void setSprite(BufferedImage sprite) {
         this.sprite = sprite;
     }
 

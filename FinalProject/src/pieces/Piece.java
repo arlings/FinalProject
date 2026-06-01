@@ -1,7 +1,7 @@
 
 package pieces;
 
-import pieces.Move;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -9,8 +9,8 @@ import javax.swing.ImageIcon;
 public interface Piece {    
     public ArrayList<Move> getValidMoves(ArrayList<Piece> pieces);
     public void setValidMoves(ArrayList<Move> moves);
-    public ImageIcon getSprite();
-    public void setSprite(ImageIcon image);
+    public BufferedImage getSprite();
+    public void setSprite(BufferedImage image);
     public int getXPos();
     public int getYPos();
     public void setXPos(int xPos);

@@ -1,7 +1,7 @@
 package pieces;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import javax.swing.ImageIcon;
 
 public class Knight extends AbstractPiece {
 
@@ -11,7 +11,7 @@ public class Knight extends AbstractPiece {
         super();
     }
 
-    public Knight(int xPos, int yPos, ImageIcon sprite, boolean isWhite) {
+    public Knight(int xPos, int yPos, BufferedImage sprite, boolean isWhite) {
         super(xPos, yPos, sprite, isWhite);
     }
 
