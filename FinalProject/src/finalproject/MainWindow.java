@@ -15,6 +15,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class MainWindow extends javax.swing.JFrame {
 
     private SandboxWindow sandboxWindow;
+    private GameWindow gameWindow;
+    private CreateUser createUser;
+    private EnterUsername enterUsername;
     
     // https://stackoverflow.com/questions/16046824/making-a-java-swing-frame-movable-and-setundecorated
     public void MoveJFrame() {
@@ -107,7 +110,7 @@ public class MainWindow extends javax.swing.JFrame {
                                 .addComponent(chessIconDecoration2)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(chessIconDecoration)))
-                .addContainerGap(258, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,9 +156,19 @@ public class MainWindow extends javax.swing.JFrame {
         newGameMenuItem.setText("New Game...");
 
         competitiveMenuItem.setText("Competitive");
+        competitiveMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                competitiveMenuItemActionPerformed(evt);
+            }
+        });
         newGameMenuItem.add(competitiveMenuItem);
 
         sandboxMenuItem.setText("Sandbox");
+        sandboxMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sandboxMenuItemActionPerformed(evt);
+            }
+        });
         newGameMenuItem.add(sandboxMenuItem);
 
         newMenu.add(newGameMenuItem);
@@ -188,7 +201,6 @@ public class MainWindow extends javax.swing.JFrame {
         );
 
         jPanel1.getAccessibleContext().setAccessibleName("");
-        jPanel1.getAccessibleContext().setAccessibleParent(null);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -213,8 +225,28 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_importGameMenuItemActionPerformed
 
     private void newUserMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newUserMenuItemActionPerformed
-        
+        if (createUser == null) {
+            createUser = new CreateUser(this);
+        }
+        createUser.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_newUserMenuItemActionPerformed
+
+    private void competitiveMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_competitiveMenuItemActionPerformed
+        if (enterUsername == null) {
+            enterUsername = new EnterUsername(this);
+        }
+        enterUsername.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_competitiveMenuItemActionPerformed
+
+    private void sandboxMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sandboxMenuItemActionPerformed
+        if (sandboxWindow == null) {
+            sandboxWindow = new SandboxWindow(this);
+        }
+        sandboxWindow.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_sandboxMenuItemActionPerformed
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

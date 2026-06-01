@@ -1,20 +1,13 @@
 package finalproject;
 
-public class GameWindow extends javax.swing.JFrame {
+public class CreateUser extends javax.swing.JFrame {
     
-    SandboxWindow sandboxWindow;
     MainWindow mainWindow;
     
-    public GameWindow(SandboxWindow m) {
-        initComponents();
-        sandboxWindow = m;
-        this.setTitle("Game Window");
-    }
-    
-    public GameWindow(MainWindow m) {
+    public CreateUser(MainWindow m) {
         initComponents();
         mainWindow = m;
-        this.setTitle("Game Window");
+        this.setTitle("Create user");
     }
 
     @SuppressWarnings("unchecked")
@@ -27,11 +20,11 @@ public class GameWindow extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 420, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 381, Short.MAX_VALUE)
+            .addGap(0, 300, Short.MAX_VALUE)
         );
 
         pack();
