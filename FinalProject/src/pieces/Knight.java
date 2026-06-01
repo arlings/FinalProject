@@ -1,16 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package pieces;
 
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
-/**
- *
- * @author NeWan5443
- */
+
 public class Knight extends AbstractPiece{
     private static int numKnights = 0;
     
@@ -24,15 +18,37 @@ public class Knight extends AbstractPiece{
     
     @Override
     public ArrayList<Move> getValidMoves(ArrayList<Piece> pieces) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<Move> moves = new ArrayList();
+        
+        searchDirection(moves, pieces, xPos, yPos, 1, -2);
+        searchDirection(moves, pieces, xPos, yPos, -1, -2);
+        searchDirection(moves, pieces, xPos, yPos, 1, 2);
+        searchDirection(moves, pieces, xPos, yPos, -1, 2);
+        searchDirection(moves, pieces, xPos, yPos, 2, -1);
+        searchDirection(moves, pieces, xPos, yPos, 2, 1);
+        searchDirection(moves, pieces, xPos, yPos, -2, -1);
+        searchDirection(moves, pieces, xPos, yPos, -2, 1);
+        
+        return moves;
     }
 
     @Override
     public void searchDirection(ArrayList<Move> moves, ArrayList<Piece> pieces, int currentX, int currentY, int dx, int dy) {
-        
+        int targetX = currentX + dx;
+        int targetY = currentY + dy;
+
+        if (targetX >= 0 && targetX < 8 && targetY >= 0 && targetY < 8) {
+            
+            Piece piece = getPieceAt(targetX, targetY, pieces);
+
+            if (piece == null) {
+                moves.add(new Move(targetX, targetY));
+            } else if (piece.isWhite() != this.isWhite) {
+                moves.add(new Move(targetX, targetY));
+            }
+         }
     }
-    
-   
+  
 
     public static int getNumKnights() {
         return numKnights;
