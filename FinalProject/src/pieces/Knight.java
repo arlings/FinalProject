@@ -1,13 +1,12 @@
-
 package pieces;
 
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
+public class Knight extends AbstractPiece {
 
-public class Knight extends AbstractPiece{
     private static int numKnights = 0;
-    
+
     public Knight() {
         super();
     }
@@ -15,11 +14,11 @@ public class Knight extends AbstractPiece{
     public Knight(int xPos, int yPos, ImageIcon sprite, boolean isWhite) {
         super(xPos, yPos, sprite, isWhite);
     }
-    
+
     @Override
     public ArrayList<Move> getValidMoves(ArrayList<Piece> pieces) {
-        ArrayList<Move> moves = new ArrayList();
-        
+        ArrayList<Move> moves = new ArrayList<>();
+
         searchDirection(moves, pieces, xPos, yPos, 1, -2);
         searchDirection(moves, pieces, xPos, yPos, -1, -2);
         searchDirection(moves, pieces, xPos, yPos, 1, 2);
@@ -28,7 +27,7 @@ public class Knight extends AbstractPiece{
         searchDirection(moves, pieces, xPos, yPos, 2, 1);
         searchDirection(moves, pieces, xPos, yPos, -2, -1);
         searchDirection(moves, pieces, xPos, yPos, -2, 1);
-        
+
         return moves;
     }
 
@@ -38,7 +37,7 @@ public class Knight extends AbstractPiece{
         int targetY = currentY + dy;
 
         if (targetX >= 0 && targetX < 8 && targetY >= 0 && targetY < 8) {
-            
+
             Piece piece = getPieceAt(targetX, targetY, pieces);
 
             if (piece == null) {
@@ -46,14 +45,13 @@ public class Knight extends AbstractPiece{
             } else if (piece.isWhite() != this.isWhite) {
                 moves.add(new Move(targetX, targetY));
             }
-         }
+        }
     }
-  
 
     public static int getNumKnights() {
         return numKnights;
     }
-    
+
     @Override
     public String toString() {
         return ("Piece Type: Knight"
