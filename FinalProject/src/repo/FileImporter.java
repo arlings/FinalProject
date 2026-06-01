@@ -8,7 +8,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 import javax.imageio.ImageIO;
-import java.util.List;
 
 public class FileImporter {
 
