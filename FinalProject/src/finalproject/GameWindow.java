@@ -1,5 +1,6 @@
 package finalproject;
 
+import java.awt.Component;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -23,8 +24,21 @@ public class GameWindow extends javax.swing.JFrame {
         this.setTitle("Game Window");
     }
     
+    /*
+    private void storePanels(){
+        Component[] children = boardContainerPanel.getComponents();
+        int index = 0;
+        for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 8; col++) {
+                tiles[row][col] = (JPanel) children[index];
+                tiles[row][col].setLayout(new java.awt.GridBagLayout());
+                index++;
+            }
+        }
+    }
+    */
     
-    public void updateBoardUI() { 
+    private void updateBoardUI() { 
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
                 tiles[row][col].removeAll();
@@ -52,11 +66,11 @@ public class GameWindow extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 410, Short.MAX_VALUE)
+            .addGap(0, 513, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 381, Short.MAX_VALUE)
+            .addGap(0, 503, Short.MAX_VALUE)
         );
 
         pack();
