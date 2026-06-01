@@ -3,10 +3,17 @@ package finalproject;
 public class GameWindow extends javax.swing.JFrame {
     
     SandboxWindow sandboxWindow;
+    MainWindow mainWindow;
     
     public GameWindow(SandboxWindow m) {
         initComponents();
         sandboxWindow = m;
+        this.setTitle("Game Window");
+    }
+    
+    public GameWindow(MainWindow m) {
+        initComponents();
+        mainWindow = m;
         this.setTitle("Game Window");
     }
 
