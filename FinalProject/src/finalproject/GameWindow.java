@@ -6,55 +6,118 @@ import javax.swing.JPanel;
 import pieces.Piece;
 
 public class GameWindow extends javax.swing.JFrame {
+
     SandboxWindow sandboxWindow;
     MainWindow mainWindow;
-    
-    private JPanel[][] tiles = new JPanel[8][8]; 
+
+    private JPanel[][] board = new JPanel[8][8];
     private Piece[][] pieces = new Piece[8][8];
+
     public GameWindow(SandboxWindow m) {
-        initComponents();
+        startGame();
         sandboxWindow = m;
-        this.setTitle("Game Window");
     }
-    
+
     public GameWindow(MainWindow m) {
-        initComponents();
+        startGame();
         mainWindow = m;
+    }
+    
+    private void startGame(){
+        initComponents();
         this.setTitle("Game Window");
     }
-    
-    /*
-    private void storePanels(){
-        Component[] children = boardContainerPanel.getComponents();
-        int index = 0;
-        for (int row = 0; row < 8; row++) {
-            for (int col = 0; col < 8; col++) {
-                tiles[row][col] = (JPanel) children[index];
-                tiles[row][col].setLayout(new java.awt.GridBagLayout());
-                index++;
-            }
-        }
+    private void storePanels() {
+        board[0][0] = A1;
+        board[0][1] = A2;
+        board[0][2] = A3;
+        board[0][3] = A4;
+        board[0][4] = A5;
+        board[0][5] = A6;
+        board[0][6] = A7;
+        board[0][7] = A8;
+
+        board[1][0] = B1;
+        board[1][1] = B2;
+        board[1][2] = B3;
+        board[1][3] = B4;
+        board[1][4] = B5;
+        board[1][5] = B6;
+        board[1][6] = B7;
+        board[1][7] = B8;
+
+        board[2][0] = C1;
+        board[2][1] = C2;
+        board[2][2] = C3;
+        board[2][3] = C4;
+        board[2][4] = C5;
+        board[2][5] = C6;
+        board[2][6] = C7;
+        board[2][7] = C8;
+
+        board[3][0] = D1;
+        board[3][1] = D2;
+        board[3][2] = D3;
+        board[3][3] = D4;
+        board[3][4] = D5;
+        board[3][5] = D6;
+        board[3][6] = D7;
+        board[3][7] = D8;
+
+        board[4][0] = E1;
+        board[4][1] = E2;
+        board[4][2] = E3;
+        board[4][3] = E4;
+        board[4][4] = E5;
+        board[4][5] = E6;
+        board[4][6] = E7;
+        board[4][7] = E8;
+
+        board[5][0] = F1;
+        board[5][1] = F2;
+        board[5][2] = F3;
+        board[5][3] = F4;
+        board[5][4] = F5;
+        board[5][5] = F6;
+        board[5][6] = F7;
+        board[5][7] = F8;
+
+        board[6][0] = G1;
+        board[6][1] = G2;
+        board[6][2] = G3;
+        board[6][3] = G4;
+        board[6][4] = G5;
+        board[6][5] = G6;
+        board[6][6] = G7;
+        board[6][7] = G8;
+
+        board[7][0] = H1;
+        board[7][1] = H2;
+        board[7][2] = H3;
+        board[7][3] = H4;
+        board[7][4] = H5;
+        board[7][5] = H6;
+        board[7][6] = H7;
+        board[7][7] = H8;
     }
-    */
-    
-    private void updateBoardUI() { 
+
+    private void updateBoardUI() {
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
-                tiles[row][col].removeAll();
+                board[row][col].removeAll();
                 Piece piece = pieces[row][col];
                 if (piece != null) {
                     java.awt.image.BufferedImage img = piece.getSprite();
                     ImageIcon icon = new ImageIcon(img);
                     JLabel pieceLabel = new JLabel(icon);
-                    tiles[row][col].add(pieceLabel);
+                    board[row][col].add(pieceLabel);
                 }
-                tiles[row][col].revalidate();
-                tiles[row][col].repaint();
+                board[row][col].revalidate();
+                board[row][col].repaint();
             }
         }
     }
-    
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
