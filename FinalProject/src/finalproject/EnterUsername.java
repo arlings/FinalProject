@@ -5,12 +5,11 @@ import java.util.ArrayList;
 public class EnterUsername extends javax.swing.JFrame {
     
     private MainWindow mainWindow;
-    ArrayList<User> arrayOfUsers=new ArrayList<>();
+    private GameWindow gameWindow;
     
     public EnterUsername(MainWindow m) {
         initComponents();
         mainWindow = m;
-        this.setTitle("Enter username");
     }
 
     @SuppressWarnings("unchecked")
@@ -64,11 +63,12 @@ public class EnterUsername extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void goBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBtnActionPerformed
-        for(int i=0; i<arrayOfUsers.size(); i++){
-            if(arrayOfUsers.get(i).getUserName().equals(userNameField)){
-                
-            }
+        if (gameWindow == null) {
+            gameWindow = new GameWindow(this);
         }
+        gameWindow.setVisible(true);
+        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_goBtnActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

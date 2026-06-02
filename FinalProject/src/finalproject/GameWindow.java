@@ -21,6 +21,7 @@ public class GameWindow extends javax.swing.JFrame {
 
     SandboxWindow sandboxWindow;
     MainWindow mainWindow;
+    EnterUsername enterUsername;
 
     private JPanel[][] board = new JPanel[8][8];
     
@@ -34,6 +35,11 @@ public class GameWindow extends javax.swing.JFrame {
     public GameWindow(MainWindow m) {
         startGame();
         mainWindow = m;
+    }
+    
+    public GameWindow(EnterUsername m) {
+        startGame();
+        enterUsername = m;
     }
     
     private void startGame(){
