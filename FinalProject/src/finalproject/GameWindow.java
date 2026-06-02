@@ -14,15 +14,13 @@ public class GameWindow extends javax.swing.JFrame {
     private Piece[][] pieces = new Piece[8][8];
 
     public GameWindow(SandboxWindow m) {
-        initComponents();
+        startGame();
         sandboxWindow = m;
-        this.setTitle("Game Window");
     }
 
     public GameWindow(MainWindow m) {
-        initComponents();
-        mainWindow = m;
         startGame();
+        mainWindow = m;
     }
     
     private void startGame(){
