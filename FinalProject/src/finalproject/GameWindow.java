@@ -1,9 +1,21 @@
 package finalproject;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import pieces.Bishop;
+import pieces.King;
+import pieces.Knight;
+import pieces.Pawn;
 import pieces.Piece;
+import pieces.Queen;
+import pieces.Rook;
+import repo.FileImporter;
 
 public class GameWindow extends javax.swing.JFrame {
 
@@ -11,6 +23,7 @@ public class GameWindow extends javax.swing.JFrame {
     MainWindow mainWindow;
 
     private JPanel[][] board = new JPanel[8][8];
+    
     private Piece[][] pieces = new Piece[8][8];
 
     public GameWindow(SandboxWindow m) {
@@ -26,8 +39,44 @@ public class GameWindow extends javax.swing.JFrame {
     private void startGame(){
         initComponents();
         this.setTitle("Game Window");
+        board = loadBoard();
+        pieces = loadPieces();
+        updateBoardUI();
     }
-    private void storePanels() {
+    
+    private Piece[][] loadPieces(){
+        BufferedImage test = loadImages();
+        //pawns        
+        for (int i = 0; i < 8; i++) {
+            pieces[1][i] = new Pawn(1, i, test, true);
+            pieces[6][i] = new Pawn(6, i, test, false);
+        }
+        //rooks
+        pieces[0][0] = new Rook(0, 0, test, true);
+        pieces[0][7] = new Rook(0, 7, test, true);
+        pieces[7][0] = new Rook(7, 0, test, false);
+        pieces[7][7] = new Rook(7, 7, test, false);
+        //knights
+        pieces[0][1] = new Knight(0, 1, test, true);
+        pieces[0][6] = new Knight(0, 6, test, true);
+        pieces[7][1] = new Knight(7, 1, test, false);
+        pieces[7][6] = new Knight(7, 6, test, false);
+        //bishops
+        pieces[0][2] = new Bishop(0, 2, test, true);
+        pieces[0][5] = new Bishop(0, 5, test, true);
+        pieces[7][2] = new Bishop(7, 2, test, false);
+        pieces[7][5] = new Bishop(7, 5, test, false);
+        //queens
+        pieces[0][3] = new Queen(0, 3, test, true); 
+        pieces[7][3] = new Queen(7, 3, test, false); 
+        //kings
+        pieces[0][4] = new King(0, 4, test, true, false, false);  
+        pieces[7][4] = new King(7, 4, test, false, false, false); 
+
+        return pieces;
+    }
+    
+    private JPanel[][] loadBoard() {
         board[0][0] = A1;
         board[0][1] = A2;
         board[0][2] = A3;
@@ -99,8 +148,22 @@ public class GameWindow extends javax.swing.JFrame {
         board[7][5] = H6;
         board[7][6] = H7;
         board[7][7] = H8;
+        
+        return board;
     }
-
+    
+    //needs to be finished later
+    private BufferedImage loadImages(){
+        FileImporter fileImporter = new FileImporter();
+        BufferedImage test = null;
+        try {
+            test = fileImporter.loadImage("test");
+        } catch (IOException ex) {
+            Logger.getLogger(GameWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return test;
+    }
+    
     private void updateBoardUI() {
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
