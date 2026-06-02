@@ -18,6 +18,8 @@ public class MainWindow extends javax.swing.JFrame {
     private GameWindow gameWindow;
     private CreateUser createUser;
     private EnterUsername enterUsername;
+    private HelpWindow helpWindow;
+    private MainWindow mainWindow;
     
     // https://stackoverflow.com/questions/16046824/making-a-java-swing-frame-movable-and-setundecorated
     public void MoveJFrame() {
@@ -298,7 +300,10 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_exitMenuMenuSelected
 
     private void helpMenuMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_helpMenuMenuSelected
-        
+        if (helpWindow == null) {
+            helpWindow = new HelpWindow(mainWindow);
+        }
+        helpWindow.setVisible(true);
     }//GEN-LAST:event_helpMenuMenuSelected
 
     public static void main(String args[]) {
