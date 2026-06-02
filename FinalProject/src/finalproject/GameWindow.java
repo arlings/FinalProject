@@ -54,30 +54,30 @@ public class GameWindow extends javax.swing.JFrame {
     private Piece[][] loadPieces() {
         //pawns        
         for (int i = 0; i < 8; i++) {
-            pieces[1][i] = new Pawn(1, i, loadImage("WhitePawn.png"), true);
-            pieces[6][i] = new Pawn(6, i, loadImage("BlackPawn.png"), false);
+            pieces[1][i] = new Pawn(1, i, loadImage("src/images/White_Pawn.png"), true);
+            pieces[6][i] = new Pawn(6, i, loadImage("src/images/Black_Pawn.png"), false);
         }
         //rooks
-        pieces[0][0] = new Rook(0, 0, loadImage("WhiteRook.png"), true);
-        pieces[0][7] = new Rook(0, 7, loadImage("WhiteRook.png"), true);
-        pieces[7][0] = new Rook(7, 0, loadImage("BlackRook.png"), false);
-        pieces[7][7] = new Rook(7, 7, loadImage("BlackRook.png"), false);
+        pieces[0][0] = new Rook(0, 0, loadImage("src/images/White_Rook.png"), true);
+        pieces[0][7] = new Rook(0, 7, loadImage("src/images/White_Rook.png"), true);
+        pieces[7][0] = new Rook(7, 0, loadImage("src/images/Black_Rook.png"), false);
+        pieces[7][7] = new Rook(7, 7, loadImage("src/images/Black_Rook.png"), false);
         //knights
-        pieces[0][1] = new Knight(0, 1, loadImage("WhiteKnight.png"), true);
-        pieces[0][6] = new Knight(0, 6, loadImage("WhiteKnight.png"), true);
-        pieces[7][1] = new Knight(7, 1, loadImage("BlackKnight.png"), false);
-        pieces[7][6] = new Knight(7, 6, loadImage("BlackKnight.png"), false);
+        pieces[0][1] = new Knight(0, 1, loadImage("src/images/White_Knight.png"), true);
+        pieces[0][6] = new Knight(0, 6, loadImage("src/images/White_Knight.png"), true);
+        pieces[7][1] = new Knight(7, 1, loadImage("src/images/Black_Knight.png"), false);
+        pieces[7][6] = new Knight(7, 6, loadImage("src/images/Black_Knight.png"), false);
         //bishops
-        pieces[0][2] = new Bishop(0, 2, loadImage("WhiteBishop.png"), true);
-        pieces[0][5] = new Bishop(0, 5, loadImage("WhiteBishop.png"), true);
-        pieces[7][2] = new Bishop(7, 2, loadImage("BlackBishop.png"), false);
+        pieces[0][2] = new Bishop(0, 2, loadImage("src/images/White_Bishop.png"), true);
+        pieces[0][5] = new Bishop(0, 5, loadImage("src/images/White_Bishop.png"), true);
+        pieces[7][2] = new Bishop(7, 2, loadImage("src/images/Black_Bishop.png"), false);
         pieces[7][5] = new Bishop(7, 5, loadImage("BlackBishop.png"), false);
         //queens
-        pieces[0][3] = new Queen(0, 3, loadImage("WhiteQueen.png"), true);
-        pieces[7][3] = new Queen(7, 3, loadImage("BlackQueen.png"), false);
+        pieces[0][3] = new Queen(0, 3, loadImage("src/images/White_Queen.png"), true);
+        pieces[7][3] = new Queen(7, 3, loadImage("src/images/Black_Queen.png"), false);
         //kings
-        pieces[0][4] = new King(0, 4, loadImage("WhiteKing.png"), true, false, false);
-        pieces[7][4] = new King(7, 4, loadImage("BlackKing.png"), false, false, false);
+        pieces[0][4] = new King(0, 4, loadImage("src/images/White_King.png"), true, false, false);
+        pieces[7][4] = new King(7, 4, loadImage("src/images/Black_King.png"), false, false, false);
 
         return pieces;
     }
@@ -127,6 +127,7 @@ public class GameWindow extends javax.swing.JFrame {
     private void initComponents() {
 
         A8 = new javax.swing.JPanel();
+        A8Label = new javax.swing.JLabel();
         B8 = new javax.swing.JPanel();
         C8 = new javax.swing.JPanel();
         D8 = new javax.swing.JPanel();
@@ -135,6 +136,7 @@ public class GameWindow extends javax.swing.JFrame {
         H7 = new javax.swing.JPanel();
         H8 = new javax.swing.JPanel();
         A7 = new javax.swing.JPanel();
+        A7Label = new javax.swing.JLabel();
         B7 = new javax.swing.JPanel();
         C7 = new javax.swing.JPanel();
         D7 = new javax.swing.JPanel();
@@ -143,6 +145,7 @@ public class GameWindow extends javax.swing.JFrame {
         G7 = new javax.swing.JPanel();
         G8 = new javax.swing.JPanel();
         A6 = new javax.swing.JPanel();
+        A6Label = new javax.swing.JLabel();
         B6 = new javax.swing.JPanel();
         C6 = new javax.swing.JPanel();
         D6 = new javax.swing.JPanel();
@@ -151,6 +154,7 @@ public class GameWindow extends javax.swing.JFrame {
         H5 = new javax.swing.JPanel();
         H6 = new javax.swing.JPanel();
         A5 = new javax.swing.JPanel();
+        A5Label = new javax.swing.JLabel();
         B5 = new javax.swing.JPanel();
         C5 = new javax.swing.JPanel();
         D5 = new javax.swing.JPanel();
@@ -159,6 +163,7 @@ public class GameWindow extends javax.swing.JFrame {
         G5 = new javax.swing.JPanel();
         G6 = new javax.swing.JPanel();
         A4 = new javax.swing.JPanel();
+        A4Label = new javax.swing.JLabel();
         B4 = new javax.swing.JPanel();
         C4 = new javax.swing.JPanel();
         D4 = new javax.swing.JPanel();
@@ -167,6 +172,7 @@ public class GameWindow extends javax.swing.JFrame {
         H3 = new javax.swing.JPanel();
         H4 = new javax.swing.JPanel();
         A3 = new javax.swing.JPanel();
+        A3Label = new javax.swing.JLabel();
         B3 = new javax.swing.JPanel();
         C3 = new javax.swing.JPanel();
         D3 = new javax.swing.JPanel();
@@ -175,6 +181,7 @@ public class GameWindow extends javax.swing.JFrame {
         G3 = new javax.swing.JPanel();
         G4 = new javax.swing.JPanel();
         A2 = new javax.swing.JPanel();
+        A2Label = new javax.swing.JLabel();
         B2 = new javax.swing.JPanel();
         C2 = new javax.swing.JPanel();
         D2 = new javax.swing.JPanel();
@@ -183,6 +190,7 @@ public class GameWindow extends javax.swing.JFrame {
         H1 = new javax.swing.JPanel();
         H2 = new javax.swing.JPanel();
         A1 = new javax.swing.JPanel();
+        A1Label = new javax.swing.JLabel();
         B1 = new javax.swing.JPanel();
         C1 = new javax.swing.JPanel();
         D1 = new javax.swing.JPanel();
@@ -194,15 +202,23 @@ public class GameWindow extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
 
+        A8Label.setText("jLabel1");
+
         javax.swing.GroupLayout A8Layout = new javax.swing.GroupLayout(A8);
         A8.setLayout(A8Layout);
         A8Layout.setHorizontalGroup(
             A8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(A8Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(A8Label)
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         A8Layout.setVerticalGroup(
             A8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(A8Layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(A8Label)
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         B8.setBackground(new java.awt.Color(153, 102, 0));
@@ -292,15 +308,23 @@ public class GameWindow extends javax.swing.JFrame {
 
         A7.setBackground(new java.awt.Color(153, 102, 0));
 
+        A7Label.setText("jLabel1");
+
         javax.swing.GroupLayout A7Layout = new javax.swing.GroupLayout(A7);
         A7.setLayout(A7Layout);
         A7Layout.setHorizontalGroup(
             A7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(A7Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(A7Label)
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         A7Layout.setVerticalGroup(
             A7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(A7Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(A7Label)
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout B7Layout = new javax.swing.GroupLayout(B7);
@@ -386,15 +410,23 @@ public class GameWindow extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
+        A6Label.setText("jLabel1");
+
         javax.swing.GroupLayout A6Layout = new javax.swing.GroupLayout(A6);
         A6.setLayout(A6Layout);
         A6Layout.setHorizontalGroup(
             A6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(A6Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(A6Label)
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         A6Layout.setVerticalGroup(
             A6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(A6Layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(A6Label)
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         B6.setBackground(new java.awt.Color(153, 102, 0));
@@ -484,15 +516,23 @@ public class GameWindow extends javax.swing.JFrame {
 
         A5.setBackground(new java.awt.Color(153, 102, 0));
 
+        A5Label.setText("jLabel1");
+
         javax.swing.GroupLayout A5Layout = new javax.swing.GroupLayout(A5);
         A5.setLayout(A5Layout);
         A5Layout.setHorizontalGroup(
             A5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(A5Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(A5Label)
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         A5Layout.setVerticalGroup(
             A5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, A5Layout.createSequentialGroup()
+                .addContainerGap(44, Short.MAX_VALUE)
+                .addComponent(A5Label)
+                .addGap(40, 40, 40))
         );
 
         javax.swing.GroupLayout B5Layout = new javax.swing.GroupLayout(B5);
@@ -578,15 +618,23 @@ public class GameWindow extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
+        A4Label.setText("jLabel1");
+
         javax.swing.GroupLayout A4Layout = new javax.swing.GroupLayout(A4);
         A4.setLayout(A4Layout);
         A4Layout.setHorizontalGroup(
             A4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(A4Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(A4Label)
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         A4Layout.setVerticalGroup(
             A4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(A4Layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(A4Label)
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         B4.setBackground(new java.awt.Color(153, 102, 0));
@@ -676,15 +724,23 @@ public class GameWindow extends javax.swing.JFrame {
 
         A3.setBackground(new java.awt.Color(153, 102, 0));
 
+        A3Label.setText("jLabel1");
+
         javax.swing.GroupLayout A3Layout = new javax.swing.GroupLayout(A3);
         A3.setLayout(A3Layout);
         A3Layout.setHorizontalGroup(
             A3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(A3Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(A3Label)
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         A3Layout.setVerticalGroup(
             A3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(A3Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(A3Label)
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout B3Layout = new javax.swing.GroupLayout(B3);
@@ -770,15 +826,23 @@ public class GameWindow extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
+        A2Label.setText("jLabel1");
+
         javax.swing.GroupLayout A2Layout = new javax.swing.GroupLayout(A2);
         A2.setLayout(A2Layout);
         A2Layout.setHorizontalGroup(
             A2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(A2Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(A2Label)
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         A2Layout.setVerticalGroup(
             A2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, A2Layout.createSequentialGroup()
+                .addContainerGap(47, Short.MAX_VALUE)
+                .addComponent(A2Label)
+                .addGap(37, 37, 37))
         );
 
         B2.setBackground(new java.awt.Color(153, 102, 0));
@@ -868,15 +932,23 @@ public class GameWindow extends javax.swing.JFrame {
 
         A1.setBackground(new java.awt.Color(153, 102, 0));
 
+        A1Label.setText("jLabel1");
+
         javax.swing.GroupLayout A1Layout = new javax.swing.GroupLayout(A1);
         A1.setLayout(A1Layout);
         A1Layout.setHorizontalGroup(
             A1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(A1Layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(A1Label)
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         A1Layout.setVerticalGroup(
             A1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(A1Layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(A1Label)
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout B1Layout = new javax.swing.GroupLayout(B1);
@@ -1098,7 +1170,7 @@ public class GameWindow extends javax.swing.JFrame {
                             .addComponent(G3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(H3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 9, Short.MAX_VALUE))
+                .addGap(0, 50, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1189,13 +1261,21 @@ public class GameWindow extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel A1;
+    private javax.swing.JLabel A1Label;
     private javax.swing.JPanel A2;
+    private javax.swing.JLabel A2Label;
     private javax.swing.JPanel A3;
+    private javax.swing.JLabel A3Label;
     private javax.swing.JPanel A4;
+    private javax.swing.JLabel A4Label;
     private javax.swing.JPanel A5;
+    private javax.swing.JLabel A5Label;
     private javax.swing.JPanel A6;
+    private javax.swing.JLabel A6Label;
     private javax.swing.JPanel A7;
+    private javax.swing.JLabel A7Label;
     private javax.swing.JPanel A8;
+    private javax.swing.JLabel A8Label;
     private javax.swing.JPanel B1;
     private javax.swing.JPanel B2;
     private javax.swing.JPanel B3;
@@ -1252,8 +1332,5 @@ public class GameWindow extends javax.swing.JFrame {
     private javax.swing.JPanel H6;
     private javax.swing.JPanel H7;
     private javax.swing.JPanel H8;
-    private javax.swing.JPanel jPanel17;
-    private javax.swing.JPanel jPanel18;
-    private javax.swing.JPanel jPanel31;
     // End of variables declaration//GEN-END:variables
 }
