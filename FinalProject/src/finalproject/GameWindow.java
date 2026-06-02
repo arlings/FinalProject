@@ -22,9 +22,10 @@ public class GameWindow extends javax.swing.JFrame {
     SandboxWindow sandboxWindow;
     MainWindow mainWindow;
     EnterUsername enterUsername;
+    FileImporter fileImporter = new FileImporter();
 
     private JPanel[][] board = new JPanel[8][8];
-    
+
     private Piece[][] pieces = new Piece[8][8];
 
     public GameWindow(SandboxWindow m) {
@@ -36,21 +37,21 @@ public class GameWindow extends javax.swing.JFrame {
         startGame();
         mainWindow = m;
     }
-    
+
     public GameWindow(EnterUsername m) {
         startGame();
         enterUsername = m;
     }
-    
-    private void startGame(){
+
+    private void startGame() {
         initComponents();
         this.setTitle("Game Window");
         board = loadBoard();
         pieces = loadPieces();
         updateBoardUI();
     }
-    
-    private Piece[][] loadPieces(){
+
+    private Piece[][] loadPieces() {
         //pawns        
         for (int i = 0; i < 8; i++) {
             pieces[1][i] = new Pawn(1, i, loadImage("WhitePawn.png"), true);
@@ -72,40 +73,38 @@ public class GameWindow extends javax.swing.JFrame {
         pieces[7][2] = new Bishop(7, 2, loadImage("BlackBishop.png"), false);
         pieces[7][5] = new Bishop(7, 5, loadImage("BlackBishop.png"), false);
         //queens
-        pieces[0][3] = new Queen(0, 3, loadImage("WhiteQueen.png"), true); 
-        pieces[7][3] = new Queen(7, 3, loadImage("BlackQueen.png"), false); 
+        pieces[0][3] = new Queen(0, 3, loadImage("WhiteQueen.png"), true);
+        pieces[7][3] = new Queen(7, 3, loadImage("BlackQueen.png"), false);
         //kings
-        pieces[0][4] = new King(0, 4, loadImage("WhiteKing.png"), true, false, false);  
-        pieces[7][4] = new King(7, 4, loadImage("BlackKing.png"), false, false, false); 
+        pieces[0][4] = new King(0, 4, loadImage("WhiteKing.png"), true, false, false);
+        pieces[7][4] = new King(7, 4, loadImage("BlackKing.png"), false, false, false);
 
         return pieces;
     }
-    
+
     private JPanel[][] loadBoard() {
-        return new JPanel[][] {
-        { A1, B1, C1, D1, E1, F1, G1, H1 }, 
-        { A2, B2, C2, D2, E2, F2, G2, H2 },
-        { A3, B3, C3, D3, E3, F3, G3, H3 },
-        { A4, B4, C4, D4, E4, F4, G4, H4 }, 
-        { A5, B5, C5, D5, E5, F5, G5, H5 },
-        { A6, B6, C6, D6, E6, F6, G6, H6 },
-        { A7, B7, C7, D7, E7, F7, G7, H7 },
-        { A8, B8, C8, D8, E8, F8, G8, H8 }
+        return new JPanel[][]{
+            {A1, B1, C1, D1, E1, F1, G1, H1},
+            {A2, B2, C2, D2, E2, F2, G2, H2},
+            {A3, B3, C3, D3, E3, F3, G3, H3},
+            {A4, B4, C4, D4, E4, F4, G4, H4},
+            {A5, B5, C5, D5, E5, F5, G5, H5},
+            {A6, B6, C6, D6, E6, F6, G6, H6},
+            {A7, B7, C7, D7, E7, F7, G7, H7},
+            {A8, B8, C8, D8, E8, F8, G8, H8}
         };
     }
-    
+
     //needs to be finished later
-    private BufferedImage loadImage(String filePath){
-        FileImporter fileImporter = new FileImporter();
-        BufferedImage test = null;
+    private BufferedImage loadImage(String filePath) {
         try {
-            test = fileImporter.loadImage(filePath);
+            return fileImporter.loadImage(filePath);
         } catch (IOException ex) {
-            Logger.getLogger(GameWindow.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GameWindow.class.getName()).log(Level.SEVERE, "Failed to load image: " + filePath, ex);
+            return null;
         }
-        return test;
     }
-    
+
     private void updateBoardUI() {
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
