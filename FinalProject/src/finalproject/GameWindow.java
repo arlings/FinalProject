@@ -45,119 +45,55 @@ public class GameWindow extends javax.swing.JFrame {
     }
     
     private Piece[][] loadPieces(){
-        BufferedImage test = loadImages();
         //pawns        
         for (int i = 0; i < 8; i++) {
-            pieces[1][i] = new Pawn(1, i, test, true);
-            pieces[6][i] = new Pawn(6, i, test, false);
+            pieces[1][i] = new Pawn(1, i, loadImage("WhitePawn.png"), true);
+            pieces[6][i] = new Pawn(6, i, loadImage("BlackPawn.png"), false);
         }
         //rooks
-        pieces[0][0] = new Rook(0, 0, test, true);
-        pieces[0][7] = new Rook(0, 7, test, true);
-        pieces[7][0] = new Rook(7, 0, test, false);
-        pieces[7][7] = new Rook(7, 7, test, false);
+        pieces[0][0] = new Rook(0, 0, loadImage("WhiteRook.png"), true);
+        pieces[0][7] = new Rook(0, 7, loadImage("WhiteRook.png"), true);
+        pieces[7][0] = new Rook(7, 0, loadImage("BlackRook.png"), false);
+        pieces[7][7] = new Rook(7, 7, loadImage("BlackRook.png"), false);
         //knights
-        pieces[0][1] = new Knight(0, 1, test, true);
-        pieces[0][6] = new Knight(0, 6, test, true);
-        pieces[7][1] = new Knight(7, 1, test, false);
-        pieces[7][6] = new Knight(7, 6, test, false);
+        pieces[0][1] = new Knight(0, 1, loadImage("WhiteKnight.png"), true);
+        pieces[0][6] = new Knight(0, 6, loadImage("WhiteKnight.png"), true);
+        pieces[7][1] = new Knight(7, 1, loadImage("BlackKnight.png"), false);
+        pieces[7][6] = new Knight(7, 6, loadImage("BlackKnight.png"), false);
         //bishops
-        pieces[0][2] = new Bishop(0, 2, test, true);
-        pieces[0][5] = new Bishop(0, 5, test, true);
-        pieces[7][2] = new Bishop(7, 2, test, false);
-        pieces[7][5] = new Bishop(7, 5, test, false);
+        pieces[0][2] = new Bishop(0, 2, loadImage("WhiteBishop.png"), true);
+        pieces[0][5] = new Bishop(0, 5, loadImage("WhiteBishop.png"), true);
+        pieces[7][2] = new Bishop(7, 2, loadImage("BlackBishop.png"), false);
+        pieces[7][5] = new Bishop(7, 5, loadImage("BlackBishop.png"), false);
         //queens
-        pieces[0][3] = new Queen(0, 3, test, true); 
-        pieces[7][3] = new Queen(7, 3, test, false); 
+        pieces[0][3] = new Queen(0, 3, loadImage("WhiteQueen.png"), true); 
+        pieces[7][3] = new Queen(7, 3, loadImage("BlackQueen.png"), false); 
         //kings
-        pieces[0][4] = new King(0, 4, test, true, false, false);  
-        pieces[7][4] = new King(7, 4, test, false, false, false); 
+        pieces[0][4] = new King(0, 4, loadImage("WhiteKing.png"), true, false, false);  
+        pieces[7][4] = new King(7, 4, loadImage("BlackKing.png"), false, false, false); 
 
         return pieces;
     }
     
     private JPanel[][] loadBoard() {
-        board[0][0] = A1;
-        board[0][1] = A2;
-        board[0][2] = A3;
-        board[0][3] = A4;
-        board[0][4] = A5;
-        board[0][5] = A6;
-        board[0][6] = A7;
-        board[0][7] = A8;
-
-        board[1][0] = B1;
-        board[1][1] = B2;
-        board[1][2] = B3;
-        board[1][3] = B4;
-        board[1][4] = B5;
-        board[1][5] = B6;
-        board[1][6] = B7;
-        board[1][7] = B8;
-
-        board[2][0] = C1;
-        board[2][1] = C2;
-        board[2][2] = C3;
-        board[2][3] = C4;
-        board[2][4] = C5;
-        board[2][5] = C6;
-        board[2][6] = C7;
-        board[2][7] = C8;
-
-        board[3][0] = D1;
-        board[3][1] = D2;
-        board[3][2] = D3;
-        board[3][3] = D4;
-        board[3][4] = D5;
-        board[3][5] = D6;
-        board[3][6] = D7;
-        board[3][7] = D8;
-
-        board[4][0] = E1;
-        board[4][1] = E2;
-        board[4][2] = E3;
-        board[4][3] = E4;
-        board[4][4] = E5;
-        board[4][5] = E6;
-        board[4][6] = E7;
-        board[4][7] = E8;
-
-        board[5][0] = F1;
-        board[5][1] = F2;
-        board[5][2] = F3;
-        board[5][3] = F4;
-        board[5][4] = F5;
-        board[5][5] = F6;
-        board[5][6] = F7;
-        board[5][7] = F8;
-
-        board[6][0] = G1;
-        board[6][1] = G2;
-        board[6][2] = G3;
-        board[6][3] = G4;
-        board[6][4] = G5;
-        board[6][5] = G6;
-        board[6][6] = G7;
-        board[6][7] = G8;
-
-        board[7][0] = H1;
-        board[7][1] = H2;
-        board[7][2] = H3;
-        board[7][3] = H4;
-        board[7][4] = H5;
-        board[7][5] = H6;
-        board[7][6] = H7;
-        board[7][7] = H8;
-        
-        return board;
+        return new JPanel[][] {
+        { A1, B1, C1, D1, E1, F1, G1, H1 }, 
+        { A2, B2, C2, D2, E2, F2, G2, H2 },
+        { A3, B3, C3, D3, E3, F3, G3, H3 },
+        { A4, B4, C4, D4, E4, F4, G4, H4 }, 
+        { A5, B5, C5, D5, E5, F5, G5, H5 },
+        { A6, B6, C6, D6, E6, F6, G6, H6 },
+        { A7, B7, C7, D7, E7, F7, G7, H7 },
+        { A8, B8, C8, D8, E8, F8, G8, H8 }
+        };
     }
     
     //needs to be finished later
-    private BufferedImage loadImages(){
+    private BufferedImage loadImage(String filePath){
         FileImporter fileImporter = new FileImporter();
         BufferedImage test = null;
         try {
-            test = fileImporter.loadImage("test");
+            test = fileImporter.loadImage(filePath);
         } catch (IOException ex) {
             Logger.getLogger(GameWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
