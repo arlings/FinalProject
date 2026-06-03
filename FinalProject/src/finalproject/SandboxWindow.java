@@ -20,6 +20,7 @@ public class SandboxWindow extends javax.swing.JFrame {
         editKnightButton = new javax.swing.JButton();
         editBishopButton = new javax.swing.JButton();
         editRookButton = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -38,24 +39,32 @@ public class SandboxWindow extends javax.swing.JFrame {
 
         editRookButton.setText("Edit");
 
+        jButton1.setText("Cancel");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(startSandboxGameButton)
-                .addGap(28, 28, 28))
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addComponent(editPawnButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(editPawnButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(editKnightButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(editBishopButton))
+                    .addComponent(jButton1))
                 .addGap(18, 18, 18)
-                .addComponent(editKnightButton)
-                .addGap(18, 18, 18)
-                .addComponent(editBishopButton)
-                .addGap(18, 18, 18)
-                .addComponent(editRookButton)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(startSandboxGameButton)
+                    .addComponent(editRookButton))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -66,9 +75,11 @@ public class SandboxWindow extends javax.swing.JFrame {
                     .addComponent(editKnightButton)
                     .addComponent(editBishopButton)
                     .addComponent(editRookButton))
-                .addGap(90, 90, 90)
-                .addComponent(startSandboxGameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addGap(112, 112, 112)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(startSandboxGameButton)
+                    .addComponent(jButton1))
+                .addGap(14, 14, 14))
         );
 
         pack();
@@ -80,8 +91,12 @@ public class SandboxWindow extends javax.swing.JFrame {
         }
         gameWindow.setVisible(true);
         gameWindow.setTitle("Sandbox / Free Play Game");
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_startSandboxGameButtonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -89,6 +104,7 @@ public class SandboxWindow extends javax.swing.JFrame {
     private javax.swing.JButton editKnightButton;
     private javax.swing.JButton editPawnButton;
     private javax.swing.JButton editRookButton;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton startSandboxGameButton;
     // End of variables declaration//GEN-END:variables
 }

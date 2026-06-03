@@ -103,7 +103,6 @@ public class EnterUsername extends javax.swing.JFrame {
             gameWindow = new GameWindow(this);
         }
         gameWindow.setVisible(true);
-        this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_goBtnActionPerformed
 

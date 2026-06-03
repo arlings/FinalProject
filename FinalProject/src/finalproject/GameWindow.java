@@ -42,10 +42,20 @@ public class GameWindow extends javax.swing.JFrame {
         startGame();
         enterUsername = m;
     }
+    
+    public void MoveJFrame() {
+        this.setUndecorated(true);
+        MainWindow.FrameDragListener frameDragListener = new MainWindow.FrameDragListener(this);
+        this.addMouseListener(frameDragListener);
+        this.addMouseMotionListener(frameDragListener);
+        this.pack();
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+    }
 
     private void startGame() {
+        MoveJFrame();
         initComponents();
-        this.setTitle("Game Window");
         board = loadBoard();
         pieces = loadPieces();
         updateBoardUI();
