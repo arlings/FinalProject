@@ -132,14 +132,16 @@ public class CreateUser extends javax.swing.JFrame {
         try {
             Scanner s = new Scanner(f);
             while (s.hasNextLine() || done) {
-                if (userNameField.getText().equalsIgnoreCase(s.nextLine().split(",")[0])) {
-                    if (warningWindow == null) {
+                if (s.hasNextLine()) {
+                    if (userNameField.getText().equalsIgnoreCase(s.nextLine().split(",")[0])) {
                         warningWindow = new WarningWindow(this, "This username already exists");
+                        userNameField.setText("");
+                        warningWindow.setVisible(true);
+                        done = true;
                     }
-                    warningWindow.setVisible(true);
-                    done = true;
                 }
             }
+            s.reset();
         } catch (FileNotFoundException e) {
             
         }
