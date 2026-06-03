@@ -5,9 +5,20 @@ public class SandboxWindow extends javax.swing.JFrame {
     private GameWindow gameWindow;
     MainWindow mainWindow;
     
+    // https://stackoverflow.com/questions/16046824/making-a-java-swing-frame-movable-and-setundecorated
+    public void MoveJFrame() {
+        this.setUndecorated(true);
+        MainWindow.FrameDragListener frameDragListener = new MainWindow.FrameDragListener(this);
+        this.addMouseListener(frameDragListener);
+        this.addMouseMotionListener(frameDragListener);
+        this.pack();
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+    }
+    
     public SandboxWindow(MainWindow m) {
+        MoveJFrame();
         initComponents();
-        this.setTitle("Sandbox Rules");
         mainWindow = m;
     }
 
@@ -50,35 +61,36 @@ public class SandboxWindow extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(editPawnButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(editKnightButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(editBishopButton))
-                    .addComponent(jButton1))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(27, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(startSandboxGameButton)
-                    .addComponent(editRookButton))
-                .addContainerGap(14, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(editPawnButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(editKnightButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(editBishopButton))
+                            .addComponent(jButton1))
+                        .addGap(18, 18, 18)
+                        .addComponent(editRookButton)))
+                .addGap(16, 16, 16))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(272, Short.MAX_VALUE)
+                .addContainerGap(161, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(editPawnButton)
                     .addComponent(editKnightButton)
                     .addComponent(editBishopButton)
                     .addComponent(editRookButton))
-                .addGap(112, 112, 112)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(startSandboxGameButton)
-                    .addComponent(jButton1))
+                .addGap(46, 46, 46)
+                .addComponent(startSandboxGameButton)
+                .addGap(43, 43, 43)
+                .addComponent(jButton1)
                 .addGap(14, 14, 14))
         );
 

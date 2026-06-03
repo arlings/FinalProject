@@ -86,6 +86,11 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
         newGameBtn.setText("New Game");
+        newGameBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newGameBtnActionPerformed(evt);
+            }
+        });
 
         titleLabel.setFont(new java.awt.Font("Jokerman", 0, 24)); // NOI18N
         titleLabel.setForeground(new java.awt.Color(153, 153, 255));
@@ -306,6 +311,10 @@ public class MainWindow extends javax.swing.JFrame {
         }
         helpWindow.setVisible(true);
     }//GEN-LAST:event_helpMenuMenuSelected
+
+    private void newGameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newGameBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_newGameBtnActionPerformed
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
