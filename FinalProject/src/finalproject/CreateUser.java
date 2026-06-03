@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class CreateUser extends javax.swing.JFrame {
     
     MainWindow mainWindow;
+    private WarningWindow warningWindow;
     
     File f = new File("src/finalproject/Users.txt");
     
@@ -127,22 +128,28 @@ public class CreateUser extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void goBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBtnActionPerformed
-        this.dispose();
-        
+        boolean done = false;
         try {
             Scanner s = new Scanner(f);
-            while (s.hasNextLine()) {
+            while (s.hasNextLine() || done) {
                 if (userNameField.getText().equalsIgnoreCase(s.nextLine().split(",")[0])) {
-                    
+                    if (warningWindow == null) {
+                        warningWindow = new WarningWindow(this, "This username already exists");
+                    }
+                    warningWindow.setVisible(true);
+                    done = true;
                 }
             }
         } catch (FileNotFoundException e) {
             
         }
+        if (!done) {
+            this.dispose();
+        }
     }//GEN-LAST:event_goBtnActionPerformed
 
     private void userNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameFieldActionPerformed
-        System.out.print("joc");
+        
     }//GEN-LAST:event_userNameFieldActionPerformed
 
     private void userNameFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_userNameFieldKeyTyped

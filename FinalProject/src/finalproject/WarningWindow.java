@@ -18,16 +18,9 @@ public class WarningWindow extends javax.swing.JFrame {
     
     public WarningWindow(CreateUser m, String txt) {
         MoveJFrame();
-        warningMessage.setText(txt);
         initComponents();
+        warningMessage.setText(txt);
         createUser = m;
-    }
-    
-    public WarningWindow(EnterUsername m, String txt) {
-        MoveJFrame();
-        warningMessage.setText(txt);
-        initComponents();
-        enterUsername = m;
     }
 
     @SuppressWarnings("unchecked")
