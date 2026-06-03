@@ -312,6 +312,9 @@
               <Image iconType="3" name="/images/Black_Pawn.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="C7LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -349,6 +352,9 @@
               <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="H3LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -386,6 +392,9 @@
               <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="G4LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -423,6 +432,9 @@
               <Image iconType="3" name="/images/White_Pawn.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="C2LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -460,6 +472,9 @@
               <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="A4LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -497,6 +512,9 @@
               <Image iconType="3" name="/images/White_Pawn.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="D2LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -534,6 +552,9 @@
               <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="B5LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -571,6 +592,9 @@
               <Image iconType="3" name="/images/Black_Pawn.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="D7LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -608,6 +632,9 @@
               <Image iconType="3" name="/images/White_Pawn.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="E2LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -645,6 +672,9 @@
               <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="A5LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -682,6 +712,9 @@
               <Image iconType="3" name="/images/Black_Pawn.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="A7LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -719,6 +752,9 @@
               <Image iconType="3" name="/images/White_Pawn.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="F2LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -756,6 +792,9 @@
               <Image iconType="3" name="/images/Black_Pawn.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="E7LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -793,6 +832,9 @@
               <Image iconType="3" name="/images/White_Pawn.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="G2LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -830,6 +872,9 @@
               <Image iconType="3" name="/images/Black_Pawn.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="F7LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -867,6 +912,9 @@
               <Image iconType="3" name="/images/Black_Pawn.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="G7LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -904,6 +952,9 @@
               <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="C5LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -941,6 +992,9 @@
               <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="D5LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -978,6 +1032,9 @@
               <Image iconType="3" name="/images/White_Pawn.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="H2LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1015,6 +1072,9 @@
               <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="H6LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1052,6 +1112,9 @@
               <Image iconType="3" name="/images/White_Pawn.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="B2LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1089,6 +1152,9 @@
               <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="C6LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1126,6 +1192,9 @@
               <Image iconType="3" name="/images/Black_Pawn.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="H7LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1163,6 +1232,9 @@
               <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="B3LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1200,6 +1272,9 @@
               <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="E5LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1237,6 +1312,9 @@
               <Image iconType="3" name="/images/Black_Rook.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="A8LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1274,6 +1352,9 @@
               <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="A3LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1311,6 +1392,9 @@
               <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="C3LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1348,6 +1432,9 @@
               <Image iconType="3" name="/images/White_Knight.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="B1LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1385,6 +1472,9 @@
               <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="B6LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1422,6 +1512,9 @@
               <Image iconType="3" name="/images/Black_Bishop.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="C8LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1459,6 +1552,9 @@
               <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="D6LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1496,6 +1592,9 @@
               <Image iconType="3" name="/images/White_Bishop.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="C1LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1533,6 +1632,9 @@
               <Image iconType="3" name="/images/Black_Queen.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="D8LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1570,6 +1672,9 @@
               <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="D3LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1607,6 +1712,9 @@
               <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="F5LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1644,6 +1752,9 @@
               <Image iconType="3" name="/images/White_Queen.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="D1LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1681,6 +1792,9 @@
               <Image iconType="3" name="/images/Black_King.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="E8LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1718,6 +1832,9 @@
               <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="H4LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1755,6 +1872,9 @@
               <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="E6LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1792,6 +1912,9 @@
               <Image iconType="3" name="/images/Black_Bishop.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="F8LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1829,6 +1952,9 @@
               <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="C4LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1866,6 +1992,9 @@
               <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="G5LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1903,6 +2032,9 @@
               <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="E3LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1940,6 +2072,9 @@
               <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="B4LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1977,6 +2112,9 @@
               <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="F6LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -2014,6 +2152,9 @@
               <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="H5LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -2051,6 +2192,9 @@
               <Image iconType="3" name="/images/White_Rook.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="A1LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -2088,6 +2232,9 @@
               <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="D4LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -2125,6 +2272,9 @@
               <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="G6LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -2162,6 +2312,9 @@
               <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="F3LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -2199,6 +2352,9 @@
               <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="A6LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -2236,6 +2392,9 @@
               <Image iconType="3" name="/images/White_King.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="E1LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -2273,6 +2432,9 @@
               <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="E4LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -2310,6 +2472,9 @@
               <Image iconType="3" name="/images/White_Bishop.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="F1LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -2347,6 +2512,9 @@
               <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="G3LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -2384,6 +2552,9 @@
               <Image iconType="3" name="/images/Black_Knight.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="G8LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -2421,6 +2592,9 @@
               <Image iconType="3" name="/images/White_Knight.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="G1LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -2458,6 +2632,9 @@
               <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="F4LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -2495,6 +2672,9 @@
               <Image iconType="3" name="/images/Black_Rook.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="H8LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -2532,6 +2712,9 @@
               <Image iconType="3" name="/images/White_Rook.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="H1LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -2569,6 +2752,9 @@
               <Image iconType="3" name="/images/Black_Knight.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="B8LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -2606,6 +2792,9 @@
               <Image iconType="3" name="/images/White_Pawn.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="A2LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -2643,6 +2832,9 @@
               <Image iconType="3" name="/images/Black_Pawn.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="B7LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

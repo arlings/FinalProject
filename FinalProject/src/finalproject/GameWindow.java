@@ -28,6 +28,15 @@ public class GameWindow extends javax.swing.JFrame {
 
     private Piece[][] pieces = new Piece[8][8];
 
+    
+    public void showPawnOptions(Piece piece){
+        if(piece.isWhite()){
+            
+        }else{
+            
+        }
+    }
+    
     public GameWindow(SandboxWindow m) {
         startGame();
         sandboxWindow = m;
@@ -275,6 +284,11 @@ public class GameWindow extends javax.swing.JFrame {
         C7.setBackground(new java.awt.Color(153, 102, 0));
 
         C7Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Black_Pawn.png"))); // NOI18N
+        C7Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                C7LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout C7Layout = new javax.swing.GroupLayout(C7);
         C7.setLayout(C7Layout);
@@ -296,6 +310,11 @@ public class GameWindow extends javax.swing.JFrame {
         H3.setBackground(new java.awt.Color(255, 255, 255));
 
         H3Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
+        H3Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                H3LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout H3Layout = new javax.swing.GroupLayout(H3);
         H3.setLayout(H3Layout);
@@ -317,6 +336,11 @@ public class GameWindow extends javax.swing.JFrame {
         G4.setBackground(new java.awt.Color(255, 255, 255));
 
         G4Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
+        G4Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                G4LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout G4Layout = new javax.swing.GroupLayout(G4);
         G4.setLayout(G4Layout);
@@ -338,6 +362,11 @@ public class GameWindow extends javax.swing.JFrame {
         C2.setBackground(new java.awt.Color(255, 255, 255));
 
         C2Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Pawn.png"))); // NOI18N
+        C2Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                C2LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout C2Layout = new javax.swing.GroupLayout(C2);
         C2.setLayout(C2Layout);
@@ -359,6 +388,11 @@ public class GameWindow extends javax.swing.JFrame {
         A4.setBackground(new java.awt.Color(255, 255, 255));
 
         A4Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
+        A4Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                A4LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout A4Layout = new javax.swing.GroupLayout(A4);
         A4.setLayout(A4Layout);
@@ -380,6 +414,11 @@ public class GameWindow extends javax.swing.JFrame {
         D2.setBackground(new java.awt.Color(153, 102, 0));
 
         D2Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Pawn.png"))); // NOI18N
+        D2Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                D2LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout D2Layout = new javax.swing.GroupLayout(D2);
         D2.setLayout(D2Layout);
@@ -401,6 +440,11 @@ public class GameWindow extends javax.swing.JFrame {
         B5.setBackground(new java.awt.Color(255, 255, 255));
 
         B5Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
+        B5Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                B5LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout B5Layout = new javax.swing.GroupLayout(B5);
         B5.setLayout(B5Layout);
@@ -422,6 +466,11 @@ public class GameWindow extends javax.swing.JFrame {
         D7.setBackground(new java.awt.Color(255, 255, 255));
 
         D7Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Black_Pawn.png"))); // NOI18N
+        D7Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                D7LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout D7Layout = new javax.swing.GroupLayout(D7);
         D7.setLayout(D7Layout);
@@ -443,6 +492,11 @@ public class GameWindow extends javax.swing.JFrame {
         E2.setBackground(new java.awt.Color(255, 255, 255));
 
         E2Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Pawn.png"))); // NOI18N
+        E2Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                E2LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout E2Layout = new javax.swing.GroupLayout(E2);
         E2.setLayout(E2Layout);
@@ -464,6 +518,11 @@ public class GameWindow extends javax.swing.JFrame {
         A5.setBackground(new java.awt.Color(153, 102, 0));
 
         A5Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
+        A5Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                A5LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout A5Layout = new javax.swing.GroupLayout(A5);
         A5.setLayout(A5Layout);
@@ -485,6 +544,11 @@ public class GameWindow extends javax.swing.JFrame {
         A7.setBackground(new java.awt.Color(153, 102, 0));
 
         A7Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Black_Pawn.png"))); // NOI18N
+        A7Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                A7LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout A7Layout = new javax.swing.GroupLayout(A7);
         A7.setLayout(A7Layout);
@@ -506,6 +570,11 @@ public class GameWindow extends javax.swing.JFrame {
         F2.setBackground(new java.awt.Color(153, 102, 0));
 
         F2Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Pawn.png"))); // NOI18N
+        F2Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                F2LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout F2Layout = new javax.swing.GroupLayout(F2);
         F2.setLayout(F2Layout);
@@ -527,6 +596,11 @@ public class GameWindow extends javax.swing.JFrame {
         E7.setBackground(new java.awt.Color(153, 102, 0));
 
         E7Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Black_Pawn.png"))); // NOI18N
+        E7Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                E7LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout E7Layout = new javax.swing.GroupLayout(E7);
         E7.setLayout(E7Layout);
@@ -548,6 +622,11 @@ public class GameWindow extends javax.swing.JFrame {
         G2.setBackground(new java.awt.Color(255, 255, 255));
 
         G2Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Pawn.png"))); // NOI18N
+        G2Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                G2LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout G2Layout = new javax.swing.GroupLayout(G2);
         G2.setLayout(G2Layout);
@@ -569,6 +648,11 @@ public class GameWindow extends javax.swing.JFrame {
         F7.setBackground(new java.awt.Color(255, 255, 255));
 
         F7Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Black_Pawn.png"))); // NOI18N
+        F7Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                F7LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout F7Layout = new javax.swing.GroupLayout(F7);
         F7.setLayout(F7Layout);
@@ -590,6 +674,11 @@ public class GameWindow extends javax.swing.JFrame {
         G7.setBackground(new java.awt.Color(153, 102, 0));
 
         G7Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Black_Pawn.png"))); // NOI18N
+        G7Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                G7LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout G7Layout = new javax.swing.GroupLayout(G7);
         G7.setLayout(G7Layout);
@@ -611,6 +700,11 @@ public class GameWindow extends javax.swing.JFrame {
         C5.setBackground(new java.awt.Color(153, 102, 0));
 
         C5Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
+        C5Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                C5LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout C5Layout = new javax.swing.GroupLayout(C5);
         C5.setLayout(C5Layout);
@@ -632,6 +726,11 @@ public class GameWindow extends javax.swing.JFrame {
         D5.setBackground(new java.awt.Color(255, 255, 255));
 
         D5Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
+        D5Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                D5LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout D5Layout = new javax.swing.GroupLayout(D5);
         D5.setLayout(D5Layout);
@@ -653,6 +752,11 @@ public class GameWindow extends javax.swing.JFrame {
         H2.setBackground(new java.awt.Color(153, 102, 0));
 
         H2Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Pawn.png"))); // NOI18N
+        H2Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                H2LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout H2Layout = new javax.swing.GroupLayout(H2);
         H2.setLayout(H2Layout);
@@ -674,6 +778,11 @@ public class GameWindow extends javax.swing.JFrame {
         H6.setBackground(new java.awt.Color(153, 102, 0));
 
         H6Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
+        H6Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                H6LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout H6Layout = new javax.swing.GroupLayout(H6);
         H6.setLayout(H6Layout);
@@ -695,6 +804,11 @@ public class GameWindow extends javax.swing.JFrame {
         B2.setBackground(new java.awt.Color(153, 102, 0));
 
         B2Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Pawn.png"))); // NOI18N
+        B2Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                B2LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout B2Layout = new javax.swing.GroupLayout(B2);
         B2.setLayout(B2Layout);
@@ -716,6 +830,11 @@ public class GameWindow extends javax.swing.JFrame {
         C6.setBackground(new java.awt.Color(255, 255, 255));
 
         C6Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
+        C6Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                C6LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout C6Layout = new javax.swing.GroupLayout(C6);
         C6.setLayout(C6Layout);
@@ -737,6 +856,11 @@ public class GameWindow extends javax.swing.JFrame {
         H7.setBackground(new java.awt.Color(255, 255, 255));
 
         H7Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Black_Pawn.png"))); // NOI18N
+        H7Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                H7LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout H7Layout = new javax.swing.GroupLayout(H7);
         H7.setLayout(H7Layout);
@@ -758,6 +882,11 @@ public class GameWindow extends javax.swing.JFrame {
         B3.setBackground(new java.awt.Color(255, 255, 255));
 
         B3Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
+        B3Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                B3LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout B3Layout = new javax.swing.GroupLayout(B3);
         B3.setLayout(B3Layout);
@@ -779,6 +908,11 @@ public class GameWindow extends javax.swing.JFrame {
         E5.setBackground(new java.awt.Color(153, 102, 0));
 
         E5Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
+        E5Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                E5LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout E5Layout = new javax.swing.GroupLayout(E5);
         E5.setLayout(E5Layout);
@@ -800,6 +934,11 @@ public class GameWindow extends javax.swing.JFrame {
         A8.setBackground(new java.awt.Color(255, 255, 255));
 
         A8Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Black_Rook.png"))); // NOI18N
+        A8Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                A8LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout A8Layout = new javax.swing.GroupLayout(A8);
         A8.setLayout(A8Layout);
@@ -821,6 +960,11 @@ public class GameWindow extends javax.swing.JFrame {
         A3.setBackground(new java.awt.Color(153, 102, 0));
 
         A3Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
+        A3Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                A3LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout A3Layout = new javax.swing.GroupLayout(A3);
         A3.setLayout(A3Layout);
@@ -842,6 +986,11 @@ public class GameWindow extends javax.swing.JFrame {
         C3.setBackground(new java.awt.Color(153, 102, 0));
 
         C3Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
+        C3Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                C3LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout C3Layout = new javax.swing.GroupLayout(C3);
         C3.setLayout(C3Layout);
@@ -863,6 +1012,11 @@ public class GameWindow extends javax.swing.JFrame {
         B1.setBackground(new java.awt.Color(255, 255, 255));
 
         B1Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Knight.png"))); // NOI18N
+        B1Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                B1LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout B1Layout = new javax.swing.GroupLayout(B1);
         B1.setLayout(B1Layout);
@@ -884,6 +1038,11 @@ public class GameWindow extends javax.swing.JFrame {
         B6.setBackground(new java.awt.Color(153, 102, 0));
 
         B6Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
+        B6Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                B6LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout B6Layout = new javax.swing.GroupLayout(B6);
         B6.setLayout(B6Layout);
@@ -905,6 +1064,11 @@ public class GameWindow extends javax.swing.JFrame {
         C8.setBackground(new java.awt.Color(255, 255, 255));
 
         C8Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Black_Bishop.png"))); // NOI18N
+        C8Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                C8LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout C8Layout = new javax.swing.GroupLayout(C8);
         C8.setLayout(C8Layout);
@@ -926,6 +1090,11 @@ public class GameWindow extends javax.swing.JFrame {
         D6.setBackground(new java.awt.Color(153, 102, 0));
 
         D6Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
+        D6Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                D6LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout D6Layout = new javax.swing.GroupLayout(D6);
         D6.setLayout(D6Layout);
@@ -947,6 +1116,11 @@ public class GameWindow extends javax.swing.JFrame {
         C1.setBackground(new java.awt.Color(153, 102, 0));
 
         C1Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Bishop.png"))); // NOI18N
+        C1Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                C1LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout C1Layout = new javax.swing.GroupLayout(C1);
         C1.setLayout(C1Layout);
@@ -968,6 +1142,11 @@ public class GameWindow extends javax.swing.JFrame {
         D8.setBackground(new java.awt.Color(153, 102, 0));
 
         D8Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Black_Queen.png"))); // NOI18N
+        D8Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                D8LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout D8Layout = new javax.swing.GroupLayout(D8);
         D8.setLayout(D8Layout);
@@ -989,6 +1168,11 @@ public class GameWindow extends javax.swing.JFrame {
         D3.setBackground(new java.awt.Color(255, 255, 255));
 
         D3Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
+        D3Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                D3LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout D3Layout = new javax.swing.GroupLayout(D3);
         D3.setLayout(D3Layout);
@@ -1010,6 +1194,11 @@ public class GameWindow extends javax.swing.JFrame {
         F5.setBackground(new java.awt.Color(255, 255, 255));
 
         F5Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
+        F5Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                F5LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout F5Layout = new javax.swing.GroupLayout(F5);
         F5.setLayout(F5Layout);
@@ -1031,6 +1220,11 @@ public class GameWindow extends javax.swing.JFrame {
         D1.setBackground(new java.awt.Color(255, 255, 255));
 
         D1Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Queen.png"))); // NOI18N
+        D1Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                D1LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout D1Layout = new javax.swing.GroupLayout(D1);
         D1.setLayout(D1Layout);
@@ -1052,6 +1246,11 @@ public class GameWindow extends javax.swing.JFrame {
         E8.setBackground(new java.awt.Color(255, 255, 255));
 
         E8Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Black_King.png"))); // NOI18N
+        E8Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                E8LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout E8Layout = new javax.swing.GroupLayout(E8);
         E8.setLayout(E8Layout);
@@ -1073,6 +1272,11 @@ public class GameWindow extends javax.swing.JFrame {
         H4.setBackground(new java.awt.Color(153, 102, 0));
 
         H4Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
+        H4Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                H4LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout H4Layout = new javax.swing.GroupLayout(H4);
         H4.setLayout(H4Layout);
@@ -1094,6 +1298,11 @@ public class GameWindow extends javax.swing.JFrame {
         E6.setBackground(new java.awt.Color(255, 255, 255));
 
         E6Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
+        E6Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                E6LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout E6Layout = new javax.swing.GroupLayout(E6);
         E6.setLayout(E6Layout);
@@ -1115,6 +1324,11 @@ public class GameWindow extends javax.swing.JFrame {
         F8.setBackground(new java.awt.Color(153, 102, 0));
 
         F8Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Black_Bishop.png"))); // NOI18N
+        F8Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                F8LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout F8Layout = new javax.swing.GroupLayout(F8);
         F8.setLayout(F8Layout);
@@ -1136,6 +1350,11 @@ public class GameWindow extends javax.swing.JFrame {
         C4.setBackground(new java.awt.Color(255, 255, 255));
 
         C4Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
+        C4Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                C4LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout C4Layout = new javax.swing.GroupLayout(C4);
         C4.setLayout(C4Layout);
@@ -1157,6 +1376,11 @@ public class GameWindow extends javax.swing.JFrame {
         G5.setBackground(new java.awt.Color(153, 102, 0));
 
         G5Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
+        G5Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                G5LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout G5Layout = new javax.swing.GroupLayout(G5);
         G5.setLayout(G5Layout);
@@ -1178,6 +1402,11 @@ public class GameWindow extends javax.swing.JFrame {
         E3.setBackground(new java.awt.Color(153, 102, 0));
 
         E3Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
+        E3Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                E3LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout E3Layout = new javax.swing.GroupLayout(E3);
         E3.setLayout(E3Layout);
@@ -1199,6 +1428,11 @@ public class GameWindow extends javax.swing.JFrame {
         B4.setBackground(new java.awt.Color(153, 102, 0));
 
         B4Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
+        B4Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                B4LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout B4Layout = new javax.swing.GroupLayout(B4);
         B4.setLayout(B4Layout);
@@ -1220,6 +1454,11 @@ public class GameWindow extends javax.swing.JFrame {
         F6.setBackground(new java.awt.Color(153, 102, 0));
 
         F6Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
+        F6Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                F6LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout F6Layout = new javax.swing.GroupLayout(F6);
         F6.setLayout(F6Layout);
@@ -1241,6 +1480,11 @@ public class GameWindow extends javax.swing.JFrame {
         H5.setBackground(new java.awt.Color(255, 255, 255));
 
         H5Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
+        H5Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                H5LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout H5Layout = new javax.swing.GroupLayout(H5);
         H5.setLayout(H5Layout);
@@ -1262,6 +1506,11 @@ public class GameWindow extends javax.swing.JFrame {
         A1.setBackground(new java.awt.Color(153, 102, 0));
 
         A1Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Rook.png"))); // NOI18N
+        A1Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                A1LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout A1Layout = new javax.swing.GroupLayout(A1);
         A1.setLayout(A1Layout);
@@ -1283,6 +1532,11 @@ public class GameWindow extends javax.swing.JFrame {
         D4.setBackground(new java.awt.Color(153, 102, 0));
 
         D4Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
+        D4Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                D4LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout D4Layout = new javax.swing.GroupLayout(D4);
         D4.setLayout(D4Layout);
@@ -1304,6 +1558,11 @@ public class GameWindow extends javax.swing.JFrame {
         G6.setBackground(new java.awt.Color(255, 255, 255));
 
         G6Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
+        G6Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                G6LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout G6Layout = new javax.swing.GroupLayout(G6);
         G6.setLayout(G6Layout);
@@ -1325,6 +1584,11 @@ public class GameWindow extends javax.swing.JFrame {
         F3.setBackground(new java.awt.Color(255, 255, 255));
 
         F3Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
+        F3Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                F3LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout F3Layout = new javax.swing.GroupLayout(F3);
         F3.setLayout(F3Layout);
@@ -1346,6 +1610,11 @@ public class GameWindow extends javax.swing.JFrame {
         A6.setBackground(new java.awt.Color(255, 255, 255));
 
         A6Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
+        A6Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                A6LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout A6Layout = new javax.swing.GroupLayout(A6);
         A6.setLayout(A6Layout);
@@ -1367,6 +1636,11 @@ public class GameWindow extends javax.swing.JFrame {
         E1.setBackground(new java.awt.Color(153, 102, 0));
 
         E1Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_King.png"))); // NOI18N
+        E1Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                E1LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout E1Layout = new javax.swing.GroupLayout(E1);
         E1.setLayout(E1Layout);
@@ -1388,6 +1662,11 @@ public class GameWindow extends javax.swing.JFrame {
         E4.setBackground(new java.awt.Color(255, 255, 255));
 
         E4Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
+        E4Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                E4LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout E4Layout = new javax.swing.GroupLayout(E4);
         E4.setLayout(E4Layout);
@@ -1409,6 +1688,11 @@ public class GameWindow extends javax.swing.JFrame {
         F1.setBackground(new java.awt.Color(255, 255, 255));
 
         F1Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Bishop.png"))); // NOI18N
+        F1Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                F1LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout F1Layout = new javax.swing.GroupLayout(F1);
         F1.setLayout(F1Layout);
@@ -1430,6 +1714,11 @@ public class GameWindow extends javax.swing.JFrame {
         G3.setBackground(new java.awt.Color(153, 102, 0));
 
         G3Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
+        G3Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                G3LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout G3Layout = new javax.swing.GroupLayout(G3);
         G3.setLayout(G3Layout);
@@ -1451,6 +1740,11 @@ public class GameWindow extends javax.swing.JFrame {
         G8.setBackground(new java.awt.Color(255, 255, 255));
 
         G8Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Black_Knight.png"))); // NOI18N
+        G8Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                G8LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout G8Layout = new javax.swing.GroupLayout(G8);
         G8.setLayout(G8Layout);
@@ -1472,6 +1766,11 @@ public class GameWindow extends javax.swing.JFrame {
         G1.setBackground(new java.awt.Color(153, 102, 0));
 
         G1Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Knight.png"))); // NOI18N
+        G1Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                G1LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout G1Layout = new javax.swing.GroupLayout(G1);
         G1.setLayout(G1Layout);
@@ -1493,6 +1792,11 @@ public class GameWindow extends javax.swing.JFrame {
         F4.setBackground(new java.awt.Color(153, 102, 0));
 
         F4Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
+        F4Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                F4LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout F4Layout = new javax.swing.GroupLayout(F4);
         F4.setLayout(F4Layout);
@@ -1514,6 +1818,11 @@ public class GameWindow extends javax.swing.JFrame {
         H8.setBackground(new java.awt.Color(153, 102, 0));
 
         H8Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Black_Rook.png"))); // NOI18N
+        H8Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                H8LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout H8Layout = new javax.swing.GroupLayout(H8);
         H8.setLayout(H8Layout);
@@ -1535,6 +1844,11 @@ public class GameWindow extends javax.swing.JFrame {
         H1.setBackground(new java.awt.Color(255, 255, 255));
 
         H1Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Rook.png"))); // NOI18N
+        H1Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                H1LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout H1Layout = new javax.swing.GroupLayout(H1);
         H1.setLayout(H1Layout);
@@ -1556,6 +1870,11 @@ public class GameWindow extends javax.swing.JFrame {
         B8.setBackground(new java.awt.Color(153, 102, 0));
 
         B8Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Black_Knight.png"))); // NOI18N
+        B8Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                B8LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout B8Layout = new javax.swing.GroupLayout(B8);
         B8.setLayout(B8Layout);
@@ -1577,6 +1896,11 @@ public class GameWindow extends javax.swing.JFrame {
         A2.setBackground(new java.awt.Color(255, 255, 255));
 
         A2Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Pawn.png"))); // NOI18N
+        A2Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                A2LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout A2Layout = new javax.swing.GroupLayout(A2);
         A2.setLayout(A2Layout);
@@ -1598,6 +1922,11 @@ public class GameWindow extends javax.swing.JFrame {
         B7.setBackground(new java.awt.Color(255, 255, 255));
 
         B7Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Black_Pawn.png"))); // NOI18N
+        B7Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                B7LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout B7Layout = new javax.swing.GroupLayout(B7);
         B7.setLayout(B7Layout);
@@ -1874,6 +2203,262 @@ public class GameWindow extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void B8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B8LabelMousePressed
+        
+    }//GEN-LAST:event_B8LabelMousePressed
+
+    private void D8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D8LabelMousePressed
+        
+    }//GEN-LAST:event_D8LabelMousePressed
+
+    private void E8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E8LabelMousePressed
+        
+    }//GEN-LAST:event_E8LabelMousePressed
+
+    private void F8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F8LabelMousePressed
+        
+    }//GEN-LAST:event_F8LabelMousePressed
+
+    private void G8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G8LabelMousePressed
+        
+    }//GEN-LAST:event_G8LabelMousePressed
+
+    private void H8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H8LabelMousePressed
+       
+    }//GEN-LAST:event_H8LabelMousePressed
+    
+    private void A7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A7LabelMousePressed
+        
+    }//GEN-LAST:event_A7LabelMousePressed
+
+    private void C7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C7LabelMousePressed
+        
+    }//GEN-LAST:event_C7LabelMousePressed
+
+    private void H3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H3LabelMousePressed
+        
+    }//GEN-LAST:event_H3LabelMousePressed
+
+    private void G4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G4LabelMousePressed
+        
+    }//GEN-LAST:event_G4LabelMousePressed
+
+    private void C2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C2LabelMousePressed
+        
+    }//GEN-LAST:event_C2LabelMousePressed
+
+    private void A4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A4LabelMousePressed
+        
+    }//GEN-LAST:event_A4LabelMousePressed
+
+    private void D2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D2LabelMousePressed
+        
+    }//GEN-LAST:event_D2LabelMousePressed
+
+    private void B5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B5LabelMousePressed
+        
+    }//GEN-LAST:event_B5LabelMousePressed
+
+    private void D7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D7LabelMousePressed
+        
+    }//GEN-LAST:event_D7LabelMousePressed
+
+    private void E2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E2LabelMousePressed
+        
+    }//GEN-LAST:event_E2LabelMousePressed
+
+    private void A5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A5LabelMousePressed
+        
+    }//GEN-LAST:event_A5LabelMousePressed
+
+    private void F2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F2LabelMousePressed
+        
+    }//GEN-LAST:event_F2LabelMousePressed
+
+    private void E7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E7LabelMousePressed
+        
+    }//GEN-LAST:event_E7LabelMousePressed
+
+    private void G2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G2LabelMousePressed
+        
+    }//GEN-LAST:event_G2LabelMousePressed
+
+    private void F7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F7LabelMousePressed
+        
+    }//GEN-LAST:event_F7LabelMousePressed
+
+    private void G7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G7LabelMousePressed
+        
+    }//GEN-LAST:event_G7LabelMousePressed
+
+    private void C5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C5LabelMousePressed
+        
+    }//GEN-LAST:event_C5LabelMousePressed
+
+    private void D5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D5LabelMousePressed
+        
+    }//GEN-LAST:event_D5LabelMousePressed
+
+    private void H2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H2LabelMousePressed
+        
+    }//GEN-LAST:event_H2LabelMousePressed
+
+    private void H6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H6LabelMousePressed
+        
+    }//GEN-LAST:event_H6LabelMousePressed
+
+    private void B2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B2LabelMousePressed
+        
+    }//GEN-LAST:event_B2LabelMousePressed
+
+    private void C6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C6LabelMousePressed
+        
+    }//GEN-LAST:event_C6LabelMousePressed
+
+    private void H7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H7LabelMousePressed
+        
+    }//GEN-LAST:event_H7LabelMousePressed
+
+    private void B3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B3LabelMousePressed
+        
+    }//GEN-LAST:event_B3LabelMousePressed
+
+    private void E5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E5LabelMousePressed
+        
+    }//GEN-LAST:event_E5LabelMousePressed
+
+    private void A8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A8LabelMousePressed
+        
+    }//GEN-LAST:event_A8LabelMousePressed
+
+    private void A3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A3LabelMousePressed
+        
+    }//GEN-LAST:event_A3LabelMousePressed
+
+    private void C3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C3LabelMousePressed
+        
+    }//GEN-LAST:event_C3LabelMousePressed
+
+    private void B1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B1LabelMousePressed
+        
+    }//GEN-LAST:event_B1LabelMousePressed
+
+    private void B6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B6LabelMousePressed
+        
+    }//GEN-LAST:event_B6LabelMousePressed
+
+    private void C8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C8LabelMousePressed
+        
+    }//GEN-LAST:event_C8LabelMousePressed
+
+    private void D6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D6LabelMousePressed
+        
+    }//GEN-LAST:event_D6LabelMousePressed
+
+    private void C1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C1LabelMousePressed
+        
+    }//GEN-LAST:event_C1LabelMousePressed
+
+    private void D3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D3LabelMousePressed
+        
+    }//GEN-LAST:event_D3LabelMousePressed
+
+    private void F5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F5LabelMousePressed
+        
+    }//GEN-LAST:event_F5LabelMousePressed
+
+    private void D1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D1LabelMousePressed
+        
+    }//GEN-LAST:event_D1LabelMousePressed
+
+    private void H4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H4LabelMousePressed
+        
+    }//GEN-LAST:event_H4LabelMousePressed
+
+    private void E6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E6LabelMousePressed
+        
+    }//GEN-LAST:event_E6LabelMousePressed
+
+    private void C4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C4LabelMousePressed
+        
+    }//GEN-LAST:event_C4LabelMousePressed
+
+    private void G5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G5LabelMousePressed
+        
+    }//GEN-LAST:event_G5LabelMousePressed
+
+    private void E3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E3LabelMousePressed
+        
+    }//GEN-LAST:event_E3LabelMousePressed
+
+    private void B4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B4LabelMousePressed
+        
+    }//GEN-LAST:event_B4LabelMousePressed
+
+    private void F6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F6LabelMousePressed
+        
+    }//GEN-LAST:event_F6LabelMousePressed
+
+    private void H5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H5LabelMousePressed
+        
+    }//GEN-LAST:event_H5LabelMousePressed
+
+    private void A1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A1LabelMousePressed
+        
+    }//GEN-LAST:event_A1LabelMousePressed
+
+    private void D4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D4LabelMousePressed
+        
+    }//GEN-LAST:event_D4LabelMousePressed
+
+    private void G6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G6LabelMousePressed
+        
+    }//GEN-LAST:event_G6LabelMousePressed
+
+    private void F3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F3LabelMousePressed
+        
+    }//GEN-LAST:event_F3LabelMousePressed
+
+    private void A6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A6LabelMousePressed
+        
+    }//GEN-LAST:event_A6LabelMousePressed
+
+    private void E1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E1LabelMousePressed
+        
+    }//GEN-LAST:event_E1LabelMousePressed
+
+    private void E4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E4LabelMousePressed
+        
+    }//GEN-LAST:event_E4LabelMousePressed
+
+    private void F1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F1LabelMousePressed
+        
+    }//GEN-LAST:event_F1LabelMousePressed
+
+    private void G3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G3LabelMousePressed
+        
+    }//GEN-LAST:event_G3LabelMousePressed
+
+    private void G1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G1LabelMousePressed
+        
+    }//GEN-LAST:event_G1LabelMousePressed
+
+    private void F4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F4LabelMousePressed
+        
+    }//GEN-LAST:event_F4LabelMousePressed
+
+    private void H1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H1LabelMousePressed
+        
+    }//GEN-LAST:event_H1LabelMousePressed
+
+    private void A2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A2LabelMousePressed
+        
+    }//GEN-LAST:event_A2LabelMousePressed
+
+    private void B7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B7LabelMousePressed
+        
+    }//GEN-LAST:event_B7LabelMousePressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel A1;
