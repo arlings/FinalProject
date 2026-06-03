@@ -265,7 +265,6 @@ public class MainWindow extends javax.swing.JFrame {
             createUser = new CreateUser(this);
         }
         createUser.setVisible(true);
-        this.setVisible(false);
     }//GEN-LAST:event_newUserMenuItemActionPerformed
 
     private void competitiveMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_competitiveMenuItemActionPerformed
