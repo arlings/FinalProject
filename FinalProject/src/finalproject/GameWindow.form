@@ -346,7 +346,7 @@
         <Component class="javax.swing.JLabel" name="H3Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
         </Component>
@@ -383,7 +383,7 @@
         <Component class="javax.swing.JLabel" name="G4Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
         </Component>
@@ -457,7 +457,7 @@
         <Component class="javax.swing.JLabel" name="A4Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
         </Component>
@@ -531,7 +531,7 @@
         <Component class="javax.swing.JLabel" name="B5Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
         </Component>
@@ -642,7 +642,7 @@
         <Component class="javax.swing.JLabel" name="A5Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
         </Component>
@@ -901,7 +901,7 @@
         <Component class="javax.swing.JLabel" name="C5Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
         </Component>
@@ -938,7 +938,7 @@
         <Component class="javax.swing.JLabel" name="D5Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
         </Component>
@@ -1012,7 +1012,7 @@
         <Component class="javax.swing.JLabel" name="H6Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
         </Component>
@@ -1086,7 +1086,7 @@
         <Component class="javax.swing.JLabel" name="C6Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
         </Component>
@@ -1160,7 +1160,7 @@
         <Component class="javax.swing.JLabel" name="B3Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
         </Component>
@@ -1197,7 +1197,7 @@
         <Component class="javax.swing.JLabel" name="E5Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
         </Component>
@@ -1271,7 +1271,7 @@
         <Component class="javax.swing.JLabel" name="A3Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
         </Component>
@@ -1308,7 +1308,7 @@
         <Component class="javax.swing.JLabel" name="C3Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
         </Component>
@@ -1382,7 +1382,7 @@
         <Component class="javax.swing.JLabel" name="B6Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
         </Component>
@@ -1456,7 +1456,7 @@
         <Component class="javax.swing.JLabel" name="D6Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
         </Component>
@@ -1567,7 +1567,7 @@
         <Component class="javax.swing.JLabel" name="D3Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
         </Component>
@@ -1604,7 +1604,7 @@
         <Component class="javax.swing.JLabel" name="F5Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
         </Component>
@@ -1715,7 +1715,7 @@
         <Component class="javax.swing.JLabel" name="H4Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
         </Component>
@@ -1752,7 +1752,7 @@
         <Component class="javax.swing.JLabel" name="E6Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
         </Component>
@@ -1826,7 +1826,7 @@
         <Component class="javax.swing.JLabel" name="C4Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
         </Component>
@@ -1863,7 +1863,7 @@
         <Component class="javax.swing.JLabel" name="G5Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
         </Component>
@@ -1900,7 +1900,7 @@
         <Component class="javax.swing.JLabel" name="E3Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
         </Component>
@@ -1937,7 +1937,7 @@
         <Component class="javax.swing.JLabel" name="B4Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
         </Component>
@@ -1974,7 +1974,7 @@
         <Component class="javax.swing.JLabel" name="F6Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
         </Component>
@@ -2011,7 +2011,7 @@
         <Component class="javax.swing.JLabel" name="H5Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
         </Component>
@@ -2085,7 +2085,7 @@
         <Component class="javax.swing.JLabel" name="D4Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
         </Component>
@@ -2122,7 +2122,7 @@
         <Component class="javax.swing.JLabel" name="G6Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
         </Component>
@@ -2159,7 +2159,7 @@
         <Component class="javax.swing.JLabel" name="F3Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
         </Component>
@@ -2196,7 +2196,7 @@
         <Component class="javax.swing.JLabel" name="A6Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
         </Component>
@@ -2270,7 +2270,7 @@
         <Component class="javax.swing.JLabel" name="E4Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
         </Component>
@@ -2344,7 +2344,7 @@
         <Component class="javax.swing.JLabel" name="G3Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
         </Component>
@@ -2455,7 +2455,7 @@
         <Component class="javax.swing.JLabel" name="F4Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
         </Component>

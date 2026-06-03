@@ -295,7 +295,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         H3.setBackground(new java.awt.Color(255, 255, 255));
 
-        H3Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Rook.png"))); // NOI18N
+        H3Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
 
         javax.swing.GroupLayout H3Layout = new javax.swing.GroupLayout(H3);
         H3.setLayout(H3Layout);
@@ -316,7 +316,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         G4.setBackground(new java.awt.Color(255, 255, 255));
 
-        G4Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Rook.png"))); // NOI18N
+        G4Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
 
         javax.swing.GroupLayout G4Layout = new javax.swing.GroupLayout(G4);
         G4.setLayout(G4Layout);
@@ -358,7 +358,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         A4.setBackground(new java.awt.Color(255, 255, 255));
 
-        A4Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Rook.png"))); // NOI18N
+        A4Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
 
         javax.swing.GroupLayout A4Layout = new javax.swing.GroupLayout(A4);
         A4.setLayout(A4Layout);
@@ -400,7 +400,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         B5.setBackground(new java.awt.Color(255, 255, 255));
 
-        B5Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Rook.png"))); // NOI18N
+        B5Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
 
         javax.swing.GroupLayout B5Layout = new javax.swing.GroupLayout(B5);
         B5.setLayout(B5Layout);
@@ -463,7 +463,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         A5.setBackground(new java.awt.Color(153, 102, 0));
 
-        A5Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Rook.png"))); // NOI18N
+        A5Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
 
         javax.swing.GroupLayout A5Layout = new javax.swing.GroupLayout(A5);
         A5.setLayout(A5Layout);
@@ -610,7 +610,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         C5.setBackground(new java.awt.Color(153, 102, 0));
 
-        C5Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Rook.png"))); // NOI18N
+        C5Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
 
         javax.swing.GroupLayout C5Layout = new javax.swing.GroupLayout(C5);
         C5.setLayout(C5Layout);
@@ -631,7 +631,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         D5.setBackground(new java.awt.Color(255, 255, 255));
 
-        D5Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Rook.png"))); // NOI18N
+        D5Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
 
         javax.swing.GroupLayout D5Layout = new javax.swing.GroupLayout(D5);
         D5.setLayout(D5Layout);
@@ -673,7 +673,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         H6.setBackground(new java.awt.Color(153, 102, 0));
 
-        H6Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Rook.png"))); // NOI18N
+        H6Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
 
         javax.swing.GroupLayout H6Layout = new javax.swing.GroupLayout(H6);
         H6.setLayout(H6Layout);
@@ -715,7 +715,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         C6.setBackground(new java.awt.Color(255, 255, 255));
 
-        C6Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Rook.png"))); // NOI18N
+        C6Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
 
         javax.swing.GroupLayout C6Layout = new javax.swing.GroupLayout(C6);
         C6.setLayout(C6Layout);
@@ -757,7 +757,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         B3.setBackground(new java.awt.Color(255, 255, 255));
 
-        B3Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Rook.png"))); // NOI18N
+        B3Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
 
         javax.swing.GroupLayout B3Layout = new javax.swing.GroupLayout(B3);
         B3.setLayout(B3Layout);
@@ -778,7 +778,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         E5.setBackground(new java.awt.Color(153, 102, 0));
 
-        E5Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Rook.png"))); // NOI18N
+        E5Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
 
         javax.swing.GroupLayout E5Layout = new javax.swing.GroupLayout(E5);
         E5.setLayout(E5Layout);
@@ -820,7 +820,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         A3.setBackground(new java.awt.Color(153, 102, 0));
 
-        A3Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Rook.png"))); // NOI18N
+        A3Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
 
         javax.swing.GroupLayout A3Layout = new javax.swing.GroupLayout(A3);
         A3.setLayout(A3Layout);
@@ -841,7 +841,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         C3.setBackground(new java.awt.Color(153, 102, 0));
 
-        C3Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Rook.png"))); // NOI18N
+        C3Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
 
         javax.swing.GroupLayout C3Layout = new javax.swing.GroupLayout(C3);
         C3.setLayout(C3Layout);
@@ -883,7 +883,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         B6.setBackground(new java.awt.Color(153, 102, 0));
 
-        B6Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Rook.png"))); // NOI18N
+        B6Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
 
         javax.swing.GroupLayout B6Layout = new javax.swing.GroupLayout(B6);
         B6.setLayout(B6Layout);
@@ -925,7 +925,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         D6.setBackground(new java.awt.Color(153, 102, 0));
 
-        D6Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Rook.png"))); // NOI18N
+        D6Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
 
         javax.swing.GroupLayout D6Layout = new javax.swing.GroupLayout(D6);
         D6.setLayout(D6Layout);
@@ -988,7 +988,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         D3.setBackground(new java.awt.Color(255, 255, 255));
 
-        D3Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Rook.png"))); // NOI18N
+        D3Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
 
         javax.swing.GroupLayout D3Layout = new javax.swing.GroupLayout(D3);
         D3.setLayout(D3Layout);
@@ -1009,7 +1009,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         F5.setBackground(new java.awt.Color(255, 255, 255));
 
-        F5Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Rook.png"))); // NOI18N
+        F5Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
 
         javax.swing.GroupLayout F5Layout = new javax.swing.GroupLayout(F5);
         F5.setLayout(F5Layout);
@@ -1072,7 +1072,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         H4.setBackground(new java.awt.Color(153, 102, 0));
 
-        H4Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Rook.png"))); // NOI18N
+        H4Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
 
         javax.swing.GroupLayout H4Layout = new javax.swing.GroupLayout(H4);
         H4.setLayout(H4Layout);
@@ -1093,7 +1093,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         E6.setBackground(new java.awt.Color(255, 255, 255));
 
-        E6Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Rook.png"))); // NOI18N
+        E6Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
 
         javax.swing.GroupLayout E6Layout = new javax.swing.GroupLayout(E6);
         E6.setLayout(E6Layout);
@@ -1135,7 +1135,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         C4.setBackground(new java.awt.Color(255, 255, 255));
 
-        C4Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Rook.png"))); // NOI18N
+        C4Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
 
         javax.swing.GroupLayout C4Layout = new javax.swing.GroupLayout(C4);
         C4.setLayout(C4Layout);
@@ -1156,7 +1156,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         G5.setBackground(new java.awt.Color(153, 102, 0));
 
-        G5Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Rook.png"))); // NOI18N
+        G5Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
 
         javax.swing.GroupLayout G5Layout = new javax.swing.GroupLayout(G5);
         G5.setLayout(G5Layout);
@@ -1177,7 +1177,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         E3.setBackground(new java.awt.Color(153, 102, 0));
 
-        E3Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Rook.png"))); // NOI18N
+        E3Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
 
         javax.swing.GroupLayout E3Layout = new javax.swing.GroupLayout(E3);
         E3.setLayout(E3Layout);
@@ -1198,7 +1198,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         B4.setBackground(new java.awt.Color(153, 102, 0));
 
-        B4Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Rook.png"))); // NOI18N
+        B4Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
 
         javax.swing.GroupLayout B4Layout = new javax.swing.GroupLayout(B4);
         B4.setLayout(B4Layout);
@@ -1219,7 +1219,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         F6.setBackground(new java.awt.Color(153, 102, 0));
 
-        F6Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Rook.png"))); // NOI18N
+        F6Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
 
         javax.swing.GroupLayout F6Layout = new javax.swing.GroupLayout(F6);
         F6.setLayout(F6Layout);
@@ -1240,7 +1240,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         H5.setBackground(new java.awt.Color(255, 255, 255));
 
-        H5Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Rook.png"))); // NOI18N
+        H5Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
 
         javax.swing.GroupLayout H5Layout = new javax.swing.GroupLayout(H5);
         H5.setLayout(H5Layout);
@@ -1282,7 +1282,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         D4.setBackground(new java.awt.Color(153, 102, 0));
 
-        D4Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Rook.png"))); // NOI18N
+        D4Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
 
         javax.swing.GroupLayout D4Layout = new javax.swing.GroupLayout(D4);
         D4.setLayout(D4Layout);
@@ -1303,7 +1303,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         G6.setBackground(new java.awt.Color(255, 255, 255));
 
-        G6Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Rook.png"))); // NOI18N
+        G6Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
 
         javax.swing.GroupLayout G6Layout = new javax.swing.GroupLayout(G6);
         G6.setLayout(G6Layout);
@@ -1324,7 +1324,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         F3.setBackground(new java.awt.Color(255, 255, 255));
 
-        F3Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Rook.png"))); // NOI18N
+        F3Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
 
         javax.swing.GroupLayout F3Layout = new javax.swing.GroupLayout(F3);
         F3.setLayout(F3Layout);
@@ -1345,7 +1345,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         A6.setBackground(new java.awt.Color(255, 255, 255));
 
-        A6Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Rook.png"))); // NOI18N
+        A6Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
 
         javax.swing.GroupLayout A6Layout = new javax.swing.GroupLayout(A6);
         A6.setLayout(A6Layout);
@@ -1387,7 +1387,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         E4.setBackground(new java.awt.Color(255, 255, 255));
 
-        E4Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Rook.png"))); // NOI18N
+        E4Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
 
         javax.swing.GroupLayout E4Layout = new javax.swing.GroupLayout(E4);
         E4.setLayout(E4Layout);
@@ -1429,7 +1429,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         G3.setBackground(new java.awt.Color(153, 102, 0));
 
-        G3Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Rook.png"))); // NOI18N
+        G3Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
 
         javax.swing.GroupLayout G3Layout = new javax.swing.GroupLayout(G3);
         G3.setLayout(G3Layout);
@@ -1492,7 +1492,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         F4.setBackground(new java.awt.Color(153, 102, 0));
 
-        F4Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Rook.png"))); // NOI18N
+        F4Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
 
         javax.swing.GroupLayout F4Layout = new javax.swing.GroupLayout(F4);
         F4.setLayout(F4Layout);
