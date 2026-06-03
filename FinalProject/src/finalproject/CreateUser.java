@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class CreateUser extends javax.swing.JFrame {
     
     MainWindow mainWindow;
+    WarningWindow warningWindow;
     
     File f = new File("src/finalproject/Users.txt");
     
@@ -127,13 +128,17 @@ public class CreateUser extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void goBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBtnActionPerformed
-        this.dispose();
-        
+        boolean done = false;
         try {
             Scanner s = new Scanner(f);
-            while (s.hasNextLine()) {
+            while (s.hasNextLine() || done) {
                 if (userNameField.getText().equalsIgnoreCase(s.nextLine().split(",")[0])) {
-                    
+                    if (warningWindow == null) {
+                        warningWindow = new WarningWindow(this, "This username already exists");
+                        userNameField.setText("");
+                    }
+                    warningWindow.setVisible(true);
+                    done = true;
                 }
             }
         } catch (FileNotFoundException e) {
