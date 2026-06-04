@@ -129,10 +129,12 @@ public class EnterUsername extends javax.swing.JFrame {
                     found = true;
                     numOfUsers++;
                     if (gameWindow == null && numOfUsers == 2) {
+                        usernames[1] = userNameField.getText();
                         gameWindow = new GameWindow(this);
                         gameWindow.setVisible(true);
                         this.dispose();
                     } else {
+                        usernames[0] = userNameField.getText();
                         this.userNameField.setText("");
                         this.topLabel.setText("Enter your username player 2");
                     }
