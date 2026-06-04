@@ -26,18 +26,17 @@ public class GameWindow extends javax.swing.JFrame {
 
     public Piece[][] pieces = new Piece[8][8];
 
-    
-    public void pieceLogic(Piece piece){
+    public void pieceLogic(Piece piece) {
         //Piece piece=piece.getPieceAt(xPos, yPos, pieces);
     }
-    
+
     public GameWindow(MainWindow m, String user1, String user2) {
         startGame();
         mainWindow = m;
         this.username1.setText(user1);
         this.username2.setText(user2);
     }
-    
+
     public GameWindow(SandboxWindow m, String user1, String user2) {
         startGame();
         sandboxWindow = m;
@@ -51,7 +50,7 @@ public class GameWindow extends javax.swing.JFrame {
         this.username1.setText(user1);
         this.username2.setText(user2);
     }
-    
+
     public void MoveJFrame() {
         this.setUndecorated(true);
         MainWindow.FrameDragListener frameDragListener = new MainWindow.FrameDragListener(this);
@@ -127,18 +126,40 @@ public class GameWindow extends javax.swing.JFrame {
     private void updateBoardUI() {
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
-                board[row][col].removeAll();
                 Piece piece = pieces[row][col];
+
                 if (piece != null) {
                     java.awt.image.BufferedImage img = piece.getSprite();
-                    ImageIcon icon = new ImageIcon(img);
-                    board[row][col] = new JLabel(icon);
+
+                    if (img != null) {
+                        // Update the existing label's icon with the piece's sprite
+                        ImageIcon icon = new ImageIcon(img);
+                        board[row][col].setIcon(icon);
+                    } else {
+                        // Fallback to transparent if the piece's sprite failed to load
+                        setTransparentIcon(board[row][col]);
+                    }
+                } else {
+                    // If the piece is null, set the image to the transparent background
+                    setTransparentIcon(board[row][col]);
                 }
+
+                // Refresh the component UI
                 board[row][col].revalidate();
                 board[row][col].repaint();
             }
         }
     }
+    
+    private void setTransparentIcon(JLabel label) {
+        java.awt.image.BufferedImage transparentImg = loadImage("/images/Transparent_Background.png");
+        if (transparentImg != null) {
+            label.setIcon(new ImageIcon(transparentImg));
+        } else {
+            // Absolute fallback if even the transparent resource file is missing
+            label.setIcon(null); 
+        }
+}
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -282,7 +303,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         C7.setBackground(new java.awt.Color(153, 102, 0));
 
-        C7Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Black_Pawn.png"))); // NOI18N
+        C7Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
         C7Label.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 C7LabelMousePressed(evt);
@@ -360,7 +381,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         C2.setBackground(new java.awt.Color(255, 255, 255));
 
-        C2Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Pawn.png"))); // NOI18N
+        C2Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
         C2Label.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 C2LabelMousePressed(evt);
@@ -412,7 +433,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         D2.setBackground(new java.awt.Color(153, 102, 0));
 
-        D2Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Pawn.png"))); // NOI18N
+        D2Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
         D2Label.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 D2LabelMousePressed(evt);
@@ -464,7 +485,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         D7.setBackground(new java.awt.Color(255, 255, 255));
 
-        D7Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Black_Pawn.png"))); // NOI18N
+        D7Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
         D7Label.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 D7LabelMousePressed(evt);
@@ -490,7 +511,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         E2.setBackground(new java.awt.Color(255, 255, 255));
 
-        E2Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Pawn.png"))); // NOI18N
+        E2Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
         E2Label.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 E2LabelMousePressed(evt);
@@ -542,7 +563,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         A7.setBackground(new java.awt.Color(153, 102, 0));
 
-        A7Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Black_Pawn.png"))); // NOI18N
+        A7Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
         A7Label.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 A7LabelMousePressed(evt);
@@ -568,7 +589,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         F2.setBackground(new java.awt.Color(153, 102, 0));
 
-        F2Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Pawn.png"))); // NOI18N
+        F2Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
         F2Label.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 F2LabelMousePressed(evt);
@@ -594,7 +615,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         E7.setBackground(new java.awt.Color(153, 102, 0));
 
-        E7Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Black_Pawn.png"))); // NOI18N
+        E7Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
         E7Label.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 E7LabelMousePressed(evt);
@@ -620,7 +641,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         G2.setBackground(new java.awt.Color(255, 255, 255));
 
-        G2Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Pawn.png"))); // NOI18N
+        G2Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
         G2Label.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 G2LabelMousePressed(evt);
@@ -646,7 +667,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         F7.setBackground(new java.awt.Color(255, 255, 255));
 
-        F7Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Black_Pawn.png"))); // NOI18N
+        F7Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
         F7Label.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 F7LabelMousePressed(evt);
@@ -672,7 +693,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         G7.setBackground(new java.awt.Color(153, 102, 0));
 
-        G7Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Black_Pawn.png"))); // NOI18N
+        G7Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
         G7Label.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 G7LabelMousePressed(evt);
@@ -750,7 +771,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         H2.setBackground(new java.awt.Color(153, 102, 0));
 
-        H2Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Pawn.png"))); // NOI18N
+        H2Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
         H2Label.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 H2LabelMousePressed(evt);
@@ -802,7 +823,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         B2.setBackground(new java.awt.Color(153, 102, 0));
 
-        B2Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Pawn.png"))); // NOI18N
+        B2Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
         B2Label.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 B2LabelMousePressed(evt);
@@ -854,7 +875,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         H7.setBackground(new java.awt.Color(255, 255, 255));
 
-        H7Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Black_Pawn.png"))); // NOI18N
+        H7Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
         H7Label.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 H7LabelMousePressed(evt);
@@ -932,7 +953,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         A8.setBackground(new java.awt.Color(255, 255, 255));
 
-        A8Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Black_Rook.png"))); // NOI18N
+        A8Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
         A8Label.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 A8LabelMousePressed(evt);
@@ -1010,7 +1031,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         B1.setBackground(new java.awt.Color(255, 255, 255));
 
-        B1Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Knight.png"))); // NOI18N
+        B1Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
         B1Label.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 B1LabelMousePressed(evt);
@@ -1062,7 +1083,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         C8.setBackground(new java.awt.Color(255, 255, 255));
 
-        C8Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Black_Bishop.png"))); // NOI18N
+        C8Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
         C8Label.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 C8LabelMousePressed(evt);
@@ -1114,7 +1135,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         C1.setBackground(new java.awt.Color(153, 102, 0));
 
-        C1Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Bishop.png"))); // NOI18N
+        C1Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
         C1Label.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 C1LabelMousePressed(evt);
@@ -1140,7 +1161,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         D8.setBackground(new java.awt.Color(153, 102, 0));
 
-        D8Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Black_Queen.png"))); // NOI18N
+        D8Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
         D8Label.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 D8LabelMousePressed(evt);
@@ -1218,7 +1239,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         D1.setBackground(new java.awt.Color(255, 255, 255));
 
-        D1Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Queen.png"))); // NOI18N
+        D1Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
         D1Label.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 D1LabelMousePressed(evt);
@@ -1244,7 +1265,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         E8.setBackground(new java.awt.Color(255, 255, 255));
 
-        E8Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Black_King.png"))); // NOI18N
+        E8Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
         E8Label.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 E8LabelMousePressed(evt);
@@ -1322,7 +1343,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         F8.setBackground(new java.awt.Color(153, 102, 0));
 
-        F8Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Black_Bishop.png"))); // NOI18N
+        F8Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
         F8Label.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 F8LabelMousePressed(evt);
@@ -1504,7 +1525,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         A1.setBackground(new java.awt.Color(153, 102, 0));
 
-        A1Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Rook.png"))); // NOI18N
+        A1Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
         A1Label.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 A1LabelMousePressed(evt);
@@ -1634,7 +1655,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         E1.setBackground(new java.awt.Color(153, 102, 0));
 
-        E1Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_King.png"))); // NOI18N
+        E1Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
         E1Label.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 E1LabelMousePressed(evt);
@@ -1686,7 +1707,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         F1.setBackground(new java.awt.Color(255, 255, 255));
 
-        F1Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Bishop.png"))); // NOI18N
+        F1Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
         F1Label.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 F1LabelMousePressed(evt);
@@ -1738,7 +1759,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         G8.setBackground(new java.awt.Color(255, 255, 255));
 
-        G8Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Black_Knight.png"))); // NOI18N
+        G8Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
         G8Label.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 G8LabelMousePressed(evt);
@@ -1764,7 +1785,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         G1.setBackground(new java.awt.Color(153, 102, 0));
 
-        G1Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Knight.png"))); // NOI18N
+        G1Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
         G1Label.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 G1LabelMousePressed(evt);
@@ -1816,7 +1837,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         H8.setBackground(new java.awt.Color(153, 102, 0));
 
-        H8Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Black_Rook.png"))); // NOI18N
+        H8Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
         H8Label.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 H8LabelMousePressed(evt);
@@ -1842,7 +1863,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         H1.setBackground(new java.awt.Color(255, 255, 255));
 
-        H1Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Rook.png"))); // NOI18N
+        H1Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
         H1Label.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 H1LabelMousePressed(evt);
@@ -1868,7 +1889,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         B8.setBackground(new java.awt.Color(153, 102, 0));
 
-        B8Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Black_Knight.png"))); // NOI18N
+        B8Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
         B8Label.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 B8LabelMousePressed(evt);
@@ -1894,7 +1915,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         A2.setBackground(new java.awt.Color(255, 255, 255));
 
-        A2Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Pawn.png"))); // NOI18N
+        A2Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
         A2Label.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 A2LabelMousePressed(evt);
@@ -1920,7 +1941,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         B7.setBackground(new java.awt.Color(255, 255, 255));
 
-        B7Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Black_Pawn.png"))); // NOI18N
+        B7Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
         B7Label.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 B7LabelMousePressed(evt);
@@ -2204,277 +2225,277 @@ public class GameWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void B8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B8LabelMousePressed
-        Piece pieceAtIndex=pieces[1][7];
+        Piece pieceAtIndex = pieces[1][7];
         pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_B8LabelMousePressed
 
     private void D8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D8LabelMousePressed
-        Piece pieceAtIndex=pieces[3][7];
+        Piece pieceAtIndex = pieces[3][7];
         pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_D8LabelMousePressed
 
     private void E8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E8LabelMousePressed
-        Piece pieceAtIndex=pieces[4][7];
+        Piece pieceAtIndex = pieces[4][7];
         pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_E8LabelMousePressed
 
     private void F8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F8LabelMousePressed
-        Piece pieceAtIndex=pieces[5][7];
+        Piece pieceAtIndex = pieces[5][7];
         pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_F8LabelMousePressed
 
     private void G8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G8LabelMousePressed
-        Piece pieceAtIndex=pieces[6][7];
+        Piece pieceAtIndex = pieces[6][7];
         pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_G8LabelMousePressed
 
     private void H8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H8LabelMousePressed
-       Piece pieceAtIndex=pieces[7][7];
-       pieceLogic(pieceAtIndex);
+        Piece pieceAtIndex = pieces[7][7];
+        pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_H8LabelMousePressed
-    
+
     private void A7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A7LabelMousePressed
-       Piece pieceAtIndex=pieces[0][6];
-       pieceLogic(pieceAtIndex); 
+        Piece pieceAtIndex = pieces[0][6];
+        pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_A7LabelMousePressed
 
     private void C7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C7LabelMousePressed
-        Piece pieceAtIndex=pieces[2][6];
+        Piece pieceAtIndex = pieces[2][6];
         pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_C7LabelMousePressed
 
     private void H3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H3LabelMousePressed
-        Piece pieceAtIndex=pieces[7][2];
+        Piece pieceAtIndex = pieces[7][2];
         pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_H3LabelMousePressed
 
     private void G4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G4LabelMousePressed
-        Piece pieceAtIndex=pieces[7][3];
+        Piece pieceAtIndex = pieces[7][3];
         pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_G4LabelMousePressed
 
     private void C2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C2LabelMousePressed
-        Piece pieceAtIndex=pieces[2][1];
+        Piece pieceAtIndex = pieces[2][1];
         pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_C2LabelMousePressed
 
     private void A4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A4LabelMousePressed
-        Piece pieceAtIndex=pieces[0][3];
+        Piece pieceAtIndex = pieces[0][3];
         pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_A4LabelMousePressed
 
     private void D2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D2LabelMousePressed
-        Piece pieceAtIndex=pieces[3][1];
+        Piece pieceAtIndex = pieces[3][1];
         pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_D2LabelMousePressed
 
     private void B5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B5LabelMousePressed
-        Piece pieceAtIndex=pieces[1][4];
+        Piece pieceAtIndex = pieces[1][4];
         pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_B5LabelMousePressed
 
     private void D7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D7LabelMousePressed
-        Piece pieceAtIndex=pieces[3][6];
+        Piece pieceAtIndex = pieces[3][6];
         pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_D7LabelMousePressed
 
     private void E2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E2LabelMousePressed
-        Piece pieceAtIndex=pieces[4][1];
+        Piece pieceAtIndex = pieces[4][1];
         pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_E2LabelMousePressed
 
     private void A5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A5LabelMousePressed
-        Piece pieceAtIndex=pieces[0][4];
+        Piece pieceAtIndex = pieces[0][4];
         pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_A5LabelMousePressed
 
     private void F2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F2LabelMousePressed
-        Piece pieceAtIndex=pieces[5][1];
+        Piece pieceAtIndex = pieces[5][1];
         pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_F2LabelMousePressed
 
     private void E7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E7LabelMousePressed
-        
+
     }//GEN-LAST:event_E7LabelMousePressed
 
     private void G2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G2LabelMousePressed
-        
+
     }//GEN-LAST:event_G2LabelMousePressed
 
     private void F7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F7LabelMousePressed
-        
+
     }//GEN-LAST:event_F7LabelMousePressed
 
     private void G7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G7LabelMousePressed
-        
+
     }//GEN-LAST:event_G7LabelMousePressed
 
     private void C5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C5LabelMousePressed
-        
+
     }//GEN-LAST:event_C5LabelMousePressed
 
     private void D5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D5LabelMousePressed
-        
+
     }//GEN-LAST:event_D5LabelMousePressed
 
     private void H2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H2LabelMousePressed
-        
+
     }//GEN-LAST:event_H2LabelMousePressed
 
     private void H6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H6LabelMousePressed
-        
+
     }//GEN-LAST:event_H6LabelMousePressed
 
     private void B2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B2LabelMousePressed
-        
+
     }//GEN-LAST:event_B2LabelMousePressed
 
     private void C6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C6LabelMousePressed
-        
+
     }//GEN-LAST:event_C6LabelMousePressed
 
     private void H7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H7LabelMousePressed
-        
+
     }//GEN-LAST:event_H7LabelMousePressed
 
     private void B3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B3LabelMousePressed
-        
+
     }//GEN-LAST:event_B3LabelMousePressed
 
     private void E5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E5LabelMousePressed
-        
+
     }//GEN-LAST:event_E5LabelMousePressed
 
     private void A8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A8LabelMousePressed
-        
+
     }//GEN-LAST:event_A8LabelMousePressed
 
     private void A3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A3LabelMousePressed
-        
+
     }//GEN-LAST:event_A3LabelMousePressed
 
     private void C3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C3LabelMousePressed
-        
+
     }//GEN-LAST:event_C3LabelMousePressed
 
     private void B1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B1LabelMousePressed
-        
+
     }//GEN-LAST:event_B1LabelMousePressed
 
     private void B6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B6LabelMousePressed
-        
+
     }//GEN-LAST:event_B6LabelMousePressed
 
     private void C8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C8LabelMousePressed
-        
+
     }//GEN-LAST:event_C8LabelMousePressed
 
     private void D6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D6LabelMousePressed
-        
+
     }//GEN-LAST:event_D6LabelMousePressed
 
     private void C1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C1LabelMousePressed
-        
+
     }//GEN-LAST:event_C1LabelMousePressed
 
     private void D3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D3LabelMousePressed
-        
+
     }//GEN-LAST:event_D3LabelMousePressed
 
     private void F5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F5LabelMousePressed
-        
+
     }//GEN-LAST:event_F5LabelMousePressed
 
     private void D1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D1LabelMousePressed
-        
+
     }//GEN-LAST:event_D1LabelMousePressed
 
     private void H4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H4LabelMousePressed
-        
+
     }//GEN-LAST:event_H4LabelMousePressed
 
     private void E6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E6LabelMousePressed
-        
+
     }//GEN-LAST:event_E6LabelMousePressed
 
     private void C4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C4LabelMousePressed
-        
+
     }//GEN-LAST:event_C4LabelMousePressed
 
     private void G5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G5LabelMousePressed
-        
+
     }//GEN-LAST:event_G5LabelMousePressed
 
     private void E3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E3LabelMousePressed
-        
+
     }//GEN-LAST:event_E3LabelMousePressed
 
     private void B4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B4LabelMousePressed
-        
+
     }//GEN-LAST:event_B4LabelMousePressed
 
     private void F6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F6LabelMousePressed
-        
+
     }//GEN-LAST:event_F6LabelMousePressed
 
     private void H5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H5LabelMousePressed
-        
+
     }//GEN-LAST:event_H5LabelMousePressed
 
     private void A1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A1LabelMousePressed
-        
+
     }//GEN-LAST:event_A1LabelMousePressed
 
     private void D4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D4LabelMousePressed
-        
+
     }//GEN-LAST:event_D4LabelMousePressed
 
     private void G6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G6LabelMousePressed
-        
+
     }//GEN-LAST:event_G6LabelMousePressed
 
     private void F3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F3LabelMousePressed
-        
+
     }//GEN-LAST:event_F3LabelMousePressed
 
     private void A6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A6LabelMousePressed
-        
+
     }//GEN-LAST:event_A6LabelMousePressed
 
     private void E1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E1LabelMousePressed
-        
+
     }//GEN-LAST:event_E1LabelMousePressed
 
     private void E4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E4LabelMousePressed
-        
+
     }//GEN-LAST:event_E4LabelMousePressed
 
     private void F1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F1LabelMousePressed
-        
+
     }//GEN-LAST:event_F1LabelMousePressed
 
     private void G3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G3LabelMousePressed
-        
+
     }//GEN-LAST:event_G3LabelMousePressed
 
     private void G1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G1LabelMousePressed
-        
+
     }//GEN-LAST:event_G1LabelMousePressed
 
     private void F4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F4LabelMousePressed
-        
+
     }//GEN-LAST:event_F4LabelMousePressed
 
     private void H1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H1LabelMousePressed
-        
+
     }//GEN-LAST:event_H1LabelMousePressed
 
     private void A2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A2LabelMousePressed
-        
+
     }//GEN-LAST:event_A2LabelMousePressed
 
     private void B7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B7LabelMousePressed
-        
+
     }//GEN-LAST:event_B7LabelMousePressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

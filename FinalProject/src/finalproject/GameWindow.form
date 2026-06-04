@@ -309,7 +309,7 @@
         <Component class="javax.swing.JLabel" name="C7Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/Black_Pawn.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
           <Events>
@@ -429,7 +429,7 @@
         <Component class="javax.swing.JLabel" name="C2Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Pawn.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
           <Events>
@@ -509,7 +509,7 @@
         <Component class="javax.swing.JLabel" name="D2Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Pawn.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
           <Events>
@@ -589,7 +589,7 @@
         <Component class="javax.swing.JLabel" name="D7Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/Black_Pawn.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
           <Events>
@@ -629,7 +629,7 @@
         <Component class="javax.swing.JLabel" name="E2Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Pawn.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
           <Events>
@@ -709,7 +709,7 @@
         <Component class="javax.swing.JLabel" name="A7Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/Black_Pawn.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
           <Events>
@@ -749,7 +749,7 @@
         <Component class="javax.swing.JLabel" name="F2Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Pawn.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
           <Events>
@@ -789,7 +789,7 @@
         <Component class="javax.swing.JLabel" name="E7Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/Black_Pawn.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
           <Events>
@@ -829,7 +829,7 @@
         <Component class="javax.swing.JLabel" name="G2Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Pawn.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
           <Events>
@@ -869,7 +869,7 @@
         <Component class="javax.swing.JLabel" name="F7Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/Black_Pawn.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
           <Events>
@@ -909,7 +909,7 @@
         <Component class="javax.swing.JLabel" name="G7Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/Black_Pawn.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
           <Events>
@@ -1029,7 +1029,7 @@
         <Component class="javax.swing.JLabel" name="H2Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Pawn.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
           <Events>
@@ -1109,7 +1109,7 @@
         <Component class="javax.swing.JLabel" name="B2Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Pawn.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
           <Events>
@@ -1189,7 +1189,7 @@
         <Component class="javax.swing.JLabel" name="H7Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/Black_Pawn.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
           <Events>
@@ -1309,7 +1309,7 @@
         <Component class="javax.swing.JLabel" name="A8Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/Black_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
           <Events>
@@ -1429,7 +1429,7 @@
         <Component class="javax.swing.JLabel" name="B1Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Knight.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
           <Events>
@@ -1509,7 +1509,7 @@
         <Component class="javax.swing.JLabel" name="C8Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/Black_Bishop.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
           <Events>
@@ -1589,7 +1589,7 @@
         <Component class="javax.swing.JLabel" name="C1Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Bishop.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
           <Events>
@@ -1629,7 +1629,7 @@
         <Component class="javax.swing.JLabel" name="D8Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/Black_Queen.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
           <Events>
@@ -1749,7 +1749,7 @@
         <Component class="javax.swing.JLabel" name="D1Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Queen.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
           <Events>
@@ -1789,7 +1789,7 @@
         <Component class="javax.swing.JLabel" name="E8Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/Black_King.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
           <Events>
@@ -1909,7 +1909,7 @@
         <Component class="javax.swing.JLabel" name="F8Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/Black_Bishop.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
           <Events>
@@ -2189,7 +2189,7 @@
         <Component class="javax.swing.JLabel" name="A1Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
           <Events>
@@ -2389,7 +2389,7 @@
         <Component class="javax.swing.JLabel" name="E1Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_King.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
           <Events>
@@ -2469,7 +2469,7 @@
         <Component class="javax.swing.JLabel" name="F1Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Bishop.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
           <Events>
@@ -2549,7 +2549,7 @@
         <Component class="javax.swing.JLabel" name="G8Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/Black_Knight.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
           <Events>
@@ -2589,7 +2589,7 @@
         <Component class="javax.swing.JLabel" name="G1Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Knight.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
           <Events>
@@ -2669,7 +2669,7 @@
         <Component class="javax.swing.JLabel" name="H8Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/Black_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
           <Events>
@@ -2709,7 +2709,7 @@
         <Component class="javax.swing.JLabel" name="H1Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
           <Events>
@@ -2749,7 +2749,7 @@
         <Component class="javax.swing.JLabel" name="B8Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/Black_Knight.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
           <Events>
@@ -2789,7 +2789,7 @@
         <Component class="javax.swing.JLabel" name="A2Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Pawn.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
           <Events>
@@ -2829,7 +2829,7 @@
         <Component class="javax.swing.JLabel" name="B7Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/Black_Pawn.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
           <Events>
