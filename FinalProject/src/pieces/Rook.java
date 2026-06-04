@@ -23,7 +23,7 @@ public class Rook extends AbstractPiece{
     }
     
     @Override
-    public ArrayList<Move> getValidMoves(ArrayList<Piece> pieces) {
+    public ArrayList<Move> getValidMoves(Piece pieces[][]) {
         ArrayList<Move> moves = new ArrayList();
 
         searchDirection(moves, pieces, xPos + 1, yPos, 1, 0);

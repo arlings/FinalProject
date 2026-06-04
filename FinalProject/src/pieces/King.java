@@ -11,7 +11,8 @@ import java.util.ArrayList;
  *
  * @author NeWan5443
  */
-public class King extends AbstractPiece{
+public class King extends AbstractPiece {
+
     private static int numKings;
     private boolean inCheck; //add logic later
     private boolean inCheckMate;
@@ -27,16 +28,18 @@ public class King extends AbstractPiece{
         this.inCheck = inCheck;
         this.inCheckMate = inCheckMate;
     }
-    
-    @Override
-    public ArrayList<Move> getValidMoves(ArrayList<Piece> pieces) {
-        ArrayList<Move> moves = new ArrayList();
 
+    @Override
+    public ArrayList<Move> getValidMoves(Piece[][] pieces) {
+        ArrayList<Move> moves = new ArrayList<>();
+
+        // Straight directions
         searchDirection(moves, pieces, xPos + 1, yPos, 1, 0);
         searchDirection(moves, pieces, xPos - 1, yPos, -1, 0);
         searchDirection(moves, pieces, xPos, yPos + 1, 0, 1);
         searchDirection(moves, pieces, xPos, yPos - 1, 0, -1);
 
+        // Diagonal directions
         searchDirection(moves, pieces, xPos + 1, yPos + 1, 1, 1);
         searchDirection(moves, pieces, xPos - 1, yPos + 1, -1, 1);
         searchDirection(moves, pieces, xPos + 1, yPos - 1, 1, -1);
@@ -46,7 +49,7 @@ public class King extends AbstractPiece{
     }
 
     @Override
-    public void searchDirection(ArrayList<Move> moves, ArrayList<Piece> pieces, int currentX, int currentY, int dx, int dy) {
+    public void searchDirection(ArrayList<Move> moves, Piece[][] pieces, int currentX, int currentY, int dx, int dy) {
         if (!isInsideBoard(currentX, currentY)) {
             return;
         }
@@ -56,6 +59,7 @@ public class King extends AbstractPiece{
         if (piece == null) {
             moves.add(new Move(currentX, currentY));
         } else {
+            // Capture enemy piece, but block further movement
             if (piece.isWhite() != this.isWhite()) {
                 moves.add(new Move(currentX, currentY));
             }
@@ -74,11 +78,11 @@ public class King extends AbstractPiece{
         inCheckMate = validMoves.isEmpty();
         return inCheckMate;
     }
-    
+
     @Override
     public String toString() {
         return ("Piece Type: King"
                 + super.toString());
     }
-    
+
 }

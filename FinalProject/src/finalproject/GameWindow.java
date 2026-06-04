@@ -2,6 +2,7 @@ package finalproject;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -9,6 +10,7 @@ import javax.swing.JLabel;
 import pieces.Bishop;
 import pieces.King;
 import pieces.Knight;
+import pieces.Move;
 import pieces.Pawn;
 import pieces.Piece;
 import pieces.Queen;
@@ -27,7 +29,8 @@ public class GameWindow extends javax.swing.JFrame {
     public Piece[][] pieces = new Piece[8][8];
 
     public void pieceLogic(Piece piece) {
-        //Piece piece=piece.getPieceAt(xPos, yPos, pieces);
+        ArrayList<Move> validMoves = new ArrayList<>();
+        validMoves = piece.getValidMoves(pieces);
     }
 
     public GameWindow(MainWindow m, String user1, String user2) {
