@@ -31,19 +31,25 @@ public class GameWindow extends javax.swing.JFrame {
         //Piece piece=piece.getPieceAt(xPos, yPos, pieces);
     }
     
-    public GameWindow(SandboxWindow m) {
-        startGame();
-        sandboxWindow = m;
-    }
-
-    public GameWindow(MainWindow m) {
+    public GameWindow(MainWindow m, String user1, String user2) {
         startGame();
         mainWindow = m;
+        this.username1.setText(user1);
+        this.username2.setText(user2);
+    }
+    
+    public GameWindow(SandboxWindow m, String user1, String user2) {
+        startGame();
+        sandboxWindow = m;
+        this.username1.setText(user1);
+        this.username2.setText(user2);
     }
 
-    public GameWindow(EnterUsername m) {
+    public GameWindow(EnterUsername m, String user1, String user2) {
         startGame();
         enterUsername = m;
+        this.username1.setText(user1);
+        this.username2.setText(user2);
     }
     
     public void MoveJFrame() {
@@ -266,8 +272,8 @@ public class GameWindow extends javax.swing.JFrame {
         A2Label = new javax.swing.JLabel();
         B7 = new javax.swing.JPanel();
         B7Label = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        username1 = new javax.swing.JLabel();
+        username2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -1938,11 +1944,11 @@ public class GameWindow extends javax.swing.JFrame {
                 .addGap(27, 27, 27))
         );
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel1.setText("User 1");
+        username1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        username1.setText("User 1");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel2.setText("User 2");
+        username2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        username2.setText("User 2");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -2049,7 +2055,7 @@ public class GameWindow extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(H1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel2))
+                        .addComponent(username2))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(A8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -2067,7 +2073,7 @@ public class GameWindow extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(H8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel1))
+                        .addComponent(username1))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(A5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -2119,7 +2125,7 @@ public class GameWindow extends javax.swing.JFrame {
                     .addComponent(B8, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(A8, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(E8, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(username1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(H7, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2190,7 +2196,7 @@ public class GameWindow extends javax.swing.JFrame {
                     .addComponent(C1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(B1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(A1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(username2, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
@@ -2600,9 +2606,9 @@ public class GameWindow extends javax.swing.JFrame {
     private javax.swing.JLabel H7Label;
     private javax.swing.JPanel H8;
     private javax.swing.JLabel H8Label;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel username1;
+    private javax.swing.JLabel username2;
     // End of variables declaration//GEN-END:variables
 }

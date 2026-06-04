@@ -130,7 +130,7 @@ public class EnterUsername extends javax.swing.JFrame {
                     numOfUsers++;
                     if (gameWindow == null && numOfUsers == 2) {
                         usernames[1] = userNameField.getText();
-                        gameWindow = new GameWindow(this);
+                        gameWindow = new GameWindow(this , usernames[0], usernames[1]);
                         gameWindow.setVisible(true);
                         this.dispose();
                     } else {

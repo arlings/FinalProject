@@ -114,7 +114,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="H1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                      <Component id="username2" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="A8" min="-2" max="-2" attributes="0"/>
@@ -133,7 +133,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="H8" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <Component id="username1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="A5" min="-2" max="-2" attributes="0"/>
@@ -192,7 +192,7 @@
                   <Component id="B8" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
                   <Component id="A8" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
                   <Component id="E8" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <Component id="username1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -270,7 +270,7 @@
                   <Component id="C1" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
                   <Component id="B1" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
                   <Component id="A1" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
-                  <Component id="jLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="username2" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="18" max="32767" attributes="0"/>
           </Group>
@@ -2838,7 +2838,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="username1">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="24" style="0"/>
@@ -2846,7 +2846,7 @@
         <Property name="text" type="java.lang.String" value="User 1"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
+    <Component class="javax.swing.JLabel" name="username2">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="24" style="0"/>
