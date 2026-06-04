@@ -1,11 +1,15 @@
 package finalproject;
 
-import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class EnterUsername extends javax.swing.JFrame {
     
     private MainWindow mainWindow;
     private GameWindow gameWindow;
+    
+    File f = new File("src/finalproject/Users.txt");
     
     public void MoveJFrame() {
         this.setUndecorated(true);
@@ -114,11 +118,21 @@ public class EnterUsername extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void goBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBtnActionPerformed
-        if (gameWindow == null) {
-            gameWindow = new GameWindow(this);
+        try {
+            Scanner s = new Scanner(f);
+            while (s.hasNextLine()) {
+                if (userNameField.getText().equalsIgnoreCase(s.nextLine().split(",")[0])) {
+                    
+                    if (gameWindow == null) {
+                        gameWindow = new GameWindow(this);
+                    }
+                    gameWindow.setVisible(true);
+                    this.dispose();
+                }
+            }
+        } catch (FileNotFoundException e) {
+            
         }
-        gameWindow.setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_goBtnActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
