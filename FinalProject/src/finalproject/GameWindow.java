@@ -6,8 +6,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import pieces.Bishop;
 import pieces.King;
 import pieces.Knight;
@@ -24,17 +22,13 @@ public class GameWindow extends javax.swing.JFrame {
     EnterUsername enterUsername;
     FileImporter fileImporter = new FileImporter();
 
-    private JPanel[][] board = new JPanel[8][8];
+    public JLabel[][] board = new JLabel[8][8];
 
-    private Piece[][] pieces = new Piece[8][8];
+    public Piece[][] pieces = new Piece[8][8];
 
     
-    public void showPawnOptions(Piece piece){
-        if(piece.isWhite()){
-            
-        }else{
-            
-        }
+    public void pieceLogic(Piece piece){
+        //Piece piece=piece.getPieceAt(xPos, yPos, pieces);
     }
     
     public GameWindow(SandboxWindow m) {
@@ -73,44 +67,44 @@ public class GameWindow extends javax.swing.JFrame {
     private Piece[][] loadPieces() {
         //pawns        
         for (int i = 0; i < 8; i++) {
-            pieces[1][i] = new Pawn(1, i, loadImage("src/images/White_Pawn.png"), true);
-            pieces[6][i] = new Pawn(6, i, loadImage("src/images/Black_Pawn.png"), false);
+            pieces[1][i] = new Pawn(1, i, loadImage("/images/White_Pawn.png"), true);
+            pieces[6][i] = new Pawn(6, i, loadImage("/images/Black_Pawn.png"), false);
         }
         //rooks
-        pieces[0][0] = new Rook(0, 0, loadImage("src/images/White_Rook.png"), true);
-        pieces[0][7] = new Rook(0, 7, loadImage("src/images/White_Rook.png"), true);
-        pieces[7][0] = new Rook(7, 0, loadImage("src/images/Black_Rook.png"), false);
-        pieces[7][7] = new Rook(7, 7, loadImage("src/images/Black_Rook.png"), false);
+        pieces[0][0] = new Rook(0, 0, loadImage("/images/White_Rook.png"), true);
+        pieces[0][7] = new Rook(0, 7, loadImage("/images/White_Rook.png"), true);
+        pieces[7][0] = new Rook(7, 0, loadImage("/images/Black_Rook.png"), false);
+        pieces[7][7] = new Rook(7, 7, loadImage("/images/Black_Rook.png"), false);
         //knights
-        pieces[0][1] = new Knight(0, 1, loadImage("src/images/White_Knight.png"), true);
-        pieces[0][6] = new Knight(0, 6, loadImage("src/images/White_Knight.png"), true);
-        pieces[7][1] = new Knight(7, 1, loadImage("src/images/Black_Knight.png"), false);
-        pieces[7][6] = new Knight(7, 6, loadImage("src/images/Black_Knight.png"), false);
+        pieces[0][1] = new Knight(0, 1, loadImage("/images/White_Knight.png"), true);
+        pieces[0][6] = new Knight(0, 6, loadImage("/images/White_Knight.png"), true);
+        pieces[7][1] = new Knight(7, 1, loadImage("/images/Black_Knight.png"), false);
+        pieces[7][6] = new Knight(7, 6, loadImage("/images/Black_Knight.png"), false);
         //bishops
-        pieces[0][2] = new Bishop(0, 2, loadImage("src/images/White_Bishop.png"), true);
-        pieces[0][5] = new Bishop(0, 5, loadImage("src/images/White_Bishop.png"), true);
-        pieces[7][2] = new Bishop(7, 2, loadImage("src/images/Black_Bishop.png"), false);
-        pieces[7][5] = new Bishop(7, 5, loadImage("BlackBishop.png"), false);
+        pieces[0][2] = new Bishop(0, 2, loadImage("/images/White_Bishop.png"), true);
+        pieces[0][5] = new Bishop(0, 5, loadImage("/images/White_Bishop.png"), true);
+        pieces[7][2] = new Bishop(7, 2, loadImage("/images/Black_Bishop.png"), false);
+        pieces[7][5] = new Bishop(7, 5, loadImage("/images/Black_Bishop.png"), false);
         //queens
-        pieces[0][3] = new Queen(0, 3, loadImage("src/images/White_Queen.png"), true);
-        pieces[7][3] = new Queen(7, 3, loadImage("src/images/Black_Queen.png"), false);
+        pieces[0][3] = new Queen(0, 3, loadImage("/images/White_Queen.png"), true);
+        pieces[7][3] = new Queen(7, 3, loadImage("/images/Black_Queen.png"), false);
         //kings
-        pieces[0][4] = new King(0, 4, loadImage("src/images/White_King.png"), true, false, false);
-        pieces[7][4] = new King(7, 4, loadImage("src/images/Black_King.png"), false, false, false);
+        pieces[0][4] = new King(0, 4, loadImage("/images/White_King.png"), true, false, false);
+        pieces[7][4] = new King(7, 4, loadImage("/images/Black_King.png"), false, false, false);
 
         return pieces;
     }
 
-    private JPanel[][] loadBoard() {
-        return new JPanel[][]{
-            {A1, B1, C1, D1, E1, F1, G1, H1},
-            {A2, B2, C2, D2, E2, F2, G2, H2},
-            {A3, B3, C3, D3, E3, F3, G3, H3},
-            {A4, B4, C4, D4, E4, F4, G4, H4},
-            {A5, B5, C5, D5, E5, F5, G5, H5},
-            {A6, B6, C6, D6, E6, F6, G6, H6},
-            {A7, B7, C7, D7, E7, F7, G7, H7},
-            {A8, B8, C8, D8, E8, F8, G8, H8}
+    private JLabel[][] loadBoard() {
+        return new JLabel[][]{
+            {A1Label, B1Label, C1Label, D1Label, E1Label, F1Label, G1Label, H1Label},
+            {A2Label, B2Label, C2Label, D2Label, E2Label, F2Label, G2Label, H2Label},
+            {A3Label, B3Label, C3Label, D3Label, E3Label, F3Label, G3Label, H3Label},
+            {A4Label, B4Label, C4Label, D4Label, E4Label, F4Label, G4Label, H4Label},
+            {A5Label, B5Label, C5Label, D5Label, E5Label, F5Label, G5Label, H5Label},
+            {A6Label, B6Label, C6Label, D6Label, E6Label, F6Label, G6Label, H6Label},
+            {A7Label, B7Label, C7Label, D7Label, E7Label, F7Label, G7Label, H7Label},
+            {A8Label, B8Label, C8Label, D8Label, E8Label, F8Label, G8Label, H8Label}
         };
     }
 
@@ -132,8 +126,7 @@ public class GameWindow extends javax.swing.JFrame {
                 if (piece != null) {
                     java.awt.image.BufferedImage img = piece.getSprite();
                     ImageIcon icon = new ImageIcon(img);
-                    JLabel pieceLabel = new JLabel(icon);
-                    board[row][col].add(pieceLabel);
+                    board[row][col] = new JLabel(icon);
                 }
                 board[row][col].revalidate();
                 board[row][col].repaint();
@@ -2205,75 +2198,93 @@ public class GameWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void B8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B8LabelMousePressed
-        
+        Piece pieceAtIndex=pieces[1][7];
+        pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_B8LabelMousePressed
 
     private void D8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D8LabelMousePressed
-        
+        Piece pieceAtIndex=pieces[3][7];
+        pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_D8LabelMousePressed
 
     private void E8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E8LabelMousePressed
-        
+        Piece pieceAtIndex=pieces[4][7];
+        pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_E8LabelMousePressed
 
     private void F8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F8LabelMousePressed
-        
+        Piece pieceAtIndex=pieces[5][7];
+        pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_F8LabelMousePressed
 
     private void G8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G8LabelMousePressed
-        
+        Piece pieceAtIndex=pieces[6][7];
+        pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_G8LabelMousePressed
 
     private void H8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H8LabelMousePressed
-       
+       Piece pieceAtIndex=pieces[7][7];
+       pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_H8LabelMousePressed
     
     private void A7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A7LabelMousePressed
-        
+       Piece pieceAtIndex=pieces[0][6];
+       pieceLogic(pieceAtIndex); 
     }//GEN-LAST:event_A7LabelMousePressed
 
     private void C7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C7LabelMousePressed
-        
+        Piece pieceAtIndex=pieces[2][6];
+        pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_C7LabelMousePressed
 
     private void H3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H3LabelMousePressed
-        
+        Piece pieceAtIndex=pieces[7][2];
+        pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_H3LabelMousePressed
 
     private void G4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G4LabelMousePressed
-        
+        Piece pieceAtIndex=pieces[7][3];
+        pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_G4LabelMousePressed
 
     private void C2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C2LabelMousePressed
-        
+        Piece pieceAtIndex=pieces[2][1];
+        pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_C2LabelMousePressed
 
     private void A4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A4LabelMousePressed
-        
+        Piece pieceAtIndex=pieces[0][3];
+        pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_A4LabelMousePressed
 
     private void D2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D2LabelMousePressed
-        
+        Piece pieceAtIndex=pieces[3][1];
+        pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_D2LabelMousePressed
 
     private void B5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B5LabelMousePressed
-        
+        Piece pieceAtIndex=pieces[1][4];
+        pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_B5LabelMousePressed
 
     private void D7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D7LabelMousePressed
-        
+        Piece pieceAtIndex=pieces[3][6];
+        pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_D7LabelMousePressed
 
     private void E2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E2LabelMousePressed
-        
+        Piece pieceAtIndex=pieces[4][1];
+        pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_E2LabelMousePressed
 
     private void A5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A5LabelMousePressed
-        
+        Piece pieceAtIndex=pieces[0][4];
+        pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_A5LabelMousePressed
 
     private void F2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F2LabelMousePressed
-        
+        Piece pieceAtIndex=pieces[5][1];
+        pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_F2LabelMousePressed
 
     private void E7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E7LabelMousePressed
