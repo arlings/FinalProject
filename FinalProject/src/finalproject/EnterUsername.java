@@ -2,6 +2,7 @@ package finalproject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Scanner;
 
 public class EnterUsername extends javax.swing.JFrame {
@@ -120,9 +121,9 @@ public class EnterUsername extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void goBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBtnActionPerformed
-        File f = new File("src/finalproject/Users.txt");
-        try {
-            Scanner s = new Scanner(f);
+        try {   
+            InputStream in = EnterUsername.class.getResourceAsStream("Users.txt");
+            Scanner s = new Scanner(in);
             boolean found = false;
             while (s.hasNextLine() || found) {
                 if (userNameField.getText().equalsIgnoreCase(s.nextLine().split(",")[0])) {
@@ -145,8 +146,8 @@ public class EnterUsername extends javax.swing.JFrame {
                 warningWindow.setVisible(true);
                 userNameField.setText("");
             }
-        } catch (FileNotFoundException e) {
-            
+        } catch (Exception e) {
+            warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help");
         }
     }//GEN-LAST:event_goBtnActionPerformed
 

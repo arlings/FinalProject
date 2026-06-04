@@ -2,6 +2,7 @@ package finalproject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -148,9 +149,9 @@ public class CreateUser extends javax.swing.JFrame {
     private void goBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBtnActionPerformed
         boolean done = false;
         boolean hasNextLine = true;
-        File f = new File("src/finalproject/Users.txt");
         try {
-            Scanner s = new Scanner(f);
+            InputStream in = EnterUsername.class.getResourceAsStream("Users.txt");
+            Scanner s = new Scanner(in);
             String nextLine = "";
             try {
                 while (hasNextLine || done)  {
@@ -168,7 +169,7 @@ public class CreateUser extends javax.swing.JFrame {
             } catch (Exception e) {
                 
             }
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
             warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help");
         }
         if (!done) {

@@ -1,15 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package finalproject;
 
 import java.util.Objects;
 
-/**
- *
- * @author NeWan5443
- */
 public class User {
     private String userName;
     private int numWins;
@@ -63,10 +55,4 @@ public class User {
     public String toString() {
         return "User{" + "userName=" + userName + ", numWins=" + numWins + '}';
     }
-    
-
-    
-    
-    
-    
 }
