@@ -22,6 +22,13 @@ public class WarningWindow extends javax.swing.JFrame {
         warningMessage.setText(txt);
         createUser = m;
     }
+    
+    public WarningWindow(EnterUsername m, String txt) {
+        MoveJFrame();
+        initComponents();
+        warningMessage.setText(txt);
+        enterUsername = m;
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

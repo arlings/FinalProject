@@ -2,14 +2,13 @@ package finalproject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class CreateUser extends javax.swing.JFrame {
     
-    MainWindow mainWindow;
+    private MainWindow mainWindow;
     private WarningWindow warningWindow;
-    
-    File f = new File("src/finalproject/Users.txt");
     
     public void MoveJFrame() {
         this.setUndecorated(true);
@@ -148,21 +147,29 @@ public class CreateUser extends javax.swing.JFrame {
 
     private void goBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBtnActionPerformed
         boolean done = false;
+        boolean hasNextLine = true;
+        File f = new File("src/finalproject/Users.txt");
         try {
             Scanner s = new Scanner(f);
-            while (s.hasNextLine() || done) {
-                if (userNameField.getText().equalsIgnoreCase(s.nextLine().split(",")[0])) {
-                    s.close();
-                    warningWindow = new WarningWindow(this, "This username already exists");
-                    warningWindow.setVisible(true);
-                    userNameField.setText("");
-                    done = true;
+            String nextLine = "";
+            try {
+                while (hasNextLine || done)  {
+                    nextLine = s.nextLine();
+                    if (userNameField.getText().equalsIgnoreCase(nextLine.split(",")[0])) {
+                        warningWindow = new WarningWindow(this, "This username already exists");
+                        warningWindow.setVisible(true);
+                        userNameField.setText("");
+                        done = true;
+                    }
+                    if (!s.hasNextLine()) {
+                        hasNextLine = false;
+                    }
                 }
+            } catch (Exception e) {
+                
             }
         } catch (FileNotFoundException e) {
-            if (warningWindow == null) {
-                warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help");
-            }
+            warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help");
         }
         if (!done) {
             this.dispose();
