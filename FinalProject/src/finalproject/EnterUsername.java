@@ -1,6 +1,5 @@
 package finalproject;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Scanner;
@@ -147,7 +146,9 @@ public class EnterUsername extends javax.swing.JFrame {
                 userNameField.setText("");
             }
         } catch (Exception e) {
-            warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help");
+            if (e.equals(new FileNotFoundException())) {
+                warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help");
+            }
         }
     }//GEN-LAST:event_goBtnActionPerformed
 
