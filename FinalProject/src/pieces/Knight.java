@@ -16,7 +16,7 @@ public class Knight extends AbstractPiece {
     }
 
     @Override
-    public ArrayList<Move> getValidMoves(ArrayList<Piece> pieces) {
+    public ArrayList<Move> getValidMoves(Piece[][] pieces) {
         ArrayList<Move> moves = new ArrayList<>();
 
         searchDirection(moves, pieces, xPos, yPos, 1, -2);
@@ -32,7 +32,7 @@ public class Knight extends AbstractPiece {
     }
 
     @Override
-    public void searchDirection(ArrayList<Move> moves, ArrayList<Piece> pieces, int currentX, int currentY, int dx, int dy) {
+    public void searchDirection(ArrayList<Move> moves, Piece[][] pieces, int currentX, int currentY, int dx, int dy) {
         int targetX = currentX + dx;
         int targetY = currentY + dy;
 
@@ -42,7 +42,7 @@ public class Knight extends AbstractPiece {
 
             if (piece == null) {
                 moves.add(new Move(targetX, targetY));
-            } else if (piece.isWhite() != this.isWhite) {
+            } else if (piece.isWhite() != this.isWhite()) { 
                 moves.add(new Move(targetX, targetY));
             }
         }

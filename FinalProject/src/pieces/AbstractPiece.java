@@ -41,9 +41,9 @@ abstract public class AbstractPiece implements Piece {
     public boolean isWhite() {
         return isWhite;
     }
-    
-    public String getTeam(){
-        if(isWhite){
+
+    public String getTeam() {
+        if (isWhite) {
             return "White";
         }
         return "Black";
@@ -80,9 +80,10 @@ abstract public class AbstractPiece implements Piece {
     public void setValidMoves(ArrayList<Move> validMoves) {
         this.validMoves = validMoves;
     }
-    abstract public ArrayList<Move> getValidMoves(ArrayList<Piece> pieces);
-    
-    public void searchDirection(ArrayList<Move> moves, ArrayList<Piece> pieces, int currentX, int currentY, int dx, int dy){
+
+    abstract public ArrayList<Move> getValidMoves(Piece pieces[][]);
+
+    public void searchDirection(ArrayList<Move> moves, Piece[][] pieces, int currentX, int currentY, int dx, int dy) {
         if (!isInsideBoard(currentX, currentY)) {
             return;
         }
@@ -98,19 +99,13 @@ abstract public class AbstractPiece implements Piece {
             }
         }
     }
-    
+
     public boolean isInsideBoard(int x, int y) {
-        return (xPos>= 0 && xPos<= 7 && yPos>= 0 && yPos <= 7);
+        return (x >= 0 && x <= 7 && y >= 0 && y <= 7);
     }
 
-    public Piece getPieceAt(int x, int y, ArrayList<Piece> pieces) {
-        for (Piece p : pieces) {
-            if (p.getXPos() == x && p.getYPos() == y) {
-                return p;
-            }
-        }
-        return null;
-
+    public Piece getPieceAt(int x, int y, Piece[][] pieces) {
+        return pieces[x][y];
     }
 
     public static int getNumPieces() {
@@ -138,7 +133,7 @@ abstract public class AbstractPiece implements Piece {
     }
 
     public String toString() {
-        return("Piece Information"
+        return ("Piece Information"
                 + "\nX Position: " + xPos
                 + "\nX Position: " + xPos
                 + "\nTeam: " + this.getTeam()
