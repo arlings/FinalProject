@@ -2231,7 +2231,9 @@ public class GameWindow extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
 
+    
     private void B8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B8LabelMousePressed
          Piece pieceAtIndex = pieces[1][7];
         pieceLogic(pieceAtIndex);

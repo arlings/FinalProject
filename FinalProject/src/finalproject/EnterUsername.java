@@ -126,17 +126,22 @@ public class EnterUsername extends javax.swing.JFrame {
             boolean found = false;
             while (s.hasNextLine() || found) {
                 if (userNameField.getText().equalsIgnoreCase(s.nextLine().split(",")[0])) {
-                    found = true;
-                    numOfUsers++;
-                    if (gameWindow == null && numOfUsers == 2) {
-                        usernames[1] = userNameField.getText();
-                        gameWindow = new GameWindow(this , usernames[0], usernames[1]);
-                        gameWindow.setVisible(true);
-                        this.dispose();
+                    if (userNameField.getText().equalsIgnoreCase(usernames[0])) {
+                        warningWindow = new WarningWindow(this, "You cant play yourself! Silly billy");
+                        warningWindow.setVisible(true);
                     } else {
-                        usernames[0] = userNameField.getText();
-                        this.userNameField.setText("");
-                        this.topLabel.setText("Enter your username player 2");
+                        found = true;
+                        numOfUsers++;
+                        if (gameWindow == null && numOfUsers == 2) {
+                            usernames[1] = userNameField.getText();
+                            gameWindow = new GameWindow(this , usernames[0], usernames[1]);
+                            gameWindow.setVisible(true);
+                            this.dispose();
+                        } else {
+                            usernames[0] = userNameField.getText();
+                            this.userNameField.setText("");
+                            this.topLabel.setText("Enter your username player 2");
+                        }
                     }
                 }
             }
@@ -148,11 +153,14 @@ public class EnterUsername extends javax.swing.JFrame {
         } catch (Exception e) {
             if (e.equals(new FileNotFoundException())) {
                 warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help");
+                warningWindow.setVisible(true);
             }
         }
     }//GEN-LAST:event_goBtnActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        numOfUsers = 0;
+        usernames = null;
         this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
