@@ -159,6 +159,7 @@ public class EnterUsername extends javax.swing.JFrame {
     }//GEN-LAST:event_goBtnActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        this.topLabel.setText("Enter your username player 1");
         numOfUsers = 0;
         usernames = null;
         this.dispose();
