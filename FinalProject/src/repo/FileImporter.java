@@ -12,7 +12,10 @@ import javax.imageio.ImageIO;
 public class FileImporter {
 
     public BufferedImage loadImage(String filePath) throws IOException {
-        java.io.InputStream inputStream = getClass().getResourceAsStream("/" + filePath);
+        java.io.InputStream inputStream = getClass().getResourceAsStream(filePath);
+        if (inputStream == null) {
+            throw new IOException("Resource not found at path: " + filePath);
+        }
         BufferedImage image = ImageIO.read(inputStream);
         return image;
     }
