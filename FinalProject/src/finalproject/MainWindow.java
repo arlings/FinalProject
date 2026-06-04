@@ -277,7 +277,6 @@ public class MainWindow extends javax.swing.JFrame {
             enterUsername = new EnterUsername(this);
         }
         enterUsername.setVisible(true);
-        this.setVisible(false);
     }//GEN-LAST:event_competitiveMenuItemActionPerformed
 
     private void sandboxMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sandboxMenuItemActionPerformed
@@ -285,7 +284,6 @@ public class MainWindow extends javax.swing.JFrame {
             sandboxWindow = new SandboxWindow(this);
         }
         sandboxWindow.setVisible(true);
-        this.setVisible(false);
     }//GEN-LAST:event_sandboxMenuItemActionPerformed
 
     private void exitMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuActionPerformed

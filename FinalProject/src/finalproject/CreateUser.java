@@ -1,9 +1,10 @@
 package finalproject;
 
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStream;
-import java.util.NoSuchElementException;
+import java.net.URISyntaxException;
 import java.util.Scanner;
 
 public class CreateUser extends javax.swing.JFrame {
@@ -173,7 +174,6 @@ public class CreateUser extends javax.swing.JFrame {
             warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help");
         }
         if (!done) {
-            
             this.dispose();
         }
     }//GEN-LAST:event_goBtnActionPerformed

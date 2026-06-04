@@ -102,7 +102,6 @@ public class SandboxWindow extends javax.swing.JFrame {
             gameWindow = new GameWindow(this, "Player 1", "Player 2");
         }
         gameWindow.setVisible(true);
-        gameWindow.setTitle("Sandbox / Free Play Game");
         this.dispose();
     }//GEN-LAST:event_startSandboxGameButtonActionPerformed
 
