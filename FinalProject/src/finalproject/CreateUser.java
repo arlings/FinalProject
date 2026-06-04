@@ -163,7 +163,7 @@ public class CreateUser extends javax.swing.JFrame {
                     }
                     if (!s.hasNextLine()) {
                         hasNextLine = false;
-                    }
+                    } 
                 }
             } catch (Exception e) {
                 
@@ -172,6 +172,7 @@ public class CreateUser extends javax.swing.JFrame {
             warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help");
         }
         if (!done) {
+            
             this.dispose();
         }
     }//GEN-LAST:event_goBtnActionPerformed
