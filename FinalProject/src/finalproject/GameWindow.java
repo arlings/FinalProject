@@ -32,6 +32,7 @@ public class GameWindow extends javax.swing.JFrame {
         ArrayList<Move> validMoves = new ArrayList<>();
         validMoves = piece.getValidMoves(pieces);
         
+        //for debugging
         int xPos=piece.getXPos();
         int yPos=piece.getYPos();
         System.out.println(xPos+"\t"+yPos);
@@ -2230,9 +2231,11 @@ public class GameWindow extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
 
+    
     private void B8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B8LabelMousePressed
-        Piece pieceAtIndex = pieces[1][7];
+         Piece pieceAtIndex = pieces[1][7];
         pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_B8LabelMousePressed
 
