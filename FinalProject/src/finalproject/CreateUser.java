@@ -7,10 +7,8 @@ import java.util.Scanner;
 
 public class CreateUser extends javax.swing.JFrame {
     
-    MainWindow mainWindow;
+    private MainWindow mainWindow;
     private WarningWindow warningWindow;
-    
-    File f = new File("src/finalproject/Users.txt");
     
     public void MoveJFrame() {
         this.setUndecorated(true);
@@ -150,7 +148,7 @@ public class CreateUser extends javax.swing.JFrame {
     private void goBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBtnActionPerformed
         boolean done = false;
         boolean hasNextLine = true;
-        
+        File f = new File("src/finalproject/Users.txt");
         try {
             Scanner s = new Scanner(f);
             String nextLine = "";
@@ -171,9 +169,7 @@ public class CreateUser extends javax.swing.JFrame {
                 
             }
         } catch (FileNotFoundException e) {
-            if (warningWindow == null) {
-                warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help");
-            }
+            warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help");
         }
         if (!done) {
             this.dispose();

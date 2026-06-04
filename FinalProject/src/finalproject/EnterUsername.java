@@ -8,8 +8,10 @@ public class EnterUsername extends javax.swing.JFrame {
     
     private MainWindow mainWindow;
     private GameWindow gameWindow;
+    private WarningWindow warningWindow;
     
-    File f = new File("src/finalproject/Users.txt");
+    static int numOfUsers;
+    static String[] usernames = new String[2];
     
     public void MoveJFrame() {
         this.setUndecorated(true);
@@ -35,7 +37,7 @@ public class EnterUsername extends javax.swing.JFrame {
         userNameField = new javax.swing.JTextField();
         goBtn = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        topLabel = new javax.swing.JLabel();
         cancelButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -52,21 +54,21 @@ public class EnterUsername extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel1.setText("Enter your username");
+        topLabel.setText("Enter your username player 1");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1)
+                .addComponent(topLabel)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1))
+                .addComponent(topLabel))
         );
 
         cancelButton.setText("Cancel");
@@ -118,17 +120,28 @@ public class EnterUsername extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void goBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBtnActionPerformed
+        File f = new File("src/finalproject/Users.txt");
         try {
             Scanner s = new Scanner(f);
-            while (s.hasNextLine()) {
+            boolean found = false;
+            while (s.hasNextLine() || found) {
                 if (userNameField.getText().equalsIgnoreCase(s.nextLine().split(",")[0])) {
-                    
-                    if (gameWindow == null) {
+                    found = true;
+                    numOfUsers++;
+                    if (gameWindow == null && numOfUsers == 2) {
                         gameWindow = new GameWindow(this);
+                        gameWindow.setVisible(true);
+                        this.dispose();
+                    } else {
+                        this.userNameField.setText("");
+                        this.topLabel.setText("Enter your username player 2");
                     }
-                    gameWindow.setVisible(true);
-                    this.dispose();
                 }
+            }
+            if (!found) {
+                warningWindow = new WarningWindow(this, "This username does not exist. Please create an account first");
+                warningWindow.setVisible(true);
+                userNameField.setText("");
             }
         } catch (FileNotFoundException e) {
             
@@ -142,9 +155,9 @@ public class EnterUsername extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton goBtn;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel topLabel;
     private javax.swing.JTextField userNameField;
     // End of variables declaration//GEN-END:variables
 }
