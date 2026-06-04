@@ -24,17 +24,13 @@ public class GameWindow extends javax.swing.JFrame {
     EnterUsername enterUsername;
     FileImporter fileImporter = new FileImporter();
 
-    private JPanel[][] board = new JPanel[8][8];
+    public JPanel[][] board = new JPanel[8][8];
 
-    private Piece[][] pieces = new Piece[8][8];
+    public Piece[][] pieces = new Piece[8][8];
 
     
-    public void showPawnOptions(Piece piece){
-        if(piece.isWhite()){
-            
-        }else{
-            
-        }
+    public void pieceLogic(Piece piece){
+        //Piece piece=piece.getPieceAt(xPos, yPos, pieces);
     }
     
     public GameWindow(SandboxWindow m) {
@@ -2205,75 +2201,93 @@ public class GameWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void B8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B8LabelMousePressed
-        
+        Piece pieceAtIndex=pieces[1][7];
+        pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_B8LabelMousePressed
 
     private void D8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D8LabelMousePressed
-        
+        Piece pieceAtIndex=pieces[3][7];
+        pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_D8LabelMousePressed
 
     private void E8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E8LabelMousePressed
-        
+        Piece pieceAtIndex=pieces[4][7];
+        pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_E8LabelMousePressed
 
     private void F8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F8LabelMousePressed
-        
+        Piece pieceAtIndex=pieces[5][7];
+        pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_F8LabelMousePressed
 
     private void G8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G8LabelMousePressed
-        
+        Piece pieceAtIndex=pieces[6][7];
+        pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_G8LabelMousePressed
 
     private void H8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H8LabelMousePressed
-       
+       Piece pieceAtIndex=pieces[7][7];
+       pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_H8LabelMousePressed
     
     private void A7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A7LabelMousePressed
-        
+       Piece pieceAtIndex=pieces[0][6];
+       pieceLogic(pieceAtIndex); 
     }//GEN-LAST:event_A7LabelMousePressed
 
     private void C7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C7LabelMousePressed
-        
+        Piece pieceAtIndex=pieces[2][6];
+        pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_C7LabelMousePressed
 
     private void H3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H3LabelMousePressed
-        
+        Piece pieceAtIndex=pieces[7][2];
+        pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_H3LabelMousePressed
 
     private void G4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G4LabelMousePressed
-        
+        Piece pieceAtIndex=pieces[7][3];
+        pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_G4LabelMousePressed
 
     private void C2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C2LabelMousePressed
-        
+        Piece pieceAtIndex=pieces[2][1];
+        pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_C2LabelMousePressed
 
     private void A4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A4LabelMousePressed
-        
+        Piece pieceAtIndex=pieces[0][3];
+        pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_A4LabelMousePressed
 
     private void D2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D2LabelMousePressed
-        
+        Piece pieceAtIndex=pieces[3][1];
+        pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_D2LabelMousePressed
 
     private void B5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B5LabelMousePressed
-        
+        Piece pieceAtIndex=pieces[1][4];
+        pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_B5LabelMousePressed
 
     private void D7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D7LabelMousePressed
-        
+        Piece pieceAtIndex=pieces[3][6];
+        pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_D7LabelMousePressed
 
     private void E2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E2LabelMousePressed
-        
+        Piece pieceAtIndex=pieces[4][1];
+        pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_E2LabelMousePressed
 
     private void A5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A5LabelMousePressed
-        
+        Piece pieceAtIndex=pieces[0][4];
+        pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_A5LabelMousePressed
 
     private void F2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F2LabelMousePressed
-        
+        Piece pieceAtIndex=pieces[5][1];
+        pieceLogic(pieceAtIndex);
     }//GEN-LAST:event_F2LabelMousePressed
 
     private void E7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E7LabelMousePressed
