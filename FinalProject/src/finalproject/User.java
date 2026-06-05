@@ -5,11 +5,7 @@ import java.util.Objects;
 public class User {
     private String userName;
     private int score;
-    private static int numUsers;
-    
-    public User(){
-    }
-    
+
     public User(String userName, int score) {
         this.userName = userName;
         this.score = score;
@@ -29,10 +25,6 @@ public class User {
 
     public void setScore(int score) {
         this.score = score;
-    }
-
-    public static int getNumUsers() {
-        return numUsers;
     }
 
     public boolean equals(Object obj) {

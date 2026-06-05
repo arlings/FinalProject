@@ -5,6 +5,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Scanner;
@@ -36,6 +37,7 @@ public class MainWindow extends javax.swing.JFrame {
     public MainWindow() {
         MoveJFrame();
         initComponents();
+        
     }
     
     public static class FrameDragListener extends MouseAdapter {

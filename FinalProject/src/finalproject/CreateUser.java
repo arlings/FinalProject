@@ -11,6 +11,7 @@ public class CreateUser extends javax.swing.JFrame {
     
     private MainWindow mainWindow;
     private WarningWindow warningWindow;
+    int numUsers = 0;
     
     public void MoveJFrame() {
         this.setUndecorated(true);
@@ -25,6 +26,13 @@ public class CreateUser extends javax.swing.JFrame {
     public CreateUser(MainWindow m) {
         MoveJFrame();
         initComponents();
+        try {
+            FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
+            Scanner s = new Scanner(in);
+            numUsers = s.nextLine().split(":").length;
+        } catch (Exception e) {
+            
+        }
         mainWindow = m;
     }
 
@@ -158,23 +166,20 @@ public class CreateUser extends javax.swing.JFrame {
                 FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
                 Scanner s = new Scanner(in);
                 String[] items = s.nextLine().split(":");
-                try {
-                    for (int i = 0; i < items.length; i++) {
-                        if (!done) {
-                            if (userNameField.getText().equalsIgnoreCase(items[i].split(",")[0])) {
-                                warningWindow = new WarningWindow(this, "This username already exists");
-                                warningWindow.setVisible(true);
-                                userNameField.setText("");
-                                done = true;
-                            }
+                for (int i = 0; i < items.length; i++) {
+                    if (!done) {
+                        if (userNameField.getText().equalsIgnoreCase(items[i].split(",")[0])) {
+                            warningWindow = new WarningWindow(this, "This username already exists");
+                            warningWindow.setVisible(true);
+                            userNameField.setText("");
+                            done = true;
                         }
                     }
-
-                } catch (Exception e) {
-
                 }
             } catch (Exception e) {
-                warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help");
+                if (numUsers > 1) {
+                    warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help");
+                }
             }
             if (!done) {
                 // Used mr cuttens code
