@@ -158,7 +158,7 @@ public class CreateUser extends javax.swing.JFrame {
     private void goBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBtnActionPerformed
         if (userNameField.getText().contains(",") || userNameField.getText().contains(":")) {
             userNameField.setText("");
-            warningWindow = new WarningWindow(this, "Your username cannot conani characters : or ,");
+            warningWindow = new WarningWindow(this, "Your username cannot contain characters : or ,");
         } else {
             boolean done = false;
             boolean hasNextLine = true;
