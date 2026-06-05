@@ -65,7 +65,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        newGameBtn = new javax.swing.JButton();
+        newGameButton = new javax.swing.JButton();
         titleLabel = new javax.swing.JLabel();
         chessIconDecoration = new javax.swing.JLabel();
         chessIconDecoration2 = new javax.swing.JLabel();
@@ -75,7 +75,7 @@ public class MainWindow extends javax.swing.JFrame {
         firstPlaceLabel = new javax.swing.JLabel();
         thirdPlaceLabel = new javax.swing.JLabel();
         viewFullLeaderboardButton = new javax.swing.JButton();
-        menuBar = new javax.swing.JMenuBar();
+        topBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         importGameMenuItem = new javax.swing.JMenuItem();
         exportGameMenuItem = new javax.swing.JMenuItem();
@@ -93,10 +93,10 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(204, 255, 255));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
-        newGameBtn.setText("New Game");
-        newGameBtn.addActionListener(new java.awt.event.ActionListener() {
+        newGameButton.setText("New Game");
+        newGameButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                newGameBtnActionPerformed(evt);
+                newGameButtonActionPerformed(evt);
             }
         });
 
@@ -180,7 +180,7 @@ public class MainWindow extends javax.swing.JFrame {
                         .addGap(23, 23, 23)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(chessIconDecoration2)
-                            .addComponent(newGameBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(newGameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(chessIconDecoration))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -201,7 +201,7 @@ public class MainWindow extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(newGameBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(newGameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(chessIconDecoration2))
                             .addComponent(chessIconDecoration))
@@ -209,7 +209,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        menuBar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        topBar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         fileMenu.setText("File");
         fileMenu.addMenuListener(new javax.swing.event.MenuListener() {
@@ -238,7 +238,7 @@ public class MainWindow extends javax.swing.JFrame {
         exportGameMenuItem.setText("Export Game...");
         fileMenu.add(exportGameMenuItem);
 
-        menuBar.add(fileMenu);
+        topBar.add(fileMenu);
 
         newMenu.setText("New");
 
@@ -270,10 +270,10 @@ public class MainWindow extends javax.swing.JFrame {
 
         newMenu.add(newGameMenuItem);
 
-        menuBar.add(newMenu);
+        topBar.add(newMenu);
 
         customizeMenu.setText("Customize");
-        menuBar.add(customizeMenu);
+        topBar.add(customizeMenu);
 
         helpMenu.setText("Help");
         helpMenu.addMenuListener(new javax.swing.event.MenuListener() {
@@ -285,7 +285,7 @@ public class MainWindow extends javax.swing.JFrame {
                 helpMenuMenuSelected(evt);
             }
         });
-        menuBar.add(helpMenu);
+        topBar.add(helpMenu);
 
         exitMenu.setText("Exit");
         exitMenu.addMenuListener(new javax.swing.event.MenuListener() {
@@ -302,9 +302,9 @@ public class MainWindow extends javax.swing.JFrame {
                 exitMenuActionPerformed(evt);
             }
         });
-        menuBar.add(exitMenu);
+        topBar.add(exitMenu);
 
-        setJMenuBar(menuBar);
+        setJMenuBar(topBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -385,9 +385,12 @@ public class MainWindow extends javax.swing.JFrame {
         helpWindow.setVisible(true);
     }//GEN-LAST:event_helpMenuMenuSelected
 
-    private void newGameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newGameBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_newGameBtnActionPerformed
+    private void newGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newGameButtonActionPerformed
+        if (sandboxWindow == null) {
+            sandboxWindow = new SandboxWindow(this);
+        }
+        sandboxWindow.setVisible(true);
+    }//GEN-LAST:event_newGameButtonActionPerformed
 
     private void viewFullLeaderboardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewFullLeaderboardButtonActionPerformed
         if (leaderboardWindow == null) {
@@ -439,8 +442,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JMenuBar menuBar;
-    private javax.swing.JButton newGameBtn;
+    private javax.swing.JButton newGameButton;
     private javax.swing.JMenu newGameMenuItem;
     private javax.swing.JMenu newMenu;
     private javax.swing.JMenuItem newUserMenuItem;
@@ -448,6 +450,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel secondPlaceLabel;
     private javax.swing.JLabel thirdPlaceLabel;
     private javax.swing.JLabel titleLabel;
+    private javax.swing.JMenuBar topBar;
     private javax.swing.JButton viewFullLeaderboardButton;
     // End of variables declaration//GEN-END:variables
 }

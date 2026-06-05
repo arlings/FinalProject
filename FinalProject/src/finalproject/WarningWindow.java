@@ -3,8 +3,9 @@ package finalproject;
 
 public class WarningWindow extends javax.swing.JFrame {
     
-    CreateUser createUser;
-    EnterUsername enterUsername;
+    private CreateUser createUser;
+    private EnterUsername enterUsername;
+    private LeaderboardWindow leaderboardWindow;
     
     public void MoveJFrame() {
         this.setUndecorated(true);
@@ -28,6 +29,13 @@ public class WarningWindow extends javax.swing.JFrame {
         initComponents();
         warningMessage.setText(txt);
         enterUsername = m;
+    }
+    
+    public WarningWindow(LeaderboardWindow m, String txt) {
+        MoveJFrame();
+        initComponents();
+        warningMessage.setText(txt);
+        leaderboardWindow = m;
     }
 
     @SuppressWarnings("unchecked")
