@@ -1,11 +1,17 @@
 package finalproject;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
 import java.net.URISyntaxException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class CreateUser extends javax.swing.JFrame {
     
@@ -174,6 +180,17 @@ public class CreateUser extends javax.swing.JFrame {
             warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help");
         }
         if (!done) {
+            // Used mr cuttens code
+            try {
+                //saves directory is located beside the src folder or JAR
+                FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/users.txt");
+                //out is FileOutputStream            
+                ObjectOutput s = new ObjectOutputStream(out);
+                s.writeBytes(userNameField.getText()+",0,0,0");
+                s.close();
+            } catch (IOException e) {
+                warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help");
+            }
             this.dispose();
         }
     }//GEN-LAST:event_goBtnActionPerformed
