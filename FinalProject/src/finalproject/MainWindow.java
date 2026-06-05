@@ -274,33 +274,25 @@ public class MainWindow extends javax.swing.JFrame {
         topBar.add(newMenu);
 
         customizeMenu.setText("Customize");
+        customizeMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                customizeMenuMouseClicked(evt);
+            }
+        });
         topBar.add(customizeMenu);
 
         helpMenu.setText("Help");
-        helpMenu.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuDeselected(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
-                helpMenuMenuSelected(evt);
+        helpMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                helpMenuMouseClicked(evt);
             }
         });
         topBar.add(helpMenu);
 
         exitMenu.setText("Exit");
-        exitMenu.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuDeselected(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
-                exitMenuMenuSelected(evt);
-            }
-        });
-        exitMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitMenuActionPerformed(evt);
+        exitMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                exitMenuMouseClicked(evt);
             }
         });
         topBar.add(exitMenu);
@@ -362,10 +354,6 @@ public class MainWindow extends javax.swing.JFrame {
         sandboxWindow.setVisible(true);
     }//GEN-LAST:event_sandboxMenuItemActionPerformed
 
-    private void exitMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuActionPerformed
-        
-    }//GEN-LAST:event_exitMenuActionPerformed
-
     private void fileMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileMenuActionPerformed
         
     }//GEN-LAST:event_fileMenuActionPerformed
@@ -373,18 +361,6 @@ public class MainWindow extends javax.swing.JFrame {
     private void fileMenuMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_fileMenuMenuSelected
         
     }//GEN-LAST:event_fileMenuMenuSelected
-
-    private void exitMenuMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_exitMenuMenuSelected
-        this.setVisible(false);
-        this.dispose();
-    }//GEN-LAST:event_exitMenuMenuSelected
-
-    private void helpMenuMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_helpMenuMenuSelected
-        if (helpWindow == null) {
-            helpWindow = new HelpWindow(mainWindow);
-        }
-        helpWindow.setVisible(true);
-    }//GEN-LAST:event_helpMenuMenuSelected
 
     private void newGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newGameButtonActionPerformed
         if (sandboxWindow == null) {
@@ -399,6 +375,21 @@ public class MainWindow extends javax.swing.JFrame {
         }
         leaderboardWindow.setVisible(true);
     }//GEN-LAST:event_viewFullLeaderboardButtonActionPerformed
+
+    private void helpMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_helpMenuMouseClicked
+        if (helpWindow == null) {
+            helpWindow = new HelpWindow(mainWindow);
+        }
+        helpWindow.setVisible(true);
+    }//GEN-LAST:event_helpMenuMouseClicked
+
+    private void exitMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMenuMouseClicked
+        this.dispose();
+    }//GEN-LAST:event_exitMenuMouseClicked
+
+    private void customizeMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customizeMenuMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_customizeMenuMouseClicked
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
