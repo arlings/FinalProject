@@ -2,6 +2,8 @@ package finalproject;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class LeaderboardWindow extends javax.swing.JFrame {
@@ -13,22 +15,62 @@ public class LeaderboardWindow extends javax.swing.JFrame {
         MoveJFrame();
         initComponents();
         mainWindow = m;
+    }
+    
+    public void leaderboardSort() {
         try {
             FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
+            FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/Leaderboard.txt");
             Scanner s = new Scanner(in);
+            
             String[] items = s.nextLine().split(":");
             String[] userData = new String[items.length];
+            User[] leaderboard = new User[items.length];
             int[] scores = new int[items.length];
             for (int i = 0; i < items.length; i++) {
                 int wins = Integer.parseInt(items[i].split(",")[1]);
                 int losses = Integer.parseInt(items[i].split(",")[3]);
                 scores[i] = (wins - losses);
-                userData[i] = items[i].split(",")[0] + ": " + scores[i] + " points";
+                leaderboard[i] = new User(items[i].split(",")[0], scores[i]);
             }
-            leaderboardList.setListData(userData);
+            mergeSort(leaderboard, 0, leaderboard.length - 1);
+            String[] sLeaderboard = new String[leaderboard.length];
+            for (int i = 0; i < leaderboard.length; i++) {
+                sLeaderboard[i] = leaderboard[i].getUserName();
+            }
+            leaderboardList.setListData(sLeaderboard);
         } catch (FileNotFoundException e) {
-            warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help");
+            warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help. (You probably haven't made any users yet!)");
             warningWindow.setVisible(true);    
+        }
+    }
+    
+    public static void mergeSort(User[] arr, int l, int r) {
+        if (l < r) {
+            int m = l + (r - l) / 2; // Safe midpoint calculation
+            mergeSort(arr, l, m);
+            mergeSort(arr, m + 1, r);
+            merge(arr, l, m, r);
+        }
+    }
+
+    private static void merge(User[] arr, int l, int m, int r) {
+        User[] left = Arrays.copyOfRange(arr, l, m + 1);
+        User[] right = Arrays.copyOfRange(arr, m + 1, r + 1);
+        int i = 0, j = 0, k = l;
+        while (i < left.length && j < right.length) {
+            // Descending order: pick larger element
+            if (left[i].getScore() >= right[j].getScore()) {
+                arr[k++] = left[i++];
+            } else {
+                arr[k++] = right[j++];
+            }
+        }
+        while (i < left.length) {
+            arr[k++] = left[i++];
+        }
+        while (j < right.length) {
+            arr[k++] = right[j++];
         }
     }
     

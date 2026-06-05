@@ -4,15 +4,15 @@ import java.util.Objects;
 
 public class User {
     private String userName;
-    private int numWins;
+    private int score;
     private static int numUsers;
     
     public User(){
     }
     
-    public User(String userName, int numWins) {
+    public User(String userName, int score) {
         this.userName = userName;
-        this.numWins = numWins;
+        this.score = score;
     }
 
     public String getUserName() {
@@ -23,12 +23,12 @@ public class User {
         this.userName = userName;
     }
 
-    public int getNumWins() {
-        return numWins;
+    public int getScore() {
+        return score;
     }
 
-    public void setNumWins(int numWins) {
-        this.numWins = numWins;
+    public void setScore(int score) {
+        this.score = score;
     }
 
     public static int getNumUsers() {
@@ -46,13 +46,13 @@ public class User {
             return false;
         }
         final User other = (User) obj;
-        if (this.numWins != other.numWins) {
+        if (this.score != other.score) {
             return false;
         }
         return Objects.equals(this.userName, other.userName);
     }
 
     public String toString() {
-        return "User{" + "userName=" + userName + ", numWins=" + numWins + '}';
+        return "User{" + "userName=" + userName + ", score=" + score + '}';
     }
 }
