@@ -12,6 +12,8 @@ import java.util.Scanner;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.util.ArrayList;
+import repo.FileImporter;
 
 public class MainWindow extends javax.swing.JFrame {
 
@@ -22,7 +24,7 @@ public class MainWindow extends javax.swing.JFrame {
     private HelpWindow helpWindow;
     private MainWindow mainWindow;
     private LeaderboardWindow leaderboardWindow;
-    
+
     // https://stackoverflow.com/questions/16046824/making-a-java-swing-frame-movable-and-setundecorated
     public void MoveJFrame() {
         this.setUndecorated(true);
@@ -33,13 +35,14 @@ public class MainWindow extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
-    
+
     public MainWindow() {
         MoveJFrame();
         initComponents();
     }
-    
+
     public static class FrameDragListener extends MouseAdapter {
+
         private final JFrame frame;
         private Point mouseDownCompCoords = null;
 
@@ -334,7 +337,7 @@ public class MainWindow extends javax.swing.JFrame {
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
             try (InputStream is = new FileInputStream(selectedFile)) {
-                
+
             } catch (IOException e) {
                 System.err.println("Error reading the file: " + e.getMessage());
             }
@@ -363,15 +366,15 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_sandboxMenuItemActionPerformed
 
     private void exitMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuActionPerformed
-        
+
     }//GEN-LAST:event_exitMenuActionPerformed
 
     private void fileMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileMenuActionPerformed
-        
+
     }//GEN-LAST:event_fileMenuActionPerformed
 
     private void fileMenuMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_fileMenuMenuSelected
-        
+
     }//GEN-LAST:event_fileMenuMenuSelected
 
     private void exitMenuMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_exitMenuMenuSelected
@@ -425,6 +428,7 @@ public class MainWindow extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainWindow().setVisible(true);
+                
             }
         });
     }
