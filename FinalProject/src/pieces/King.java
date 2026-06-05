@@ -23,8 +23,8 @@ public class King extends AbstractPiece {
         inCheckMate = false;
     }
 
-    public King(int xPos, int yPos, BufferedImage sprite, boolean isWhite, boolean inCheck, boolean inCheckMate) {
-        super(xPos, yPos, sprite, isWhite);
+    public King(int rowNum, int columnNum, BufferedImage sprite, boolean isWhite, boolean inCheck, boolean inCheckMate) {
+        super(rowNum, columnNum, sprite, isWhite);
         this.inCheck = inCheck;
         this.inCheckMate = inCheckMate;
     }
@@ -34,34 +34,34 @@ public class King extends AbstractPiece {
         ArrayList<Move> moves = new ArrayList<>();
 
         // Straight directions
-        searchDirection(moves, pieces, xPos + 1, yPos, 1, 0);
-        searchDirection(moves, pieces, xPos - 1, yPos, -1, 0);
-        searchDirection(moves, pieces, xPos, yPos + 1, 0, 1);
-        searchDirection(moves, pieces, xPos, yPos - 1, 0, -1);
+        searchDirection(moves, pieces, rowNum + 1, columnNum, 1, 0);
+        searchDirection(moves, pieces, rowNum - 1, columnNum, -1, 0);
+        searchDirection(moves, pieces, rowNum, columnNum + 1, 0, 1);
+        searchDirection(moves, pieces, rowNum, columnNum - 1, 0, -1);
 
         // Diagonal directions
-        searchDirection(moves, pieces, xPos + 1, yPos + 1, 1, 1);
-        searchDirection(moves, pieces, xPos - 1, yPos + 1, -1, 1);
-        searchDirection(moves, pieces, xPos + 1, yPos - 1, 1, -1);
-        searchDirection(moves, pieces, xPos - 1, yPos - 1, -1, -1);
+        searchDirection(moves, pieces, rowNum + 1, columnNum + 1, 1, 1);
+        searchDirection(moves, pieces, rowNum - 1, columnNum + 1, -1, 1);
+        searchDirection(moves, pieces, rowNum + 1, columnNum - 1, 1, -1);
+        searchDirection(moves, pieces, rowNum - 1, columnNum - 1, -1, -1);
 
         return moves;
     }
 
     @Override
-    public void searchDirection(ArrayList<Move> moves, Piece[][] pieces, int currentX, int currentY, int dx, int dy) {
-        if (!isInsideBoard(currentX, currentY)) {
+    public void searchDirection(ArrayList<Move> moves, Piece[][] pieces, int currentRow, int currentCol, int dRow, int dCol) {
+        if (!isInsideBoard(currentRow, currentCol)) {
             return;
         }
 
-        Piece piece = getPieceAt(currentX, currentY, pieces);
+        Piece piece = getPieceAt(currentRow, currentCol, pieces);
 
         if (piece == null) {
-            moves.add(new Move(currentX, currentY));
+            moves.add(new Move(currentRow, currentCol));
         } else {
             // Capture enemy piece, but block further movement
             if (piece.isWhite() != this.isWhite()) {
-                moves.add(new Move(currentX, currentY));
+                moves.add(new Move(currentRow, currentCol));
             }
         }
     }

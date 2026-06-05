@@ -19,8 +19,8 @@ public class Bishop extends AbstractPiece{
         numBishop++;
     }
 
-    public Bishop(int xPos, int yPos, BufferedImage sprite, boolean isWhite) {
-        super(xPos, yPos, sprite, isWhite);
+    public Bishop(int rowNum, int columnNum, BufferedImage sprite, boolean isWhite) {
+        super(rowNum, columnNum, sprite, isWhite);
         numBishop++;
     }
     
@@ -28,10 +28,10 @@ public class Bishop extends AbstractPiece{
     public ArrayList<Move> getValidMoves(Piece pieces[][]) {
         ArrayList<Move> moves = new ArrayList();
 
-        searchDirection(moves, pieces, xPos + 1, yPos + 1, 1, 1);
-        searchDirection(moves, pieces, xPos - 1, yPos + 1, -1, 1);
-        searchDirection(moves, pieces, xPos + 1, yPos - 1, 1, -1);
-        searchDirection(moves, pieces, xPos - 1, yPos - 1, -1, -1);
+        searchDirection(moves, pieces, rowNum + 1, columnNum + 1, 1, 1);
+        searchDirection(moves, pieces, rowNum - 1, columnNum + 1, -1, 1);
+        searchDirection(moves, pieces, rowNum + 1, columnNum - 1, 1, -1);
+        searchDirection(moves, pieces, rowNum - 1, columnNum - 1, -1, -1);
 
         return moves;
     }

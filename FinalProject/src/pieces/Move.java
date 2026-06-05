@@ -9,33 +9,33 @@ package pieces;
  * @author NeWan5443
  */
 public class Move {
-    private int xPos;
-    private int yPos;
+    private int rowNum;
+    private int columnNum;
 
     public Move() {
-        xPos = 0;
-        yPos = 0;
+        rowNum = 0;
+        columnNum = 0;
     }
 
-    public Move(int xPos, int yPos) {
-        this.xPos = xPos;
-        this.yPos = yPos;
+    public Move(int rowNum, int columnNum) {
+        this.rowNum = rowNum;
+        this.columnNum = columnNum;
     }
 
-    public int getXPos() {
-        return xPos;
+    public int getRowNum() {
+        return rowNum;
     }
 
-    public int getYPos() {
-        return yPos;
+    public int getColumnNum() {
+        return columnNum;
     }
 
-    public void setXPos(int xPos) {
-        this.xPos = xPos;
+    public void setRowNum(int rowNum) {
+        this.rowNum = rowNum;
     }
 
-    public void setYPos(int yPos) {
-        this.yPos = yPos;
+    public void setColumnNum(int columnNum) {
+        this.columnNum = columnNum;
     }
 
     public boolean equals(Object obj) {
@@ -49,14 +49,14 @@ public class Move {
             return false;
         }
         final Move other = (Move) obj;
-        if (this.xPos != other.xPos) {
+        if (this.rowNum != other.rowNum) {
             return false;
         }
-        return this.yPos == other.yPos;
+        return this.columnNum == other.columnNum;
     }
 
     public String toString() {
-        return "Move{" + "xPos=" + xPos + ", yPos=" + yPos + '}';
+        return "Move{" + "rowNum=" + rowNum + ", columnNum=" + columnNum + '}';
     }
     
     
