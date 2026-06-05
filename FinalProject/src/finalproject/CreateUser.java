@@ -1,17 +1,11 @@
 package finalproject;
 
-import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
-import java.net.URISyntaxException;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 public class CreateUser extends javax.swing.JFrame {
     
@@ -154,44 +148,46 @@ public class CreateUser extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void goBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBtnActionPerformed
-        boolean done = false;
-        boolean hasNextLine = true;
-        try {
-            InputStream in = EnterUsername.class.getResourceAsStream("Users.txt");
-            Scanner s = new Scanner(in);
-            String nextLine = "";
+        if (userNameField.getText().contains(",") || userNameField.getText().contains(":")) {
+            userNameField.setText("");
+            warningWindow = new WarningWindow(this, "Your username cannot conani characters : or ,");
+        } else {
+            boolean done = false;
+            boolean hasNextLine = true;
             try {
-                while (hasNextLine || done)  {
-                    nextLine = s.nextLine();
-                    if (userNameField.getText().equalsIgnoreCase(nextLine.split(",")[0])) {
-                        warningWindow = new WarningWindow(this, "This username already exists");
-                        warningWindow.setVisible(true);
-                        userNameField.setText("");
-                        done = true;
+                FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
+                Scanner s = new Scanner(in);
+                String[] items = s.nextLine().split(":");
+                try {
+                    for (int i = 0; i < items.length; i++) {
+                        if (!done) {
+                            if (userNameField.getText().equalsIgnoreCase(items[i].split(",")[0])) {
+                                warningWindow = new WarningWindow(this, "This username already exists");
+                                warningWindow.setVisible(true);
+                                userNameField.setText("");
+                                done = true;
+                            }
+                        }
                     }
-                    if (!s.hasNextLine()) {
-                        hasNextLine = false;
-                    } 
+
+                } catch (Exception e) {
+
                 }
             } catch (Exception e) {
-                
-            }
-        } catch (Exception e) {
-            warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help");
-        }
-        if (!done) {
-            // Used mr cuttens code
-            try {
-                //saves directory is located beside the src folder or JAR
-                FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/users.txt");
-                //out is FileOutputStream            
-                ObjectOutput s = new ObjectOutputStream(out);
-                s.writeBytes(userNameField.getText()+",0,0,0");
-                s.close();
-            } catch (IOException e) {
                 warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help");
             }
-            this.dispose();
+            if (!done) {
+                // Used mr cuttens code
+                try {
+                    //saves directory is located beside the src folder or JAR
+                    FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/Users.txt", true);
+                    out.write((userNameField.getText() + ",0,0,0:").getBytes());
+                    userNameField.setText("");
+                } catch (IOException e) {
+                    warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help");
+                }
+                this.dispose();
+            }
         }
     }//GEN-LAST:event_goBtnActionPerformed
 
@@ -203,6 +199,7 @@ public class CreateUser extends javax.swing.JFrame {
         if (userNameField.getText().length() > 15) {
             userNameField.setText(userNameField.getText().substring(0, 15));
         }
+        
     }//GEN-LAST:event_userNameFieldKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
