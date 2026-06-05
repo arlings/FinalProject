@@ -20,6 +20,7 @@ public class MainWindow extends javax.swing.JFrame {
     private EnterUsername enterUsername;
     private HelpWindow helpWindow;
     private MainWindow mainWindow;
+    private LeaderboardWindow leaderboardWindow;
     
     // https://stackoverflow.com/questions/16046824/making-a-java-swing-frame-movable-and-setundecorated
     public void MoveJFrame() {
@@ -68,6 +69,12 @@ public class MainWindow extends javax.swing.JFrame {
         titleLabel = new javax.swing.JLabel();
         chessIconDecoration = new javax.swing.JLabel();
         chessIconDecoration2 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        secondPlaceLabel = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        firstPlaceLabel = new javax.swing.JLabel();
+        thirdPlaceLabel = new javax.swing.JLabel();
+        viewFullLeaderboardButton = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         importGameMenuItem = new javax.swing.JMenuItem();
@@ -83,6 +90,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(204, 255, 255));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
         newGameBtn.setText("New Game");
@@ -100,6 +108,68 @@ public class MainWindow extends javax.swing.JFrame {
 
         chessIconDecoration2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ChessPawnArtIcon.png"))); // NOI18N
 
+        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel2.setOpaque(false);
+
+        secondPlaceLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        secondPlaceLabel.setForeground(new java.awt.Color(153, 153, 153));
+        secondPlaceLabel.setText("N/A");
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/MainLeaderboardImage.png"))); // NOI18N
+
+        firstPlaceLabel.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        firstPlaceLabel.setForeground(new java.awt.Color(255, 204, 102));
+        firstPlaceLabel.setText("N/A");
+
+        thirdPlaceLabel.setForeground(new java.awt.Color(192, 142, 78));
+        thirdPlaceLabel.setText("N/A");
+
+        viewFullLeaderboardButton.setText("View Full Leaderboard");
+        viewFullLeaderboardButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewFullLeaderboardButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(28, 28, 28))
+                            .addComponent(viewFullLeaderboardButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(secondPlaceLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(thirdPlaceLabel)
+                                .addGap(42, 42, 42))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(73, 73, 73)
+                        .addComponent(firstPlaceLabel)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(secondPlaceLabel)
+                    .addComponent(thirdPlaceLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(firstPlaceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(viewFullLeaderboardButton)
+                .addGap(12, 12, 12))
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -116,21 +186,27 @@ public class MainWindow extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(277, Short.MAX_VALUE))
+                .addGap(24, 24, 24)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(13, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(newGameBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(chessIconDecoration2))
-                    .addComponent(chessIconDecoration))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(newGameBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(chessIconDecoration2))
+                            .addComponent(chessIconDecoration))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         menuBar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -256,7 +332,6 @@ public class MainWindow extends javax.swing.JFrame {
         Scanner s = new Scanner("");
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
-            System.out.println("Selected file: " + selectedFile.getAbsolutePath());
             try (InputStream is = new FileInputStream(selectedFile)) {
                 
             } catch (IOException e) {
@@ -314,6 +389,13 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_newGameBtnActionPerformed
 
+    private void viewFullLeaderboardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewFullLeaderboardButtonActionPerformed
+        if (leaderboardWindow == null) {
+            leaderboardWindow = new LeaderboardWindow(mainWindow);
+        }
+        leaderboardWindow.setVisible(true);
+    }//GEN-LAST:event_viewFullLeaderboardButtonActionPerformed
+
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -351,15 +433,21 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenu exitMenu;
     private javax.swing.JMenuItem exportGameMenuItem;
     private javax.swing.JMenu fileMenu;
+    private javax.swing.JLabel firstPlaceLabel;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JMenuItem importGameMenuItem;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JButton newGameBtn;
     private javax.swing.JMenu newGameMenuItem;
     private javax.swing.JMenu newMenu;
     private javax.swing.JMenuItem newUserMenuItem;
     private javax.swing.JMenuItem sandboxMenuItem;
+    private javax.swing.JLabel secondPlaceLabel;
+    private javax.swing.JLabel thirdPlaceLabel;
     private javax.swing.JLabel titleLabel;
+    private javax.swing.JButton viewFullLeaderboardButton;
     // End of variables declaration//GEN-END:variables
 }

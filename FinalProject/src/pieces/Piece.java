@@ -22,5 +22,4 @@ public interface Piece {
     public Piece getPieceAt(int row, int col, Piece pieces[][]);
     public boolean equals(Piece p);
     public String toString();
-
 }
