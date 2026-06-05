@@ -36,7 +36,7 @@ public class LeaderboardWindow extends javax.swing.JFrame {
             mergeSort(leaderboard, 0, leaderboard.length - 1);
             String[] sLeaderboard = new String[leaderboard.length];
             for (int i = 0; i < leaderboard.length; i++) {
-                sLeaderboard[i] = leaderboard[i].getUserName();
+                sLeaderboard[i] = "#" + (i + 1) + leaderboard[i].toString();
             }
             leaderboardList.setListData(sLeaderboard);
         } catch (FileNotFoundException e) {

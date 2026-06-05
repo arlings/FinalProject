@@ -53,6 +53,6 @@ public class User {
     }
 
     public String toString() {
-        return "User{" + "userName=" + userName + ", score=" + score + '}';
+        return userName + ", score = " + score;
     }
 }
