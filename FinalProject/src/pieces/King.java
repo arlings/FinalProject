@@ -11,7 +11,8 @@ import java.util.ArrayList;
  *
  * @author NeWan5443
  */
-public class King extends AbstractPiece{
+public class King extends AbstractPiece {
+
     private static int numKings;
     private boolean inCheck; //add logic later
     private boolean inCheckMate;
@@ -22,42 +23,45 @@ public class King extends AbstractPiece{
         inCheckMate = false;
     }
 
-    public King(int xPos, int yPos, BufferedImage sprite, boolean isWhite, boolean inCheck, boolean inCheckMate) {
-        super(xPos, yPos, sprite, isWhite);
+    public King(int rowNum, int columnNum, BufferedImage sprite, boolean isWhite, boolean inCheck, boolean inCheckMate) {
+        super(rowNum, columnNum, sprite, isWhite);
         this.inCheck = inCheck;
         this.inCheckMate = inCheckMate;
     }
-    
+
     @Override
-    public ArrayList<Move> getValidMoves(ArrayList<Piece> pieces) {
-        ArrayList<Move> moves = new ArrayList();
+    public ArrayList<Move> getValidMoves(Piece[][] pieces) {
+        ArrayList<Move> moves = new ArrayList<>();
 
-        searchDirection(moves, pieces, xPos + 1, yPos, 1, 0);
-        searchDirection(moves, pieces, xPos - 1, yPos, -1, 0);
-        searchDirection(moves, pieces, xPos, yPos + 1, 0, 1);
-        searchDirection(moves, pieces, xPos, yPos - 1, 0, -1);
+        // Straight directions
+        searchDirection(moves, pieces, rowNum + 1, columnNum, 1, 0);
+        searchDirection(moves, pieces, rowNum - 1, columnNum, -1, 0);
+        searchDirection(moves, pieces, rowNum, columnNum + 1, 0, 1);
+        searchDirection(moves, pieces, rowNum, columnNum - 1, 0, -1);
 
-        searchDirection(moves, pieces, xPos + 1, yPos + 1, 1, 1);
-        searchDirection(moves, pieces, xPos - 1, yPos + 1, -1, 1);
-        searchDirection(moves, pieces, xPos + 1, yPos - 1, 1, -1);
-        searchDirection(moves, pieces, xPos - 1, yPos - 1, -1, -1);
+        // Diagonal directions
+        searchDirection(moves, pieces, rowNum + 1, columnNum + 1, 1, 1);
+        searchDirection(moves, pieces, rowNum - 1, columnNum + 1, -1, 1);
+        searchDirection(moves, pieces, rowNum + 1, columnNum - 1, 1, -1);
+        searchDirection(moves, pieces, rowNum - 1, columnNum - 1, -1, -1);
 
         return moves;
     }
 
     @Override
-    public void searchDirection(ArrayList<Move> moves, ArrayList<Piece> pieces, int currentX, int currentY, int dx, int dy) {
-        if (!isInsideBoard(currentX, currentY)) {
+    public void searchDirection(ArrayList<Move> moves, Piece[][] pieces, int currentRow, int currentCol, int dRow, int dCol) {
+        if (!isInsideBoard(currentRow, currentCol)) {
             return;
         }
 
-        Piece piece = getPieceAt(currentX, currentY, pieces);
+        Piece piece = getPieceAt(currentRow, currentCol, pieces);
 
         if (piece == null) {
-            moves.add(new Move(currentX, currentY));
+            moves.add(new Move(currentRow, currentCol));
         } else {
+            // Capture enemy piece, but block further movement
             if (piece.isWhite() != this.isWhite()) {
-                moves.add(new Move(currentX, currentY));
+                moves.add(new Move(currentRow, currentCol));
             }
         }
     }
@@ -74,11 +78,11 @@ public class King extends AbstractPiece{
         inCheckMate = validMoves.isEmpty();
         return inCheckMate;
     }
-    
+
     @Override
     public String toString() {
         return ("Piece Type: King"
                 + super.toString());
     }
-    
+
 }

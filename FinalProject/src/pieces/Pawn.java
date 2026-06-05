@@ -14,60 +14,53 @@ import java.util.ArrayList;
 public class Pawn extends AbstractPiece {
 
     private static int numPawns = 0;
-
+    private boolean firstMove = true;
     public Pawn() {
     }
 
-    public Pawn(int xPos, int yPos, BufferedImage sprite, boolean isWhite) {
-        super(xPos, yPos, sprite, isWhite);
+    public Pawn(int rowNum, int columnNum, BufferedImage sprite, boolean isWhite) {
+        super(rowNum, columnNum, sprite, isWhite);
     }
 
     @Override
-    public ArrayList<Move> getValidMoves(ArrayList<Piece> pieces) {
-        ArrayList<Move> moves = new ArrayList();
+    public ArrayList<Move> getValidMoves(Piece[][] pieces) {
+        ArrayList<Move> moves = new ArrayList<>();
+
         
-        if(this.isWhite){
-            searchDirection(moves, pieces, xPos, yPos + 1, 1);
-        }else{
-            searchDirection(moves, pieces, xPos, yPos + 1, -1);
+        int direction = this.isWhite() ? 1 : -1;
+
+        searchDirection(moves, pieces, rowNum + direction, columnNum, direction);
+        if(firstMove){
+            moves.add(new Move(rowNum + direction + 1, columnNum));
+            firstMove = false;
         }
         
         return moves;
     }
-
-    public void searchDirection(ArrayList<Move> moves, ArrayList<Piece> pieces, int currentX, int currentY, int forwardRow) {
-        if (!isInsideBoard(currentX, currentY)) {
-            return;
-        }
-        
-        Piece pieceForward = getPieceAt(currentX, currentY, pieces);
-        if (pieceForward == null) {
-            moves.add(new Move(currentX, currentY));
-        }
-        
-        if(this.isWhite){
-            forwardRow = 1;
-        }else{
-            forwardRow = -1;
-        }
-        
-        int leftCol = -1;
-        int rightCol = 1;
-        
-        Move diagonalLeft = new Move(this.getXPos() + forwardRow, this.getYPos() + leftCol);
-        Move diagonalRight = new Move(this.getXPos() + forwardRow, this.getYPos() + rightCol);
-        
-        if (isInsideBoard(diagonalLeft.getXPos(), diagonalLeft.getYPos())) {
-            Piece targetPiece = getPieceAt(diagonalLeft.getXPos(), diagonalLeft.getYPos(), pieces);
-            if (targetPiece != null && targetPiece.isWhite() != this.isWhite()) {
-                moves.add(new Move(diagonalLeft.getXPos(), diagonalLeft.getYPos()));
+    
+    public void searchDirection(ArrayList<Move> moves, Piece[][] pieces, int targetRow, int targetCol, int direction) {
+        if (isInsideBoard(targetRow, targetCol)) {
+            Piece pieceForward = getPieceAt(targetRow, targetCol, pieces);
+            if (pieceForward == null) {
+                moves.add(new Move(targetRow, targetCol));
             }
         }
 
-        if (isInsideBoard(diagonalRight.getXPos(), diagonalRight.getYPos())) {
-            Piece targetPiece = getPieceAt(diagonalRight.getXPos(), diagonalRight.getYPos(), pieces);
+        int leftCol = columnNum - 1;
+        int rightCol = columnNum + 1;
+        int diagonalRow = rowNum + direction; 
+
+        if (isInsideBoard(diagonalRow, leftCol)) {
+            Piece targetPiece = getPieceAt(diagonalRow, leftCol, pieces);
             if (targetPiece != null && targetPiece.isWhite() != this.isWhite()) {
-                moves.add(new Move(diagonalRight.getXPos(), diagonalRight.getYPos()));
+                moves.add(new Move(diagonalRow, leftCol));
+            }
+        }
+
+        if (isInsideBoard(diagonalRow, rightCol)) {
+            Piece targetPiece = getPieceAt(diagonalRow, rightCol, pieces);
+            if (targetPiece != null && targetPiece.isWhite() != this.isWhite()) {
+                moves.add(new Move(diagonalRow, rightCol));
             }
         }
     }

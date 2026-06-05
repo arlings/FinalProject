@@ -31,142 +31,142 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="A2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="B2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="C2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="D2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="E2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="F2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="G2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="H2" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="A7" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="B7" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="C7" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="D7" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="E7" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="F7" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="G7" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="H7" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="A3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="B3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="C3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="D3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="E3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="F3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="G3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="H3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="A4" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="B4" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="C4" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="D4" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="E4" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="F4" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="G4" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="H4" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="A1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="B1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="C1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="D1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="E1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="F1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="G1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="H1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                      <Component id="username2" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="A8" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="B8" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="C8" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="D8" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="E8" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="F8" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="G8" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="H8" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <Component id="username1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="A5" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="B5" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="C5" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="D5" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="E5" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="F5" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="G5" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="H5" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="A6" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="B6" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="C6" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="D6" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="E6" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="F6" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="G6" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="H6" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -192,9 +192,9 @@
                   <Component id="B8" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
                   <Component id="A8" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
                   <Component id="E8" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <Component id="username1" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="H7" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
                   <Component id="G7" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
@@ -205,7 +205,7 @@
                   <Component id="B7" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
                   <Component id="A7" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="H6" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
                   <Component id="G6" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
@@ -216,7 +216,7 @@
                   <Component id="A6" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
                   <Component id="E6" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="H5" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
                   <Component id="G5" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
@@ -227,7 +227,7 @@
                   <Component id="B5" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
                   <Component id="A5" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="H4" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
                   <Component id="G4" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
@@ -238,7 +238,7 @@
                   <Component id="A4" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
                   <Component id="E4" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="H3" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
                   <Component id="G3" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
@@ -249,7 +249,7 @@
                   <Component id="B3" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
                   <Component id="A3" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="H2" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
                   <Component id="G2" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
@@ -260,7 +260,7 @@
                   <Component id="A2" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
                   <Component id="E2" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="H1" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
                   <Component id="G1" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
@@ -270,9 +270,9 @@
                   <Component id="C1" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
                   <Component id="B1" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
                   <Component id="A1" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
-                  <Component id="jLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="username2" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="18" max="32767" attributes="0"/>
+              <EmptySpace pref="60" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -309,9 +309,12 @@
         <Component class="javax.swing.JLabel" name="C7Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/Black_Pawn.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="C7LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -346,9 +349,12 @@
         <Component class="javax.swing.JLabel" name="H3Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="H3LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -383,9 +389,12 @@
         <Component class="javax.swing.JLabel" name="G4Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="G4LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -420,9 +429,12 @@
         <Component class="javax.swing.JLabel" name="C2Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Pawn.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="C2LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -457,9 +469,12 @@
         <Component class="javax.swing.JLabel" name="A4Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="A4LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -494,9 +509,12 @@
         <Component class="javax.swing.JLabel" name="D2Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Pawn.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="D2LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -531,9 +549,12 @@
         <Component class="javax.swing.JLabel" name="B5Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="B5LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -568,9 +589,12 @@
         <Component class="javax.swing.JLabel" name="D7Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/Black_Pawn.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="D7LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -605,9 +629,12 @@
         <Component class="javax.swing.JLabel" name="E2Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Pawn.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="E2LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -642,9 +669,12 @@
         <Component class="javax.swing.JLabel" name="A5Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="A5LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -679,9 +709,12 @@
         <Component class="javax.swing.JLabel" name="A7Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/Black_Pawn.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="A7LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -716,9 +749,12 @@
         <Component class="javax.swing.JLabel" name="F2Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Pawn.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="F2LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -753,9 +789,12 @@
         <Component class="javax.swing.JLabel" name="E7Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/Black_Pawn.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="E7LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -790,9 +829,12 @@
         <Component class="javax.swing.JLabel" name="G2Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Pawn.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="G2LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -827,9 +869,12 @@
         <Component class="javax.swing.JLabel" name="F7Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/Black_Pawn.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="F7LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -864,9 +909,12 @@
         <Component class="javax.swing.JLabel" name="G7Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/Black_Pawn.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="G7LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -901,9 +949,12 @@
         <Component class="javax.swing.JLabel" name="C5Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="C5LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -938,9 +989,12 @@
         <Component class="javax.swing.JLabel" name="D5Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="D5LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -975,9 +1029,12 @@
         <Component class="javax.swing.JLabel" name="H2Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Pawn.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="H2LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1012,9 +1069,12 @@
         <Component class="javax.swing.JLabel" name="H6Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="H6LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1049,9 +1109,12 @@
         <Component class="javax.swing.JLabel" name="B2Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Pawn.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="B2LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1086,9 +1149,12 @@
         <Component class="javax.swing.JLabel" name="C6Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="C6LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1123,9 +1189,12 @@
         <Component class="javax.swing.JLabel" name="H7Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/Black_Pawn.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="H7LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1160,9 +1229,12 @@
         <Component class="javax.swing.JLabel" name="B3Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="B3LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1197,9 +1269,12 @@
         <Component class="javax.swing.JLabel" name="E5Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="E5LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1234,9 +1309,12 @@
         <Component class="javax.swing.JLabel" name="A8Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/Black_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="A8LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1271,9 +1349,12 @@
         <Component class="javax.swing.JLabel" name="A3Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="A3LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1308,9 +1389,12 @@
         <Component class="javax.swing.JLabel" name="C3Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="C3LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1345,9 +1429,12 @@
         <Component class="javax.swing.JLabel" name="B1Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Knight.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="B1LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1382,9 +1469,12 @@
         <Component class="javax.swing.JLabel" name="B6Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="B6LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1419,9 +1509,12 @@
         <Component class="javax.swing.JLabel" name="C8Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/Black_Bishop.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="C8LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1456,9 +1549,12 @@
         <Component class="javax.swing.JLabel" name="D6Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="D6LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1493,9 +1589,12 @@
         <Component class="javax.swing.JLabel" name="C1Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Bishop.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="C1LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1530,9 +1629,12 @@
         <Component class="javax.swing.JLabel" name="D8Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/Black_Queen.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="D8LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1567,9 +1669,12 @@
         <Component class="javax.swing.JLabel" name="D3Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="D3LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1604,9 +1709,12 @@
         <Component class="javax.swing.JLabel" name="F5Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="F5LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1641,9 +1749,12 @@
         <Component class="javax.swing.JLabel" name="D1Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Queen.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="D1LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1678,9 +1789,12 @@
         <Component class="javax.swing.JLabel" name="E8Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/Black_King.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="E8LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1715,9 +1829,12 @@
         <Component class="javax.swing.JLabel" name="H4Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="H4LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1752,9 +1869,12 @@
         <Component class="javax.swing.JLabel" name="E6Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="E6LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1789,9 +1909,12 @@
         <Component class="javax.swing.JLabel" name="F8Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/Black_Bishop.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="F8LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1826,9 +1949,12 @@
         <Component class="javax.swing.JLabel" name="C4Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="C4LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1863,9 +1989,12 @@
         <Component class="javax.swing.JLabel" name="G5Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="G5LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1900,9 +2029,12 @@
         <Component class="javax.swing.JLabel" name="E3Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="E3LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1937,9 +2069,12 @@
         <Component class="javax.swing.JLabel" name="B4Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="B4LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1974,9 +2109,12 @@
         <Component class="javax.swing.JLabel" name="F6Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="F6LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -2011,9 +2149,12 @@
         <Component class="javax.swing.JLabel" name="H5Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="H5LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -2048,9 +2189,12 @@
         <Component class="javax.swing.JLabel" name="A1Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="A1LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -2085,9 +2229,12 @@
         <Component class="javax.swing.JLabel" name="D4Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="D4LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -2122,9 +2269,12 @@
         <Component class="javax.swing.JLabel" name="G6Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="G6LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -2159,9 +2309,12 @@
         <Component class="javax.swing.JLabel" name="F3Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="F3LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -2196,9 +2349,12 @@
         <Component class="javax.swing.JLabel" name="A6Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="A6LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -2233,9 +2389,12 @@
         <Component class="javax.swing.JLabel" name="E1Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_King.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="E1LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -2270,9 +2429,12 @@
         <Component class="javax.swing.JLabel" name="E4Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="E4LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -2307,9 +2469,12 @@
         <Component class="javax.swing.JLabel" name="F1Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Bishop.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="F1LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -2344,9 +2509,12 @@
         <Component class="javax.swing.JLabel" name="G3Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="G3LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -2381,9 +2549,12 @@
         <Component class="javax.swing.JLabel" name="G8Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/Black_Knight.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="G8LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -2418,9 +2589,12 @@
         <Component class="javax.swing.JLabel" name="G1Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Knight.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="G1LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -2455,9 +2629,12 @@
         <Component class="javax.swing.JLabel" name="F4Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="F4LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -2492,9 +2669,12 @@
         <Component class="javax.swing.JLabel" name="H8Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/Black_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="H8LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -2529,9 +2709,12 @@
         <Component class="javax.swing.JLabel" name="H1Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Rook.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="H1LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -2566,7 +2749,7 @@
         <Component class="javax.swing.JLabel" name="B8Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/Black_Knight.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
         </Component>
@@ -2603,9 +2786,12 @@
         <Component class="javax.swing.JLabel" name="A2Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/White_Pawn.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="A2LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -2640,13 +2826,16 @@
         <Component class="javax.swing.JLabel" name="B7Label">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/Black_Pawn.png"/>
+              <Image iconType="3" name="/images/Transparent_Background.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="B7LabelMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="username1">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="24" style="0"/>
@@ -2654,7 +2843,7 @@
         <Property name="text" type="java.lang.String" value="User 1"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
+    <Component class="javax.swing.JLabel" name="username2">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="24" style="0"/>

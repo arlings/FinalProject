@@ -18,18 +18,18 @@ public class Rook extends AbstractPiece{
         super();
     }
 
-    public Rook(int xPos, int yPos, BufferedImage sprite, boolean isWhite) {
-        super(xPos, yPos, sprite, isWhite);
+    public Rook(int rowNum, int columnNum, BufferedImage sprite, boolean isWhite) {
+        super(rowNum, columnNum, sprite, isWhite);
     }
     
     @Override
-    public ArrayList<Move> getValidMoves(ArrayList<Piece> pieces) {
+    public ArrayList<Move> getValidMoves(Piece pieces[][]) {
         ArrayList<Move> moves = new ArrayList();
 
-        searchDirection(moves, pieces, xPos + 1, yPos, 1, 0);
-        searchDirection(moves, pieces, xPos - 1, yPos, -1, 0);
-        searchDirection(moves, pieces, xPos, yPos + 1, 0, 1);
-        searchDirection(moves, pieces, xPos, yPos - 1, 0, -1);
+        searchDirection(moves, pieces, rowNum + 1, columnNum, 1, 0);
+        searchDirection(moves, pieces, rowNum - 1, columnNum, -1, 0);
+        searchDirection(moves, pieces, rowNum, columnNum + 1, 0, 1);
+        searchDirection(moves, pieces, rowNum, columnNum - 1, 0, -1);
 
         return moves;
     }
