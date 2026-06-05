@@ -32,10 +32,33 @@ public class GameWindow extends javax.swing.JFrame {
         ArrayList<Move> validMoves = new ArrayList<>();
         validMoves = piece.getValidMoves(pieces);
         
-        //for debugging
-        int xPos=piece.getXPos();
-        int yPos=piece.getYPos();
-        System.out.println(xPos+"\t"+yPos);
+        
+    }
+    
+    public boolean isKingInCheck(Piece king){
+        int xPos=king.getXPos();
+        int yPos=king.getYPos();
+        boolean oponentsColour;
+        if(king.isWhite()){
+            oponentsColour=false;
+        }else{
+            oponentsColour=true;
+        }
+        for (int row=0; row<8; row++){
+            for(int col=0; col<8; col++){
+                if(row == xPos && col == yPos){
+                    //skip if it is the king's space
+                }else if(pieces[row][col].isWhite() == oponentsColour){
+                    ArrayList<Move> validMoves=new ArrayList<>();
+                    for(int i=0; i<validMoves.size(); i++){
+                        if (validMoves.get(i).getXPos() == xPos&& validMoves.get(i).getYPos() == yPos){
+                            return true;//is in check
+                        }
+                    }
+                }
+            }
+        }
+        return false;//isn't in check
     }
 
     public GameWindow(MainWindow m, String user1, String user2) {
