@@ -20,6 +20,7 @@ public class MainWindow extends javax.swing.JFrame {
     private EnterUsername enterUsername;
     private HelpWindow helpWindow;
     private MainWindow mainWindow;
+    private LeaderboardWindow leaderboardWindow;
     
     // https://stackoverflow.com/questions/16046824/making-a-java-swing-frame-movable-and-setundecorated
     public void MoveJFrame() {
@@ -389,7 +390,10 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_newGameBtnActionPerformed
 
     private void viewFullLeaderboardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewFullLeaderboardButtonActionPerformed
-        // TODO add your handling code here:
+        if (leaderboardWindow == null) {
+            leaderboardWindow = new LeaderboardWindow(mainWindow);
+        }
+        leaderboardWindow.setVisible(true);
     }//GEN-LAST:event_viewFullLeaderboardButtonActionPerformed
 
     public static void main(String args[]) {
