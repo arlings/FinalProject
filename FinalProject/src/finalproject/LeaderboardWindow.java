@@ -14,6 +14,7 @@ public class LeaderboardWindow extends javax.swing.JFrame {
     public LeaderboardWindow(MainWindow m) {
         MoveJFrame();
         initComponents();
+        leaderboardSort();
         mainWindow = m;
     }
     
