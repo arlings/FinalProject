@@ -15,6 +15,7 @@ public class Pawn extends AbstractPiece {
 
     private static int numPawns = 0;
     private boolean firstMove = true;
+
     public Pawn() {
     }
 
@@ -26,18 +27,20 @@ public class Pawn extends AbstractPiece {
     public ArrayList<Move> getValidMoves(Piece[][] pieces) {
         ArrayList<Move> moves = new ArrayList<>();
 
-        
         int direction = this.isWhite() ? 1 : -1;
 
         searchDirection(moves, pieces, rowNum + direction, columnNum, direction);
-        if(firstMove){
-            moves.add(new Move(rowNum + direction + 1, columnNum));
-            firstMove = false;
+        if (firstMove) {
+            int twoStepRow = rowNum + (2 * direction);
+            if (isInsideBoard(twoStepRow, columnNum)
+                    && getPieceAt(rowNum + direction, columnNum, pieces) == null
+                    && getPieceAt(twoStepRow, columnNum, pieces) == null) {
+                moves.add(new Move(twoStepRow, columnNum));
+            }
         }
-        
         return moves;
     }
-    
+
     public void searchDirection(ArrayList<Move> moves, Piece[][] pieces, int targetRow, int targetCol, int direction) {
         if (isInsideBoard(targetRow, targetCol)) {
             Piece pieceForward = getPieceAt(targetRow, targetCol, pieces);
@@ -45,18 +48,15 @@ public class Pawn extends AbstractPiece {
                 moves.add(new Move(targetRow, targetCol));
             }
         }
-
         int leftCol = columnNum - 1;
         int rightCol = columnNum + 1;
-        int diagonalRow = rowNum + direction; 
-
+        int diagonalRow = rowNum + direction;
         if (isInsideBoard(diagonalRow, leftCol)) {
             Piece targetPiece = getPieceAt(diagonalRow, leftCol, pieces);
             if (targetPiece != null && targetPiece.isWhite() != this.isWhite()) {
                 moves.add(new Move(diagonalRow, leftCol));
             }
         }
-
         if (isInsideBoard(diagonalRow, rightCol)) {
             Piece targetPiece = getPieceAt(diagonalRow, rightCol, pieces);
             if (targetPiece != null && targetPiece.isWhite() != this.isWhite()) {
@@ -67,6 +67,10 @@ public class Pawn extends AbstractPiece {
 
     public static int getNumPawns() {
         return numPawns;
+    }
+
+    public void setFirstMove(boolean firstMove) {
+        this.firstMove = firstMove;
     }
 
     @Override

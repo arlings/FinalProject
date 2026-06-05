@@ -24,71 +24,11 @@ public class GameWindow extends javax.swing.JFrame {
     EnterUsername enterUsername;
     FileImporter fileImporter = new FileImporter();
 
+    private Piece selectedPiece = null;
+    private Move selectedPosition = null;
+
     public JLabel[][] board = new JLabel[8][8];
-
     public Piece[][] pieces = new Piece[8][8];
-
-    public void clearValidMoveIndicators(ArrayList<Move> validMoves) {
-        for (Move move : validMoves) {
-            int row = move.getRowNum();
-            int col = move.getColumnNum();
-            setTransparentIcon(board[row][col]);
-        }
-    }
-
-    public void getValidMoves(Piece piece) {
-        if (piece == null) {
-            return;
-        }
-
-        ArrayList<Move> validMoves = piece.getValidMoves(pieces);
-        clearValidMoveIndicators(validMoves);
-        java.awt.image.BufferedImage img = loadImage("/images/LightGreenPicture.png");
-        ImageIcon icon = new ImageIcon(img);
-
-        for (Move move : validMoves) {
-            int row = move.getRowNum();
-            int col = move.getColumnNum();
-            board[row][col].setIcon(icon);
-        }
-
-    }
-
-    public void movePiece(Move orgPos, Move newPos) {
-        int orgRow = orgPos.getRowNum();
-        int orgCol = orgPos.getColumnNum();
-        int newRow = orgPos.getRowNum();
-        int newCol = orgPos.getColumnNum();
-        pieces[orgRow][orgCol].setRowNum(newRow);
-        pieces[orgRow][orgCol].setColumnNum(newCol);
-        updateBoardUI();
-    }
-
-    public boolean isKingInCheck(Piece king) {
-        int xPos = king.getRowNum();
-        int yPos = king.getColumnNum();
-        boolean oponentsColour;
-        if (king.isWhite()) {
-            oponentsColour = false;
-        } else {
-            oponentsColour = true;
-        }
-        for (int row = 0; row < 8; row++) {
-            for (int col = 0; col < 8; col++) {
-                if (row == xPos && col == yPos) {
-                    //skip if it is the king's space
-                } else if (pieces[row][col].isWhite() == oponentsColour) {
-                    ArrayList<Move> validMoves = new ArrayList<>();
-                    for (int i = 0; i < validMoves.size(); i++) {
-                        if (validMoves.get(i).getRowNum() == xPos && validMoves.get(i).getColumnNum() == yPos) {
-                            return true;//is in check
-                        }
-                    }
-                }
-            }
-        }
-        return false;//isn't in check
-    }
 
     public GameWindow(MainWindow m, String user1, String user2) {
         startGame();
@@ -111,14 +51,114 @@ public class GameWindow extends javax.swing.JFrame {
         this.username2.setText(user2);
     }
 
-    public void MoveJFrame() {
-        this.setUndecorated(true);
-        MainWindow.FrameDragListener frameDragListener = new MainWindow.FrameDragListener(this);
-        this.addMouseListener(frameDragListener);
-        this.addMouseMotionListener(frameDragListener);
-        this.pack();
-        this.setLocationRelativeTo(null);
-        this.setVisible(true);
+    private void handleClick(int row, int col) {
+        if (selectedPiece == null) {
+            if (pieces[row][col] != null) {
+                selectedPiece = pieces[row][col];
+                selectedPosition = new Move(row, col);
+                getValidMoves(selectedPiece);
+            }
+            return;
+        }
+
+        if (pieces[row][col] != null
+                && pieces[row][col].isWhite() == selectedPiece.isWhite()) {
+
+            selectedPiece = pieces[row][col];
+            selectedPosition = new Move(row, col);
+            getValidMoves(selectedPiece);
+            return;
+        }
+
+        ArrayList<Move> validMoves = selectedPiece.getValidMoves(pieces);
+
+        for (Move move : validMoves) {
+            if (move.getRowNum() == row && move.getColumnNum() == col) {
+                movePiece(selectedPosition, move);
+                selectedPiece = null;
+                selectedPosition = null;
+                return;
+            }
+        }
+    }
+
+    public void movePiece(Move orgPos, Move newPos) {
+
+        int orgRow = orgPos.getRowNum();
+        int orgCol = orgPos.getColumnNum();
+        int newRow = newPos.getRowNum();
+        int newCol = newPos.getColumnNum();
+
+        Piece movingPiece = pieces[orgRow][orgCol];
+
+        if (movingPiece instanceof Pawn) {
+            ((Pawn) movingPiece).setFirstMove(false);
+        }
+
+        movingPiece.setRowNum(newRow);
+        movingPiece.setColumnNum(newCol);
+
+        pieces[newRow][newCol] = movingPiece;
+        pieces[orgRow][orgCol] = null;
+
+        updateBoardUI();
+    }
+
+    public void getValidMoves(Piece piece) {
+
+        updateBoardUI();
+
+        if (piece == null) {
+            return;
+        }
+
+        ArrayList<Move> validMoves = piece.getValidMoves(pieces);
+
+        BufferedImage img = loadImage("/images/LightGreenPicture.png");
+        ImageIcon icon = new ImageIcon(img);
+
+        for (Move move : validMoves) {
+
+            int row = move.getRowNum();
+            int col = move.getColumnNum();
+
+            if (pieces[row][col] != null) {
+                board[row][col].setIcon(overlayDot(pieces[row][col], img));
+            } else {
+                board[row][col].setIcon(icon);
+            }
+        }
+    }
+
+    public boolean isKingInCheck(Piece king) {
+
+        int xPos = king.getRowNum();
+        int yPos = king.getColumnNum();
+
+        boolean opponentColour = !king.isWhite();
+
+        for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 8; col++) {
+
+                if (row == xPos && col == yPos) {
+                    continue;
+                }
+
+                if (pieces[row][col] != null
+                        && pieces[row][col].isWhite() == opponentColour) {
+
+                    ArrayList<Move> validMoves = new ArrayList<>();
+
+                    for (int i = 0; i < validMoves.size(); i++) {
+                        if (validMoves.get(i).getRowNum() == xPos
+                                && validMoves.get(i).getColumnNum() == yPos) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     private void startGame() {
@@ -130,30 +170,30 @@ public class GameWindow extends javax.swing.JFrame {
     }
 
     private Piece[][] loadPieces() {
-        //pawns        
+
         for (int i = 0; i < 8; i++) {
             pieces[1][i] = new Pawn(1, i, loadImage("/images/White_Pawn.png"), true);
             pieces[6][i] = new Pawn(6, i, loadImage("/images/Black_Pawn.png"), false);
         }
-        //rooks
+
         pieces[0][0] = new Rook(0, 0, loadImage("/images/White_Rook.png"), true);
         pieces[0][7] = new Rook(0, 7, loadImage("/images/White_Rook.png"), true);
         pieces[7][0] = new Rook(7, 0, loadImage("/images/Black_Rook.png"), false);
         pieces[7][7] = new Rook(7, 7, loadImage("/images/Black_Rook.png"), false);
-        //knights
+
         pieces[0][1] = new Knight(0, 1, loadImage("/images/White_Knight.png"), true);
         pieces[0][6] = new Knight(0, 6, loadImage("/images/White_Knight.png"), true);
         pieces[7][1] = new Knight(7, 1, loadImage("/images/Black_Knight.png"), false);
         pieces[7][6] = new Knight(7, 6, loadImage("/images/Black_Knight.png"), false);
-        //bishops
+
         pieces[0][2] = new Bishop(0, 2, loadImage("/images/White_Bishop.png"), true);
         pieces[0][5] = new Bishop(0, 5, loadImage("/images/White_Bishop.png"), true);
         pieces[7][2] = new Bishop(7, 2, loadImage("/images/Black_Bishop.png"), false);
         pieces[7][5] = new Bishop(7, 5, loadImage("/images/Black_Bishop.png"), false);
-        //queens
+
         pieces[0][3] = new Queen(0, 3, loadImage("/images/White_Queen.png"), true);
         pieces[7][3] = new Queen(7, 3, loadImage("/images/Black_Queen.png"), false);
-        //kings
+
         pieces[0][4] = new King(0, 4, loadImage("/images/White_King.png"), true, false, false);
         pieces[7][4] = new King(7, 4, loadImage("/images/Black_King.png"), false, false, false);
 
@@ -173,27 +213,26 @@ public class GameWindow extends javax.swing.JFrame {
         };
     }
 
-    //needs to be finished later
-    private BufferedImage loadImage(String filePath) {
-        try {
-            return fileImporter.loadImage(filePath);
-        } catch (IOException ex) {
-            Logger.getLogger(GameWindow.class.getName()).log(Level.SEVERE, "Failed to load image: " + filePath, ex);
-            return null;
-        }
+    public void MoveJFrame() {
+        this.setUndecorated(true);
+        MainWindow.FrameDragListener frameDragListener = new MainWindow.FrameDragListener(this);
+        this.addMouseListener(frameDragListener);
+        this.addMouseMotionListener(frameDragListener);
+        this.pack();
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
 
     private void updateBoardUI() {
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
+
                 Piece piece = pieces[row][col];
 
                 if (piece != null) {
-                    java.awt.image.BufferedImage img = piece.getSprite();
-
+                    BufferedImage img = piece.getSprite();
                     if (img != null) {
-                        ImageIcon icon = new ImageIcon(img);
-                        board[row][col].setIcon(icon);
+                        board[row][col].setIcon(new ImageIcon(img));
                     } else {
                         setTransparentIcon(board[row][col]);
                     }
@@ -201,20 +240,50 @@ public class GameWindow extends javax.swing.JFrame {
                     setTransparentIcon(board[row][col]);
                 }
 
-                // Refresh the component UI
                 board[row][col].revalidate();
                 board[row][col].repaint();
             }
         }
     }
 
+    private ImageIcon overlayDot(Piece piece, BufferedImage dot) {
+
+        if (piece == null) {
+            return new ImageIcon(dot);
+        }
+
+        BufferedImage base = piece.getSprite();
+
+        BufferedImage combined = new BufferedImage(
+                base.getWidth(),
+                base.getHeight(),
+                BufferedImage.TYPE_INT_ARGB);
+
+        java.awt.Graphics g = combined.getGraphics();
+        g.drawImage(base, 0, 0, null);
+        g.drawImage(dot, 0, 0, null);
+        g.dispose();
+
+        return new ImageIcon(combined);
+    }
+
     private void setTransparentIcon(JLabel label) {
-        java.awt.image.BufferedImage transparentImg = loadImage("/images/Transparent_Background.png");
-        if (transparentImg != null) {
-            label.setIcon(new ImageIcon(transparentImg));
+        BufferedImage img = loadImage("/images/Transparent_Background.png");
+
+        if (img != null) {
+            label.setIcon(new ImageIcon(img));
         } else {
-            // Absolute fallback if even the transparent resource file is missing
             label.setIcon(null);
+        }
+    }
+
+    private BufferedImage loadImage(String filePath) {
+        try {
+            return fileImporter.loadImage(filePath);
+        } catch (IOException ex) {
+            Logger.getLogger(GameWindow.class.getName())
+                    .log(Level.SEVERE, "Failed to load image: " + filePath, ex);
+            return null;
         }
     }
 
@@ -1947,6 +2016,11 @@ public class GameWindow extends javax.swing.JFrame {
         B8.setBackground(new java.awt.Color(153, 102, 0));
 
         B8Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Transparent_Background.png"))); // NOI18N
+        B8Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                B8LabelMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout B8Layout = new javax.swing.GroupLayout(B8);
         B8.setLayout(B8Layout);
@@ -2032,12 +2106,13 @@ public class GameWindow extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel3)
-                .addGap(0, 990, Short.MAX_VALUE))
+                .addContainerGap(984, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3)
+            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -2278,323 +2353,261 @@ public class GameWindow extends javax.swing.JFrame {
 
 
     private void B8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B8LabelMousePressed
-        Piece pieceAtIndex = pieces[7][1];
-        getValidMoves(pieceAtIndex);
+        handleClick(7, 1);
     }//GEN-LAST:event_B8LabelMousePressed
 
     private void D8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D8LabelMousePressed
-        Piece pieceAtIndex = pieces[7][3];
-        getValidMoves(pieceAtIndex);
+        handleClick(7, 3);
     }//GEN-LAST:event_D8LabelMousePressed
 
     private void E8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E8LabelMousePressed
-        Piece pieceAtIndex = pieces[7][4];
-        getValidMoves(pieceAtIndex);
+        handleClick(7, 4);
     }//GEN-LAST:event_E8LabelMousePressed
 
     private void F8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F8LabelMousePressed
-        Piece pieceAtIndex = pieces[7][5];
-        getValidMoves(pieceAtIndex);
+        handleClick(7, 5);
     }//GEN-LAST:event_F8LabelMousePressed
 
     private void G8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G8LabelMousePressed
-        Piece pieceAtIndex = pieces[7][6];
-        getValidMoves(pieceAtIndex);
+        handleClick(7, 6);
     }//GEN-LAST:event_G8LabelMousePressed
 
     private void H8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H8LabelMousePressed
-        Piece pieceAtIndex = pieces[7][7];
-        getValidMoves(pieceAtIndex);
+        handleClick(7, 7);
     }//GEN-LAST:event_H8LabelMousePressed
 
     private void A7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A7LabelMousePressed
-        Piece pieceAtIndex = pieces[6][0];
-        getValidMoves(pieceAtIndex);
+        handleClick(6, 0);
     }//GEN-LAST:event_A7LabelMousePressed
 
     private void C7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C7LabelMousePressed
-        Piece pieceAtIndex = pieces[6][2];
-        getValidMoves(pieceAtIndex);
+        handleClick(6, 2);
     }//GEN-LAST:event_C7LabelMousePressed
 
     private void H3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H3LabelMousePressed
-        Piece pieceAtIndex = pieces[2][7];
-        getValidMoves(pieceAtIndex);
+        handleClick(2, 7);
     }//GEN-LAST:event_H3LabelMousePressed
 
     private void G4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G4LabelMousePressed
-        Piece pieceAtIndex = pieces[3][7];
-        getValidMoves(pieceAtIndex);
+        handleClick(3, 6);
     }//GEN-LAST:event_G4LabelMousePressed
 
     private void C2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C2LabelMousePressed
-        Piece pieceAtIndex = pieces[1][2];
-        getValidMoves(pieceAtIndex);
+        handleClick(1, 2);
     }//GEN-LAST:event_C2LabelMousePressed
 
     private void A4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A4LabelMousePressed
-        Piece pieceAtIndex = pieces[3][0];
-        getValidMoves(pieceAtIndex);
+        handleClick(3, 0);
     }//GEN-LAST:event_A4LabelMousePressed
 
     private void D2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D2LabelMousePressed
-        Piece pieceAtIndex = pieces[1][3];
-        getValidMoves(pieceAtIndex);
+        handleClick(1, 3);
     }//GEN-LAST:event_D2LabelMousePressed
 
     private void B5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B5LabelMousePressed
-        Piece pieceAtIndex = pieces[4][1];
-        getValidMoves(pieceAtIndex);
+        handleClick(4, 1);
     }//GEN-LAST:event_B5LabelMousePressed
 
     private void D7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D7LabelMousePressed
-        Piece pieceAtIndex = pieces[6][3];
-        getValidMoves(pieceAtIndex);
+        handleClick(6, 3);
     }//GEN-LAST:event_D7LabelMousePressed
 
     private void E2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E2LabelMousePressed
-        Piece pieceAtIndex = pieces[1][4];
-        getValidMoves(pieceAtIndex);
+        handleClick(1, 4);
     }//GEN-LAST:event_E2LabelMousePressed
 
     private void A5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A5LabelMousePressed
-        Piece pieceAtIndex = pieces[4][0];
-        getValidMoves(pieceAtIndex);
+        handleClick(4, 0);
     }//GEN-LAST:event_A5LabelMousePressed
 
     private void F2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F2LabelMousePressed
-        Piece pieceAtIndex = pieces[1][5];
-        getValidMoves(pieceAtIndex);
+        handleClick(1, 5);
     }//GEN-LAST:event_F2LabelMousePressed
 
     private void E7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E7LabelMousePressed
-        Piece pieceAtIndex = pieces[6][4];
-        getValidMoves(pieceAtIndex);
+        handleClick(6, 4);
     }//GEN-LAST:event_E7LabelMousePressed
 
     private void G2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G2LabelMousePressed
-        Piece pieceAtIndex = pieces[1][6];
-        getValidMoves(pieceAtIndex);
+        handleClick(1, 6);
     }//GEN-LAST:event_G2LabelMousePressed
 
     private void F7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F7LabelMousePressed
-        Piece pieceAtIndex = pieces[6][5];
-        getValidMoves(pieceAtIndex);
+        handleClick(6, 5);
     }//GEN-LAST:event_F7LabelMousePressed
 
     private void G7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G7LabelMousePressed
-        Piece pieceAtIndex = pieces[6][6];
-        getValidMoves(pieceAtIndex);
+        handleClick(6, 6);
     }//GEN-LAST:event_G7LabelMousePressed
 
     private void C5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C5LabelMousePressed
-        Piece pieceAtIndex = pieces[4][2];
-        getValidMoves(pieceAtIndex);
+        handleClick(4, 2);
     }//GEN-LAST:event_C5LabelMousePressed
 
     private void D5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D5LabelMousePressed
-        Piece pieceAtIndex = pieces[4][3];
-        getValidMoves(pieceAtIndex);
+        handleClick(4, 3);
     }//GEN-LAST:event_D5LabelMousePressed
 
     private void H2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H2LabelMousePressed
-        Piece pieceAtIndex = pieces[1][7];
-        getValidMoves(pieceAtIndex);
+        handleClick(1, 7);
     }//GEN-LAST:event_H2LabelMousePressed
 
     private void H6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H6LabelMousePressed
-        Piece pieceAtIndex = pieces[5][7];
-        getValidMoves(pieceAtIndex);
+        handleClick(5, 7);
     }//GEN-LAST:event_H6LabelMousePressed
 
     private void B2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B2LabelMousePressed
-        Piece pieceAtIndex = pieces[1][1];
-        getValidMoves(pieceAtIndex);
+        handleClick(1, 1);
     }//GEN-LAST:event_B2LabelMousePressed
 
     private void C6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C6LabelMousePressed
-        Piece pieceAtIndex = pieces[5][2];
-        getValidMoves(pieceAtIndex);
+        handleClick(5, 2);
     }//GEN-LAST:event_C6LabelMousePressed
 
     private void H7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H7LabelMousePressed
-        Piece pieceAtIndex = pieces[6][7];
-        getValidMoves(pieceAtIndex);
+        handleClick(6, 7);
     }//GEN-LAST:event_H7LabelMousePressed
 
     private void B3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B3LabelMousePressed
-        Piece pieceAtIndex = pieces[2][2];
-        getValidMoves(pieceAtIndex);
+        handleClick(2, 1);
     }//GEN-LAST:event_B3LabelMousePressed
 
     private void E5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E5LabelMousePressed
-        Piece pieceAtIndex = pieces[4][4];
-        getValidMoves(pieceAtIndex);
+        handleClick(4, 4);
     }//GEN-LAST:event_E5LabelMousePressed
 
     private void A8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A8LabelMousePressed
-        Piece pieceAtIndex = pieces[7][0];
-        getValidMoves(pieceAtIndex);
+        handleClick(7, 0);
     }//GEN-LAST:event_A8LabelMousePressed
 
     private void A3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A3LabelMousePressed
-        Piece pieceAtIndex = pieces[2][0];
-        getValidMoves(pieceAtIndex);
+        handleClick(2, 0);
     }//GEN-LAST:event_A3LabelMousePressed
 
     private void C3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C3LabelMousePressed
-
+        handleClick(2, 2);
     }//GEN-LAST:event_C3LabelMousePressed
 
     private void B1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B1LabelMousePressed
-        Piece pieceAtIndex = pieces[0][1];
-        getValidMoves(pieceAtIndex);
+        handleClick(0, 1);
     }//GEN-LAST:event_B1LabelMousePressed
 
     private void B6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B6LabelMousePressed
-        Piece pieceAtIndex = pieces[5][1];
-        getValidMoves(pieceAtIndex);
+        handleClick(5, 1);
     }//GEN-LAST:event_B6LabelMousePressed
 
     private void C8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C8LabelMousePressed
-        Piece pieceAtIndex = pieces[7][2];
-        getValidMoves(pieceAtIndex);
+        handleClick(7, 2);
     }//GEN-LAST:event_C8LabelMousePressed
 
     private void D6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D6LabelMousePressed
-        Piece pieceAtIndex = pieces[5][3];
-        getValidMoves(pieceAtIndex);
+        handleClick(5, 3);
     }//GEN-LAST:event_D6LabelMousePressed
 
     private void C1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C1LabelMousePressed
-        Piece pieceAtIndex = pieces[0][2];
-        getValidMoves(pieceAtIndex);
+        handleClick(0, 2);
     }//GEN-LAST:event_C1LabelMousePressed
 
     private void D3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D3LabelMousePressed
-        Piece pieceAtIndex = pieces[2][3];
-        getValidMoves(pieceAtIndex);
+        handleClick(2, 3);
     }//GEN-LAST:event_D3LabelMousePressed
 
     private void F5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F5LabelMousePressed
-        Piece pieceAtIndex = pieces[4][5];
-        getValidMoves(pieceAtIndex);
+        handleClick(4, 5);
     }//GEN-LAST:event_F5LabelMousePressed
 
     private void D1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D1LabelMousePressed
-        Piece pieceAtIndex = pieces[0][3];
-        getValidMoves(pieceAtIndex);
+        handleClick(0, 3);
     }//GEN-LAST:event_D1LabelMousePressed
 
     private void H4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H4LabelMousePressed
-        Piece pieceAtIndex = pieces[3][7];
-        getValidMoves(pieceAtIndex);
+        handleClick(3, 7);
     }//GEN-LAST:event_H4LabelMousePressed
 
     private void E6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E6LabelMousePressed
-        Piece pieceAtIndex = pieces[5][4];
-        getValidMoves(pieceAtIndex);
+        handleClick(5, 4);
     }//GEN-LAST:event_E6LabelMousePressed
 
     private void C4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C4LabelMousePressed
-        Piece pieceAtIndex = pieces[3][2];
-        getValidMoves(pieceAtIndex);
+        handleClick(3, 2);
     }//GEN-LAST:event_C4LabelMousePressed
 
     private void G5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G5LabelMousePressed
-        Piece pieceAtIndex = pieces[4][6];
-        getValidMoves(pieceAtIndex);
+        handleClick(4, 6);
     }//GEN-LAST:event_G5LabelMousePressed
 
     private void E3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E3LabelMousePressed
-        Piece pieceAtIndex = pieces[2][4];
-        getValidMoves(pieceAtIndex);
+        handleClick(2, 4);
     }//GEN-LAST:event_E3LabelMousePressed
 
     private void B4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B4LabelMousePressed
-        Piece pieceAtIndex = pieces[3][1];
-        getValidMoves(pieceAtIndex);
+        handleClick(3, 1);
     }//GEN-LAST:event_B4LabelMousePressed
 
     private void F6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F6LabelMousePressed
-        Piece pieceAtIndex = pieces[5][5];
-        getValidMoves(pieceAtIndex);
+        handleClick(5, 5);
     }//GEN-LAST:event_F6LabelMousePressed
 
     private void H5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H5LabelMousePressed
-        Piece pieceAtIndex = pieces[4][7];
-        getValidMoves(pieceAtIndex);
+        handleClick(4, 7);
     }//GEN-LAST:event_H5LabelMousePressed
 
     private void A1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A1LabelMousePressed
-        Piece pieceAtIndex = pieces[0][0];
-        getValidMoves(pieceAtIndex);
+        handleClick(0, 0);
     }//GEN-LAST:event_A1LabelMousePressed
 
     private void D4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D4LabelMousePressed
-        Piece pieceAtIndex = pieces[3][3];
-        getValidMoves(pieceAtIndex);
+        handleClick(3, 3);
     }//GEN-LAST:event_D4LabelMousePressed
 
     private void G6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G6LabelMousePressed
-        Piece pieceAtIndex = pieces[5][6];
-        getValidMoves(pieceAtIndex);
+        handleClick(5, 6);
     }//GEN-LAST:event_G6LabelMousePressed
 
     private void F3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F3LabelMousePressed
-        Piece pieceAtIndex = pieces[2][5];
-        getValidMoves(pieceAtIndex);
+        handleClick(2, 5);
     }//GEN-LAST:event_F3LabelMousePressed
 
     private void A6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A6LabelMousePressed
-        Piece pieceAtIndex = pieces[5][0];
-        getValidMoves(pieceAtIndex);
+        handleClick(5, 0);
     }//GEN-LAST:event_A6LabelMousePressed
 
     private void E1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E1LabelMousePressed
-        Piece pieceAtIndex = pieces[0][4];
-        getValidMoves(pieceAtIndex);
+        handleClick(0, 4);
     }//GEN-LAST:event_E1LabelMousePressed
 
     private void E4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E4LabelMousePressed
-        Piece pieceAtIndex = pieces[3][4];
-        getValidMoves(pieceAtIndex);
+        handleClick(3, 4);
     }//GEN-LAST:event_E4LabelMousePressed
 
     private void F1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F1LabelMousePressed
-        Piece pieceAtIndex = pieces[0][5];
-        getValidMoves(pieceAtIndex);
+        handleClick(0, 5);
     }//GEN-LAST:event_F1LabelMousePressed
 
     private void G3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G3LabelMousePressed
-        Piece pieceAtIndex = pieces[2][6];
-        getValidMoves(pieceAtIndex);
+        handleClick(2, 6);
     }//GEN-LAST:event_G3LabelMousePressed
 
     private void G1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G1LabelMousePressed
-        Piece pieceAtIndex = pieces[0][6];
-        getValidMoves(pieceAtIndex);
+        handleClick(0, 6);
     }//GEN-LAST:event_G1LabelMousePressed
 
     private void F4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F4LabelMousePressed
-        Piece pieceAtIndex = pieces[3][5];
-        getValidMoves(pieceAtIndex);
+        handleClick(3, 5);
     }//GEN-LAST:event_F4LabelMousePressed
 
     private void H1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H1LabelMousePressed
-        Piece pieceAtIndex = pieces[0][7];
-        getValidMoves(pieceAtIndex);
+        handleClick(0, 7);
     }//GEN-LAST:event_H1LabelMousePressed
 
     private void A2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A2LabelMousePressed
-        Piece pieceAtIndex = pieces[1][0];
-        getValidMoves(pieceAtIndex);
+        handleClick(1, 0);
     }//GEN-LAST:event_A2LabelMousePressed
 
     private void B7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B7LabelMousePressed
-        Piece pieceAtIndex = pieces[6][1];
-        getValidMoves(pieceAtIndex);
+        handleClick(6, 1);
     }//GEN-LAST:event_B7LabelMousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel A1;
