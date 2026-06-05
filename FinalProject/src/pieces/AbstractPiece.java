@@ -9,8 +9,8 @@ import javax.swing.ImageIcon;
 abstract public class AbstractPiece implements Piece {
 
     protected ArrayList<Move> validMoves;
-    protected int xPos;
-    protected int yPos;
+    protected int rowNum;
+    protected int columnNum;
     protected BufferedImage sprite;
     protected boolean isWhite;
     protected static int numPieces;
@@ -19,19 +19,19 @@ abstract public class AbstractPiece implements Piece {
     public AbstractPiece() {
     }
 
-    public AbstractPiece(int xPos, int yPos, BufferedImage sprite, boolean isWhite) {
-        this.xPos = xPos;
-        this.yPos = yPos;
+    public AbstractPiece(int rowNum, int columnNum, BufferedImage sprite, boolean isWhite) {
+        this.rowNum = rowNum;
+        this.columnNum = columnNum;
         this.sprite = sprite;
         this.isWhite = isWhite;
     }
 
-    public int getXPos() {
-        return xPos;
+    public int getRowNum() {
+        return rowNum;
     }
 
-    public int getYPos() {
-        return yPos;
+    public int getColumnNum() {
+        return columnNum;
     }
 
     public BufferedImage getSprite() {
@@ -53,12 +53,12 @@ abstract public class AbstractPiece implements Piece {
         return value;
     }
 
-    public void setXPos(int xPos) {
-        this.xPos = xPos;
+    public void setRowNum(int rowNum) {
+        this.rowNum = rowNum;
     }
 
-    public void setYPos(int yPos) {
-        this.yPos = yPos;
+    public void setColumnNum(int columnNum) {
+        this.columnNum = columnNum;
     }
 
     public void setSprite(BufferedImage sprite) {
@@ -83,29 +83,29 @@ abstract public class AbstractPiece implements Piece {
 
     abstract public ArrayList<Move> getValidMoves(Piece pieces[][]);
 
-    public void searchDirection(ArrayList<Move> moves, Piece[][] pieces, int currentX, int currentY, int dx, int dy) {
-        if (!isInsideBoard(currentX, currentY)) {
+    public void searchDirection(ArrayList<Move> moves, Piece[][] pieces, int currentRow, int currentCol, int dRow, int dCol) {
+        if (!isInsideBoard(currentRow, currentCol)) {
             return;
         }
 
-        Piece piece = getPieceAt(currentX, currentY, pieces);
+        Piece piece = getPieceAt(currentRow, currentCol, pieces);
 
         if (piece == null) {
-            moves.add(new Move(currentX, currentY));
-            searchDirection(moves, pieces, currentX + dx, currentY + dy, dx, dy);
+            moves.add(new Move(currentRow, currentCol));
+            searchDirection(moves, pieces, currentRow + dRow, currentCol + dCol, dRow, dCol);
         } else {
             if (piece.isWhite() != this.isWhite()) {
-                moves.add(new Move(currentX, currentY));
+                moves.add(new Move(currentRow, currentCol));
             }
         }
     }
 
-    public boolean isInsideBoard(int x, int y) {
-        return (x >= 0 && x <= 7 && y >= 0 && y <= 7);
+    public boolean isInsideBoard(int row, int col) {
+        return (row >= 0 && row <= 7 && col >= 0 && col <= 7);
     }
 
-    public Piece getPieceAt(int x, int y, Piece[][] pieces) {
-        return pieces[x][y];
+    public Piece getPieceAt(int row, int col, Piece[][] pieces) {
+        return pieces[row][col];
     }
 
     public static int getNumPieces() {
@@ -134,8 +134,8 @@ abstract public class AbstractPiece implements Piece {
 
     public String toString() {
         return ("Piece Information"
-                + "\nX Position: " + xPos
-                + "\nX Position: " + xPos
+                + "\nRow Position: " + rowNum
+                + "\nRow Position: " + rowNum
                 + "\nTeam: " + this.getTeam()
                 + "\nNumber of Valid Moves: " + validMoves
                 + "\nValue: " + value);

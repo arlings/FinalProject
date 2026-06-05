@@ -14,39 +14,41 @@ import java.util.ArrayList;
 public class Pawn extends AbstractPiece {
 
     private static int numPawns = 0;
-
+    private boolean firstMove = true;
     public Pawn() {
     }
 
-    public Pawn(int xPos, int yPos, BufferedImage sprite, boolean isWhite) {
-        super(xPos, yPos, sprite, isWhite);
+    public Pawn(int rowNum, int columnNum, BufferedImage sprite, boolean isWhite) {
+        super(rowNum, columnNum, sprite, isWhite);
     }
 
     @Override
     public ArrayList<Move> getValidMoves(Piece[][] pieces) {
         ArrayList<Move> moves = new ArrayList<>();
 
-        // Determine direction: White moves up the board rows (+1 or -1 depending on your board setup)
-        // Assuming row + 1 is forward for White, row - 1 is forward for Black
+        
         int direction = this.isWhite() ? 1 : -1;
 
-        // Check one square directly ahead
-        searchDirection(moves, pieces, xPos + direction, yPos, direction);
-
+        searchDirection(moves, pieces, rowNum + direction, columnNum, direction);
+        if(firstMove){
+            moves.add(new Move(rowNum + direction + 1, columnNum));
+            firstMove = false;
+        }
+        
         return moves;
     }
     
-    public void searchDirection(ArrayList<Move> moves, Piece[][] pieces, int targetX, int targetY, int direction) {
-        if (isInsideBoard(targetX, targetY)) {
-            Piece pieceForward = getPieceAt(targetX, targetY, pieces);
+    public void searchDirection(ArrayList<Move> moves, Piece[][] pieces, int targetRow, int targetCol, int direction) {
+        if (isInsideBoard(targetRow, targetCol)) {
+            Piece pieceForward = getPieceAt(targetRow, targetCol, pieces);
             if (pieceForward == null) {
-                moves.add(new Move(targetX, targetY));
+                moves.add(new Move(targetRow, targetCol));
             }
         }
 
-        int leftCol = yPos - 1;
-        int rightCol = yPos + 1;
-        int diagonalRow = xPos + direction; 
+        int leftCol = columnNum - 1;
+        int rightCol = columnNum + 1;
+        int diagonalRow = rowNum + direction; 
 
         if (isInsideBoard(diagonalRow, leftCol)) {
             Piece targetPiece = getPieceAt(diagonalRow, leftCol, pieces);

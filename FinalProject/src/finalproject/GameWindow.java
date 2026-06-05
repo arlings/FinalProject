@@ -32,12 +32,17 @@ public class GameWindow extends javax.swing.JFrame {
         ArrayList<Move> validMoves = new ArrayList<>();
         validMoves = piece.getValidMoves(pieces);
         
-        
+        int row = piece.getRowNum();
+        int col = piece.getColumnNum();
+        System.out.println("Current Pos: " + row+"\t"+col);
+        for(Move move: validMoves){
+            System.out.println("Move: " + move.getRowNum() + "\t" + move.getColumnNum());
+        }
     }
     
     public boolean isKingInCheck(Piece king){
-        int xPos=king.getXPos();
-        int yPos=king.getYPos();
+        int xPos=king.getRowNum();
+        int yPos=king.getColumnNum();
         boolean oponentsColour;
         if(king.isWhite()){
             oponentsColour=false;
@@ -49,9 +54,9 @@ public class GameWindow extends javax.swing.JFrame {
                 if(row == xPos && col == yPos){
                     //skip if it is the king's space
                 }else if(pieces[row][col].isWhite() == oponentsColour){
-                    ArrayList<Move> validMoves=new ArrayList<>();
+                    ArrayList<Move> validMoves =new ArrayList<>();
                     for(int i=0; i<validMoves.size(); i++){
-                        if (validMoves.get(i).getXPos() == xPos&& validMoves.get(i).getYPos() == yPos){
+                        if (validMoves.get(i).getRowNum() == xPos&& validMoves.get(i).getColumnNum() == yPos){
                             return true;//is in check
                         }
                     }

@@ -20,8 +20,8 @@ public class Queen extends AbstractPiece {
         numQueens++;
     }
 
-    public Queen(int xPos, int yPos, BufferedImage sprite, boolean isWhite) {
-        super(xPos, yPos, sprite, isWhite);
+    public Queen(int rowNum, int columnNum, BufferedImage sprite, boolean isWhite) {
+        super(rowNum, columnNum, sprite, isWhite);
         numQueens++;
     }
 
@@ -30,15 +30,15 @@ public class Queen extends AbstractPiece {
     public ArrayList<Move> getValidMoves(Piece pieces[][]) {
         ArrayList<Move> moves = new ArrayList();
 
-        searchDirection(moves, pieces, xPos + 1, yPos, 1, 0);
-        searchDirection(moves, pieces, xPos - 1, yPos, -1, 0);
-        searchDirection(moves, pieces, xPos, yPos + 1, 0, 1);
-        searchDirection(moves, pieces, xPos, yPos - 1, 0, -1);
+        searchDirection(moves, pieces, rowNum + 1, columnNum, 1, 0);
+        searchDirection(moves, pieces, rowNum - 1, columnNum, -1, 0);
+        searchDirection(moves, pieces, rowNum, columnNum + 1, 0, 1);
+        searchDirection(moves, pieces, rowNum, columnNum - 1, 0, -1);
 
-        searchDirection(moves, pieces, xPos + 1, yPos + 1, 1, 1);
-        searchDirection(moves, pieces, xPos - 1, yPos + 1, -1, 1);
-        searchDirection(moves, pieces, xPos + 1, yPos - 1, 1, -1);
-        searchDirection(moves, pieces, xPos - 1, yPos - 1, -1, -1);
+        searchDirection(moves, pieces, rowNum + 1, columnNum + 1, 1, 1);
+        searchDirection(moves, pieces, rowNum - 1, columnNum + 1, -1, 1);
+        searchDirection(moves, pieces, rowNum + 1, columnNum - 1, 1, -1);
+        searchDirection(moves, pieces, rowNum - 1, columnNum - 1, -1, -1);
 
         return moves;
     }
