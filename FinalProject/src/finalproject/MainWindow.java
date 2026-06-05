@@ -331,7 +331,6 @@ public class MainWindow extends javax.swing.JFrame {
         Scanner s = new Scanner("");
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
-            System.out.println("Selected file: " + selectedFile.getAbsolutePath());
             try (InputStream is = new FileInputStream(selectedFile)) {
                 
             } catch (IOException e) {
