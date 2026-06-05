@@ -37,7 +37,6 @@ public class MainWindow extends javax.swing.JFrame {
     public MainWindow() {
         MoveJFrame();
         initComponents();
-        
     }
     
     public static class FrameDragListener extends MouseAdapter {
