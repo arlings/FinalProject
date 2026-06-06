@@ -25,10 +25,12 @@ public class GameWindow extends javax.swing.JFrame {
     FileImporter fileImporter = new FileImporter();
 
     private Piece selectedPiece = null;
-    private Move selectedPosition = null;
+    private Move selectedPos = null;
 
     public JLabel[][] board = new JLabel[8][8];
     public Piece[][] pieces = new Piece[8][8];
+
+    private boolean whiteTurn = true;
 
     public GameWindow(MainWindow m, String user1, String user2) {
         startGame();
@@ -53,30 +55,39 @@ public class GameWindow extends javax.swing.JFrame {
 
     private void handleClick(int row, int col) {
         if (selectedPiece == null) {
-            if (pieces[row][col] != null) {
+            if (pieces[row][col] != null && pieces[row][col].isWhite() == whiteTurn) {
                 selectedPiece = pieces[row][col];
-                selectedPosition = new Move(row, col);
+                selectedPos = new Move(row, col);
                 getValidMoves(selectedPiece);
             }
             return;
         }
 
-        if (pieces[row][col] != null
-                && pieces[row][col].isWhite() == selectedPiece.isWhite()) {
+        if (isCurrentPlayerPiece(row, col)) {
 
             selectedPiece = pieces[row][col];
-            selectedPosition = new Move(row, col);
+            selectedPos = new Move(row, col);
             getValidMoves(selectedPiece);
             return;
         }
 
-        ArrayList<Move> validMoves = selectedPiece.getValidMoves(pieces);
+        ArrayList<Move> rawMoves = selectedPiece.getValidMoves(pieces);
+        ArrayList<Move> validMoves = new ArrayList<>();
+        
+        //raw move code is AI
+        for (Move move : rawMoves) {
+            if (isMoveLegal(selectedPos, move, whiteTurn)) {
+                validMoves.add(move);
+            }
+        }
 
         for (Move move : validMoves) {
             if (move.getRowNum() == row && move.getColumnNum() == col) {
-                movePiece(selectedPosition, move);
-                selectedPiece = null;
-                selectedPosition = null;
+                if (isMoveLegal(selectedPos, move, whiteTurn)) {
+                    movePiece(selectedPos, move);
+                    selectedPiece = null;
+                    selectedPos = null;
+                }
                 return;
             }
         }
@@ -102,6 +113,18 @@ public class GameWindow extends javax.swing.JFrame {
         pieces[orgRow][orgCol] = null;
 
         updateBoardUI();
+
+        Piece whiteKing = findKing(pieces, true);
+        Piece blackKing = findKing(pieces, false);
+
+        if (whiteKing != null && isKingInCheck(whiteKing, pieces)) {
+            highlightCheck(whiteKing);
+        }
+
+        if (blackKing != null && isKingInCheck(blackKing, pieces)) {
+            highlightCheck(blackKing);
+        }
+        whiteTurn = !whiteTurn;
     }
 
     public void getValidMoves(Piece piece) {
@@ -123,35 +146,25 @@ public class GameWindow extends javax.swing.JFrame {
             int col = move.getColumnNum();
 
             if (pieces[row][col] != null) {
-                board[row][col].setIcon(overlayDot(pieces[row][col], img));
+                board[row][col].setIcon(overlayImages(pieces[row][col], img));
             } else {
                 board[row][col].setIcon(icon);
             }
         }
     }
 
-    public boolean isKingInCheck(Piece king) {
-
-        int xPos = king.getRowNum();
-        int yPos = king.getColumnNum();
-
+    private boolean isKingInCheck(Piece king, Piece pieces[][]) {
+        int kingRow = king.getRowNum();
+        int kingCol = king.getColumnNum();
         boolean opponentColour = !king.isWhite();
 
-        for (int row = 0; row < 8; row++) {
-            for (int col = 0; col < 8; col++) {
-
-                if (row == xPos && col == yPos) {
-                    continue;
-                }
-
-                if (pieces[row][col] != null
-                        && pieces[row][col].isWhite() == opponentColour) {
-
-                    ArrayList<Move> validMoves = new ArrayList<>();
-
-                    for (int i = 0; i < validMoves.size(); i++) {
-                        if (validMoves.get(i).getRowNum() == xPos
-                                && validMoves.get(i).getColumnNum() == yPos) {
+        for (int r = 0; r < 8; r++) {
+            for (int c = 0; c < 8; c++) {
+                if (pieces[r][c] != null && pieces[r][c].isWhite() == opponentColour) {
+                    ArrayList<Move> validMoves = pieces[r][c].getValidMoves(pieces);
+                    for (Move move : validMoves) {
+                        if (move.getRowNum() == kingRow && move.getColumnNum() == kingCol) {
+                            highlightCheck(king);
                             return true;
                         }
                     }
@@ -159,6 +172,40 @@ public class GameWindow extends javax.swing.JFrame {
             }
         }
         return false;
+    }
+
+    private Piece findKing(Piece pieces[][], boolean isWhite) {
+        for (int r = 0; r < pieces.length; r++) {
+            for (int c = 0; c < pieces[0].length; c++) {
+                if (pieces[r][c] != null && pieces[r][c] instanceof King
+                        && pieces[r][c].isWhite() == isWhite) {
+                    return pieces[r][c];
+                }
+            }
+        }
+        return null;
+    }
+
+    private boolean isMoveLegal(Move orgPos, Move futurePos, boolean isWhite) {
+        Piece temp[][] = copyBoard(pieces);
+        Piece testPiece = temp[orgPos.getRowNum()][orgPos.getColumnNum()];
+
+        temp[futurePos.getRowNum()][futurePos.getColumnNum()] = testPiece;
+        temp[orgPos.getRowNum()][orgPos.getColumnNum()] = null;
+
+        Piece king = findKing(temp, isWhite);
+
+        return !isKingInCheck(king, temp);
+    }
+
+    private Piece[][] copyBoard(Piece[][] original) {
+        Piece[][] copy = new Piece[8][8];
+        for (int r = 0; r < copy.length; r++) {
+            for (int c = 0; c < copy[0].length; c++) {
+                copy[r][c] = original[r][c];
+            }
+        }
+        return copy;
     }
 
     private void startGame() {
@@ -223,6 +270,13 @@ public class GameWindow extends javax.swing.JFrame {
         this.setVisible(true);
     }
 
+    private void highlightCheck(Piece king) {
+        int r = king.getRowNum();
+        int c = king.getColumnNum();
+        BufferedImage redOverlay = loadImage("/images/RedBackground.png");
+        board[r][c].setIcon(overlayImages(king, redOverlay));
+    }
+
     private void updateBoardUI() {
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
@@ -246,7 +300,7 @@ public class GameWindow extends javax.swing.JFrame {
         }
     }
 
-    private ImageIcon overlayDot(Piece piece, BufferedImage dot) {
+    private ImageIcon overlayImages(Piece piece, BufferedImage dot) {
 
         if (piece == null) {
             return new ImageIcon(dot);
@@ -285,6 +339,11 @@ public class GameWindow extends javax.swing.JFrame {
                     .log(Level.SEVERE, "Failed to load image: " + filePath, ex);
             return null;
         }
+    }
+
+    private boolean isCurrentPlayerPiece(int row, int col) {
+        Piece p = pieces[row][col];
+        return p != null && p.isWhite() == whiteTurn;
     }
 
     @SuppressWarnings("unchecked")
