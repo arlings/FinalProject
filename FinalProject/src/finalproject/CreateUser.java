@@ -78,11 +78,6 @@ public class CreateUser extends javax.swing.JFrame {
             }
         });
 
-        userNameField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                userNameFieldActionPerformed(evt);
-            }
-        });
         userNameField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 userNameFieldKeyTyped(evt);
@@ -158,7 +153,7 @@ public class CreateUser extends javax.swing.JFrame {
     private void goBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBtnActionPerformed
         if (userNameField.getText().contains(",") || userNameField.getText().contains(":")) {
             userNameField.setText("");
-            warningWindow = new WarningWindow(this, "Your username cannot conani characters : or ,");
+            warningWindow = new WarningWindow(this, "Your username cannot contain characters : or ,");
         } else {
             boolean done = false;
             boolean hasNextLine = true;
@@ -198,15 +193,10 @@ public class CreateUser extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_goBtnActionPerformed
 
-    private void userNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameFieldActionPerformed
-        
-    }//GEN-LAST:event_userNameFieldActionPerformed
-
     private void userNameFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_userNameFieldKeyTyped
         if (userNameField.getText().length() > 15) {
             userNameField.setText(userNameField.getText().substring(0, 15));
         }
-        
     }//GEN-LAST:event_userNameFieldKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

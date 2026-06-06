@@ -1,5 +1,6 @@
 package finalproject;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Scanner;
@@ -121,11 +122,13 @@ public class EnterUsername extends javax.swing.JFrame {
 
     private void goBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBtnActionPerformed
         try {   
-            InputStream in = EnterUsername.class.getResourceAsStream("Users.txt");
+            FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
             Scanner s = new Scanner(in);
             boolean found = false;
-            while (s.hasNextLine() || found) {
-                if (userNameField.getText().equalsIgnoreCase(s.nextLine().split(",")[0])) {
+            this.topLabel.setText("Enter your username player 1");
+            String[] items = s.nextLine().split(":");
+            for (int i = 0; i < items.length; i++) {
+                if (userNameField.getText().equalsIgnoreCase(items[i].split(",")[0])) {
                     if (userNameField.getText().equalsIgnoreCase(usernames[0])) {
                         warningWindow = new WarningWindow(this, "You cant play yourself! Silly billy");
                         warningWindow.setVisible(true);
@@ -159,7 +162,6 @@ public class EnterUsername extends javax.swing.JFrame {
     }//GEN-LAST:event_goBtnActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-        this.topLabel.setText("Enter your username player 1");
         numOfUsers = 0;
         usernames = null;
         this.dispose();
