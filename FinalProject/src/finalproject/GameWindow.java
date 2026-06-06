@@ -190,12 +190,23 @@ public class GameWindow extends javax.swing.JFrame {
         Piece temp[][] = copyBoard(pieces);
         Piece testPiece = temp[orgPos.getRowNum()][orgPos.getColumnNum()];
 
-        temp[futurePos.getRowNum()][futurePos.getColumnNum()] = testPiece;
+        int targetRow = futurePos.getRowNum();
+        int targetCol = futurePos.getColumnNum();
+        int savedRow = testPiece.getRowNum();
+        int savedCol = testPiece.getColumnNum();
+        
+        temp[targetRow][targetCol] = testPiece;
         temp[orgPos.getRowNum()][orgPos.getColumnNum()] = null;
+        testPiece.setRowNum(targetRow);
+        testPiece.setColumnNum(targetCol);
 
         Piece king = findKing(temp, isWhite);
-
-        return !isKingInCheck(king, temp);
+        boolean inCheck = isKingInCheck(king, temp);
+        
+        testPiece.setRowNum(savedRow);
+        testPiece.setColumnNum(savedCol);
+        
+        return !inCheck;
     }
 
     private Piece[][] copyBoard(Piece[][] original) {
