@@ -106,8 +106,8 @@ public class Pawn extends AbstractPiece {
         this.enPassantEligible = enPassantEligible;
     }
     
+    
 
-    @Override
     public String toString() {
         return ("Piece Type: Pawn"
                 + super.toString());

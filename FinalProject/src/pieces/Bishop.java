@@ -5,7 +5,6 @@
 package pieces;
 
 import java.awt.image.BufferedImage;
-import pieces.Move;
 import java.util.ArrayList;
 
 /**

@@ -134,7 +134,7 @@ abstract public class AbstractPiece implements Piece {
     public String toString() {
         return ("Piece Information"
                 + "\nRow Position: " + rowNum
-                + "\nRow Position: " + rowNum
+                + "\nColumn Position: " + columnNum
                 + "\nTeam: " + this.getTeam()
                 + "\nNumber of Valid Moves: " + validMoves
                 + "\nValue: " + value);
