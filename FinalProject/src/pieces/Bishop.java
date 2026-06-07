@@ -20,7 +20,7 @@ public class Bishop extends AbstractPiece{
     }
 
     public Bishop(int rowNum, int columnNum, BufferedImage sprite, boolean isWhite) {
-        super(rowNum, columnNum, sprite, isWhite);
+        super(rowNum, columnNum, sprite, isWhite, 3);
         numBishop++;
     }
     

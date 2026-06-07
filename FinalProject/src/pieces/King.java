@@ -16,38 +16,57 @@ public class King extends AbstractPiece {
     private static int numKings;
     private boolean inCheck; //add logic later
     private boolean inCheckMate;
+    private boolean hasMoved;
+    
 
     public King() {
-        super();
-        inCheck = false;
-        inCheckMate = false;
+        this(0, 4, null, true, false, false, false);
     }
 
-    public King(int rowNum, int columnNum, BufferedImage sprite, boolean isWhite, boolean inCheck, boolean inCheckMate) {
-        super(rowNum, columnNum, sprite, isWhite);
+    public King(int rowNum, int columnNum, BufferedImage sprite, boolean isWhite, boolean inCheck, boolean inCheckMate, boolean hasMoved) {
+        super(rowNum, columnNum, sprite, isWhite, 0);
         this.inCheck = inCheck;
         this.inCheckMate = inCheckMate;
+        this.hasMoved = hasMoved;
     }
 
     @Override
     public ArrayList<Move> getValidMoves(Piece[][] pieces) {
         ArrayList<Move> moves = new ArrayList<>();
-
         // Straight directions
         searchDirection(moves, pieces, rowNum + 1, columnNum, 1, 0);
         searchDirection(moves, pieces, rowNum - 1, columnNum, -1, 0);
         searchDirection(moves, pieces, rowNum, columnNum + 1, 0, 1);
         searchDirection(moves, pieces, rowNum, columnNum - 1, 0, -1);
-
         // Diagonal directions
         searchDirection(moves, pieces, rowNum + 1, columnNum + 1, 1, 1);
         searchDirection(moves, pieces, rowNum - 1, columnNum + 1, -1, 1);
         searchDirection(moves, pieces, rowNum + 1, columnNum - 1, 1, -1);
         searchDirection(moves, pieces, rowNum - 1, columnNum - 1, -1, -1);
-
+        
+        if (!this.hasMoved) {
+            checkCastling(moves, pieces);
+        }
+        
         return moves;
     }
-
+    
+    private void checkCastling(ArrayList<Move> moves, Piece[][] pieces){
+        Piece kingSidePiece = pieces[this.rowNum][7];
+        if(kingSidePiece instanceof Rook && !((Rook) kingSidePiece).hasMoved()){
+            if(pieces[this.rowNum][5] == null && pieces[this.rowNum][6] == null){
+                moves.add(new Move(this.rowNum, 6));
+            }
+        }
+        
+        Piece queenSidePiece = pieces[this.rowNum][0];
+        if (queenSidePiece instanceof Rook && !((Rook) queenSidePiece).hasMoved()) {
+            if (pieces[this.rowNum][1] == null && pieces[this.rowNum][2] == null && pieces[this.rowNum][3] == null) {
+                moves.add(new Move(this.rowNum, 2)); 
+            }
+        }
+    }
+    
     @Override
     public void searchDirection(ArrayList<Move> moves, Piece[][] pieces, int currentRow, int currentCol, int dRow, int dCol) {
         if (!isInsideBoard(currentRow, currentCol)) {
@@ -77,6 +96,14 @@ public class King extends AbstractPiece {
     public boolean isInCheckMate() {
         inCheckMate = validMoves.isEmpty();
         return inCheckMate;
+    }
+    
+    public boolean hasMoved(){
+        return this.hasMoved;
+    }
+    
+    public void setHasMoved(boolean hasMoved){
+        this.hasMoved = hasMoved;
     }
 
     @Override

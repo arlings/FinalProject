@@ -21,7 +21,7 @@ public class Queen extends AbstractPiece {
     }
 
     public Queen(int rowNum, int columnNum, BufferedImage sprite, boolean isWhite) {
-        super(rowNum, columnNum, sprite, isWhite);
+        super(rowNum, columnNum, sprite, isWhite, 9);
         numQueens++;
     }
 

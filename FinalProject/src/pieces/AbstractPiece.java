@@ -1,10 +1,8 @@
 package pieces;
 
 import java.awt.image.BufferedImage;
-import pieces.Move;
 import java.util.ArrayList;
 import java.util.Objects;
-import javax.swing.ImageIcon;
 
 abstract public class AbstractPiece implements Piece {
 
@@ -19,11 +17,12 @@ abstract public class AbstractPiece implements Piece {
     public AbstractPiece() {
     }
 
-    public AbstractPiece(int rowNum, int columnNum, BufferedImage sprite, boolean isWhite) {
+    public AbstractPiece(int rowNum, int columnNum, BufferedImage sprite, boolean isWhite, int value) {
         this.rowNum = rowNum;
         this.columnNum = columnNum;
         this.sprite = sprite;
         this.isWhite = isWhite;
+        this.value = value;
     }
 
     public int getRowNum() {

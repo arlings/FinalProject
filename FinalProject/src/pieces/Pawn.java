@@ -15,19 +15,25 @@ public class Pawn extends AbstractPiece {
 
     private static int numPawns = 0;
     private boolean firstMove = true;
-
+    private boolean enPassantEligible = false;
+    
     public Pawn() {
     }
 
     public Pawn(int rowNum, int columnNum, BufferedImage sprite, boolean isWhite) {
-        super(rowNum, columnNum, sprite, isWhite);
+        super(rowNum, columnNum, sprite, isWhite, 1);
     }
 
     @Override
     public ArrayList<Move> getValidMoves(Piece[][] pieces) {
         ArrayList<Move> moves = new ArrayList<>();
 
-        int direction = this.isWhite() ? 1 : -1;
+        int direction;
+        if (this.isWhite()) {
+            direction = 1;
+        } else {
+            direction = -1;
+        }
 
         searchDirection(moves, pieces, rowNum + direction, columnNum, direction);
         if (firstMove) {
@@ -36,6 +42,24 @@ public class Pawn extends AbstractPiece {
                     && getPieceAt(rowNum + direction, columnNum, pieces) == null
                     && getPieceAt(twoStepRow, columnNum, pieces) == null) {
                 moves.add(new Move(twoStepRow, columnNum));
+            }
+        }
+        
+        if (columnNum - 1 >= 0) {
+            Piece leftPiece = pieces[rowNum][columnNum - 1];
+            if (leftPiece instanceof Pawn && leftPiece.isWhite() != this.isWhite()) {
+                if (((Pawn) leftPiece).isEnPassantEligible()) {
+                    moves.add(new Move(rowNum + direction, columnNum - 1));
+                }
+            }
+        }
+
+        if (columnNum + 1 < 8) {
+            Piece rightPiece = pieces[rowNum][columnNum + 1];
+            if (rightPiece instanceof Pawn && rightPiece.isWhite() != this.isWhite()) {
+                if (((Pawn) rightPiece).isEnPassantEligible()) {
+                    moves.add(new Move(rowNum + direction, columnNum + 1));
+                }
             }
         }
         return moves;
@@ -68,10 +92,19 @@ public class Pawn extends AbstractPiece {
     public static int getNumPawns() {
         return numPawns;
     }
-
+    
+    public boolean isEnPassantEligible() {
+        return enPassantEligible;
+    }
+    
     public void setFirstMove(boolean firstMove) {
         this.firstMove = firstMove;
     }
+    
+    public void setEnPassantEligible(boolean eligible) {
+        this.enPassantEligible = eligible;
+    }
+    
 
     @Override
     public String toString() {

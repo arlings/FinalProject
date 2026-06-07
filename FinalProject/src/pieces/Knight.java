@@ -12,7 +12,7 @@ public class Knight extends AbstractPiece {
     }
 
     public Knight(int rowNum, int columnNum, BufferedImage sprite, boolean isWhite) {
-        super(rowNum, columnNum, sprite, isWhite);
+        super(rowNum, columnNum, sprite, isWhite, 3);
     }
 
     @Override

@@ -13,13 +13,15 @@ import java.util.ArrayList;
  */
 public class Rook extends AbstractPiece{
     private static int numRooks;
+    private boolean hasMoved;
     
     public Rook() {
-        super();
+        this(0, 0, null, true, false);
     }
 
-    public Rook(int rowNum, int columnNum, BufferedImage sprite, boolean isWhite) {
-        super(rowNum, columnNum, sprite, isWhite);
+    public Rook(int rowNum, int columnNum, BufferedImage sprite, boolean isWhite, boolean hasMoved) {
+        super(rowNum, columnNum, sprite, isWhite, 5);
+        this.hasMoved = hasMoved;
     }
     
     @Override
@@ -34,7 +36,13 @@ public class Rook extends AbstractPiece{
         return moves;
     }
 
+    public boolean hasMoved(){
+        return hasMoved;
+    }
     
+    public void setHasMoved(boolean hasMoved){
+        this.hasMoved = hasMoved;
+    }
 
     public static int getNumRooks() {
         return numRooks;
