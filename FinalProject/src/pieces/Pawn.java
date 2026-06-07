@@ -19,6 +19,7 @@ public class Pawn extends AbstractPiece {
     
     public Pawn() {
     }
+    
 
     public Pawn(int rowNum, int columnNum, BufferedImage sprite, boolean isWhite) {
         super(rowNum, columnNum, sprite, isWhite, 1);
@@ -101,8 +102,8 @@ public class Pawn extends AbstractPiece {
         this.firstMove = firstMove;
     }
     
-    public void setEnPassantEligible(boolean eligible) {
-        this.enPassantEligible = eligible;
+    public void setEnPassantEligible(boolean enPassantEligible){
+        this.enPassantEligible = enPassantEligible;
     }
     
 

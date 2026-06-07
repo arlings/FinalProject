@@ -24,6 +24,7 @@ public class MainWindow extends javax.swing.JFrame {
     private HelpWindow helpWindow;
     private MainWindow mainWindow;
     private LeaderboardWindow leaderboardWindow;
+    
 
     // https://stackoverflow.com/questions/16046824/making-a-java-swing-frame-movable-and-setundecorated
     public void MoveJFrame() {

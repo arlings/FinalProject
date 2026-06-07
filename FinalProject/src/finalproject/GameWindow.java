@@ -9,7 +9,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import pieces.Bishop;
 import pieces.King;
@@ -20,8 +19,11 @@ import pieces.Piece;
 import pieces.Queen;
 import pieces.Rook;
 import repo.FileImporter;
+import javax.swing.JOptionPane;
 
 public class GameWindow extends javax.swing.JFrame implements ActionListener {
+
+    private PromotionWindow promotionWindow;
 
     SandboxWindow sandboxWindow;
     MainWindow mainWindow;
@@ -40,8 +42,24 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
     private int whiteTime;
     private int blackTime;
     private Timer matchTimer;
+    
+    int promotionCol;
+    int promotionRow;
+    boolean promotionIsWhite;
+    
+    public int getPromotionCol() {
+        return promotionCol;
+    }
 
-    public GameWindow(MainWindow m, String user2, String user1, int chosenTime) {
+    public int getPromotionRow() {
+        return promotionRow;
+    }
+
+    public boolean getPromotionIsWhite() {
+        return promotionIsWhite;
+    }
+    
+    public GameWindow(MainWindow m, String user1, String user2, int chosenTime) {
         startGame(user1, user2, chosenTime);
         mainWindow = m;
         this.user1Lbl.setText(user1);
@@ -113,6 +131,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
             selectedPos = null;
             updateBoardUI();
         }
+
     }
 
     public void movePiece(Move orgPos, Move newPos) {
@@ -152,6 +171,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         if (blackKing != null && isKingInCheck(blackKing, pieces)) {
             highlightCheck(blackKing, false);
         }
+
         whiteTurn = !whiteTurn;
         updateValues();
         Piece nextKing = findKing(pieces, whiteTurn);
@@ -540,7 +560,57 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         Piece p = pieces[row][col];
         return p != null && p.isWhite() == whiteTurn;
     }
+    
+    private void checkIfPromoted(Pawn p) {
+  
+        promotionCol = p.getColumnNum();
+        promotionRow = p.getRowNum();
+        promotionIsWhite = p.isWhite();
+        if (p.isWhite()) {
+            if (p.getRowNum() == 7) {
+                GameWindow.this.setVisible(false);
+                if (promotionWindow == null) {
+                    promotionWindow = new PromotionWindow(this);
+                }
+                promotionWindow.setVisible(true);
+            }
+        } else {
+            if (p.getRowNum() == 0) {
+                GameWindow.this.setVisible(false);
+                if (promotionWindow == null) {
+                    promotionWindow = new PromotionWindow(this);
+                }
+                promotionWindow.setVisible(true);
+            }
 
+        }
+    }
+
+    public void fixBoardAfterPromotion(int col, int row, String piece, boolean isWhite) {
+        if (isWhite) {
+            if (piece.equalsIgnoreCase("Queen")) {
+                pieces[row][col] = new Queen(row, col, loadImage("/images/White_Queen.png"), isWhite);
+            } else if (piece.equalsIgnoreCase("Rook")) {
+                pieces[row][col] = new Rook(row, col, loadImage("/images/White_Rook.png"), isWhite, true);
+            } else if (piece.equalsIgnoreCase("Bishop")) {
+                pieces[row][col] = new Bishop(row, col, loadImage("/images/White_Bishop.png"), isWhite);
+            } else if (piece.equalsIgnoreCase("Knight")) {
+                pieces[row][col] = new Knight(row, col, loadImage("/images/White_Knight.png"), isWhite);
+            }
+        } else {
+            if (piece.equalsIgnoreCase("Queen")) {
+                pieces[row][col] = new Queen(row, col, loadImage("/images/Black_Queen.png"), isWhite);
+            } else if (piece.equalsIgnoreCase("Rook")) {
+                pieces[row][col] = new Rook(row, col, loadImage("/images/Black_Rook.png"), isWhite, true);
+            } else if (piece.equalsIgnoreCase("Bishop")) {
+                pieces[row][col] = new Bishop(row, col, loadImage("/images/Black_Bishop.png"), isWhite);
+            } else if (piece.equalsIgnoreCase("Knight")) {
+                pieces[row][col] = new Knight(row, col, loadImage("/images/Black_Knight.png"), isWhite);
+            }
+        }
+        updateBoardUI();
+    }
+    
     private void setPlayerNames(String user1, String user2) {
         user1Lbl.setText(user1);
         user2Lbl.setText(user2);
