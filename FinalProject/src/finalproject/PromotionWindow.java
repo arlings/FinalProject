@@ -1,4 +1,3 @@
-
 package finalproject;
 
 /**
@@ -14,6 +13,7 @@ public class PromotionWindow extends javax.swing.JFrame {
         initComponents();
     }
     private GameWindow gameWindow;
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -171,29 +171,47 @@ public class PromotionWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void queenPromotionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_queenPromotionBtnActionPerformed
-        //switch queen for pawn
-        //update board
+
+        int col = gameWindow.getPromotionCol();
+        int row = gameWindow.getPromotionRow();
+        boolean promotionIsWhite = gameWindow.getPromotionIsWhite();
+        gameWindow.fixBoardAfterPromotion(col, row, "Queen", promotionIsWhite);
+        PromotionWindow.this.setVisible(false);
+        gameWindow.setVisible(true);
     }//GEN-LAST:event_queenPromotionBtnActionPerformed
 
     private void bishopPromotionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bishopPromotionBtnActionPerformed
-        //switch queen for pawn
-        //update board
+        int col = gameWindow.getPromotionCol();
+        int row = gameWindow.getPromotionRow();
+        boolean promotionIsWhite = gameWindow.getPromotionIsWhite();
+        gameWindow.fixBoardAfterPromotion(col, row, "Bishop", promotionIsWhite);
+        PromotionWindow.this.setVisible(false);
+        gameWindow.setVisible(true);
     }//GEN-LAST:event_bishopPromotionBtnActionPerformed
 
     private void knightPromotionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_knightPromotionBtnActionPerformed
-        //switch queen for pawn
-        //update board
+        int col = gameWindow.getPromotionCol();
+        int row = gameWindow.getPromotionRow();
+        boolean promotionIsWhite = gameWindow.getPromotionIsWhite();
+        gameWindow.fixBoardAfterPromotion(col, row, "Knight", promotionIsWhite);
+        PromotionWindow.this.setVisible(false);
+        gameWindow.setVisible(true);
     }//GEN-LAST:event_knightPromotionBtnActionPerformed
 
     private void rookPromotionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rookPromotionBtnActionPerformed
-        //switch queen for pawn
-        //update board
+        int col = gameWindow.getPromotionCol();
+        int row = gameWindow.getPromotionRow();
+        boolean promotionIsWhite = gameWindow.getPromotionIsWhite();
+        gameWindow.fixBoardAfterPromotion(col, row, "Rook", promotionIsWhite);
+        PromotionWindow.this.setVisible(false);
+        gameWindow.setVisible(true);
     }//GEN-LAST:event_rookPromotionBtnActionPerformed
-public PromotionWindow(GameWindow m){
-    initComponents();
-    gameWindow = m;
-}
+    public PromotionWindow(GameWindow m) {
+        initComponents();
+        gameWindow = m;
+    }
 
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bishopPromotionBtn;
     private javax.swing.JLabel jLabel1;

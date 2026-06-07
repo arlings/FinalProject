@@ -35,11 +35,27 @@ public class GameWindow extends javax.swing.JFrame {
 
     private boolean whiteTurn = true;
 
+    private int promotionCol;
+    private int promotionRow;
+    private boolean promotionIsWhite;
+
     public GameWindow(MainWindow m, String user1, String user2) {
         startGame();
         mainWindow = m;
         this.username1.setText(user1);
         this.username2.setText(user2);
+    }
+
+    public int getPromotionCol() {
+        return promotionCol;
+    }
+
+    public int getPromotionRow() {
+        return promotionRow;
+    }
+
+    public boolean getPromotionIsWhite() {
+        return promotionIsWhite;
     }
 
     public GameWindow(SandboxWindow m, String user1, String user2) {
@@ -90,26 +106,24 @@ public class GameWindow extends javax.swing.JFrame {
             if (move.getRowNum() == row && move.getColumnNum() == col) {
                 if (isMoveLegal(selectedPos, move, whiteTurn)) {
                     movePiece(selectedPos, move);
-                    
+
                     try {
 
-                        Pawn castedSelectedPiece=((Pawn)(selectedPiece));
-                        
+                        Pawn castedSelectedPiece = ((Pawn) (selectedPiece));
+
                         checkIfPromoted(castedSelectedPiece);
-       
+
                     } catch (Exception e) {
-                        System.out.println("Error: "+e);
+                        System.out.println("Error: " + e);
                     }
                     selectedPiece = null;
                     selectedPos = null;
                     return;
-                    
+
                 }
 
             }
         }
-
-        
 
     }
 
@@ -144,7 +158,7 @@ public class GameWindow extends javax.swing.JFrame {
         if (blackKing != null && isKingInCheck(blackKing, pieces)) {
             highlightCheck(blackKing);
         }
-        
+
         whiteTurn = !whiteTurn;
     }
 
@@ -379,8 +393,13 @@ public class GameWindow extends javax.swing.JFrame {
     }
 
     private void checkIfPromoted(Pawn p) {
+  
+        promotionCol = p.getColumnNum();
+        promotionRow = p.getRowNum();
+        promotionIsWhite = p.isWhite();
         if (p.isWhite()) {
             if (p.getRowNum() == 7) {
+                GameWindow.this.setVisible(false);
                 if (promotionWindow == null) {
                     promotionWindow = new PromotionWindow(this);
                 }
@@ -388,13 +407,39 @@ public class GameWindow extends javax.swing.JFrame {
             }
         } else {
             if (p.getRowNum() == 0) {
+                GameWindow.this.setVisible(false);
                 if (promotionWindow == null) {
                     promotionWindow = new PromotionWindow(this);
                 }
                 promotionWindow.setVisible(true);
+            }
 
+        }
+    }
+
+    public void fixBoardAfterPromotion(int col, int row, String piece, boolean isWhite) {
+        if (isWhite) {
+            if (piece.equalsIgnoreCase("Queen")) {
+                pieces[row][col] = new Queen(row, col, loadImage("/images/White_Queen.png"), isWhite);
+            } else if (piece.equalsIgnoreCase("Rook")) {
+                pieces[row][col] = new Rook(row, col, loadImage("/images/White_Rook.png"), isWhite);
+            } else if (piece.equalsIgnoreCase("Bishop")) {
+                pieces[row][col] = new Bishop(row, col, loadImage("/images/White_Bishop.png"), isWhite);
+            } else if (piece.equalsIgnoreCase("Knight")) {
+                pieces[row][col] = new Knight(row, col, loadImage("/images/White_Knight.png"), isWhite);
+            }
+        } else {
+            if (piece.equalsIgnoreCase("Queen")) {
+                pieces[row][col] = new Queen(row, col, loadImage("/images/Black_Queen.png"), isWhite);
+            } else if (piece.equalsIgnoreCase("Rook")) {
+                pieces[row][col] = new Rook(row, col, loadImage("/images/Black_Rook.png"), isWhite);
+            } else if (piece.equalsIgnoreCase("Bishop")) {
+                pieces[row][col] = new Bishop(row, col, loadImage("/images/Black_Bishop.png"), isWhite);
+            } else if (piece.equalsIgnoreCase("Knight")) {
+                pieces[row][col] = new Knight(row, col, loadImage("/images/Black_Knight.png"), isWhite);
             }
         }
+        updateBoardUI();
     }
 
     @SuppressWarnings("unchecked")
