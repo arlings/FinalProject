@@ -25,6 +25,7 @@ abstract public class AbstractPiece implements Piece {
         this.sprite = sprite;
         this.isWhite = isWhite;
     }
+    
 
     public int getRowNum() {
         return rowNum;

@@ -16,8 +16,11 @@ import pieces.Piece;
 import pieces.Queen;
 import pieces.Rook;
 import repo.FileImporter;
+import javax.swing.JOptionPane;
 
 public class GameWindow extends javax.swing.JFrame {
+
+    private PromotionWindow promotionWindow;
 
     SandboxWindow sandboxWindow;
     MainWindow mainWindow;
@@ -54,6 +57,7 @@ public class GameWindow extends javax.swing.JFrame {
     }
 
     private void handleClick(int row, int col) {
+
         if (selectedPiece == null) {
             if (pieces[row][col] != null && pieces[row][col].isWhite() == whiteTurn) {
                 selectedPiece = pieces[row][col];
@@ -73,11 +77,12 @@ public class GameWindow extends javax.swing.JFrame {
 
         ArrayList<Move> rawMoves = selectedPiece.getValidMoves(pieces);
         ArrayList<Move> validMoves = new ArrayList<>();
-        
+
         //raw move code is AI
         for (Move move : rawMoves) {
             if (isMoveLegal(selectedPos, move, whiteTurn)) {
                 validMoves.add(move);
+
             }
         }
 
@@ -85,12 +90,28 @@ public class GameWindow extends javax.swing.JFrame {
             if (move.getRowNum() == row && move.getColumnNum() == col) {
                 if (isMoveLegal(selectedPos, move, whiteTurn)) {
                     movePiece(selectedPos, move);
+                    
+                    try {
+                        //System.out.println("Before");
+                        
+                        Pawn castedSelectedPiece=((Pawn)(selectedPiece));
+                        //System.out.println("After");
+                        checkIfPromoted(castedSelectedPiece);
+                        //System.out.println("After");
+                    } catch (Exception e) {
+                        System.out.println("Error: "+e);
+                    }
                     selectedPiece = null;
                     selectedPos = null;
+                    return;
+                    
                 }
-                return;
+
             }
         }
+
+        
+
     }
 
     public void movePiece(Move orgPos, Move newPos) {
@@ -124,6 +145,7 @@ public class GameWindow extends javax.swing.JFrame {
         if (blackKing != null && isKingInCheck(blackKing, pieces)) {
             highlightCheck(blackKing);
         }
+        
         whiteTurn = !whiteTurn;
     }
 
@@ -194,7 +216,7 @@ public class GameWindow extends javax.swing.JFrame {
         int targetCol = futurePos.getColumnNum();
         int savedRow = testPiece.getRowNum();
         int savedCol = testPiece.getColumnNum();
-        
+
         temp[targetRow][targetCol] = testPiece;
         temp[orgPos.getRowNum()][orgPos.getColumnNum()] = null;
         testPiece.setRowNum(targetRow);
@@ -202,10 +224,10 @@ public class GameWindow extends javax.swing.JFrame {
 
         Piece king = findKing(temp, isWhite);
         boolean inCheck = isKingInCheck(king, temp);
-        
+
         testPiece.setRowNum(savedRow);
         testPiece.setColumnNum(savedCol);
-        
+
         return !inCheck;
     }
 
@@ -355,6 +377,25 @@ public class GameWindow extends javax.swing.JFrame {
     private boolean isCurrentPlayerPiece(int row, int col) {
         Piece p = pieces[row][col];
         return p != null && p.isWhite() == whiteTurn;
+    }
+
+    private void checkIfPromoted(Pawn p) {
+        if (p.isWhite()) {
+            if (p.getRowNum() == 7) {
+                if (promotionWindow == null) {
+                    promotionWindow = new PromotionWindow(this);
+                }
+                promotionWindow.setVisible(true);
+            }
+        } else {
+            if (p.getRowNum() == 0) {
+                if (promotionWindow == null) {
+                    promotionWindow = new PromotionWindow(this);
+                }
+                promotionWindow.setVisible(true);
+
+            }
+        }
     }
 
     @SuppressWarnings("unchecked")

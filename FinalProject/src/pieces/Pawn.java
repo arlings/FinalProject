@@ -18,6 +18,7 @@ public class Pawn extends AbstractPiece {
 
     public Pawn() {
     }
+    
 
     public Pawn(int rowNum, int columnNum, BufferedImage sprite, boolean isWhite) {
         super(rowNum, columnNum, sprite, isWhite);
@@ -72,6 +73,16 @@ public class Pawn extends AbstractPiece {
     public void setFirstMove(boolean firstMove) {
         this.firstMove = firstMove;
     }
+    
+    public static Pawn clone(Pawn p){
+        boolean isWhite=false;
+        if (p.getTeam().equalsIgnoreCase("White")){
+            isWhite=true;
+        }
+        Pawn newPawn=new Pawn(p.getRowNum(), p.getColumnNum(), p.getSprite(),isWhite);
+        return newPawn;
+    }
+    
 
     @Override
     public String toString() {
