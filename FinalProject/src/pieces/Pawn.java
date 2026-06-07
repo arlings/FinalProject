@@ -74,14 +74,7 @@ public class Pawn extends AbstractPiece {
         this.firstMove = firstMove;
     }
     
-    public static Pawn clone(Pawn p){
-        boolean isWhite=false;
-        if (p.getTeam().equalsIgnoreCase("White")){
-            isWhite=true;
-        }
-        Pawn newPawn=new Pawn(p.getRowNum(), p.getColumnNum(), p.getSprite(),isWhite);
-        return newPawn;
-    }
+    
     
 
     @Override

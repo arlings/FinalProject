@@ -92,12 +92,11 @@ public class GameWindow extends javax.swing.JFrame {
                     movePiece(selectedPos, move);
                     
                     try {
-                        //System.out.println("Before");
-                        
+
                         Pawn castedSelectedPiece=((Pawn)(selectedPiece));
-                        //System.out.println("After");
+                        
                         checkIfPromoted(castedSelectedPiece);
-                        //System.out.println("After");
+       
                     } catch (Exception e) {
                         System.out.println("Error: "+e);
                     }
