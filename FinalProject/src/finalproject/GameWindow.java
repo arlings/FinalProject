@@ -22,6 +22,7 @@ import repo.FileImporter;
 import javax.swing.JOptionPane;
 
 public class GameWindow extends javax.swing.JFrame implements ActionListener {
+
     private PromotionWindow promotionWindow;
     SandboxWindow sandboxWindow;
     MainWindow mainWindow;
@@ -40,11 +41,11 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
     private int whiteTime;
     private int blackTime;
     private Timer matchTimer;
-    
+
     private int promotionCol;
     private int promotionRow;
     private boolean promotionIsWhite;
-    
+
     public int getPromotionCol() {
         return promotionCol;
     }
@@ -56,29 +57,23 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
     public boolean getPromotionIsWhite() {
         return promotionIsWhite;
     }
-    
+
     public GameWindow(MainWindow m, String user2, String user1, int chosenTime) {
         //starts game setups and sets user labels for main window path
         startGame(user1, user2, chosenTime);
         mainWindow = m;
-        this.user1Lbl.setText(user1);
-        this.user2Lbl.setText(user2);
     }
 
     public GameWindow(SandboxWindow m, String user2, String user1, int chosenTime) {
         //starts game setups and sets user labels for sandbox path
         startGame(user1, user2, chosenTime);
         sandboxWindow = m;
-        this.user1Lbl.setText(user1);
-        this.user2Lbl.setText(user2);
     }
 
     public GameWindow(EnterUsername m, String user2, String user1, int chosenTime) {
         //starts game setups and sets user labels for username entry path
         startGame(user1, user2, chosenTime);
         enterUsername = m;
-        this.user1Lbl.setText(user1);
-        this.user2Lbl.setText(user2);
     }
 
     private void handleClick(int row, int col) {
@@ -166,45 +161,23 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         if (movingPiece instanceof Rook rook) {
             rook.setHasMoved(true);
         }
-        
+
         //enpassant logic
         handleEnPassant(movingPiece, orgRow, orgCol, newRow, newCol);
-        
+
         //updates internal row and column variables of the moving piece
         movingPiece.setRowNum(newRow);
         movingPiece.setColumnNum(newCol);
 
-        //moves piece reference to new array spot and clears the old origin slot
+        //moves piece reference to new array spot and clears the original slot
         pieces[newRow][newCol] = movingPiece;
         pieces[orgRow][orgCol] = null;
 
-        //refreshes all board label icons to match the backend piece array
-        updateBoardUI();
-
-        Piece whiteKing = findKing(pieces, true);
-        Piece blackKing = findKing(pieces, false);
-
-        //if white king is in check it applies red highlight without a flash
-        if (whiteKing != null && isKingInCheck(whiteKing, pieces)) {
-            highlightCheck(whiteKing, false);
+        if (movingPiece instanceof Pawn) {
+            checkIfPromoted((Pawn) movingPiece);
         }
-
-        //if black king is in check it applies red highlight without a flash
-        if (blackKing != null && isKingInCheck(blackKing, pieces)) {
-            highlightCheck(blackKing, false);
-        }
-        //switches the turn boolean to opposite player
         whiteTurn = !whiteTurn;
-        //recalculates point values and advantages displayed on screen
-        updateValues();
-        Piece nextKing = findKing(pieces, whiteTurn);
-        //if next player has no legal moves and king is in check game ends in checkmate
-        if (isCheckmate(nextKing, whiteTurn)) {
-            //stops match timer and turns on reset button then shows checkmate alert box
-            matchTimer.stop();
-            resetBtn.setEnabled(true);
-            JOptionPane.showMessageDialog(null, "Checkmate!");
-        }
+        performPostMoveChecks(whiteTurn);
     }
 
     public void getValidMoves(Piece piece) {
@@ -237,12 +210,12 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
             }
         }
     }
-    
+
     private void handleEnPassant(Piece movingPiece, int orgRow, int orgCol, int newRow, int newCol) {
         //if moving piece is pawn and changes columns and lands on an empty square then it is enpassant capture
         if (movingPiece instanceof Pawn && orgCol != newCol && pieces[newRow][newCol] == null) {
             //sets enemy pawn to null to capture it from original row and new column location
-            pieces[orgRow][newCol] = null; 
+            pieces[orgRow][newCol] = null;
         }
 
         //if moving piece is a pawn we handle first move and double step eligibility
@@ -280,7 +253,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
                 rook.setColumnNum(5);
                 ((Rook) rook).setHasMoved(true);
             }
-        //if king column decreases by two then it is a queenside castle move
+            //if king column decreases by two then it is a queenside castle move
         } else if (orgCol - newCol == 2) {
             Piece rook = pieces[row][0];
             //if rook exists it moves rook from column 0 to column 3 and flags it as moved
@@ -356,21 +329,21 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
             if (targetCol - orgCol == 2) {
                 //if any castling path squares are attacked it returns false to block the move
                 if (isSquareAttacked(savedRow, 4, isWhite)
-                    || isSquareAttacked(savedRow, 5, isWhite)
-                    || isSquareAttacked(savedRow, 6, isWhite)) {
+                        || isSquareAttacked(savedRow, 5, isWhite)
+                        || isSquareAttacked(savedRow, 6, isWhite)) {
                     return false;
                 }
-            //if king jumps two columns left it checks columns 4 3 and 2 for enemy threats
+                //if king jumps two columns left it checks columns 4 3 and 2 for enemy threats
             } else if (orgCol - targetCol == 2) {
                 //if any castling path squares are attacked it returns false to block the move
                 if (isSquareAttacked(savedRow, 4, isWhite)
-                    || isSquareAttacked(savedRow, 3, isWhite)
-                    || isSquareAttacked(savedRow, 2, isWhite)) {
+                        || isSquareAttacked(savedRow, 3, isWhite)
+                        || isSquareAttacked(savedRow, 2, isWhite)) {
                     return false;
                 }
             }
         }
-        
+
         //executes move on the temporary simulation board matrix array
         temp[targetRow][targetCol] = testPiece;
         temp[orgPos.getRowNum()][orgPos.getColumnNum()] = null;
@@ -431,9 +404,8 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
     }
 
     private void startGame(String user1, String user2, int chosenTime) {
-        //runs frame decorations and panel layouts then instantiates board arrays
-        MoveJFrame();
         initComponents();
+        MoveJFrame();
         board = loadBoard();
         pieces = loadPieces();
         updateBoardUI();
@@ -529,7 +501,6 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
 
     public void MoveJFrame() {
         //removes top frame borders and sets custom drag click mouse tracking listeners
-        this.setUndecorated(true);
         MainWindow.FrameDragListener frameDragListener = new MainWindow.FrameDragListener(this);
         this.addMouseListener(frameDragListener);
         this.addMouseMotionListener(frameDragListener);
@@ -701,7 +672,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
                         resetBtn.setEnabled(true);
                         JOptionPane.showMessageDialog(null, "Black Wins!");
                     }
-                //if black turn flag is active it decrements black player countdown variable
+                    //if black turn flag is active it decrements black player countdown variable
                 } else {
                     blackTime--;
                     //if black time expires it zeros out variable and stops game with white victory
@@ -758,36 +729,50 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
             //assigns positive marker text strings to display side advantages
             whiteAdvantageLbl.setText("+" + difference);
             blackAdvantageLbl.setText("-" + difference);
-        //if difference is negative black player holds a point advantage
+            //if difference is negative black player holds a point advantage
         } else {//black is winning
             //assigns absolute valuation offsets to prevent double negative symbol prints
             whiteAdvantageLbl.setText("-" + Math.abs(difference));
             blackAdvantageLbl.setText("+" + Math.abs(difference));
         }
     }
-    
-     private void checkIfPromoted(Pawn p) {
-  
-        promotionCol = p.getColumnNum();
-        promotionRow = p.getRowNum();
-        promotionIsWhite = p.isWhite();
-        if (p.isWhite()) {
-            if (p.getRowNum() == 7) {
-                GameWindow.this.setVisible(false);
-                if (promotionWindow == null) {
-                    promotionWindow = new PromotionWindow(this);
-                }
-                promotionWindow.setVisible(true);
-            }
-        } else {
-            if (p.getRowNum() == 0) {
-                GameWindow.this.setVisible(false);
-                if (promotionWindow == null) {
-                    promotionWindow = new PromotionWindow(this);
-                }
-                promotionWindow.setVisible(true);
-            }
 
+    private void checkIfPromoted(Pawn p) {
+
+        if ((p.isWhite() && p.getRowNum() == 7) || (!p.isWhite() && p.getRowNum() == 0)) {
+            if (matchTimer != null) {
+                matchTimer.stop();
+            }
+            promotionCol = p.getColumnNum();
+            promotionRow = p.getRowNum();
+            promotionIsWhite = p.isWhite();
+
+            if (promotionWindow == null) {
+                promotionWindow = new PromotionWindow(this);
+            }
+            promotionWindow.setVisible(true);
+        }
+    }
+
+    private void performPostMoveChecks(boolean isWhiteTurn) {
+        updateBoardUI();
+        updateValues();
+
+        Piece whiteKing = findKing(pieces, true);
+        Piece blackKing = findKing(pieces, false);
+
+        if (whiteKing != null && isKingInCheck(whiteKing, pieces)) {
+            highlightCheck(whiteKing, false);
+        }
+        if (blackKing != null && isKingInCheck(blackKing, pieces)) {
+            highlightCheck(blackKing, false);
+        }
+
+        Piece nextKing = findKing(pieces, isWhiteTurn);
+        if (isCheckmate(nextKing, isWhiteTurn)) {
+            matchTimer.stop();
+            resetBtn.setEnabled(true);
+            JOptionPane.showMessageDialog(null, "Checkmate!");
         }
     }
 
@@ -813,9 +798,16 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
                 pieces[row][col] = new Knight(row, col, loadImage("/images/Black_Knight.png"), isWhite);
             }
         }
-        updateBoardUI();
-    }
+        performPostMoveChecks(!isWhite);
+        boolean nextTurn = !isWhite;
+        Piece nextKing = findKing(pieces, nextTurn);
 
+        if (!isCheckmate(nextKing, nextTurn)) {
+            matchTimer.start();
+            // Switch the turn only if the game is continuing
+            whiteTurn = nextTurn;
+        }
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
