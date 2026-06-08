@@ -3,6 +3,7 @@ package finalproject;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -21,9 +22,9 @@ public class LeaderboardWindow extends javax.swing.JFrame {
     public void leaderboardSort() {
         try {
             FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
-            FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/Leaderboard.txt");
+            FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/Leaderboard.txt", true);
+            FileOutputStream out2 = new FileOutputStream(System.getProperty("user.dir") + "/Leaderboard.txt", false);
             Scanner s = new Scanner(in);
-            
             String[] items = s.nextLine().split(":");
             String[] userData = new String[items.length];
             User[] leaderboard = new User[items.length];
@@ -39,9 +40,17 @@ public class LeaderboardWindow extends javax.swing.JFrame {
             for (int i = 0; i < leaderboard.length; i++) {
                 sLeaderboard[i] = "#" + (i + 1) + " " + leaderboard[i].toString();
             }
-            leaderboardList.setListData(sLeaderboard);
+            leaderboardList.setListData(sLeaderboard); 
+            try {
+                out2.write("".getBytes());
+                for (int i = 0; i < sLeaderboard.length; i++) {
+                    out.write(sLeaderboard[i].getBytes());
+                }
+            } catch(IOException e) {
+                warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help.");    
+            }
         } catch (FileNotFoundException e) {
-            warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help. (You probably haven't made any users yet!)");
+            warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help.");
             warningWindow.setVisible(true);    
         }
     }
