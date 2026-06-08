@@ -24,6 +24,7 @@ public class MainWindow extends javax.swing.JFrame {
     private HelpWindow helpWindow;
     private MainWindow mainWindow;
     private LeaderboardWindow leaderboardWindow;
+    private WarningWindow warningWindow;
     
 
     // https://stackoverflow.com/questions/16046824/making-a-java-swing-frame-movable-and-setundecorated
@@ -39,6 +40,17 @@ public class MainWindow extends javax.swing.JFrame {
 
     public MainWindow() {
         MoveJFrame();
+        try {
+            FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Leaderboard.txt");
+            Scanner s = new Scanner(in);
+            String nextLine = s.nextLine();
+            firstPlaceLabel.setText(nextLine.split(":")[0]);
+            secondPlaceLabel.setText(nextLine.split(":")[1]);
+            thirdPlaceLabel.setText(nextLine.split(":")[2]);
+        } catch (FileNotFoundException e) {
+            warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help.");
+            warningWindow.setVisible(true);
+        }
         initComponents();
     }
 
@@ -424,7 +436,6 @@ public class MainWindow extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainWindow().setVisible(true);
-                
             }
         });
     }
