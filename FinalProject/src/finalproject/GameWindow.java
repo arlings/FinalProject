@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -686,6 +687,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
                         blackTime = 0;
                         matchTimer.stop();
                         resetBtn.setEnabled(true);
+                        
                         JOptionPane.showMessageDialog(null, "White Wins!");
                     }
                 }
@@ -778,11 +780,22 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         if (isCheckmate(nextKing, isWhiteTurn)) {
             matchTimer.stop();
             resetBtn.setEnabled(true);
-            JOptionPane.showMessageDialog(null, "Checkmate! " );
+            JOptionPane.showMessageDialog(null, "Checkmate!" );
             try {
                 FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
                 FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/Users.txt");
-                
+                Scanner s = new Scanner(in);
+                String[] players = s.nextLine().split(":");
+                for (int i = 0; i < players.length; i++) {
+                    if (isWhiteTurn) {
+                        players[i].split(",")[0].equalsIgnoreCase(user2Lbl.getText());
+                        players[i] = players[i].split(",")[0] + "," + (Integer.parseInt(players[i].split(",")[1]) + 1) + "," +  players[i].split(",")[2] + "," +  players[i].split(",")[3];
+                    } else {
+                        players[i].split(",")[0].equalsIgnoreCase(user1Lbl.getText());
+                        players[i] = players[i].split(",")[0] + "," + (Integer.parseInt(players[i].split(",")[1]) + 1) + "," +  players[i].split(",")[2] + "," +  players[i].split(",")[3];
+                        
+                    }
+                }
                 this.dispose();
             } catch (FileNotFoundException e) {
                 warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help. (You probably haven't made any users yet!)");

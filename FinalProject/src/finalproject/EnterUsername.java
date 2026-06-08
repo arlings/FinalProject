@@ -24,10 +24,11 @@ public class EnterUsername extends javax.swing.JFrame {
         this.setVisible(true);
     }
     
-    public EnterUsername(MainWindow m) {
+    public EnterUsername(MainWindow m, int chosenTime) {
         MoveJFrame();
         initComponents();
         mainWindow = m;
+        timeChosenLabel.setText(chosenTime + "");
     }
 
     @SuppressWarnings("unchecked")
@@ -40,6 +41,7 @@ public class EnterUsername extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         topLabel = new javax.swing.JLabel();
         cancelButton = new javax.swing.JButton();
+        timeChosenLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 153, 153));
@@ -79,6 +81,9 @@ public class EnterUsername extends javax.swing.JFrame {
             }
         });
 
+        timeChosenLabel.setForeground(new java.awt.Color(204, 255, 255));
+        timeChosenLabel.setText("jLabel1");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -92,6 +97,10 @@ public class EnterUsername extends javax.swing.JFrame {
                     .addComponent(cancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(goBtn))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(timeChosenLabel)
+                .addGap(99, 99, 99))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,7 +112,8 @@ public class EnterUsername extends javax.swing.JFrame {
                     .addComponent(goBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cancelButton)
-                .addGap(0, 23, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addComponent(timeChosenLabel))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -121,6 +131,7 @@ public class EnterUsername extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void goBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBtnActionPerformed
+        int chosenTime = Integer.parseInt(timeChosenLabel.getText());
         try {   
             FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
             Scanner s = new Scanner(in);
@@ -137,7 +148,7 @@ public class EnterUsername extends javax.swing.JFrame {
                         numOfUsers++;
                         if (gameWindow == null && numOfUsers == 2) {
                             usernames[1] = userNameField.getText();
-                            gameWindow = new GameWindow(this , usernames[0], usernames[1], 300);
+                            gameWindow = new GameWindow(this , usernames[0], usernames[1], chosenTime);
                             gameWindow.setVisible(true);
                             this.dispose();
                         } else {
@@ -172,6 +183,7 @@ public class EnterUsername extends javax.swing.JFrame {
     private javax.swing.JButton goBtn;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel timeChosenLabel;
     private javax.swing.JLabel topLabel;
     private javax.swing.JTextField userNameField;
     // End of variables declaration//GEN-END:variables

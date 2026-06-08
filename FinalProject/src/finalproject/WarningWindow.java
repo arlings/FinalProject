@@ -7,6 +7,7 @@ public class WarningWindow extends javax.swing.JFrame {
     private EnterUsername enterUsername;
     private LeaderboardWindow leaderboardWindow;
     private GameWindow gameWindow;
+    private MainWindow mainWindow;
     
     public void MoveJFrame() {
         this.setUndecorated(true);
@@ -44,6 +45,13 @@ public class WarningWindow extends javax.swing.JFrame {
         initComponents();
         warningMessage.setText(txt);
         gameWindow = m;
+    }
+    
+    public WarningWindow(MainWindow m, String txt) {
+        MoveJFrame();
+        initComponents();
+        warningMessage.setText(txt);
+        mainWindow = m;
     }
 
     @SuppressWarnings("unchecked")
