@@ -39,7 +39,7 @@ public class PromotionWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(204, 0, 204));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 255));
 
         jLabel1.setText("Pick a piece to promote");
 
