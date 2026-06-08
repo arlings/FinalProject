@@ -3,6 +3,9 @@ package finalproject;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -27,6 +30,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
     SandboxWindow sandboxWindow;
     MainWindow mainWindow;
     EnterUsername enterUsername;
+    WarningWindow warningWindow;
     FileImporter fileImporter = new FileImporter();
 
     private Piece selectedPiece = null;
@@ -60,24 +64,18 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
 
     public GameWindow(MainWindow m, String user2, String user1, int chosenTime) {
         //starts game setups and sets user labels for main window path
-        MoveJFrame();
-        initComponents();
         startGame(user1, user2, chosenTime);
         mainWindow = m;
     }
 
     public GameWindow(SandboxWindow m, String user2, String user1, int chosenTime) {
         //starts game setups and sets user labels for sandbox path
-        MoveJFrame();
-        initComponents();
         startGame(user1, user2, chosenTime);
         sandboxWindow = m;
     }
 
     public GameWindow(EnterUsername m, String user2, String user1, int chosenTime) {
         //starts game setups and sets user labels for username entry path
-        MoveJFrame();
-        initComponents();
         startGame(user1, user2, chosenTime);
         enterUsername = m;
     }
@@ -410,6 +408,8 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
     }
 
     private void startGame(String user1, String user2, int chosenTime) {
+        MoveJFrame();
+        initComponents();
         board = loadBoard();
         pieces = loadPieces();
         updateBoardUI();
@@ -505,6 +505,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
 
     public void MoveJFrame() {
         //removes top frame borders and sets custom drag click mouse tracking listeners
+        this.setUndecorated(true);
         MainWindow.FrameDragListener frameDragListener = new MainWindow.FrameDragListener(this);
         this.addMouseListener(frameDragListener);
         this.addMouseMotionListener(frameDragListener);
@@ -777,6 +778,15 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
             matchTimer.stop();
             resetBtn.setEnabled(true);
             JOptionPane.showMessageDialog(null, "Checkmate!");
+            try {
+                FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
+                FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/Users.txt");
+                
+                this.dispose();
+            } catch (FileNotFoundException e) {
+                warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help. (You probably haven't made any users yet!)");
+                warningWindow.setVisible(true); 
+            }
         }
     }
 
