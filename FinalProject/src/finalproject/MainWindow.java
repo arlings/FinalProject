@@ -40,18 +40,26 @@ public class MainWindow extends javax.swing.JFrame {
 
     public MainWindow() {
         MoveJFrame();
+        initComponents();
+        getTop3();
+    }
+    
+    public void getTop3() {
         try {
             FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Leaderboard.txt");
             Scanner s = new Scanner(in);
             String nextLine = s.nextLine();
-            firstPlaceLabel.setText(nextLine.split(":")[0]);
-            secondPlaceLabel.setText(nextLine.split(":")[1]);
-            thirdPlaceLabel.setText(nextLine.split(":")[2]);
+            try {
+                firstPlaceLabel.setText("#" + nextLine.split("#")[1].split(",")[0]);
+                secondPlaceLabel.setText("#" + nextLine.split("#")[2].split(",")[0]);
+                thirdPlaceLabel.setText("#" + nextLine.split("#")[3].split(",")[0]);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                
+            }
         } catch (FileNotFoundException e) {
-            warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help.");
+            warningWindow = new WarningWindow(this, "There was an error with the Leaderboard file. Please see user manual for more help.");
             warningWindow.setVisible(true);
         }
-        initComponents();
     }
 
     public static class FrameDragListener extends MouseAdapter {
@@ -394,6 +402,7 @@ public class MainWindow extends javax.swing.JFrame {
             leaderboardWindow = new LeaderboardWindow(mainWindow);
         }
         leaderboardWindow.setVisible(true);
+        getTop3();
     }//GEN-LAST:event_viewFullLeaderboardButtonActionPerformed
 
     private void helpMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_helpMenuMouseClicked
