@@ -214,10 +214,10 @@
                           <Component id="B8" alignment="0" max="32767" attributes="0"/>
                           <Component id="A8" alignment="0" max="32767" attributes="0"/>
                           <Component id="D8" alignment="0" max="32767" attributes="0"/>
-                          <Component id="E8" alignment="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="F8" alignment="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="G8" alignment="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="H8" alignment="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="E8" alignment="0" pref="102" max="32767" attributes="0"/>
+                          <Component id="F8" alignment="0" pref="102" max="32767" attributes="0"/>
+                          <Component id="G8" alignment="0" pref="102" max="32767" attributes="0"/>
+                          <Component id="H8" alignment="0" pref="102" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">

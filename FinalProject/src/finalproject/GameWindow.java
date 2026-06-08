@@ -777,7 +777,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         if (isCheckmate(nextKing, isWhiteTurn)) {
             matchTimer.stop();
             resetBtn.setEnabled(true);
-            JOptionPane.showMessageDialog(null, "Checkmate!");
+            JOptionPane.showMessageDialog(null, "Checkmate! " );
             try {
                 FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
                 FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/Users.txt");
