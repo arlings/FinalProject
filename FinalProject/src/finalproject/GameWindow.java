@@ -26,12 +26,13 @@ import javax.swing.JOptionPane;
 
 public class GameWindow extends javax.swing.JFrame implements ActionListener {
 
-    private PromotionWindow promotionWindow;
+    PromotionWindow promotionWindow;
     SandboxWindow sandboxWindow;
     MainWindow mainWindow;
     EnterUsername enterUsername;
     WarningWindow warningWindow;
     FileImporter fileImporter = new FileImporter();
+    
 
     private Piece selectedPiece = null;
     private Move selectedPos = null;
@@ -2900,10 +2901,10 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
                             .addComponent(B8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(A8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(D8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(E8, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(F8, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(G8, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(H8, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                            .addComponent(E8, javax.swing.GroupLayout.PREFERRED_SIZE, 102, Short.MAX_VALUE)
+                            .addComponent(F8, javax.swing.GroupLayout.PREFERRED_SIZE, 102, Short.MAX_VALUE)
+                            .addComponent(G8, javax.swing.GroupLayout.PREFERRED_SIZE, 102, Short.MAX_VALUE)
+                            .addComponent(H8, javax.swing.GroupLayout.PREFERRED_SIZE, 102, Short.MAX_VALUE))
                         .addGap(0, 0, 0)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(H7, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
