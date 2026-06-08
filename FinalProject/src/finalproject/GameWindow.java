@@ -60,18 +60,24 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
 
     public GameWindow(MainWindow m, String user2, String user1, int chosenTime) {
         //starts game setups and sets user labels for main window path
+        MoveJFrame();
+        initComponents();
         startGame(user1, user2, chosenTime);
         mainWindow = m;
     }
 
     public GameWindow(SandboxWindow m, String user2, String user1, int chosenTime) {
         //starts game setups and sets user labels for sandbox path
+        MoveJFrame();
+        initComponents();
         startGame(user1, user2, chosenTime);
         sandboxWindow = m;
     }
 
     public GameWindow(EnterUsername m, String user2, String user1, int chosenTime) {
         //starts game setups and sets user labels for username entry path
+        MoveJFrame();
+        initComponents();
         startGame(user1, user2, chosenTime);
         enterUsername = m;
     }
@@ -404,8 +410,6 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
     }
 
     private void startGame(String user1, String user2, int chosenTime) {
-        MoveJFrame();
-        initComponents();
         board = loadBoard();
         pieces = loadPieces();
         updateBoardUI();
