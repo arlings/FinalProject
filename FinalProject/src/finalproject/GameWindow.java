@@ -312,6 +312,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
             }
         }
         //returns null if king matching that color is not found on board array
+        System.out.println("not found");
         return null;
     }
 
@@ -450,7 +451,15 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         whiteAdvantageLbl.setText("+0");
         blackAdvantageLbl.setText("+0");
     }
-
+    /* 
+    //for testing
+    private Piece[][] loadPieces(){
+        pieces[5][2] = new Queen(5, 2, loadImage("/images/White_Queen.png"), true);
+        pieces[7][4] = new King(7, 4, loadImage("/images/Black_King.png"), false, false, false, false);
+        return pieces;
+    }
+    */
+    
     private Piece[][] loadPieces() {
 
         //loops row columns index up to eight to fill row one and six with pawns
@@ -488,7 +497,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         //returns the fully configured initial piece position matrix array
         return pieces;
     }
-
+    
     private JLabel[][] loadBoard() {
         //returns a hardcoded label mapping matching rows and columns layout of grid swing panel
         return new JLabel[][]{
@@ -558,7 +567,37 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         //returns true if king is in check and absolutely no legal move stops the threat
         return true;
     }
+    
+    private boolean isStalemate(Piece king, boolean isWhiteTurn) {
+        //if king reference is missing or if king is checked it is not stalemate
+        if (king == null || isKingInCheck(king, pieces)) {
+            return false;
+        }
 
+        //loops rows of board to scan all friendly pieces for a saving escape move
+        for (int r = 0; r < board.length; r++) {
+            //loops columns of board to scan all friendly pieces for a saving escape move
+            for (int c = 0; c < board[0].length; c++) {
+                Piece piece = pieces[r][c];
+                //if piece belongs to current player turn it tests all its possible target moves
+                if (piece != null && piece.isWhite() == isWhiteTurn) {
+                    ArrayList<Move> validMoves = piece.getValidMoves(pieces);
+                    //loops through moves to see if any move option breaks check state
+                    for (Move move : validMoves) {
+                        Move currentPos = new Move(r, c);
+                        //if a single move is legal it means king can escape and it is not checkmate
+                        if (isMoveLegal(currentPos, move, isWhiteTurn)) {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        //returns true if king is in check and absolutely no legal move stops the threat
+        return true;
+    }
+    
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         //if chain is AI, fixes some King UI flashing issues
@@ -780,13 +819,18 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
             JOptionPane.showMessageDialog(null, "Checkmate! " );
             try {
                 FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
-                FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/Users.txt");
-                
-                this.dispose();
+                FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/Users.txt");                
             } catch (FileNotFoundException e) {
                 warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help. (You probably haven't made any users yet!)");
                 warningWindow.setVisible(true); 
             }
+        }
+        
+        if (isStalemate(nextKing, isWhiteTurn)) {
+            matchTimer.stop();
+            resetBtn.setEnabled(true);
+            JOptionPane.showMessageDialog(null, "Stalemate! The game is a draw.");
+            this.dispose();
         }
     }
 
@@ -816,10 +860,11 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         boolean nextTurn = !isWhite;
         Piece nextKing = findKing(pieces, nextTurn);
 
-        if (!isCheckmate(nextKing, nextTurn)) {
+        if (!isCheckmate(nextKing, nextTurn) && !isStalemate(nextKing, nextTurn)) {
             matchTimer.start();
             // Switch the turn only if the game is continuing
             whiteTurn = nextTurn;
+            
         }
     }
 
