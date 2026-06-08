@@ -89,7 +89,7 @@ public class MainWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        leaderboardPanel = new javax.swing.JPanel();
         newGameButton = new javax.swing.JButton();
         titleLabel = new javax.swing.JLabel();
         chessIconDecoration = new javax.swing.JLabel();
@@ -107,7 +107,12 @@ public class MainWindow extends javax.swing.JFrame {
         newMenu = new javax.swing.JMenu();
         newUserMenuItem = new javax.swing.JMenuItem();
         newGameMenuItem = new javax.swing.JMenu();
-        competitiveMenuItem = new javax.swing.JMenuItem();
+        competitiveMenu = new javax.swing.JMenu();
+        oneMinMenuItem = new javax.swing.JMenuItem();
+        twoMinMenuItem = new javax.swing.JMenuItem();
+        fiveMinMenuItem = new javax.swing.JMenuItem();
+        tenMinMenuItem = new javax.swing.JMenuItem();
+        thirtyMinMenuItem = new javax.swing.JMenuItem();
         sandboxMenuItem = new javax.swing.JMenuItem();
         customizeMenu = new javax.swing.JMenu();
         helpMenu = new javax.swing.JMenu();
@@ -115,8 +120,8 @@ public class MainWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(204, 255, 255));
-        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
+        leaderboardPanel.setBackground(new java.awt.Color(204, 255, 255));
+        leaderboardPanel.setForeground(new java.awt.Color(255, 255, 255));
 
         newGameButton.setText("New Game");
         newGameButton.addActionListener(new java.awt.event.ActionListener() {
@@ -195,37 +200,37 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGap(12, 12, 12))
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout leaderboardPanelLayout = new javax.swing.GroupLayout(leaderboardPanel);
+        leaderboardPanel.setLayout(leaderboardPanelLayout);
+        leaderboardPanelLayout.setHorizontalGroup(
+            leaderboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(leaderboardPanelLayout.createSequentialGroup()
+                .addGroup(leaderboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(leaderboardPanelLayout.createSequentialGroup()
                         .addGap(23, 23, 23)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(leaderboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(chessIconDecoration2)
                             .addComponent(newGameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(chessIconDecoration))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, leaderboardPanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(24, 24, 24)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(13, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        leaderboardPanelLayout.setVerticalGroup(
+            leaderboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(leaderboardPanelLayout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(leaderboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(leaderboardPanelLayout.createSequentialGroup()
                         .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(leaderboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(leaderboardPanelLayout.createSequentialGroup()
                                 .addComponent(newGameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(chessIconDecoration2))
@@ -277,13 +282,49 @@ public class MainWindow extends javax.swing.JFrame {
 
         newGameMenuItem.setText("New Game...");
 
-        competitiveMenuItem.setText("Competitive");
-        competitiveMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        competitiveMenu.setText("Competitive");
+
+        oneMinMenuItem.setText("1 minute");
+        oneMinMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                competitiveMenuItemActionPerformed(evt);
+                oneMinMenuItemActionPerformed(evt);
             }
         });
-        newGameMenuItem.add(competitiveMenuItem);
+        competitiveMenu.add(oneMinMenuItem);
+
+        twoMinMenuItem.setText("2 minute");
+        twoMinMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                twoMinMenuItemActionPerformed(evt);
+            }
+        });
+        competitiveMenu.add(twoMinMenuItem);
+
+        fiveMinMenuItem.setText("5 minute");
+        fiveMinMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fiveMinMenuItemActionPerformed(evt);
+            }
+        });
+        competitiveMenu.add(fiveMinMenuItem);
+
+        tenMinMenuItem.setText("10 minute");
+        tenMinMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tenMinMenuItemActionPerformed(evt);
+            }
+        });
+        competitiveMenu.add(tenMinMenuItem);
+
+        thirtyMinMenuItem.setText("30 minute");
+        thirtyMinMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                thirtyMinMenuItemActionPerformed(evt);
+            }
+        });
+        competitiveMenu.add(thirtyMinMenuItem);
+
+        newGameMenuItem.add(competitiveMenu);
 
         sandboxMenuItem.setText("Sandbox");
         sandboxMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -327,14 +368,14 @@ public class MainWindow extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(leaderboardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(leaderboardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jPanel1.getAccessibleContext().setAccessibleName("");
+        leaderboardPanel.getAccessibleContext().setAccessibleName("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -363,13 +404,6 @@ public class MainWindow extends javax.swing.JFrame {
         }
         createUser.setVisible(true);
     }//GEN-LAST:event_newUserMenuItemActionPerformed
-
-    private void competitiveMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_competitiveMenuItemActionPerformed
-        if (enterUsername == null) {
-            enterUsername = new EnterUsername(this);
-        }
-        enterUsername.setVisible(true);
-    }//GEN-LAST:event_competitiveMenuItemActionPerformed
 
     private void sandboxMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sandboxMenuItemActionPerformed
         if (sandboxWindow == null) {
@@ -420,6 +454,41 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_customizeMenuMouseClicked
 
+    private void tenMinMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tenMinMenuItemActionPerformed
+        if (enterUsername == null) {
+            enterUsername = new EnterUsername(mainWindow, 600);
+        }
+        enterUsername.setVisible(true);
+    }//GEN-LAST:event_tenMinMenuItemActionPerformed
+
+    private void oneMinMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_oneMinMenuItemActionPerformed
+        if (enterUsername == null) {
+            enterUsername = new EnterUsername(mainWindow, 60);
+        }
+        enterUsername.setVisible(true);
+    }//GEN-LAST:event_oneMinMenuItemActionPerformed
+
+    private void twoMinMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_twoMinMenuItemActionPerformed
+        if (enterUsername == null) {
+            enterUsername = new EnterUsername(mainWindow, 120);
+        }
+        enterUsername.setVisible(true);
+    }//GEN-LAST:event_twoMinMenuItemActionPerformed
+
+    private void fiveMinMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fiveMinMenuItemActionPerformed
+        if (enterUsername == null) {
+            enterUsername = new EnterUsername(mainWindow, 300);
+        }
+        enterUsername.setVisible(true);
+    }//GEN-LAST:event_fiveMinMenuItemActionPerformed
+
+    private void thirtyMinMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thirtyMinMenuItemActionPerformed
+        if (enterUsername == null) {
+            enterUsername = new EnterUsername(mainWindow, 1800);
+        }
+        enterUsername.setVisible(true);
+    }//GEN-LAST:event_thirtyMinMenuItemActionPerformed
+
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -452,26 +521,31 @@ public class MainWindow extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel chessIconDecoration;
     private javax.swing.JLabel chessIconDecoration2;
-    private javax.swing.JMenuItem competitiveMenuItem;
+    private javax.swing.JMenu competitiveMenu;
     private javax.swing.JMenu customizeMenu;
     private javax.swing.JMenu exitMenu;
     private javax.swing.JMenuItem exportGameMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JLabel firstPlaceLabel;
+    private javax.swing.JMenuItem fiveMinMenuItem;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JMenuItem importGameMenuItem;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel leaderboardPanel;
     private javax.swing.JButton newGameButton;
     private javax.swing.JMenu newGameMenuItem;
     private javax.swing.JMenu newMenu;
     private javax.swing.JMenuItem newUserMenuItem;
+    private javax.swing.JMenuItem oneMinMenuItem;
     private javax.swing.JMenuItem sandboxMenuItem;
     private javax.swing.JLabel secondPlaceLabel;
+    private javax.swing.JMenuItem tenMinMenuItem;
     private javax.swing.JLabel thirdPlaceLabel;
+    private javax.swing.JMenuItem thirtyMinMenuItem;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JMenuBar topBar;
+    private javax.swing.JMenuItem twoMinMenuItem;
     private javax.swing.JButton viewFullLeaderboardButton;
     // End of variables declaration//GEN-END:variables
 }
