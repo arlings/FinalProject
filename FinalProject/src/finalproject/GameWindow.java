@@ -404,8 +404,8 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
     }
 
     private void startGame(String user1, String user2, int chosenTime) {
-        initComponents();
         MoveJFrame();
+        initComponents();
         board = loadBoard();
         pieces = loadPieces();
         updateBoardUI();
