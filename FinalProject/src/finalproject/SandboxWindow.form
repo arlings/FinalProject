@@ -3073,6 +3073,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Pawn Move"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pawnMoveBtnActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JRadioButton" name="pawnCaptureBtn">
           <Properties>
@@ -3081,6 +3084,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Pawn Capture"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pawnCaptureBtnActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JRadioButton" name="knightTopLeftHorzBtn">
           <Properties>
