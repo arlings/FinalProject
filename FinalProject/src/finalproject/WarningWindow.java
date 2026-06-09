@@ -66,6 +66,7 @@ public class WarningWindow extends javax.swing.JFrame {
         warningMessage = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setAlwaysOnTop(true);
 
         jPanel2.setBackground(new java.awt.Color(255, 153, 153));
 

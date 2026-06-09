@@ -462,14 +462,6 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         whiteAdvantageLbl.setText("+0");
         blackAdvantageLbl.setText("+0");
     }
-    /* 
-    //for testing
-    private Piece[][] loadPieces(){
-        pieces[5][2] = new Queen(5, 2, loadImage("/images/White_Queen.png"), true);
-        pieces[7][4] = new King(7, 4, loadImage("/images/Black_King.png"), false, false, false, false);
-        return pieces;
-    }
-    */
     
     private Piece[][] loadPieces(String blackSkin, String whiteSkin) {
 
@@ -506,6 +498,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         pieces[7][4] = new King(7, 4, loadImage("/images/" + blackSkin + "Black_King.png"), false, false, false, false);
 
         //returns the fully configured initial piece position matrix array
+        System.out.print(pieces[0][2].getSprite());
         return pieces;
     }
     
@@ -3087,7 +3080,6 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
 
     private void B8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B8LabelMousePressed
         handleClick(7, 1);

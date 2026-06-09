@@ -156,11 +156,11 @@ public class SkinWindow extends javax.swing.JFrame {
             }
             mergeSort(leaderboard, 0, leaderboard.length - 1);
             try {
-                if (leaderboard[0].getUserName().equalsIgnoreCase(userDropdown.getItemAt(userDropdown.getSelectedIndex()))) {
+                if (leaderboard[0].getUserName().equalsIgnoreCase(userDropdown.getItemAt(userDropdown.getSelectedIndex())) && leaderboard[0].getScore() > 3) {
                     skinDropdown.addItem("1stplace");
-                } else if (leaderboard[1].getUserName().equalsIgnoreCase(userDropdown.getItemAt(userDropdown.getSelectedIndex()))) {
+                } else if (leaderboard[1].getUserName().equalsIgnoreCase(userDropdown.getItemAt(userDropdown.getSelectedIndex())) && leaderboard[0].getScore() > 3) {
                     skinDropdown.addItem("2ndplace");
-                } else if (leaderboard[2].getUserName().equalsIgnoreCase(userDropdown.getItemAt(userDropdown.getSelectedIndex()))) {
+                } else if (leaderboard[2].getUserName().equalsIgnoreCase(userDropdown.getItemAt(userDropdown.getSelectedIndex())) && leaderboard[0].getScore() > 3) {
                     skinDropdown.addItem("3rdplace");
                 }
             } catch (ArrayIndexOutOfBoundsException e) {

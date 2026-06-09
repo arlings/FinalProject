@@ -56,8 +56,8 @@ public class MainWindow extends javax.swing.JFrame {
             } catch (ArrayIndexOutOfBoundsException e) {
                 
             }
-        } catch (FileNotFoundException e) {
-            warningWindow = new WarningWindow(this, "There was an error with the Leaderboard file. Please see user manual for more help.");
+        } catch (Exception e) {
+            warningWindow = new WarningWindow(this, "There was an error with the Leaderboard file. Please see user manual for more help. it may be empty");
             warningWindow.setVisible(true);
         }
     }
