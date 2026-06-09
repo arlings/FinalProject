@@ -1,1 +1,1 @@
-Luca,31,0,0,30Wins:Arlind,31,0,0,:
+Luca,31,0,0,Default:Arlind,31,0,0,10Wins:

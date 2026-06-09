@@ -797,6 +797,50 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
             promotionWindow.setVisible(true);
         }
     }
+    
+    public void win(boolean isWhiteTurn) {
+        try {
+            FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
+            FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/Users.txt");
+            Scanner s = new Scanner(in);
+            String[] players = s.nextLine().split(":");
+            for (int i = 0; i < players.length; i++) {
+                if (isWhiteTurn) {
+                    if (players[i].split(",")[0].equalsIgnoreCase(user2Lbl.getText())) {
+                        players[i] = players[i].split(",")[0] + "," + (Integer.parseInt(players[i].split(",")[1]) + 1) + "," +  players[i].split(",")[2] + "," +  players[i].split(",")[3] +  players[i].split(",")[4];
+                    }
+                } else {
+                    if (players[i].split(",")[0].equalsIgnoreCase(user1Lbl.getText())) {
+                        players[i] = players[i].split(",")[0] + "," + (Integer.parseInt(players[i].split(",")[1]) + 1) + "," +  players[i].split(",")[2] + "," +  players[i].split(",")[3] +  players[i].split(",")[4];
+                    }
+                }
+            }
+            for (int i = 0; i < players.length; i++) {
+                if (isWhiteTurn) {
+                    if (players[i].split(",")[0].equalsIgnoreCase(user1Lbl.getText())) {
+                        players[i] = players[i].split(",")[0] + "," + players[i].split(",")[1] + "," +  players[i].split(",")[2] + "," + (Integer.parseInt(players[i].split(",")[3]) + 1) +  players[i].split(",")[4];
+                    }
+                } else {
+                    if (players[i].split(",")[0].equalsIgnoreCase(user2Lbl.getText())) {
+                        players[i] = players[i].split(",")[0] + "," + players[i].split(",")[1] + "," +  players[i].split(",")[2] + "," + (Integer.parseInt(players[i].split(",")[3]) + 1) +  players[i].split(",")[4];
+                    }
+                }
+            }
+            String newFile = "";
+            for (int i = 0; i < players.length; i++) {
+                newFile += players[i] + ":";
+            }
+            try {
+                out.write(newFile.getBytes());
+            } catch (IOException e) {
+                
+            }
+            this.dispose();
+        } catch (FileNotFoundException e) {
+            warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help. (You probably haven't made any users yet!)");
+            warningWindow.setVisible(true); 
+        }
+    }
 
     private void performPostMoveChecks(boolean isWhiteTurn) {
         updateBoardUI();
@@ -816,38 +860,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
             matchTimer.stop();
             JOptionPane.showMessageDialog(null, "Checkmate!");
             if (!isSandbox) {
-                try {
-                    FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
-                    FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/Users.txt");
-                    Scanner s = new Scanner(in);
-                    String[] players = s.nextLine().split(":");
-                    for (int i = 0; i < players.length; i++) {
-                        if (isWhiteTurn) {
-                            if (players[i].split(",")[0].equalsIgnoreCase(user2Lbl.getText())) {
-                                players[i] = players[i].split(",")[0] + "," + (Integer.parseInt(players[i].split(",")[1]) + 1) + "," +  players[i].split(",")[2] + "," +  players[i].split(",")[3];
-                            }
-                        } else {
-                            if (players[i].split(",")[0].equalsIgnoreCase(user1Lbl.getText())) {
-                                players[i] = players[i].split(",")[0] + "," + (Integer.parseInt(players[i].split(",")[1]) + 1) + "," +  players[i].split(",")[2] + "," +  players[i].split(",")[3];
-                            }
-                        }
-                    }
-                    for (int i = 0; i < players.length; i++) {
-                        if (isWhiteTurn) {
-                            if (players[i].split(",")[0].equalsIgnoreCase(user1Lbl.getText())) {
-                                players[i] = players[i].split(",")[0] + "," + players[i].split(",")[1] + "," +  players[i].split(",")[2] + "," + (Integer.parseInt(players[i].split(",")[3]) + 1);
-                            }
-                        } else {
-                            if (players[i].split(",")[0].equalsIgnoreCase(user2Lbl.getText())) {
-                                players[i] = players[i].split(",")[0] + "," + players[i].split(",")[1] + "," +  players[i].split(",")[2] + "," + (Integer.parseInt(players[i].split(",")[3]) + 1);
-                            }
-                        }
-                    }
-                    this.dispose();
-                } catch (FileNotFoundException e) {
-                    warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help. (You probably haven't made any users yet!)");
-                    warningWindow.setVisible(true); 
-                }
+                win(isWhiteTurn);
             } else {
                 this.dispose();
             }

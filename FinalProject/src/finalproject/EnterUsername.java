@@ -132,15 +132,17 @@ public class EnterUsername extends javax.swing.JFrame {
 
     private void goBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBtnActionPerformed
         int chosenTime = Integer.parseInt(timeChosenLabel.getText());
+        // Safety fix: If something wiped out your array, re-initialize it instantly
+        if (usernames == null) {
+            usernames = new String[2];
+        }
         try {   
             FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
             Scanner s = new Scanner(in);
             boolean found = false;
             
-            // To remember Player 1's index across the loop iterations
             int prevIndex = 0; 
             
-            // Loop through all lines in the file to make sure we find the users
             while (s.hasNextLine()) {
                 String line = s.nextLine();
                 if (line.trim().isEmpty()) continue;
@@ -150,12 +152,12 @@ public class EnterUsername extends javax.swing.JFrame {
                 for (int i = 0; i < items.length; i++) {
                     String[] currentUserData = items[i].split(",");
                     
-                    // Track where player 1 is by matching their username in the file
+                    // Fixed: Access the array at index 0 using usernames[0]
                     if (usernames[0] != null && currentUserData[0].equalsIgnoreCase(usernames[0])) {
                         prevIndex = i;
                     }
-                    
                     if (userNameField.getText().equalsIgnoreCase(currentUserData[0])) {
+                        // Fixed: Access the array at index 0 using usernames[0]
                         if (userNameField.getText().equalsIgnoreCase(usernames[0])) {
                             warningWindow = new WarningWindow(this, "You cant play yourself! Silly billy");
                             warningWindow.setVisible(true);
@@ -166,9 +168,9 @@ public class EnterUsername extends javax.swing.JFrame {
                             numOfUsers++;
                             System.out.print(numOfUsers);
                             if (gameWindow == null && numOfUsers == 2) {
+                                // Fixed: Store player 2 name into usernames[1]
                                 usernames[1] = userNameField.getText();
                                 
-                                // Safely splitting the strings once to get values out cleanly
                                 String[] p1Data = items[prevIndex].split(",");
                                 String[] p2Data = items[i].split(",");
                                 
@@ -182,6 +184,7 @@ public class EnterUsername extends javax.swing.JFrame {
                                 this.dispose();
                                 return;
                             } else {
+                                // Fixed: Store player 1 name into usernames[0]
                                 usernames[0] = userNameField.getText();
                                 this.userNameField.setText("");
                                 this.topLabel.setText("Enter your username player 2");
@@ -197,27 +200,27 @@ public class EnterUsername extends javax.swing.JFrame {
             if (!found) {
                 warningWindow = new WarningWindow(this, "This username does not exist. Please create an account first");
                 warningWindow.setVisible(true);
-                usernames[0] = "";
-                usernames[1] = "";
-                numOfUsers = 0;
-                userNameField.setText("");
-                this.dispose();
+                resetSystem();
             }
         } catch (FileNotFoundException e) {
-            // Proper way to catch your specific file exception
-            usernames[0] = "";
-            usernames[1] = "";
-            numOfUsers = 0;
+            resetSystem();
             warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help");
             warningWindow.setVisible(true);
         } catch (Exception e) {
-            usernames[0] = "";
-            usernames[1] = "";
-            numOfUsers = 0;
-            e.printStackTrace(); // Helps you spot other crashes in console
+            resetSystem();
+            e.printStackTrace(); 
         }
     }//GEN-LAST:event_goBtnActionPerformed
 
+    private void resetSystem() {
+        usernames = new String[2]; // Safely reinstantiates the array so it's never null
+        usernames[0] = "";
+        usernames[1] = "";
+        numOfUsers = 0;
+        userNameField.setText("");
+        this.dispose();
+    }
+    
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         numOfUsers = 0;
         usernames = null;

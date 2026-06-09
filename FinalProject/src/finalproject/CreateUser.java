@@ -182,7 +182,7 @@ public class CreateUser extends javax.swing.JFrame {
                     //saves directory is located beside the src folder or JAR
                     FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/Users.txt", true);
                     FileOutputStream out2 = new FileOutputStream(System.getProperty("user.dir") + "/Leaderboard.txt", true);
-                    out.write((userNameField.getText() + ",0,0,0,:").getBytes());
+                    out.write((userNameField.getText() + ",0,0,0,Default:").getBytes());
                     out2.write("".getBytes());
                     userNameField.setText("");
                 } catch (IOException e) {
