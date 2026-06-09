@@ -2,6 +2,7 @@ package pieces;
 
 import java.util.ArrayList;
 import java.awt.image.BufferedImage;
+
 public class CustomPiece extends AbstractPiece {
 
     private boolean pawnMoves = false;
@@ -14,6 +15,7 @@ public class CustomPiece extends AbstractPiece {
 
     /**
      * Custom piece constructor
+     *
      * @param row - row
      * @param col - col
      * @param sprite - image
@@ -24,18 +26,20 @@ public class CustomPiece extends AbstractPiece {
         super(row, col, sprite, isWhite, 0);//calls super constructor with the paramaters
         this.isSandboxMode = isSandboxMode;
     }
-    
+
     /**
      * set the sandbox mode
-     * @param isSandboxMode- boolean of if it is the sandbox mode 
+     *
+     * @param isSandboxMode- boolean of if it is the sandbox mode
      */
     public void setSandboxMode(boolean isSandboxMode) {
         this.isSandboxMode = isSandboxMode;
     }
-    
+
     /**
      * add move rules
-     * @param preset - String  of move
+     *
+     * @param preset - String of move
      */
     public void addMoveRules(String preset) {
         // Rook-like
@@ -110,7 +114,8 @@ public class CustomPiece extends AbstractPiece {
     //fully just copied pasted from AI
     /**
      * removes the move rules
-     * @param preset - String 
+     *
+     * @param preset - String
      */
     public void removeMoveRules(String preset) {
         // Rook-like
@@ -195,6 +200,7 @@ public class CustomPiece extends AbstractPiece {
 
     /**
      * add the move rules
+     *
      * @param dx - delta x
      * @param dy - delta y
      */
@@ -204,6 +210,7 @@ public class CustomPiece extends AbstractPiece {
 
     /**
      * jump the knight
+     *
      * @param moves - array list of moves
      * @param pieces - 2d array of pieces
      * @param dRow - delta row
@@ -224,11 +231,12 @@ public class CustomPiece extends AbstractPiece {
 
     /**
      * searc
+     *
      * @param moves
      * @param pieces
      * @param targetRow
      * @param targetCol
-     * @param direction 
+     * @param direction
      */
     private void searchPawnForward(ArrayList<Move> moves, Piece[][] pieces, int targetRow, int targetCol, int direction) {
         if (isInsideBoard(targetRow, targetCol)) {

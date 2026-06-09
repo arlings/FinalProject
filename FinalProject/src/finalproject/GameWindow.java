@@ -325,8 +325,6 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
                 }
             }
         }
-        //returns null if king matching that color is not found on board array
-        System.out.println("not found");
         return null;
     }
 
@@ -498,7 +496,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         pieces[7][4] = new King(7, 4, loadImage("/images/" + blackSkin + "Black_King.png"), false, false, false, false);
 
         //returns the fully configured initial piece position matrix array
-        System.out.print(pieces[0][2].getSprite());
+        System.out.print("/images/" + whiteSkin + "White_King.png");
         return pieces;
     }
     

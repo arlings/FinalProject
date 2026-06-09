@@ -1,13 +1,10 @@
 package finalproject;
 
-import static finalproject.EnterUsername.usernames;
 import static finalproject.LeaderboardWindow.mergeSort;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.Scanner;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
 
 public class SkinWindow extends javax.swing.JFrame {
     
@@ -185,7 +182,7 @@ public class SkinWindow extends javax.swing.JFrame {
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
         try {
             FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
-            FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/Leaderboard.txt");
+            FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/Users.txt");
             Scanner s = new Scanner(in);
             String[] userInfo = s.nextLine().split(":");
             String user = userDropdown.getItemAt(userDropdown.getSelectedIndex());
@@ -201,7 +198,7 @@ public class SkinWindow extends javax.swing.JFrame {
             try {
                 out.write(changedFile.getBytes());
             } catch (Exception e) {
-                
+                System.out.print(e);
             }
         } catch (FileNotFoundException e) {
             

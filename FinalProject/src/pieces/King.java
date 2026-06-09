@@ -1,4 +1,3 @@
-
 package pieces;
 
 import java.awt.image.BufferedImage;
@@ -10,7 +9,6 @@ public class King extends AbstractPiece {
     private boolean inCheck; //add logic later
     private boolean inCheckMate;
     private boolean hasMoved;
-    
 
     /**
      * Default default constructor
@@ -21,6 +19,7 @@ public class King extends AbstractPiece {
 
     /**
      * King constructor
+     *
      * @param rowNum - row number
      * @param columnNum - column number
      * @param sprite - sprite
@@ -38,6 +37,7 @@ public class King extends AbstractPiece {
 
     /**
      * get the valid moves
+     *
      * @param pieces- 2d array of pieces
      * @return - array list of valid moves
      */
@@ -53,37 +53,39 @@ public class King extends AbstractPiece {
         searchDirection(moves, pieces, rowNum - 1, columnNum + 1, -1, 1);
         searchDirection(moves, pieces, rowNum + 1, columnNum - 1, 1, -1);
         searchDirection(moves, pieces, rowNum - 1, columnNum - 1, -1, -1);
-        
+
         if (!this.hasMoved) {//for castling
             checkCastling(moves, pieces);
         }
-        
+
         return moves;
     }
-    
+
     /**
      * check for castling
+     *
      * @param moves - array list of moves
      * @param pieces - 2d array of pieces
      */
-    private void checkCastling(ArrayList<Move> moves, Piece[][] pieces){
+    private void checkCastling(ArrayList<Move> moves, Piece[][] pieces) {
         Piece kingSidePiece = pieces[this.rowNum][7];
-        if(kingSidePiece instanceof Rook && !((Rook) kingSidePiece).hasMoved()){
-            if(pieces[this.rowNum][5] == null && pieces[this.rowNum][6] == null){
+        if (kingSidePiece instanceof Rook && !((Rook) kingSidePiece).hasMoved()) {
+            if (pieces[this.rowNum][5] == null && pieces[this.rowNum][6] == null) {
                 moves.add(new Move(this.rowNum, 6));
             }
         }
-        
+
         Piece queenSidePiece = pieces[this.rowNum][0];
         if (queenSidePiece instanceof Rook && !((Rook) queenSidePiece).hasMoved()) {
             if (pieces[this.rowNum][1] == null && pieces[this.rowNum][2] == null && pieces[this.rowNum][3] == null) {
-                moves.add(new Move(this.rowNum, 2)); 
+                moves.add(new Move(this.rowNum, 2));
             }
         }
     }
-    
+
     /**
      * search direction
+     *
      * @param moves - array list of moves
      * @param pieces - 2d array of pieces
      * @param currentRow - current row
@@ -110,6 +112,7 @@ public class King extends AbstractPiece {
 
     /**
      * get the number of kings
+     *
      * @return - number of kings
      */
     public static int getNumKings() {
@@ -118,6 +121,7 @@ public class King extends AbstractPiece {
 
     /**
      * get if king is in check
+     *
      * @return - true if in check false otherwise
      */
     public boolean isInCheck() {
@@ -126,31 +130,35 @@ public class King extends AbstractPiece {
 
     /**
      * get if king is in check mate
+     *
      * @return - true if in check mate false otherwise
      */
     public boolean isInCheckMate() {
         inCheckMate = validMoves.isEmpty();
         return inCheckMate;
     }
-    
+
     /**
      * check if king has moved
+     *
      * @return - true if king has moved false otherwise
      */
-    public boolean hasMoved(){
+    public boolean hasMoved() {
         return this.hasMoved;
     }
-    
+
     /**
      * set if king has moved
+     *
      * @param hasMoved - boolean if king has moved
      */
-    public void setHasMoved(boolean hasMoved){
+    public void setHasMoved(boolean hasMoved) {
         this.hasMoved = hasMoved;
     }
 
     /**
      * return toString of king class
+     *
      * @return - toString
      */
     public String toString() {

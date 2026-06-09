@@ -2,7 +2,7 @@ package finalproject;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.InputStream;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class EnterUsername extends javax.swing.JFrame {
@@ -12,7 +12,7 @@ public class EnterUsername extends javax.swing.JFrame {
     private WarningWindow warningWindow;
     
     static int numOfUsers;
-    static String[] usernames = new String[2];
+    static String[] users = new String[2];
     
     public void MoveJFrame() {
         this.setUndecorated(true);
@@ -133,8 +133,8 @@ public class EnterUsername extends javax.swing.JFrame {
     private void goBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBtnActionPerformed
         int chosenTime = Integer.parseInt(timeChosenLabel.getText());
         // Safety fix: If something wiped out your array, re-initialize it instantly
-        if (usernames == null) {
-            usernames = new String[2];
+        if (users == null) {
+            users = new String[2];
         }
         try {   
             FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
@@ -153,12 +153,12 @@ public class EnterUsername extends javax.swing.JFrame {
                     String[] currentUserData = items[i].split(",");
                     
                     // Fixed: Access the array at index 0 using usernames[0]
-                    if (usernames[0] != null && currentUserData[0].equalsIgnoreCase(usernames[0])) {
+                    if (users[0] != null && currentUserData[0].equalsIgnoreCase(users[0])) {
                         prevIndex = i;
                     }
                     if (userNameField.getText().equalsIgnoreCase(currentUserData[0])) {
                         // Fixed: Access the array at index 0 using usernames[0]
-                        if (userNameField.getText().equalsIgnoreCase(usernames[0])) {
+                        if (userNameField.getText().equalsIgnoreCase(users[0])) {
                             warningWindow = new WarningWindow(this, "You cant play yourself! Silly billy");
                             warningWindow.setVisible(true);
                             s.close();
@@ -166,17 +166,17 @@ public class EnterUsername extends javax.swing.JFrame {
                         } else {
                             found = true;
                             numOfUsers++;
-                            System.out.print(numOfUsers);
                             if (gameWindow == null && numOfUsers == 2) {
                                 // Fixed: Store player 2 name into usernames[1]
-                                usernames[1] = userNameField.getText();
+                                users[1] = userNameField.getText();
                                 
                                 String[] p1Data = items[prevIndex].split(",");
                                 String[] p2Data = items[i].split(",");
-                                
+                                System.out.print(Arrays.toString(p1Data));
+                                System.out.print(Arrays.toString(p2Data));
                                 gameWindow = new GameWindow(this, 
-                                    new User(usernames[1], Integer.parseInt(p2Data[1]) - Integer.parseInt(p2Data[3]), p2Data[4]), // user2 slot = Player 2
-                                    new User(usernames[0], Integer.parseInt(p1Data[1]) - Integer.parseInt(p1Data[3]), p1Data[4]), // user1 slot = Player 1
+                                    new User(users[1], Integer.parseInt(p2Data[1]) - Integer.parseInt(p2Data[3]), p2Data[4]), // user2 slot = Player 2
+                                    new User(users[0], Integer.parseInt(p1Data[1]) - Integer.parseInt(p1Data[3]), p1Data[4]), // user1 slot = Player 1
                                     chosenTime, false);
                                 
                                 gameWindow.setVisible(true);
@@ -185,7 +185,7 @@ public class EnterUsername extends javax.swing.JFrame {
                                 return;
                             } else {
                                 // Fixed: Store player 1 name into usernames[0]
-                                usernames[0] = userNameField.getText();
+                                users[0] = userNameField.getText();
                                 this.userNameField.setText("");
                                 this.topLabel.setText("Enter your username player 2");
                                 s.close();
@@ -213,9 +213,9 @@ public class EnterUsername extends javax.swing.JFrame {
     }//GEN-LAST:event_goBtnActionPerformed
 
     private void resetSystem() {
-        usernames = new String[2]; // Safely reinstantiates the array so it's never null
-        usernames[0] = "";
-        usernames[1] = "";
+        users = new String[2]; // Safely reinstantiates the array so it's never null
+        users[0] = "";
+        users[1] = "";
         numOfUsers = 0;
         userNameField.setText("");
         this.dispose();
@@ -223,7 +223,7 @@ public class EnterUsername extends javax.swing.JFrame {
     
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         numOfUsers = 0;
-        usernames = null;
+        users = null;
         this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 

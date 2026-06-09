@@ -1,1 +1,1 @@
-Arlind,0,0,0,Default:Neo,0,0,0,Default:Luca,0,0,0,Default:
+#1 Arlind, score = 100#2 Neo, score = 40#3 Luca, score = 10

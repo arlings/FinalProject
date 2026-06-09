@@ -1,14 +1,12 @@
-
 package pieces;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-
 public class Queen extends AbstractPiece {
-    
+
     private static int numQueens = 0;
-    
+
     /**
      * default queen constructor
      */
@@ -19,6 +17,7 @@ public class Queen extends AbstractPiece {
 
     /**
      * Queen constructor
+     *
      * @param rowNum - rown number
      * @param columnNum - column number
      * @param sprite - sprite
@@ -29,9 +28,9 @@ public class Queen extends AbstractPiece {
         numQueens++;//number of queens increase
     }
 
-   
     /**
      * get the valid moves
+     *
      * @param pieces- d2 array of pieces
      * @return - an array list of all the valid moves
      */
@@ -53,6 +52,7 @@ public class Queen extends AbstractPiece {
 
     /**
      * get the number of queens
+     *
      * @return - the number of queens
      */
     public static int getNumQueens() {
@@ -61,11 +61,12 @@ public class Queen extends AbstractPiece {
 
     /**
      * return the status of an instance of the queen
+     *
      * @return - the status
      */
     public String toString() {
         return ("Piece Type: Queen"
                 + super.toString());//calls the super constructor for toString
     }
-    
+
 }
