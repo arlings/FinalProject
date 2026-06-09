@@ -170,11 +170,14 @@ public class SkinWindow extends javax.swing.JFrame {
             
         }
         
-        if (wins > 30) {
+        if (wins >= 30) {
             skinDropdown.addItem("30Wins");
-        } else if (wins > 20) {
             skinDropdown.addItem("20Wins");
-        } else if (wins > 10) {
+            skinDropdown.addItem("10Wins");
+        } else if (wins >= 20) {
+            skinDropdown.addItem("20Wins");
+            skinDropdown.addItem("10Wins");
+        } else if (wins >= 10) {
             skinDropdown.addItem("10Wins");
         } 
     }//GEN-LAST:event_userDropdownActionPerformed
