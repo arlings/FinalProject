@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 #1 Luca, score = 31#2 Arlind, score = 31#3 Pascal, score = 0
+=======
+Luca,31,0,0,30Wins:Arlind,31,0,0,Default:
+>>>>>>> origin/main
