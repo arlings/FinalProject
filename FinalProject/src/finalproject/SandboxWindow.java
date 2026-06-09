@@ -1,11 +1,27 @@
 package finalproject;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import pieces.CustomPiece;
+import pieces.Move;
+import pieces.Piece;
+import repo.FileImporter;
+
 public class SandboxWindow extends javax.swing.JFrame {
 
     private GameWindow gameWindow;
     MainWindow mainWindow;
-    
-    // https://stackoverflow.com/questions/16046824/making-a-java-swing-frame-movable-and-setundecorated
+    private JLabel[][] board = new JLabel[8][8];
+    private Piece[][] pieces = new Piece[8][8];
+    private FileImporter fileImporter = new FileImporter();
+
+    //https://stackoverflow.com/questions/16046824/making-a-java-swing-frame-movable-and-setundecorated
     public void MoveJFrame() {
         this.setUndecorated(true);
         MainWindow.FrameDragListener frameDragListener = new MainWindow.FrameDragListener(this);
@@ -15,11 +31,131 @@ public class SandboxWindow extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
-    
+
     public SandboxWindow(MainWindow m) {
         MoveJFrame();
         initComponents();
         mainWindow = m;
+        board = loadBoard();
+        startGame();
+    }
+
+    private void updateBoardUI() {
+        //loops through all board rows to synchronize graphic frame boxes
+        for (int row = 0; row < 8; row++) {
+            //loops through all board columns to synchronize graphic frame boxes
+            for (int col = 0; col < 8; col++) {
+                Piece piece = pieces[row][col];
+                //if a piece sits on this array slot it pulls its sprite image file
+                if (piece != null) {
+                    BufferedImage img = piece.getSprite();
+                    //if image loads correctly icon is mapped to label else sets transparent icon
+                    if (img != null) {
+                        board[row][col].setIcon(new ImageIcon(img));
+                    }
+                } else {
+                    Icon currentIcon = board[row][col].getIcon();
+
+                    // Only reset to transparent if it DOES NOT have the green dot
+                    if (!isGreenDotIcon(currentIcon)) {
+                        setTransparentIcon(board[row][col]);
+                    }
+                }
+
+                //forces layout manager to redraw and recalculate box label visuals
+                board[row][col].revalidate();
+                board[row][col].repaint();
+            }
+        }
+    }
+
+    private boolean isGreenDotIcon(Icon icon) {
+        if (icon == null) {
+            return false;
+        }
+        ImageIcon dot = (ImageIcon) icon;
+        return "GREEN_DOT".equals(dot.getDescription()); //AI
+    }
+
+    private ImageIcon overlayImages(Piece piece, BufferedImage dot) {
+
+        //if piece object is null it just prints the plain dot indicator image
+        if (piece == null) {
+            return new ImageIcon(dot);
+        }
+
+        BufferedImage base = piece.getSprite();
+
+        //creates container canvas matching width and height dimensions of base piece image
+        BufferedImage combined = new BufferedImage(
+                base.getWidth(),
+                base.getHeight(),
+                BufferedImage.TYPE_INT_ARGB);
+
+        //draws piece sprite onto canvas first then paints indicator dot directly on top
+        java.awt.Graphics g = combined.getGraphics();
+        g.drawImage(base, 0, 0, null);
+        g.drawImage(dot, 0, 0, null);
+        g.dispose();
+
+        //returns the merged combined image wrapped inside a swing icon object container
+        return new ImageIcon(combined);
+    }
+
+    private void setTransparentIcon(JLabel label) {
+        BufferedImage img = loadImage("/images/Transparent_Background.png");
+
+        //assigns transparent asset icon to label or sets null if image fails file stream check
+        if (img != null) {
+            label.setIcon(new ImageIcon(img));
+        } else {
+            label.setIcon(null);
+        }
+    }
+
+    private BufferedImage loadImage(String filePath) {
+        try {
+            return fileImporter.loadImage(filePath);
+        } catch (IOException ex) {
+            Logger.getLogger(GameWindow.class.getName())
+                    .log(Level.SEVERE, "Failed to load image: " + filePath, ex);
+            return null;
+        }
+    }
+
+    private JLabel[][] loadBoard() {
+        //returns a hardcoded label mapping matching rows and columns layout of grid swing panel
+        return new JLabel[][]{
+            {A1Label, B1Label, C1Label, D1Label, E1Label, F1Label, G1Label, H1Label},
+            {A2Label, B2Label, C2Label, D2Label, E2Label, F2Label, G2Label, H2Label},
+            {A3Label, B3Label, C3Label, D3Label, E3Label, F3Label, G3Label, H3Label},
+            {A4Label, B4Label, C4Label, D4Label, E4Label, F4Label, G4Label, H4Label},
+            {A5Label, B5Label, C5Label, D5Label, E5Label, F5Label, G5Label, H5Label},
+            {A6Label, B6Label, C6Label, D6Label, E6Label, F6Label, G6Label, H6Label},
+            {A7Label, B7Label, C7Label, D7Label, E7Label, F7Label, G7Label, H7Label},
+            {A8Label, B8Label, C8Label, D8Label, E8Label, F8Label, G8Label, H8Label}
+        };
+    }
+
+    private void startGame() {
+        pieces = new Piece[8][8];
+        Piece myPiece = new CustomPiece(3, 4, loadImage("/images/White_Pawn.png"), true);
+        pieces[3][4] = myPiece;
+        updateBoardUI();
+    }
+
+    private void showValidMoves(Piece piece) {
+        updateBoardUI();
+        ArrayList<Move> validMoves = piece.getValidMoves(pieces);
+        BufferedImage dot = loadImage("/images/LightGreenPicture.png");
+
+        for (Move move : validMoves) {
+            int r = move.getRowNum();
+            int c = move.getColumnNum();
+            ImageIcon dotIcon = new ImageIcon(dot);
+            dotIcon.setDescription("GREEN_DOT");
+            board[r][c].setIcon(dotIcon);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -27,17 +163,9 @@ public class SandboxWindow extends javax.swing.JFrame {
     private void initComponents() {
 
         startSandboxGameButton = new javax.swing.JButton();
-        editPawnButton = new javax.swing.JButton();
-        editKnightButton = new javax.swing.JButton();
-        editBishopButton = new javax.swing.JButton();
-        editRookButton = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        editQueenBtn = new javax.swing.JButton();
-        editKingBtn = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         G2 = new javax.swing.JPanel();
         G2Label = new javax.swing.JLabel();
@@ -45,8 +173,6 @@ public class SandboxWindow extends javax.swing.JFrame {
         F7Label = new javax.swing.JLabel();
         G3 = new javax.swing.JPanel();
         G3Label = new javax.swing.JLabel();
-        startGameBtn = new javax.swing.JButton();
-        resetBtn = new javax.swing.JButton();
         G8 = new javax.swing.JPanel();
         G8Label = new javax.swing.JLabel();
         F5 = new javax.swing.JPanel();
@@ -169,10 +295,35 @@ public class SandboxWindow extends javax.swing.JFrame {
         E7Label = new javax.swing.JLabel();
         D3 = new javax.swing.JPanel();
         D3Label = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        pawnMoveBtn = new javax.swing.JRadioButton();
+        pawnCaptureBtn = new javax.swing.JRadioButton();
+        knightTopLeftHorzBtn = new javax.swing.JRadioButton();
+        knightTopRightHorzBtn = new javax.swing.JRadioButton();
+        knightBottomLeftHorzBtn = new javax.swing.JRadioButton();
+        knightBottomRightHorzBtn = new javax.swing.JRadioButton();
+        bishopTopLeftBtn = new javax.swing.JRadioButton();
+        bishopTopRightBtn = new javax.swing.JRadioButton();
+        bishopBottomLeftBtn = new javax.swing.JRadioButton();
+        bishopBottomRight = new javax.swing.JRadioButton();
+        rookLeftBtn = new javax.swing.JRadioButton();
+        rookRightBtn = new javax.swing.JRadioButton();
+        rookUpBtn = new javax.swing.JRadioButton();
+        rookDownBtn = new javax.swing.JRadioButton();
+        jLabel2 = new javax.swing.JLabel();
+        queenBtn = new javax.swing.JRadioButton();
+        knightBtn = new javax.swing.JRadioButton();
+        bishopBtn = new javax.swing.JRadioButton();
+        rookBtn = new javax.swing.JRadioButton();
+        pawnBtn = new javax.swing.JRadioButton();
+        knightTopLeftVertBtn = new javax.swing.JRadioButton();
+        knightTopRightVertBtn = new javax.swing.JRadioButton();
+        knightBottomLeftVertBtn = new javax.swing.JRadioButton();
+        knightBottomRightVertBtn = new javax.swing.JRadioButton();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -182,14 +333,6 @@ public class SandboxWindow extends javax.swing.JFrame {
                 startSandboxGameButtonActionPerformed(evt);
             }
         });
-
-        editPawnButton.setText("Edit Pawn");
-
-        editKnightButton.setText("Edit Knight");
-
-        editBishopButton.setText("Edit Bishop");
-
-        editRookButton.setText("Edit Rook");
 
         jButton1.setText("Cancel");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -217,14 +360,6 @@ public class SandboxWindow extends javax.swing.JFrame {
                 .addGap(0, 6, Short.MAX_VALUE)
                 .addComponent(jLabel1))
         );
-
-        editQueenBtn.setText("Edit Queen");
-
-        editKingBtn.setText("Edit King");
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Black_Pawn.png"))); // NOI18N
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Black_Knight.png"))); // NOI18N
 
         G2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -303,22 +438,6 @@ public class SandboxWindow extends javax.swing.JFrame {
                 .addComponent(G3Label)
                 .addGap(27, 27, 27))
         );
-
-        startGameBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
-        startGameBtn.setText("Start Game");
-        startGameBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                startGameBtnActionPerformed(evt);
-            }
-        });
-
-        resetBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
-        resetBtn.setText("Reset Game");
-        resetBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                resetBtnActionPerformed(evt);
-            }
-        });
 
         G8.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -525,7 +644,7 @@ public class SandboxWindow extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, H8Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(H8Label)
-                .addGap(27, 27, 27))
+                .addGap(20, 20, 20))
         );
 
         C5.setBackground(new java.awt.Color(153, 102, 0));
@@ -1906,13 +2025,246 @@ public class SandboxWindow extends javax.swing.JFrame {
                 .addGap(27, 27, 27))
         );
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Black_Queen.png"))); // NOI18N
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Black_Rook.png"))); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Segoe UI Black", 0, 36)); // NOI18N
+        jLabel9.setText("Presets");
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Black_Bishop.png"))); // NOI18N
+        pawnMoveBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        pawnMoveBtn.setText("Pawn Move");
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Black_King.png"))); // NOI18N
+        pawnCaptureBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        pawnCaptureBtn.setText("Pawn Capture");
+
+        knightTopLeftHorzBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        knightTopLeftHorzBtn.setText("Knight Top Left Horz");
+
+        knightTopRightHorzBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        knightTopRightHorzBtn.setText("Knight Top Right Horz");
+        knightTopRightHorzBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                knightTopRightHorzBtnActionPerformed(evt);
+            }
+        });
+
+        knightBottomLeftHorzBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        knightBottomLeftHorzBtn.setText("Knight Bottom Left Horz");
+
+        knightBottomRightHorzBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        knightBottomRightHorzBtn.setText("Knight Bottom Right Horz");
+        knightBottomRightHorzBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                knightBottomRightHorzBtnActionPerformed(evt);
+            }
+        });
+
+        bishopTopLeftBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        bishopTopLeftBtn.setText("Bishop Top Left");
+
+        bishopTopRightBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        bishopTopRightBtn.setText("Bishop Top Right");
+
+        bishopBottomLeftBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        bishopBottomLeftBtn.setText("Bishop Bottom Left");
+
+        bishopBottomRight.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        bishopBottomRight.setText("Bishop Bottom Right");
+
+        rookLeftBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rookLeftBtn.setText("Rook Left");
+
+        rookRightBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rookRightBtn.setText("Rook Right");
+
+        rookUpBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rookUpBtn.setText("Rook Up");
+
+        rookDownBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rookDownBtn.setText("Rook Down");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        jLabel2.setText("Combine as many presets you want!");
+
+        queenBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        queenBtn.setText("Queen");
+
+        knightBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        knightBtn.setText("Knight");
+
+        bishopBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        bishopBtn.setText("Bishop");
+
+        rookBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        rookBtn.setText("Rook");
+
+        pawnBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        pawnBtn.setText("Pawn");
+        pawnBtn.setActionCommand("Pawn");
+        pawnBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pawnBtnActionPerformed(evt);
+            }
+        });
+
+        knightTopLeftVertBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        knightTopLeftVertBtn.setText("Knight Top Left Vert");
+        knightTopLeftVertBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                knightTopLeftVertBtnActionPerformed(evt);
+            }
+        });
+
+        knightTopRightVertBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        knightTopRightVertBtn.setText("Knight Top Right Vert");
+        knightTopRightVertBtn.setActionCommand("Knight Top Right Vert");
+
+        knightBottomLeftVertBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        knightBottomLeftVertBtn.setText("Knight Bottom Left Vert");
+
+        knightBottomRightVertBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        knightBottomRightVertBtn.setText("Knight Bottom Right Vert");
+        knightBottomRightVertBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                knightBottomRightVertBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(knightTopRightHorzBtn)
+                            .addComponent(knightBottomRightHorzBtn)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(pawnMoveBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(knightBottomLeftHorzBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(pawnCaptureBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(knightTopLeftHorzBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(35, 35, 35)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(knightTopRightVertBtn)
+                            .addComponent(knightBottomRightVertBtn)
+                            .addComponent(knightBottomLeftVertBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(knightTopLeftVertBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(bishopTopLeftBtn)
+                            .addComponent(bishopTopRightBtn)
+                            .addComponent(bishopBottomLeftBtn)
+                            .addComponent(bishopBottomRight)
+                            .addComponent(rookLeftBtn)
+                            .addComponent(rookRightBtn)
+                            .addComponent(rookUpBtn)
+                            .addComponent(rookDownBtn)
+                            .addComponent(queenBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(knightBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(bishopBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(rookBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pawnBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(34, 34, 34)
+                                .addComponent(jLabel2)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(17, 17, 17))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel9)
+                .addGap(161, 161, 161))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(pawnBtn)
+                .addGap(2, 2, 2)
+                .addComponent(pawnMoveBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pawnCaptureBtn)
+                .addGap(20, 20, 20)
+                .addComponent(knightBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(knightTopLeftHorzBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(knightTopRightHorzBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(knightBottomLeftHorzBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(knightBottomRightHorzBtn))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(knightTopLeftVertBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(knightTopRightVertBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(knightBottomLeftVertBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(knightBottomRightVertBtn)))
+                .addGap(20, 20, 20)
+                .addComponent(bishopBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bishopTopLeftBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bishopTopRightBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bishopBottomLeftBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bishopBottomRight)
+                .addGap(20, 20, 20)
+                .addComponent(rookBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rookLeftBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rookRightBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rookUpBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rookDownBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(queenBtn)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI Black", 0, 36)); // NOI18N
+        jLabel10.setText("Icon ");
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Pawn.png"))); // NOI18N
+        jLabel3.setText("jLabel3");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(38, Short.MAX_VALUE)
+                .addComponent(jLabel10)
+                .addGap(29, 29, 29))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel3)
+                .addContainerGap(634, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -2052,122 +2404,71 @@ public class SandboxWindow extends javax.swing.JFrame {
                                 .addGap(0, 0, 0)
                                 .addComponent(H7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 374, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(startSandboxGameButton))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel4))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(startGameBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(resetBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel8)
-                                                .addGap(73, 73, 73))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addComponent(jLabel6)
-                                                .addGap(73, 73, 73)))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                            .addComponent(jLabel7)
-                                            .addGap(73, 73, 73)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addGap(73, 73, 73)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(editQueenBtn)
-                                    .addComponent(editKingBtn)
-                                    .addComponent(editBishopButton)
-                                    .addComponent(editRookButton)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(editPawnButton)
-                                        .addComponent(editKnightButton)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(8, 8, 8)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(99, 99, 99)
+                        .addComponent(jLabel4)
+                        .addGap(0, 116, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                            .addComponent(C8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                            .addComponent(B8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                            .addComponent(A8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                            .addComponent(D8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                            .addComponent(E8, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                                            .addComponent(F8, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                                            .addComponent(G8, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                                            .addComponent(H8, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addGap(0, 0, 0)
-                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                            .addComponent(H7, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addComponent(G7, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addComponent(F7, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addComponent(E7, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addComponent(D7, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addComponent(C7, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addComponent(B7, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addComponent(A7, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                            .addComponent(jLabel2)
-                                                            .addComponent(editPawnButton))
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                            .addComponent(jLabel3)
-                                                            .addComponent(editKnightButton))
-                                                        .addGap(10, 10, 10)
-                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                            .addComponent(jLabel5)
-                                                            .addComponent(editQueenBtn))
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE))))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(57, 57, 57)
-                                                .addComponent(jLabel4)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(H6, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(G6, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(F6, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(D6, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(C6, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(B6, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(A6, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(E6, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(editRookButton, javax.swing.GroupLayout.Alignment.TRAILING)))
-                                    .addComponent(jLabel8))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(C8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(B8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(A8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(D8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(E8, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                    .addComponent(F8, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                    .addComponent(G8, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                    .addComponent(H8, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, 0)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(H5, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(G5, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(F5, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(E5, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(D5, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(C5, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(B5, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(A5, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(editBishopButton))))
-                            .addComponent(jLabel6))
+                                    .addComponent(H7, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(G7, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(F7, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(E7, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(D7, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(C7, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(B7, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(A7, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(57, 57, 57)
+                                .addComponent(jLabel4)))
+                        .addGap(0, 0, 0)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(H6, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(G6, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(F6, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(D6, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(C6, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(B6, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(A6, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(E6, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(H5, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(G5, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(F5, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(E5, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(D5, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(C5, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(B5, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(A5, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(H4, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(G4, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2176,14 +2477,8 @@ public class SandboxWindow extends javax.swing.JFrame {
                             .addComponent(C4, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(B4, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(A4, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(E4, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel7))))
-                    .addComponent(editKingBtn))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
+                            .addComponent(E4, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, 0)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(H3, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(G3, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2192,13 +2487,7 @@ public class SandboxWindow extends javax.swing.JFrame {
                             .addComponent(D3, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(C3, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(B3, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(A3, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(startGameBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                            .addComponent(A3, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(H2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(G2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2208,24 +2497,26 @@ public class SandboxWindow extends javax.swing.JFrame {
                             .addComponent(B2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(A2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(E2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 6, Short.MAX_VALUE))
+                        .addGap(0, 4, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(H1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(G1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(F1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(E1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(D1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(C1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(B1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(A1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(resetBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(H1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(G1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(F1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(E1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(D1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(C1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(B1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(A1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(startSandboxGameButton))
-                .addContainerGap())
+                .addGap(18, 18, 18))
         );
 
         pack();
@@ -2244,274 +2535,229 @@ public class SandboxWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_startSandboxGameButtonActionPerformed
 
     private void G2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G2LabelMousePressed
-        handleClick(1, 6);
     }//GEN-LAST:event_G2LabelMousePressed
 
     private void F7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F7LabelMousePressed
-        handleClick(6, 5);
     }//GEN-LAST:event_F7LabelMousePressed
 
     private void G3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G3LabelMousePressed
-        handleClick(2, 6);
     }//GEN-LAST:event_G3LabelMousePressed
 
-    private void startGameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startGameBtnActionPerformed
-        startTimer();
-        startGameBtn.setEnabled(false);
-        resetBtn.setEnabled(true);
-    }//GEN-LAST:event_startGameBtnActionPerformed
-
-    private void resetBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetBtnActionPerformed
-        //https://stackoverflow.com/questions/15853112/joptionpane-yes-no-option
-        int response = JOptionPane.showConfirmDialog(this, "Are you sure you want to reset the match? This will clear current progress.", "Reset Game", JOptionPane.YES_NO_OPTION);
-        if (response == JOptionPane.YES_OPTION) {
-            resetGame();
-        }
-    }//GEN-LAST:event_resetBtnActionPerformed
-
     private void G8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G8LabelMousePressed
-        handleClick(7, 6);
     }//GEN-LAST:event_G8LabelMousePressed
 
     private void F5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F5LabelMousePressed
-        handleClick(4, 5);
     }//GEN-LAST:event_F5LabelMousePressed
 
     private void G1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G1LabelMousePressed
-        handleClick(0, 6);
     }//GEN-LAST:event_G1LabelMousePressed
 
     private void D1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D1LabelMousePressed
-        handleClick(0, 3);
     }//GEN-LAST:event_D1LabelMousePressed
 
     private void F4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F4LabelMousePressed
-        handleClick(3, 5);
     }//GEN-LAST:event_F4LabelMousePressed
 
     private void G7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G7LabelMousePressed
-        handleClick(6, 6);
     }//GEN-LAST:event_G7LabelMousePressed
 
     private void E8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E8LabelMousePressed
-        handleClick(7, 4);
     }//GEN-LAST:event_E8LabelMousePressed
 
     private void H8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H8LabelMousePressed
-        handleClick(7, 7);
     }//GEN-LAST:event_H8LabelMousePressed
 
     private void C5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C5LabelMousePressed
-        handleClick(4, 2);
     }//GEN-LAST:event_C5LabelMousePressed
 
     private void H4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H4LabelMousePressed
-        handleClick(3, 7);
     }//GEN-LAST:event_H4LabelMousePressed
 
     private void D5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D5LabelMousePressed
-        handleClick(4, 3);
     }//GEN-LAST:event_D5LabelMousePressed
 
     private void E6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E6LabelMousePressed
-        handleClick(5, 4);
     }//GEN-LAST:event_E6LabelMousePressed
 
     private void H2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H2LabelMousePressed
-        handleClick(1, 7);
     }//GEN-LAST:event_H2LabelMousePressed
 
     private void H6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H6LabelMousePressed
-        handleClick(5, 7);
     }//GEN-LAST:event_H6LabelMousePressed
 
     private void C7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C7LabelMousePressed
-        handleClick(6, 2);
     }//GEN-LAST:event_C7LabelMousePressed
 
     private void H3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H3LabelMousePressed
-        handleClick(2, 7);
     }//GEN-LAST:event_H3LabelMousePressed
 
     private void F8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F8LabelMousePressed
-        handleClick(7, 5);
     }//GEN-LAST:event_F8LabelMousePressed
 
     private void G4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G4LabelMousePressed
-        handleClick(3, 6);
     }//GEN-LAST:event_G4LabelMousePressed
 
     private void C4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C4LabelMousePressed
-        handleClick(3, 2);
     }//GEN-LAST:event_C4LabelMousePressed
 
     private void C2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C2LabelMousePressed
-        handleClick(1, 2);
     }//GEN-LAST:event_C2LabelMousePressed
 
     private void B2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B2LabelMousePressed
-        handleClick(1, 1);
     }//GEN-LAST:event_B2LabelMousePressed
 
     private void G5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G5LabelMousePressed
-        handleClick(4, 6);
     }//GEN-LAST:event_G5LabelMousePressed
 
     private void A4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A4LabelMousePressed
-        handleClick(3, 0);
     }//GEN-LAST:event_A4LabelMousePressed
 
     private void C6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C6LabelMousePressed
-        handleClick(5, 2);
     }//GEN-LAST:event_C6LabelMousePressed
 
     private void E3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E3LabelMousePressed
-        handleClick(2, 4);
     }//GEN-LAST:event_E3LabelMousePressed
 
     private void H7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H7LabelMousePressed
-        handleClick(6, 7);
     }//GEN-LAST:event_H7LabelMousePressed
 
     private void B4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B4LabelMousePressed
-        handleClick(3, 1);
     }//GEN-LAST:event_B4LabelMousePressed
 
     private void B3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B3LabelMousePressed
-        handleClick(2, 1);
     }//GEN-LAST:event_B3LabelMousePressed
 
     private void E5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E5LabelMousePressed
-        handleClick(4, 4);
     }//GEN-LAST:event_E5LabelMousePressed
 
     private void D2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D2LabelMousePressed
-        handleClick(1, 3);
     }//GEN-LAST:event_D2LabelMousePressed
 
     private void B5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B5LabelMousePressed
-        handleClick(4, 1);
     }//GEN-LAST:event_B5LabelMousePressed
 
     private void F6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F6LabelMousePressed
-        handleClick(5, 5);
     }//GEN-LAST:event_F6LabelMousePressed
 
     private void D7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D7LabelMousePressed
-        handleClick(6, 3);
     }//GEN-LAST:event_D7LabelMousePressed
 
     private void H5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H5LabelMousePressed
-        handleClick(4, 7);
     }//GEN-LAST:event_H5LabelMousePressed
 
     private void E2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E2LabelMousePressed
-        handleClick(1, 4);
     }//GEN-LAST:event_E2LabelMousePressed
 
     private void A8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A8LabelMousePressed
-        handleClick(7, 0);
     }//GEN-LAST:event_A8LabelMousePressed
 
     private void A1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A1LabelMousePressed
-        handleClick(0, 0);
     }//GEN-LAST:event_A1LabelMousePressed
 
     private void A5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A5LabelMousePressed
-        handleClick(4, 0);
     }//GEN-LAST:event_A5LabelMousePressed
 
     private void A3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A3LabelMousePressed
-        handleClick(2, 0);
     }//GEN-LAST:event_A3LabelMousePressed
 
     private void D4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D4LabelMousePressed
-        handleClick(3, 3);
     }//GEN-LAST:event_D4LabelMousePressed
 
     private void C3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C3LabelMousePressed
-        handleClick(2, 2);
     }//GEN-LAST:event_C3LabelMousePressed
 
     private void G6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G6LabelMousePressed
-        handleClick(5, 6);
     }//GEN-LAST:event_G6LabelMousePressed
 
     private void B1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B1LabelMousePressed
-        handleClick(0, 1);
     }//GEN-LAST:event_B1LabelMousePressed
 
     private void B6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B6LabelMousePressed
-        handleClick(5, 1);
     }//GEN-LAST:event_B6LabelMousePressed
 
     private void B7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B7LabelMousePressed
-        handleClick(6, 1);
     }//GEN-LAST:event_B7LabelMousePressed
 
     private void F3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F3LabelMousePressed
-        handleClick(2, 5);
     }//GEN-LAST:event_F3LabelMousePressed
 
     private void A2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A2LabelMousePressed
-        handleClick(1, 0);
     }//GEN-LAST:event_A2LabelMousePressed
 
     private void A6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A6LabelMousePressed
-        handleClick(5, 0);
     }//GEN-LAST:event_A6LabelMousePressed
 
     private void B8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B8LabelMousePressed
-        handleClick(7, 1);
     }//GEN-LAST:event_B8LabelMousePressed
 
     private void C8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C8LabelMousePressed
-        handleClick(7, 2);
     }//GEN-LAST:event_C8LabelMousePressed
 
     private void E1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E1LabelMousePressed
-        handleClick(0, 4);
     }//GEN-LAST:event_E1LabelMousePressed
 
     private void H1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H1LabelMousePressed
-        handleClick(0, 7);
     }//GEN-LAST:event_H1LabelMousePressed
 
     private void D6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D6LabelMousePressed
-        handleClick(5, 3);
     }//GEN-LAST:event_D6LabelMousePressed
 
     private void E4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E4LabelMousePressed
-        handleClick(3, 4);
     }//GEN-LAST:event_E4LabelMousePressed
 
     private void A7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A7LabelMousePressed
-        handleClick(6, 0);
     }//GEN-LAST:event_A7LabelMousePressed
 
     private void C1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C1LabelMousePressed
-        handleClick(0, 2);
     }//GEN-LAST:event_C1LabelMousePressed
 
     private void F1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F1LabelMousePressed
-        handleClick(0, 5);
     }//GEN-LAST:event_F1LabelMousePressed
 
     private void F2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F2LabelMousePressed
-        handleClick(1, 5);
     }//GEN-LAST:event_F2LabelMousePressed
 
     private void D8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D8LabelMousePressed
-        handleClick(7, 3);
     }//GEN-LAST:event_D8LabelMousePressed
 
     private void E7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E7LabelMousePressed
-        handleClick(6, 4);
     }//GEN-LAST:event_E7LabelMousePressed
 
     private void D3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D3LabelMousePressed
-        handleClick(2, 3);
     }//GEN-LAST:event_D3LabelMousePressed
+
+    private void knightBottomRightHorzBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_knightBottomRightHorzBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_knightBottomRightHorzBtnActionPerformed
+
+    private void knightBottomRightVertBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_knightBottomRightVertBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_knightBottomRightVertBtnActionPerformed
+
+    private void knightTopRightHorzBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_knightTopRightHorzBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_knightTopRightHorzBtnActionPerformed
+
+    private void knightTopLeftVertBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_knightTopLeftVertBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_knightTopLeftVertBtnActionPerformed
+
+    private void pawnBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pawnBtnActionPerformed
+        CustomPiece customPiece = (CustomPiece) pieces[3][4];
+        if (pawnBtn.isSelected()) {
+            customPiece.addMoveRules("PAWN");
+            showValidMoves(customPiece);
+            //System.out.println(customPiece.getValidMoves(pieces).size());
+        } else {
+            customPiece.removeMoveRules("PAWN");
+            int r = customPiece.getRowNum();
+            int c = customPiece.getColumnNum();
+            setTransparentIcon(board[r+1][c]);
+            setTransparentIcon(board[r+2][c]);
+            //System.out.println(customPiece.getValidMoves(pieces).size());
+        }
+        updateBoardUI();
+    }//GEN-LAST:event_pawnBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -2643,24 +2889,40 @@ public class SandboxWindow extends javax.swing.JFrame {
     private javax.swing.JLabel H7Label;
     private javax.swing.JPanel H8;
     private javax.swing.JLabel H8Label;
-    private javax.swing.JButton editBishopButton;
-    private javax.swing.JButton editKingBtn;
-    private javax.swing.JButton editKnightButton;
-    private javax.swing.JButton editPawnButton;
-    private javax.swing.JButton editQueenBtn;
-    private javax.swing.JButton editRookButton;
+    private javax.swing.JRadioButton bishopBottomLeftBtn;
+    private javax.swing.JRadioButton bishopBottomRight;
+    private javax.swing.JRadioButton bishopBtn;
+    private javax.swing.JRadioButton bishopTopLeftBtn;
+    private javax.swing.JRadioButton bishopTopRightBtn;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JButton resetBtn;
-    private javax.swing.JButton startGameBtn;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JRadioButton knightBottomLeftHorzBtn;
+    private javax.swing.JRadioButton knightBottomLeftVertBtn;
+    private javax.swing.JRadioButton knightBottomRightHorzBtn;
+    private javax.swing.JRadioButton knightBottomRightVertBtn;
+    private javax.swing.JRadioButton knightBtn;
+    private javax.swing.JRadioButton knightTopLeftHorzBtn;
+    private javax.swing.JRadioButton knightTopLeftVertBtn;
+    private javax.swing.JRadioButton knightTopRightHorzBtn;
+    private javax.swing.JRadioButton knightTopRightVertBtn;
+    private javax.swing.JRadioButton pawnBtn;
+    private javax.swing.JRadioButton pawnCaptureBtn;
+    private javax.swing.JRadioButton pawnMoveBtn;
+    private javax.swing.JRadioButton queenBtn;
+    private javax.swing.JRadioButton rookBtn;
+    private javax.swing.JRadioButton rookDownBtn;
+    private javax.swing.JRadioButton rookLeftBtn;
+    private javax.swing.JRadioButton rookRightBtn;
+    private javax.swing.JRadioButton rookUpBtn;
     private javax.swing.JButton startSandboxGameButton;
     // End of variables declaration//GEN-END:variables
+
 }
