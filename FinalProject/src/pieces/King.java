@@ -1,16 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package pieces;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-/**
- *
- * @author NeWan5443
- */
 public class King extends AbstractPiece {
 
     private static int numKings;
@@ -19,18 +12,35 @@ public class King extends AbstractPiece {
     private boolean hasMoved;
     
 
+    /**
+     * Default default constructor
+     */
     public King() {
-        this(0, 4, null, true, false, false, false);
+        this(0, 4, null, true, false, false, false);//calls the King constructor with the following paramaters
     }
 
+    /**
+     * King constructor
+     * @param rowNum - row number
+     * @param columnNum - column number
+     * @param sprite - sprite
+     * @param isWhite- is the piece is white
+     * @param inCheck- if king is in check
+     * @param inCheckMate- if king is in check mate
+     * @param hasMoved - if king has moved
+     */
     public King(int rowNum, int columnNum, BufferedImage sprite, boolean isWhite, boolean inCheck, boolean inCheckMate, boolean hasMoved) {
-        super(rowNum, columnNum, sprite, isWhite, 0);
+        super(rowNum, columnNum, sprite, isWhite, 0);//calls super class with the following paramaters
         this.inCheck = inCheck;
         this.inCheckMate = inCheckMate;
         this.hasMoved = hasMoved;
     }
 
-    @Override
+    /**
+     * get the valid moves
+     * @param pieces- 2d array of pieces
+     * @return - array list of valid moves
+     */
     public ArrayList<Move> getValidMoves(Piece[][] pieces) {
         ArrayList<Move> moves = new ArrayList<>();
         // Straight directions
@@ -44,13 +54,18 @@ public class King extends AbstractPiece {
         searchDirection(moves, pieces, rowNum + 1, columnNum - 1, 1, -1);
         searchDirection(moves, pieces, rowNum - 1, columnNum - 1, -1, -1);
         
-        if (!this.hasMoved) {
+        if (!this.hasMoved) {//for castling
             checkCastling(moves, pieces);
         }
         
         return moves;
     }
     
+    /**
+     * check for castling
+     * @param moves - array list of moves
+     * @param pieces - 2d array of pieces
+     */
     private void checkCastling(ArrayList<Move> moves, Piece[][] pieces){
         Piece kingSidePiece = pieces[this.rowNum][7];
         if(kingSidePiece instanceof Rook && !((Rook) kingSidePiece).hasMoved()){
@@ -67,9 +82,17 @@ public class King extends AbstractPiece {
         }
     }
     
-    @Override
+    /**
+     * search direction
+     * @param moves - array list of moves
+     * @param pieces - 2d array of pieces
+     * @param currentRow - current row
+     * @param currentCol - current col
+     * @param dRow - delta row
+     * @param dCol - delta col
+     */
     public void searchDirection(ArrayList<Move> moves, Piece[][] pieces, int currentRow, int currentCol, int dRow, int dCol) {
-        if (!isInsideBoard(currentRow, currentCol)) {
+        if (!isInsideBoard(currentRow, currentCol)) {//if it isn't inside of the board
             return;
         }
 
@@ -85,31 +108,54 @@ public class King extends AbstractPiece {
         }
     }
 
+    /**
+     * get the number of kings
+     * @return - number of kings
+     */
     public static int getNumKings() {
         return numKings;
     }
 
+    /**
+     * get if king is in check
+     * @return - true if in check false otherwise
+     */
     public boolean isInCheck() {
         return inCheck;
     }
 
+    /**
+     * get if king is in check mate
+     * @return - true if in check mate false otherwise
+     */
     public boolean isInCheckMate() {
         inCheckMate = validMoves.isEmpty();
         return inCheckMate;
     }
     
+    /**
+     * check if king has moved
+     * @return - true if king has moved false otherwise
+     */
     public boolean hasMoved(){
         return this.hasMoved;
     }
     
+    /**
+     * set if king has moved
+     * @param hasMoved - boolean if king has moved
+     */
     public void setHasMoved(boolean hasMoved){
         this.hasMoved = hasMoved;
     }
 
-    @Override
+    /**
+     * return toString of king class
+     * @return - toString
+     */
     public String toString() {
         return ("Piece Type: King"
-                + super.toString());
+                + super.toString());//calls super toString class
     }
 
 }

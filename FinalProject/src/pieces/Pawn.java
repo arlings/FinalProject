@@ -1,38 +1,45 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package pieces;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-/**
- *
- * @author NeWan5443
- */
 public class Pawn extends AbstractPiece {
 
     private static int numPawns = 0;
     private boolean firstMove = true;
     private boolean enPassantEligible = false;
     
+    /**
+     * default Pawn constructor
+     */
     public Pawn() {
     }
     
 
+    /**
+     * Pawn constructor
+     * @param rowNum - row number
+     * @param columnNum - column number
+     * @param sprite - sprite
+     * @param isWhite - if the piece is on the white team or not
+     */
     public Pawn(int rowNum, int columnNum, BufferedImage sprite, boolean isWhite) {
-        super(rowNum, columnNum, sprite, isWhite, 1);
+        super(rowNum, columnNum, sprite, isWhite, 1);//calls super class with the following constructors
     }
 
-    @Override
+    /**
+     * returns all the valid moves
+     * @param pieces - 2d array of pieces
+     * @return - array list of all possible moves
+     */
     public ArrayList<Move> getValidMoves(Piece[][] pieces) {
         ArrayList<Move> moves = new ArrayList<>();
 
         int direction;
-        if (this.isWhite()) {
+        if (this.isWhite()) {//if on the white team
             direction = 1;
-        } else {
+        } else {//on the black team
             direction = -1;
         }
 
@@ -66,6 +73,14 @@ public class Pawn extends AbstractPiece {
         return moves;
     }
 
+    /**
+     * gets the direction
+     * @param moves - array list of moves
+     * @param pieces - 2d array of pieces
+     * @param targetRow - target row
+     * @param targetCol - target column
+     * @param direction - direction
+     */
     public void searchDirection(ArrayList<Move> moves, Piece[][] pieces, int targetRow, int targetCol, int direction) {
         if (isInsideBoard(targetRow, targetCol)) {
             Piece pieceForward = getPieceAt(targetRow, targetCol, pieces);
@@ -90,26 +105,46 @@ public class Pawn extends AbstractPiece {
         }
     }
 
+    /**
+     * get the number of pawns
+     * @return - the number of pawns
+     */
     public static int getNumPawns() {
         return numPawns;
     }
     
+    /**
+     * if enPassang is eligible
+     * @return - true if eligible false otherwise
+     */
     public boolean isEnPassantEligible() {
         return enPassantEligible;
     }
     
+    /**
+     * set first move
+     * @param firstMove- the first move 
+     */
     public void setFirstMove(boolean firstMove) {
         this.firstMove = firstMove;
     }
     
+    /**
+     * set if enPassang is eligible
+     * @param enPassantEligible - boolean of if enPassant is eligible
+     */
     public void setEnPassantEligible(boolean enPassantEligible){
         this.enPassantEligible = enPassantEligible;
     }
     
     
 
+    /**
+     * returns the status of the current pawn
+     * @return - the status
+     */
     public String toString() {
         return ("Piece Type: Pawn"
-                + super.toString());
+                + super.toString());//calls the toString in the super class
     }
 }

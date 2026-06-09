@@ -12,15 +12,31 @@ public class CustomPiece extends AbstractPiece {
     private ArrayList<int[]> knightJumps = new ArrayList<>();
     private ArrayList<Move> customJumps = new ArrayList<>();
 
+    /**
+     * Custom piece constructor
+     * @param row - row
+     * @param col - col
+     * @param sprite - image
+     * @param isWhite- if piece is White
+     * @param isSandboxMode - if it is sandbox mode
+     */
     public CustomPiece(int row, int col, BufferedImage sprite, boolean isWhite, boolean isSandboxMode) {
-        super(row, col, sprite, isWhite, 0);
+        super(row, col, sprite, isWhite, 0);//calls super constructor with the paramaters
         this.isSandboxMode = isSandboxMode;
     }
     
+    /**
+     * set the sandbox mode
+     * @param isSandboxMode- boolean of if it is the sandbox mode 
+     */
     public void setSandboxMode(boolean isSandboxMode) {
         this.isSandboxMode = isSandboxMode;
     }
     
+    /**
+     * add move rules
+     * @param preset - String  of move
+     */
     public void addMoveRules(String preset) {
         // Rook-like
         if (preset.equalsIgnoreCase("UP_ROOK")) {
@@ -92,6 +108,10 @@ public class CustomPiece extends AbstractPiece {
     }
 
     //fully just copied pasted from AI
+    /**
+     * removes the move rules
+     * @param preset - String 
+     */
     public void removeMoveRules(String preset) {
         // Rook-like
         if (preset.equalsIgnoreCase("UP_ROOK")) {
@@ -162,6 +182,9 @@ public class CustomPiece extends AbstractPiece {
         }
     }
 
+    /**
+     * clear the rules
+     */
     public void clearRules() {
         this.slideDirections.clear();
         this.knightJumps.clear();
@@ -170,10 +193,22 @@ public class CustomPiece extends AbstractPiece {
         this.pawnCaptures = false;
     }
 
+    /**
+     * add the move rules
+     * @param dx - delta x
+     * @param dy - delta y
+     */
     public void addMoveRules(int dx, int dy) {
         customJumps.add(new Move(dx, dy));
     }
 
+    /**
+     * jump the knight
+     * @param moves - array list of moves
+     * @param pieces - 2d array of pieces
+     * @param dRow - delta row
+     * @param dCol - delta col
+     */
     private void knightJump(ArrayList<Move> moves, Piece[][] pieces, int dRow, int dCol) {
         int targetRow = rowNum + dRow;
         int targetCol = columnNum + dCol;
@@ -187,6 +222,14 @@ public class CustomPiece extends AbstractPiece {
         }
     }
 
+    /**
+     * searc
+     * @param moves
+     * @param pieces
+     * @param targetRow
+     * @param targetCol
+     * @param direction 
+     */
     private void searchPawnForward(ArrayList<Move> moves, Piece[][] pieces, int targetRow, int targetCol, int direction) {
         if (isInsideBoard(targetRow, targetCol)) {
             Piece pieceForward = getPieceAt(targetRow, targetCol, pieces);
