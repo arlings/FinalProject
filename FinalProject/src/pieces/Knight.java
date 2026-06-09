@@ -7,18 +7,33 @@ public class Knight extends AbstractPiece {
 
     private static int numKnights = 0;
 
+    /**
+     * default Knight constructor
+     */
     public Knight() {
-        super();
+        super();//calls super class constructor with no paramaters
     }
 
+    /**
+     * Knight constructor
+     * @param rowNum - row number
+     * @param columnNum - col number
+     * @param sprite - sprite
+     * @param isWhite - boolean of if team is white
+     */
     public Knight(int rowNum, int columnNum, BufferedImage sprite, boolean isWhite) {
-        super(rowNum, columnNum, sprite, isWhite, 3);
+        super(rowNum, columnNum, sprite, isWhite, 3);//calls super class constructor with the following paramaters
     }
 
-    @Override
+    /**
+     * ger the valid moves
+     * @param pieces - 2d array of pieces
+     * @return - array list of valid moves
+     */
     public ArrayList<Move> getValidMoves(Piece[][] pieces) {
         ArrayList<Move> moves = new ArrayList<>();
 
+        //possible moves for knight
         searchDirection(moves, pieces, rowNum, columnNum, 1, -2);
         searchDirection(moves, pieces, rowNum, columnNum, -1, -2);
         searchDirection(moves, pieces, rowNum, columnNum, 1, 2);
@@ -31,7 +46,15 @@ public class Knight extends AbstractPiece {
         return moves;
     }
 
-    @Override
+    /**
+     * search the direction
+     * @param moves - array list of moves
+     * @param pieces - 2d array of pieces
+     * @param currentRow - current row
+     * @param currentCol - current col
+     * @param dRow - delta row
+     * @param dCol - delta col
+     */
     public void searchDirection(ArrayList<Move> moves, Piece[][] pieces, int currentRow, int currentCol, int dRow, int dCol) {
         int targetRow = currentRow + dRow;
         int targetCol = currentCol + dCol;
@@ -48,13 +71,20 @@ public class Knight extends AbstractPiece {
         }
     }
 
+    /**
+     * get the number of knights
+     * @return - the number of knights
+     */
     public static int getNumKnights() {
         return numKnights;
     }
 
-    @Override
+    /**
+     * return the status of the knight
+     * @return - toString status
+     */
     public String toString() {
         return ("Piece Type: Knight"
-                + super.toString());
+                + super.toString());//calls toString in the super class
     }
 }
