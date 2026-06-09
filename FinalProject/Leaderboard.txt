@@ -1,1 +1,1 @@
-#1 Arloind, score = 2#2 Arlind, score = 1#3 Arlind2, score = 0#4 Arlindd, score = 0#5 Josh, score = 0#6 Luca, score = 0#7 Neo, score = 0
+#1 Luca, score = 0#2 Arlind, score = 0
