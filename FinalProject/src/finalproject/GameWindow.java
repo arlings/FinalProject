@@ -820,6 +820,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
             matchTimer.stop();
             resetBtn.setEnabled(true);
             JOptionPane.showMessageDialog(null, "Checkmate!" );
+            this.dispose();
             try {
                 FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
                 FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/Users.txt");
