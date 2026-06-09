@@ -239,5 +239,4 @@ abstract public class AbstractPiece implements Piece {
                 + "\nNumber of Valid Moves: " + validMoves
                 + "\nValue: " + value);
     }
-
 }
