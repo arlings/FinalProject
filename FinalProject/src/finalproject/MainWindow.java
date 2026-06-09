@@ -25,8 +25,7 @@ public class MainWindow extends javax.swing.JFrame {
     private MainWindow mainWindow;
     private LeaderboardWindow leaderboardWindow;
     private WarningWindow warningWindow;
-    
-
+    private SkinWindow skinWindow;
    
     // https://stackoverflow.com/questions/16046824/making-a-java-swing-frame-movable-and-setundecorated
     public void MoveJFrame() {
@@ -452,7 +451,10 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_exitMenuMouseClicked
 
     private void customizeMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customizeMenuMouseClicked
-        // TODO add your handling code here:
+        if (skinWindow == null) {
+            skinWindow = new SkinWindow(mainWindow);
+        }
+        skinWindow.setVisible(true);
     }//GEN-LAST:event_customizeMenuMouseClicked
 
     private void tenMinMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tenMinMenuItemActionPerformed
