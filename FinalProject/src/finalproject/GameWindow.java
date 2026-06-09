@@ -716,6 +716,9 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
                         whiteTime = 0;
                         matchTimer.stop();
                         JOptionPane.showMessageDialog(null, "Black Wins!");
+                        if (!isSandbox) {
+                            win(false);
+                        }
                     }
                     //if black turn flag is active it decrements black player countdown variable
                 } else {
@@ -725,6 +728,9 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
                         blackTime = 0;
                         matchTimer.stop();
                         JOptionPane.showMessageDialog(null, "White Wins!");
+                        if (!isSandbox) {
+                            win(true);
+                        }
                     }
                 }
                 //updates display clocks after updating time tracking counters
