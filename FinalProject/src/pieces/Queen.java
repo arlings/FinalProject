@@ -18,7 +18,7 @@ public class Queen extends AbstractPiece {
     /**
      * Queen constructor
      *
-     * @param rowNum - rown number
+     * @param rowNum - row number
      * @param columnNum - column number
      * @param sprite - sprite
      * @param isWhite - if the piece is on the white team
