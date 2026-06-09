@@ -2856,14 +2856,18 @@ public class SandboxWindow extends javax.swing.JFrame {
         updateMoves("PAWN_MOVE", pawnOffsets, pawnMoveBtn);
         if(!pawnMoveBtn.isSelected() && pawnBtn.isSelected()){
             pawnBtn.setSelected(false);
+        }else if(pawnMoveBtn.isSelected() && pawnCaptureBtn.isSelected()){
+           pawnBtn.setSelected(true);
         }
     }//GEN-LAST:event_pawnMoveBtnActionPerformed
 
     private void pawnCaptureBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pawnCaptureBtnActionPerformed
         int[][] pawnOffsets = {{1,1}, {1,-1}}; 
-        updateMoves("PAWN_CAPTURE", pawnOffsets, pawnMoveBtn);
+        updateMoves("PAWN_CAPTURE", pawnOffsets, pawnCaptureBtn);
         if(!pawnCaptureBtn.isSelected() && pawnBtn.isSelected()){
             pawnBtn.setSelected(false);
+        }else if(pawnMoveBtn.isSelected() && pawnCaptureBtn.isSelected()){
+           pawnBtn.setSelected(true);
         }
     }//GEN-LAST:event_pawnCaptureBtnActionPerformed
 
