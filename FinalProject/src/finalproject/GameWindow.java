@@ -27,12 +27,12 @@ import javax.swing.JOptionPane;
 
 public class GameWindow extends javax.swing.JFrame implements ActionListener {
 
-    PromotionWindow promotionWindow;
-    SandboxWindow sandboxWindow;
-    MainWindow mainWindow;
-    EnterUsername enterUsername;
-    WarningWindow warningWindow;
-    FileImporter fileImporter = new FileImporter();
+    private PromotionWindow promotionWindow;
+    private SandboxWindow sandboxWindow;
+    private MainWindow mainWindow;
+    private EnterUsername enterUsername;
+    private WarningWindow warningWindow;
+    private FileImporter fileImporter = new FileImporter();
     private boolean isSandbox;
 
     private Piece selectedPiece = null;
@@ -47,6 +47,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
     private int whiteTime;
     private int blackTime;
     private Timer matchTimer;
+    private boolean ended = false;
 
     private int promotionCol;
     private int promotionRow;
@@ -705,9 +706,11 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
     //time methods
     //https://stackoverflow.com/questions/28337718/java-swing-timer-countdown
     private void startTimer() {
+        
         //creates countdown timer task executing once every one thousand milliseconds
         matchTimer = new Timer(1000, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                
                 //if white turn flag is active it decrements white player countdown variable
                 if (whiteTurn) {
                     whiteTime--;
@@ -719,6 +722,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
                         if (!isSandbox) {
                             win(false);
                         }
+                        ended = true;
                     }
                     //if black turn flag is active it decrements black player countdown variable
                 } else {
@@ -731,6 +735,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
                         if (!isSandbox) {
                             win(true);
                         }
+                        ended = true;
                     }
                 }
                 //updates display clocks after updating time tracking counters
@@ -738,7 +743,11 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
             }
         });
         //starts game loop thread execution block
-        matchTimer.start();
+        if (ended) {
+            this.dispose();
+        } else {
+            matchTimer.start();
+        }
     }
 
     private void updateTime() {
@@ -865,11 +874,11 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         if (isCheckmate(nextKing, isWhiteTurn)) {
             matchTimer.stop();
             JOptionPane.showMessageDialog(null, "Checkmate!");
+            ended = true;
             if (!isSandbox) {
                 win(isWhiteTurn);
-            } else {
-                this.dispose();
-            }
+            } 
+            this.dispose();
         }
         
         if (isStalemate(nextKing, isWhiteTurn)) {
