@@ -79,7 +79,7 @@ public class SkinWindow extends javax.swing.JFrame {
             .addComponent(jLabel1)
         );
 
-        exitButton.setText("Exit");
+        exitButton.setText("Done");
         exitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitButtonActionPerformed(evt);
@@ -136,19 +136,17 @@ public class SkinWindow extends javax.swing.JFrame {
 
     private void userDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userDropdownActionPerformed
         skinDropdown.removeAllItems();
+        skinDropdown.addItem("Default");
         int wins = 0;
         try {
             FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
-            FileInputStream in2 = new FileInputStream(System.getProperty("user.dir") + "/Leaderboard.txt");
             Scanner s = new Scanner(in);
-            Scanner s2 = new Scanner(in2);
             String[] userInfo = s.nextLine().split(":");
             for (int i = 0; i < userInfo.length; i++) {
                 if (userInfo[i].split(",")[0].equalsIgnoreCase(userDropdown.getItemAt(userDropdown.getSelectedIndex()))) {
                     wins = Integer.parseInt(userInfo[i].split(",")[1]);
                 }
             }
-            String[] userData = new String[userInfo.length];
             User[] leaderboard = new User[userInfo.length];
             int[] scores = new int[userInfo.length];
             for (int i = 0; i < userInfo.length; i++) {
