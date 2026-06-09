@@ -2,20 +2,25 @@ package pieces;
 
 import java.util.ArrayList;
 import java.awt.image.BufferedImage;
-
 public class CustomPiece extends AbstractPiece {
 
     private boolean pawnMoves = false;
     private boolean pawnCaptures = false;
     private boolean isFirstMove = true;
+    private boolean isSandboxMode = false;
     private ArrayList<int[]> slideDirections = new ArrayList<>();
     private ArrayList<int[]> knightJumps = new ArrayList<>();
     private ArrayList<Move> customJumps = new ArrayList<>();
 
-    public CustomPiece(int row, int col, BufferedImage sprite, boolean isWhite) {
+    public CustomPiece(int row, int col, BufferedImage sprite, boolean isWhite, boolean isSandboxMode) {
         super(row, col, sprite, isWhite, 0);
+        this.isSandboxMode = isSandboxMode;
     }
-
+    
+    public void setSandboxMode(boolean isSandboxMode) {
+        this.isSandboxMode = isSandboxMode;
+    }
+    
     public void addMoveRules(String preset) {
         // Rook-like
         if (preset.equalsIgnoreCase("UP_ROOK")) {
@@ -191,12 +196,12 @@ public class CustomPiece extends AbstractPiece {
         }
     }
 
-    private void searchPawnCaptures(ArrayList<Move> moves, Piece[][] pieces, int targetRow, int targetCol, int direction) {
+    private void searchPawnCaptures(ArrayList<Move> moves, Piece[][] pieces, int targetRow) {
         int[] captureCols = {columnNum - 1, columnNum + 1};
         for (int col : captureCols) {
             if (isInsideBoard(targetRow, col)) {
                 Piece targetPiece = getPieceAt(targetRow, col, pieces);
-                if (targetPiece != null && targetPiece.isWhite() != this.isWhite()) {
+                if (isSandboxMode || (targetPiece != null && targetPiece.isWhite() != this.isWhite())) {
                     moves.add(new Move(targetRow, col));
                 }
             }
@@ -219,7 +224,6 @@ public class CustomPiece extends AbstractPiece {
 
             if (isInsideBoard(targetRow, targetCol)) {
                 Piece target = getPieceAt(targetRow, targetCol, pieces);
-                // Standard check: empty or opponent
                 if (target == null || target.isWhite() != this.isWhite()) {
                     moves.add(new Move(targetRow, targetCol));
                 }
@@ -229,10 +233,8 @@ public class CustomPiece extends AbstractPiece {
             int direction = this.isWhite() ? 1 : -1;
 
             if (pawnMoves) {
-                // Forward move: Relative row + direction
                 searchPawnForward(moves, pieces, rowNum + direction, columnNum, direction);
 
-                // Two-step: Relative row + (2 * direction)
                 if (isFirstMove) {
                     int targetRow = rowNum + direction;
                     int twoStepRow = rowNum + (2 * direction);
@@ -243,10 +245,8 @@ public class CustomPiece extends AbstractPiece {
                     }
                 }
             }
-
             if (pawnCaptures) {
-                // Captures: Relative row + direction, Left/Right columns
-                searchPawnCaptures(moves, pieces, rowNum + direction, columnNum, direction);
+                searchPawnCaptures(moves, pieces, rowNum + direction);
             }
         }
         return moves;

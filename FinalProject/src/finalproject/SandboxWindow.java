@@ -7,7 +7,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JRadioButton;
 import pieces.CustomPiece;
 import pieces.Move;
 import pieces.Piece;
@@ -139,7 +141,7 @@ public class SandboxWindow extends javax.swing.JFrame {
 
     private void startGame() {
         pieces = new Piece[8][8];
-        Piece myPiece = new CustomPiece(3, 4, loadImage("/images/White_Pawn.png"), true);
+        Piece myPiece = new CustomPiece(3, 4, loadImage("/images/White_Pawn.png"), true, true);
         pieces[3][4] = myPiece;
         updateBoardUI();
     }
@@ -157,7 +159,28 @@ public class SandboxWindow extends javax.swing.JFrame {
             board[r][c].setIcon(dotIcon);
         }
     }
-
+    
+    private void updateMoves(String preset, int offsets[][], JRadioButton button){
+        CustomPiece customPiece = (CustomPiece) pieces[3][4];
+        if (button.isSelected()) {
+            customPiece.addMoveRules(preset);
+            showValidMoves(customPiece);
+            //System.out.println(customPiece.getValidMoves(pieces).size());
+        } else {
+            customPiece.removeMoveRules(preset);
+            int r = customPiece.getRowNum();
+            int c = customPiece.getColumnNum();
+            for (int[] offset : offsets) {
+                int targetRow = r + offset[0];
+                int targetCol = c + offset[1];
+                if (targetRow >= 0 && targetRow < board.length && targetCol >= 0 && targetCol < board[0].length) {
+                    setTransparentIcon(board[targetRow][targetCol]);
+                }
+        }
+            //System.out.println(customPiece.getValidMoves(pieces).size());
+        }
+        updateBoardUI();
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -2035,9 +2058,19 @@ public class SandboxWindow extends javax.swing.JFrame {
 
         pawnMoveBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         pawnMoveBtn.setText("Pawn Move");
+        pawnMoveBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pawnMoveBtnActionPerformed(evt);
+            }
+        });
 
         pawnCaptureBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         pawnCaptureBtn.setText("Pawn Capture");
+        pawnCaptureBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pawnCaptureBtnActionPerformed(evt);
+            }
+        });
 
         knightTopLeftHorzBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         knightTopLeftHorzBtn.setText("Knight Top Left Horz");
@@ -2806,21 +2839,33 @@ public class SandboxWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_knightTopLeftVertBtnActionPerformed
 
     private void pawnBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pawnBtnActionPerformed
-        CustomPiece customPiece = (CustomPiece) pieces[3][4];
-        if (pawnBtn.isSelected()) {
-            customPiece.addMoveRules("PAWN");
-            showValidMoves(customPiece);
-            //System.out.println(customPiece.getValidMoves(pieces).size());
-        } else {
-            customPiece.removeMoveRules("PAWN");
-            int r = customPiece.getRowNum();
-            int c = customPiece.getColumnNum();
-            setTransparentIcon(board[r+1][c]);
-            setTransparentIcon(board[r+2][c]);
-            //System.out.println(customPiece.getValidMoves(pieces).size());
+        int[][] pawnOffsets = {{1, 0}, {2, 0}, {1,1}, {1,-1}}; 
+        updateMoves("PAWN", pawnOffsets, pawnBtn);
+        if(pawnBtn.isSelected()){
+            pawnMoveBtn.setSelected(true);
+            pawnCaptureBtn.setSelected(true);
+        }else{
+            pawnMoveBtn.setSelected(false);
+            pawnCaptureBtn.setSelected(false);
         }
-        updateBoardUI();
+        
     }//GEN-LAST:event_pawnBtnActionPerformed
+
+    private void pawnMoveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pawnMoveBtnActionPerformed
+        int[][] pawnOffsets = {{1, 0}, {2, 0}}; 
+        updateMoves("PAWN_MOVE", pawnOffsets, pawnMoveBtn);
+        if(!pawnMoveBtn.isSelected() && pawnBtn.isSelected()){
+            pawnBtn.setSelected(false);
+        }
+    }//GEN-LAST:event_pawnMoveBtnActionPerformed
+
+    private void pawnCaptureBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pawnCaptureBtnActionPerformed
+        int[][] pawnOffsets = {{1,1}, {1,-1}}; 
+        updateMoves("PAWN_CAPTURE", pawnOffsets, pawnMoveBtn);
+        if(!pawnCaptureBtn.isSelected() && pawnBtn.isSelected()){
+            pawnBtn.setSelected(false);
+        }
+    }//GEN-LAST:event_pawnCaptureBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
