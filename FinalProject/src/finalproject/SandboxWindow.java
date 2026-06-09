@@ -181,6 +181,9 @@ public class SandboxWindow extends javax.swing.JFrame {
         }
         updateBoardUI();
     }
+    private void checkAllButtons(int numLocal, JRadioButton global){
+        
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
