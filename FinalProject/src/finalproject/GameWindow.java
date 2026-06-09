@@ -48,6 +48,8 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
     private int blackTime;
     private Timer matchTimer;
     private boolean ended = false;
+    
+    private User[] users = new User[2];
 
     private int promotionCol;
     private int promotionRow;
@@ -69,6 +71,8 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         //starts game setups and sets user labels for main window path
         this.isSandbox = isSandbox;
         startGame(user1, user2, chosenTime);
+        users[0] = user1;
+        users[1] = user2;
         mainWindow = m;
     }
 
@@ -76,6 +80,8 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         //starts game setups and sets user labels for sandbox path
         this.isSandbox = isSandbox;
         startGame(user1, user2, chosenTime);
+        users[0] = user1;
+        users[1] = user2;
         sandboxWindow = m;
     }
 
@@ -83,6 +89,8 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         //starts game setups and sets user labels for username entry path
         this.isSandbox = isSandbox;
         startGame(user1, user2, chosenTime);
+        users[0] = user1;
+        users[1] = user2;
         enterUsername = m;
     }
 
@@ -807,7 +815,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
             promotionIsWhite = p.isWhite();
 
             if (promotionWindow == null) {
-                promotionWindow = new PromotionWindow(this);
+                promotionWindow = new PromotionWindow(this, users[0], users[1]);
             }
             promotionWindow.setVisible(true);
         }
@@ -888,26 +896,26 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         }
     }
 
-    public void fixBoardAfterPromotion(int col, int row, String piece, boolean isWhite) {
+    public void fixBoardAfterPromotion(int col, int row, String piece, boolean isWhite, String whiteSkin, String blackSkin) {
         if (isWhite) {
             if (piece.equalsIgnoreCase("Queen")) {
-                pieces[row][col] = new Queen(row, col, loadImage("/images/White_Queen.png"), isWhite);
+                pieces[row][col] = new Queen(row, col, loadImage("/images/" + whiteSkin + "White_Queen.png"), isWhite);
             } else if (piece.equalsIgnoreCase("Rook")) {
-                pieces[row][col] = new Rook(row, col, loadImage("/images/White_Rook.png"), isWhite, true);
+                pieces[row][col] = new Rook(row, col, loadImage("/images/" + whiteSkin + "White_Rook.png"), isWhite, true);
             } else if (piece.equalsIgnoreCase("Bishop")) {
-                pieces[row][col] = new Bishop(row, col, loadImage("/images/White_Bishop.png"), isWhite);
+                pieces[row][col] = new Bishop(row, col, loadImage("/images/" + whiteSkin + "White_Bishop.png"), isWhite);
             } else if (piece.equalsIgnoreCase("Knight")) {
-                pieces[row][col] = new Knight(row, col, loadImage("/images/White_Knight.png"), isWhite);
+                pieces[row][col] = new Knight(row, col, loadImage("/images/" + whiteSkin + "White_Knight.png"), isWhite);
             }
         } else {
             if (piece.equalsIgnoreCase("Queen")) {
-                pieces[row][col] = new Queen(row, col, loadImage("/images/Black_Queen.png"), isWhite);
+                pieces[row][col] = new Queen(row, col, loadImage("/images/" + blackSkin + "Black_Queen.png"), isWhite);
             } else if (piece.equalsIgnoreCase("Rook")) {
-                pieces[row][col] = new Rook(row, col, loadImage("/images/Black_Rook.png"), isWhite, true);
+                pieces[row][col] = new Rook(row, col, loadImage("/images/" + blackSkin + "Black_Rook.png"), isWhite, true);
             } else if (piece.equalsIgnoreCase("Bishop")) {
-                pieces[row][col] = new Bishop(row, col, loadImage("/images/Black_Bishop.png"), isWhite);
+                pieces[row][col] = new Bishop(row, col, loadImage("/images/" + blackSkin + "Black_Bishop.png"), isWhite);
             } else if (piece.equalsIgnoreCase("Knight")) {
-                pieces[row][col] = new Knight(row, col, loadImage("/images/Black_Knight.png"), isWhite);
+                pieces[row][col] = new Knight(row, col, loadImage("/images/" + blackSkin + "Black_Knight.png"), isWhite);
             }
         }
         performPostMoveChecks(!isWhite);

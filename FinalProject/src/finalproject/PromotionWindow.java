@@ -15,10 +15,11 @@ public class PromotionWindow extends javax.swing.JFrame {
         this.setVisible(true);
     }
     
-    public PromotionWindow(GameWindow m) {
+    public PromotionWindow(GameWindow m, User user1, User user2) {
         MoveJFrame();
         initComponents();
         gameWindow = m;
+        hiddenInfo.setText(user1.getUserName() + "," + user2.getUserName());
     }
     
     @SuppressWarnings("unchecked")
@@ -39,6 +40,7 @@ public class PromotionWindow extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        hiddenInfo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -90,6 +92,10 @@ public class PromotionWindow extends javax.swing.JFrame {
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Black_Rook.png"))); // NOI18N
 
+        hiddenInfo.setFont(new java.awt.Font("Segoe UI", 0, 3)); // NOI18N
+        hiddenInfo.setForeground(new java.awt.Color(204, 204, 255));
+        hiddenInfo.setText("jLabel10");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -99,7 +105,9 @@ public class PromotionWindow extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel2)
-                        .addComponent(queenPromotionBtn, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(hiddenInfo)
+                            .addComponent(queenPromotionBtn)))
                     .addComponent(jLabel6))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -154,7 +162,9 @@ public class PromotionWindow extends javax.swing.JFrame {
                     .addComponent(queenPromotionBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addComponent(hiddenInfo)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -165,7 +175,7 @@ public class PromotionWindow extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -176,8 +186,8 @@ public class PromotionWindow extends javax.swing.JFrame {
         int col = gameWindow.getPromotionCol();
         int row = gameWindow.getPromotionRow();
         boolean promotionIsWhite = gameWindow.getPromotionIsWhite();
-        gameWindow.fixBoardAfterPromotion(col, row, "Queen", promotionIsWhite);
-        PromotionWindow.this.setVisible(false);
+        gameWindow.fixBoardAfterPromotion(col, row, "Queen", promotionIsWhite, hiddenInfo.getText().split(",")[0], hiddenInfo.getText().split(",")[1]);
+        this.setVisible(false);
         gameWindow.setVisible(true);
     }//GEN-LAST:event_queenPromotionBtnActionPerformed
 
@@ -185,8 +195,10 @@ public class PromotionWindow extends javax.swing.JFrame {
         int col = gameWindow.getPromotionCol();
         int row = gameWindow.getPromotionRow();
         boolean promotionIsWhite = gameWindow.getPromotionIsWhite();
-        gameWindow.fixBoardAfterPromotion(col, row, "Bishop", promotionIsWhite);
-        PromotionWindow.this.setVisible(false);
+        if (promotionIsWhite) {
+            gameWindow.fixBoardAfterPromotion(col, row, "Bishop", promotionIsWhite, hiddenInfo.getText().split(",")[0], hiddenInfo.getText().split(",")[1]);
+        }
+        this.setVisible(false);
         gameWindow.setVisible(true);
     }//GEN-LAST:event_bishopPromotionBtnActionPerformed
 
@@ -194,7 +206,7 @@ public class PromotionWindow extends javax.swing.JFrame {
         int col = gameWindow.getPromotionCol();
         int row = gameWindow.getPromotionRow();
         boolean promotionIsWhite = gameWindow.getPromotionIsWhite();
-        gameWindow.fixBoardAfterPromotion(col, row, "Knight", promotionIsWhite);
+        gameWindow.fixBoardAfterPromotion(col, row, "Knight", promotionIsWhite, hiddenInfo.getText().split(",")[0], hiddenInfo.getText().split(",")[1]);
         PromotionWindow.this.setVisible(false);
         gameWindow.setVisible(true);
     }//GEN-LAST:event_knightPromotionBtnActionPerformed
@@ -203,13 +215,14 @@ public class PromotionWindow extends javax.swing.JFrame {
         int col = gameWindow.getPromotionCol();
         int row = gameWindow.getPromotionRow();
         boolean promotionIsWhite = gameWindow.getPromotionIsWhite();
-        gameWindow.fixBoardAfterPromotion(col, row, "Rook", promotionIsWhite);
+        gameWindow.fixBoardAfterPromotion(col, row, "Rook", promotionIsWhite, hiddenInfo.getText().split(",")[0], hiddenInfo.getText().split(",")[1]);
         PromotionWindow.this.setVisible(false);
         gameWindow.setVisible(true);
     }//GEN-LAST:event_rookPromotionBtnActionPerformed
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bishopPromotionBtn;
+    private javax.swing.JLabel hiddenInfo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
