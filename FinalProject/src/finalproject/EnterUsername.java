@@ -138,6 +138,7 @@ public class EnterUsername extends javax.swing.JFrame {
             boolean found = false;
             this.topLabel.setText("Enter your username player 1");
             String[] items = s.nextLine().split(":");
+            int prevIndex = 0;
             for (int i = 0; i < items.length; i++) {
                 if (userNameField.getText().equalsIgnoreCase(items[i].split(",")[0])) {
                     if (userNameField.getText().equalsIgnoreCase(usernames[0])) {
@@ -148,10 +149,11 @@ public class EnterUsername extends javax.swing.JFrame {
                         numOfUsers++;
                         if (gameWindow == null && numOfUsers == 2) {
                             usernames[1] = userNameField.getText();
-                            gameWindow = new GameWindow(this , usernames[0], usernames[1], chosenTime);
+                            gameWindow = new GameWindow(this, new User(usernames[0], Integer.parseInt(items[i].split(",")[1]) - Integer.parseInt(items[i].split(",")[3]), items[i].split(",")[4]), new User(usernames[1], Integer.parseInt(items[prevIndex].split(",")[1]) - Integer.parseInt(items[prevIndex].split(",")[3]), items[i].split(",")[4]), chosenTime, false);
                             gameWindow.setVisible(true);
                             this.dispose();
                         } else {
+                            prevIndex = i;
                             usernames[0] = userNameField.getText();
                             this.userNameField.setText("");
                             this.topLabel.setText("Enter your username player 2");

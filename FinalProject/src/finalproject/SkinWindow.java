@@ -157,11 +157,11 @@ public class SkinWindow extends javax.swing.JFrame {
             mergeSort(leaderboard, 0, leaderboard.length - 1);
             try {
                 if (leaderboard[0].getUserName().equalsIgnoreCase(userDropdown.getItemAt(userDropdown.getSelectedIndex()))) {
-                    skinDropdown.addItem("1st place");
+                    skinDropdown.addItem("1stplace");
                 } else if (leaderboard[1].getUserName().equalsIgnoreCase(userDropdown.getItemAt(userDropdown.getSelectedIndex()))) {
-                    skinDropdown.addItem("2nd place");
+                    skinDropdown.addItem("2ndplace");
                 } else if (leaderboard[2].getUserName().equalsIgnoreCase(userDropdown.getItemAt(userDropdown.getSelectedIndex()))) {
-                    skinDropdown.addItem("3rd place");
+                    skinDropdown.addItem("3rdplace");
                 }
             } catch (ArrayIndexOutOfBoundsException e) {
                     
@@ -171,15 +171,38 @@ public class SkinWindow extends javax.swing.JFrame {
         }
         
         if (wins > 30) {
-            skinDropdown.addItem("30 Wins");
+            skinDropdown.addItem("30Wins");
         } else if (wins > 20) {
-            skinDropdown.addItem("20 Wins");
+            skinDropdown.addItem("20Wins");
         } else if (wins > 10) {
-            skinDropdown.addItem("10 Wins");
+            skinDropdown.addItem("10Wins");
         } 
     }//GEN-LAST:event_userDropdownActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
+        try {
+            FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
+            FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/Leaderboard.txt");
+            Scanner s = new Scanner(in);
+            String[] userInfo = s.nextLine().split(":");
+            String user = userDropdown.getItemAt(userDropdown.getSelectedIndex());
+            for (int i = 0; i < userInfo.length; i++) {
+                if (user.equals(userInfo[i].split(",")[0])) {
+                    userInfo[i] = userInfo[i].split(",")[0] + "," + userInfo[i].split(",")[1] + "," + userInfo[i].split(",")[2] + "," + userInfo[i].split(",")[3] + "," + skinDropdown.getItemAt(skinDropdown.getSelectedIndex());
+                }
+            }
+            String changedFile = "";
+            for (int i = 0; i < userInfo.length; i++) {
+                changedFile += userInfo[i] + ":";
+            }
+            try {
+                out.write(changedFile.getBytes());
+            } catch (Exception e) {
+                
+            }
+        } catch (FileNotFoundException e) {
+            
+        }
         this.dispose();
     }//GEN-LAST:event_exitButtonActionPerformed
 

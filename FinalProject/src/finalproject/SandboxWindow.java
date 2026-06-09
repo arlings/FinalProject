@@ -2527,7 +2527,7 @@ public class SandboxWindow extends javax.swing.JFrame {
 
     private void startSandboxGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startSandboxGameButtonActionPerformed
         if (gameWindow == null) {
-            gameWindow = new GameWindow(this, "Player 1", "Player 2", 300);
+            gameWindow = new GameWindow(this, new User("Player 1", 0), new User("Player 1", 0), 300, true);
         }
         gameWindow.setVisible(true);
         this.dispose();

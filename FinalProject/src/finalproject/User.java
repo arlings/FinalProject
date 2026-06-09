@@ -5,10 +5,17 @@ import java.util.Objects;
 public class User {
     private String userName;
     private int score;
+    private String skin;
 
     public User(String userName, int score) {
         this.userName = userName;
         this.score = score;
+    }
+    
+    public User(String userName, int score, String skin) {
+        this.userName = userName;
+        this.score = score;
+        this.skin = skin;
     }
 
     public String getUserName() {
@@ -25,6 +32,14 @@ public class User {
 
     public void setScore(int score) {
         this.score = score;
+    }
+    
+    public void setSkin(String skin) {
+        this.skin = skin;
+    }
+    
+    public String getSkin() {
+        return skin;
     }
 
     public boolean equals(Object obj) {

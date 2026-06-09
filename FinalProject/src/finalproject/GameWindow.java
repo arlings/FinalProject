@@ -33,7 +33,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
     EnterUsername enterUsername;
     WarningWindow warningWindow;
     FileImporter fileImporter = new FileImporter();
-    
+    private boolean isSandbox;
 
     private Piece selectedPiece = null;
     private Move selectedPos = null;
@@ -64,20 +64,23 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         return promotionIsWhite;
     }
 
-    public GameWindow(MainWindow m, String user2, String user1, int chosenTime) {
+    public GameWindow(MainWindow m, User user2, User user1, int chosenTime, boolean isSandbox) {
         //starts game setups and sets user labels for main window path
+        this.isSandbox = isSandbox;
         startGame(user1, user2, chosenTime);
         mainWindow = m;
     }
 
-    public GameWindow(SandboxWindow m, String user2, String user1, int chosenTime) {
+    public GameWindow(SandboxWindow m, User user2, User user1, int chosenTime, boolean isSandbox) {
         //starts game setups and sets user labels for sandbox path
+        this.isSandbox = isSandbox;
         startGame(user1, user2, chosenTime);
         sandboxWindow = m;
     }
 
-    public GameWindow(EnterUsername m, String user2, String user1, int chosenTime) {
+    public GameWindow(EnterUsername m, User user2, User user1, int chosenTime, boolean isSandbox) {
         //starts game setups and sets user labels for username entry path
+        this.isSandbox = isSandbox;
         startGame(user1, user2, chosenTime);
         enterUsername = m;
     }
@@ -410,31 +413,29 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         return false;
     }
 
-    private void startGame(String user1, String user2, int chosenTime) {
+    private void startGame(User user1, User user2, int chosenTime) {
         MoveJFrame();
         initComponents();
         board = loadBoard();
-        pieces = loadPieces();
+        pieces = loadPieces(user1.getSkin(), user2.getSkin());
         updateBoardUI();
-        setPlayerNames(user1, user2);
+        setPlayerNames(user1.getUserName(), user2.getUserName());
 
         //assigns player labels and sets time variables from game settings parameters
-        this.user1Lbl.setText(user1);
-        this.user2Lbl.setText(user2);
+        this.user1Lbl.setText(user1.getUserName());
+        this.user2Lbl.setText(user2.getUserName());
         this.totalTime = chosenTime;
         this.whiteTime = chosenTime;
         this.blackTime = chosenTime;
         //updates timer view elements and adjusts button enablement flags
         updateTime();
         startGameBtn.setEnabled(true);
-        resetBtn.setEnabled(false);
-
         //zeros out original side panel advantage text displays
         whiteAdvantageLbl.setText("+0");
         blackAdvantageLbl.setText("+0");
     }
 
-    private void resetGame() {
+    private void resetGame(User user1, User user2) {
         //halts game timer loop and sets turn flags back to default white player
         matchTimer.stop();
         whiteTurn = true;
@@ -444,12 +445,11 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         selectedPiece = null;
         selectedPos = null;
         pieces = new Piece[8][8];
-        pieces = loadPieces();
+        pieces = loadPieces(user1.getSkin(), user2.getSkin());
         //refreshes panel labels and resets timer readouts and interaction buttons
         updateBoardUI();
         updateTime();
         startGameBtn.setEnabled(true);
-        resetBtn.setEnabled(false);
         whiteAdvantageLbl.setText("+0");
         blackAdvantageLbl.setText("+0");
     }
@@ -462,39 +462,39 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
     }
     */
     
-    private Piece[][] loadPieces() {
+    private Piece[][] loadPieces(String blackSkin, String whiteSkin) {
 
         //loops row columns index up to eight to fill row one and six with pawns
         for (int i = 0; i < 8; i++) {
-            pieces[1][i] = new Pawn(1, i, loadImage("/images/White_Pawn.png"), true);
-            pieces[6][i] = new Pawn(6, i, loadImage("/images/Black_Pawn.png"), false);
+            pieces[1][i] = new Pawn(1, i, loadImage("/images/" + whiteSkin + "White_Pawn.png"), true);
+            pieces[6][i] = new Pawn(6, i, loadImage("/images/" + blackSkin + "Black_Pawn.png"), false);
         }
 
         //sets up rooks on back corners of the chess piece matrix board array
-        pieces[0][0] = new Rook(0, 0, loadImage("/images/White_Rook.png"), true, false);
-        pieces[0][7] = new Rook(0, 7, loadImage("/images/White_Rook.png"), true, false);
-        pieces[7][0] = new Rook(7, 0, loadImage("/images/Black_Rook.png"), false, false);
-        pieces[7][7] = new Rook(7, 7, loadImage("/images/Black_Rook.png"), false, false);
+        pieces[0][0] = new Rook(0, 0, loadImage("/images/" + whiteSkin + "White_Rook.png"), true, false);
+        pieces[0][7] = new Rook(0, 7, loadImage("/images/" + whiteSkin + "White_Rook.png"), true, false);
+        pieces[7][0] = new Rook(7, 0, loadImage("/images/" + blackSkin + "Black_Rook.png"), false, false);
+        pieces[7][7] = new Rook(7, 7, loadImage("/images/" + blackSkin + "Black_Rook.png"), false, false);
 
         //sets up knights on indices one and six of the back rows
-        pieces[0][1] = new Knight(0, 1, loadImage("/images/White_Knight.png"), true);
-        pieces[0][6] = new Knight(0, 6, loadImage("/images/White_Knight.png"), true);
-        pieces[7][1] = new Knight(7, 1, loadImage("/images/Black_Knight.png"), false);
-        pieces[7][6] = new Knight(7, 6, loadImage("/images/Black_Knight.png"), false);
+        pieces[0][1] = new Knight(0, 1, loadImage("/images/" + whiteSkin + "White_Knight.png"), true);
+        pieces[0][6] = new Knight(0, 6, loadImage("/images/" + whiteSkin + "White_Knight.png"), true);
+        pieces[7][1] = new Knight(7, 1, loadImage("/images/" + blackSkin + "Black_Knight.png"), false);
+        pieces[7][6] = new Knight(7, 6, loadImage("/images/" + blackSkin + "Black_Knight.png"), false);
 
         //sets up bishops on indices two and five of the back rows
-        pieces[0][2] = new Bishop(0, 2, loadImage("/images/White_Bishop.png"), true);
-        pieces[0][5] = new Bishop(0, 5, loadImage("/images/White_Bishop.png"), true);
-        pieces[7][2] = new Bishop(7, 2, loadImage("/images/Black_Bishop.png"), false);
-        pieces[7][5] = new Bishop(7, 5, loadImage("/images/Black_Bishop.png"), false);
+        pieces[0][2] = new Bishop(0, 2, loadImage("/images/" + whiteSkin + "White_Bishop.png"), true);
+        pieces[0][5] = new Bishop(0, 5, loadImage("/images/" + whiteSkin + "White_Bishop.png"), true);
+        pieces[7][2] = new Bishop(7, 2, loadImage("/images/" + blackSkin + "Black_Bishop.png"), false);
+        pieces[7][5] = new Bishop(7, 5, loadImage("/images/" + blackSkin + "Black_Bishop.png"), false);
 
         //sets up queens on the column position three coordinates
-        pieces[0][3] = new Queen(0, 3, loadImage("/images/White_Queen.png"), true);
-        pieces[7][3] = new Queen(7, 3, loadImage("/images/Black_Queen.png"), false);
+        pieces[0][3] = new Queen(0, 3, loadImage("/images/" + whiteSkin + "White_Queen.png"), true);
+        pieces[7][3] = new Queen(7, 3, loadImage("/images/" + blackSkin + "Black_Queen.png"), false);
 
         //sets up kings on the column position four coordinates with tracking variables
-        pieces[0][4] = new King(0, 4, loadImage("/images/White_King.png"), true, false, false, false);
-        pieces[7][4] = new King(7, 4, loadImage("/images/Black_King.png"), false, false, false, false);
+        pieces[0][4] = new King(0, 4, loadImage("/images/" + whiteSkin + "White_King.png"), true, false, false, false);
+        pieces[7][4] = new King(7, 4, loadImage("/images/" + blackSkin + "Black_King.png"), false, false, false, false);
 
         //returns the fully configured initial piece position matrix array
         return pieces;
@@ -715,7 +715,6 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
                     if (whiteTime <= 0) {
                         whiteTime = 0;
                         matchTimer.stop();
-                        resetBtn.setEnabled(true);
                         JOptionPane.showMessageDialog(null, "Black Wins!");
                     }
                     //if black turn flag is active it decrements black player countdown variable
@@ -725,8 +724,6 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
                     if (blackTime <= 0) {
                         blackTime = 0;
                         matchTimer.stop();
-                        resetBtn.setEnabled(true);
-                        
                         JOptionPane.showMessageDialog(null, "White Wins!");
                     }
                 }
@@ -814,38 +811,50 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         if (blackKing != null && isKingInCheck(blackKing, pieces)) {
             highlightCheck(blackKing, false);
         }
-
         Piece nextKing = findKing(pieces, isWhiteTurn);
         if (isCheckmate(nextKing, isWhiteTurn)) {
             matchTimer.stop();
-            resetBtn.setEnabled(true);
-            JOptionPane.showMessageDialog(null, "Checkmate!" );
-            this.dispose();
-            try {
-                FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
-                FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/Users.txt");
-                Scanner s = new Scanner(in);
-                String[] players = s.nextLine().split(":");
-                for (int i = 0; i < players.length; i++) {
-                    if (isWhiteTurn) {
-                        players[i].split(",")[0].equalsIgnoreCase(user2Lbl.getText());
-                        players[i] = players[i].split(",")[0] + "," + (Integer.parseInt(players[i].split(",")[1]) + 1) + "," +  players[i].split(",")[2] + "," +  players[i].split(",")[3];
-                    } else {
-                        players[i].split(",")[0].equalsIgnoreCase(user1Lbl.getText());
-                        players[i] = players[i].split(",")[0] + "," + (Integer.parseInt(players[i].split(",")[1]) + 1) + "," +  players[i].split(",")[2] + "," +  players[i].split(",")[3];
-                        
+            JOptionPane.showMessageDialog(null, "Checkmate!");
+            if (!isSandbox) {
+                try {
+                    FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
+                    FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/Users.txt");
+                    Scanner s = new Scanner(in);
+                    String[] players = s.nextLine().split(":");
+                    for (int i = 0; i < players.length; i++) {
+                        if (isWhiteTurn) {
+                            if (players[i].split(",")[0].equalsIgnoreCase(user2Lbl.getText())) {
+                                players[i] = players[i].split(",")[0] + "," + (Integer.parseInt(players[i].split(",")[1]) + 1) + "," +  players[i].split(",")[2] + "," +  players[i].split(",")[3];
+                            }
+                        } else {
+                            if (players[i].split(",")[0].equalsIgnoreCase(user1Lbl.getText())) {
+                                players[i] = players[i].split(",")[0] + "," + (Integer.parseInt(players[i].split(",")[1]) + 1) + "," +  players[i].split(",")[2] + "," +  players[i].split(",")[3];
+                            }
+                        }
                     }
+                    for (int i = 0; i < players.length; i++) {
+                        if (isWhiteTurn) {
+                            if (players[i].split(",")[0].equalsIgnoreCase(user1Lbl.getText())) {
+                                players[i] = players[i].split(",")[0] + "," + players[i].split(",")[1] + "," +  players[i].split(",")[2] + "," + (Integer.parseInt(players[i].split(",")[3]) + 1);
+                            }
+                        } else {
+                            if (players[i].split(",")[0].equalsIgnoreCase(user2Lbl.getText())) {
+                                players[i] = players[i].split(",")[0] + "," + players[i].split(",")[1] + "," +  players[i].split(",")[2] + "," + (Integer.parseInt(players[i].split(",")[3]) + 1);
+                            }
+                        }
+                    }
+                    this.dispose();
+                } catch (FileNotFoundException e) {
+                    warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help. (You probably haven't made any users yet!)");
+                    warningWindow.setVisible(true); 
                 }
+            } else {
                 this.dispose();
-            } catch (FileNotFoundException e) {
-                warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help. (You probably haven't made any users yet!)");
-                warningWindow.setVisible(true); 
             }
         }
         
         if (isStalemate(nextKing, isWhiteTurn)) {
             matchTimer.stop();
-            resetBtn.setEnabled(true);
             JOptionPane.showMessageDialog(null, "Stalemate! The game is a draw.");
             this.dispose();
         }
@@ -1025,7 +1034,6 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         whiteTimeLbl = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         blackTimeLbl = new javax.swing.JLabel();
-        resetBtn = new javax.swing.JButton();
         startGameBtn = new javax.swing.JButton();
         whiteAdvantageLbl = new javax.swing.JLabel();
         blackAdvantageLbl = new javax.swing.JLabel();
@@ -2767,14 +2775,6 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
                 .addContainerGap())
         );
 
-        resetBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
-        resetBtn.setText("Reset Game");
-        resetBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                resetBtnActionPerformed(evt);
-            }
-        });
-
         startGameBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         startGameBtn.setText("Start Game");
         startGameBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -2811,9 +2811,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
                         .addGap(0, 0, 0)
                         .addComponent(G4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addComponent(H4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(resetBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(H4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(A1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
@@ -3012,10 +3010,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
                     .addComponent(C4, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(B4, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(A4, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(E4, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(resetBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(E4, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(H3, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(G3, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -3314,18 +3309,9 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         handleClick(6, 1);
     }//GEN-LAST:event_B7LabelMousePressed
 
-    private void resetBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetBtnActionPerformed
-        //https://stackoverflow.com/questions/15853112/joptionpane-yes-no-option
-        int response = JOptionPane.showConfirmDialog(this, "Are you sure you want to reset the match? This will clear current progress.", "Reset Game", JOptionPane.YES_NO_OPTION);
-        if (response == JOptionPane.YES_OPTION) {
-            resetGame();
-        }
-    }//GEN-LAST:event_resetBtnActionPerformed
-
     private void startGameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startGameBtnActionPerformed
         startTimer();
         startGameBtn.setEnabled(false);
-        resetBtn.setEnabled(true);
     }//GEN-LAST:event_startGameBtnActionPerformed
 
 
@@ -3464,7 +3450,6 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JButton resetBtn;
     private javax.swing.JButton startGameBtn;
     private javax.swing.JLabel user1Lbl;
     private javax.swing.JLabel user2Lbl;
