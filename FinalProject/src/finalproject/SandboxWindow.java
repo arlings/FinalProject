@@ -160,9 +160,9 @@ public class SandboxWindow extends javax.swing.JFrame {
         }
     }
     
-    private void updateMoves(String preset, int offsets[][], JRadioButton buttonLocal){
+    private void updateMoves(String preset, int offsets[][], JRadioButton button){
         CustomPiece customPiece = (CustomPiece) pieces[3][4];
-        if (buttonLocal.isSelected()) {
+        if (button.isSelected()) {
             customPiece.addMoveRules(preset);
             showValidMoves(customPiece);
             //System.out.println(customPiece.getValidMoves(pieces).size());
@@ -2861,7 +2861,7 @@ public class SandboxWindow extends javax.swing.JFrame {
 
     private void pawnCaptureBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pawnCaptureBtnActionPerformed
         int[][] pawnOffsets = {{1,1}, {1,-1}}; 
-        updateMoves("PAWN_Capture", pawnOffsets, pawnMoveBtn);
+        updateMoves("PAWN_CAPTURE", pawnOffsets, pawnMoveBtn);
         if(!pawnCaptureBtn.isSelected() && pawnBtn.isSelected()){
             pawnBtn.setSelected(false);
         }
