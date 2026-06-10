@@ -24,6 +24,7 @@ import pieces.Queen;
 import pieces.Rook;
 import repo.FileImporter;
 import javax.swing.JOptionPane;
+import pieces.CustomPiece;
 
 public class GameWindow extends javax.swing.JFrame implements ActionListener {
 
@@ -40,7 +41,8 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
 
     public JLabel[][] board = new JLabel[8][8];
     public Piece[][] pieces = new Piece[8][8];
-
+    public Piece customPiece;
+    
     private boolean whiteTurn = true;
 
     private int totalTime;
@@ -76,13 +78,15 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         mainWindow = m;
     }
 
-    public GameWindow(SandboxWindow m, User user2, User user1, int chosenTime, boolean isSandbox) {
+    public GameWindow(SandboxWindow m, User user2, User user1, int chosenTime, boolean isSandbox, Piece customPiece) {
         //starts game setups and sets user labels for sandbox path
         this.isSandbox = isSandbox;
+        this.customPiece = customPiece;
         startGame(user1, user2, chosenTime);
         users[0] = user1;
         users[1] = user2;
         sandboxWindow = m;
+        System.out.println("After" + customPiece);
     }
 
     public GameWindow(EnterUsername m, User user2, User user1, int chosenTime, boolean isSandbox) {
@@ -426,7 +430,11 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         MoveJFrame();
         initComponents();
         board = loadBoard();
-        pieces = loadPieces(user1.getSkin(), user2.getSkin());
+        if (isSandbox) {
+            pieces = loadPiecesSandbox("Default", "Default");
+        } else {
+            pieces = loadPieces(user1.getSkin(), user2.getSkin());
+        }
         updateBoardUI();
         setPlayerNames(user1.getUserName(), user2.getUserName());
 
@@ -922,7 +930,26 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
             
         }
     }
-
+    
+    //sandbox logic
+    private Piece[][] loadPiecesSandbox(String blackSkin, String whiteSkin) {
+        Piece[][] sandboxBoard = loadPieces(blackSkin, whiteSkin);
+        sandboxBoard[3][4] = ((CustomPiece) customPiece).copy(3,4);
+        return sandboxBoard;
+    }
+    
+    private void handleSandboxClick(int r, int c, java.awt.event.MouseEvent evt){
+        if(startGameBtn.isEnabled() && isSandbox){
+            if(evt.getButton() == java.awt.event.MouseEvent.BUTTON1){
+                pieces[r][c] = ((CustomPiece) customPiece).copy(r,c);
+            }else if(evt.getButton() == java.awt.event.MouseEvent.BUTTON3){
+                pieces[r][c] = null; //add logic to prevent king deletion and highlight check if attemtped
+                //also add some instructions on main game board for sandbox
+            }
+            updateBoardUI();
+        }
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -3083,258 +3110,322 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
 
     private void B8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B8LabelMousePressed
         handleClick(7, 1);
+        handleSandboxClick(7,1, evt);
     }//GEN-LAST:event_B8LabelMousePressed
 
     private void D8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D8LabelMousePressed
         handleClick(7, 3);
+        handleSandboxClick(7,3, evt);
     }//GEN-LAST:event_D8LabelMousePressed
 
     private void E8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E8LabelMousePressed
         handleClick(7, 4);
+        handleSandboxClick(7,4, evt);
     }//GEN-LAST:event_E8LabelMousePressed
 
     private void F8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F8LabelMousePressed
         handleClick(7, 5);
+        handleSandboxClick(7,5, evt);
     }//GEN-LAST:event_F8LabelMousePressed
 
     private void G8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G8LabelMousePressed
         handleClick(7, 6);
+        handleSandboxClick(7,6, evt);
     }//GEN-LAST:event_G8LabelMousePressed
 
     private void H8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H8LabelMousePressed
         handleClick(7, 7);
+        handleSandboxClick(7,7, evt);
     }//GEN-LAST:event_H8LabelMousePressed
 
     private void A7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A7LabelMousePressed
         handleClick(6, 0);
+        handleSandboxClick(6,0, evt);
     }//GEN-LAST:event_A7LabelMousePressed
 
     private void C7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C7LabelMousePressed
         handleClick(6, 2);
+        handleSandboxClick(6,2, evt);
     }//GEN-LAST:event_C7LabelMousePressed
 
     private void H3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H3LabelMousePressed
         handleClick(2, 7);
+        handleSandboxClick(2,7, evt);
     }//GEN-LAST:event_H3LabelMousePressed
 
     private void G4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G4LabelMousePressed
         handleClick(3, 6);
+        handleSandboxClick(3,6, evt);
     }//GEN-LAST:event_G4LabelMousePressed
 
     private void C2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C2LabelMousePressed
         handleClick(1, 2);
+        handleSandboxClick(1,2, evt);
     }//GEN-LAST:event_C2LabelMousePressed
 
     private void A4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A4LabelMousePressed
         handleClick(3, 0);
+        handleSandboxClick(3,0, evt);
     }//GEN-LAST:event_A4LabelMousePressed
 
     private void D2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D2LabelMousePressed
         handleClick(1, 3);
+        handleSandboxClick(1,3, evt);
     }//GEN-LAST:event_D2LabelMousePressed
 
     private void B5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B5LabelMousePressed
         handleClick(4, 1);
+        handleSandboxClick(4,1, evt);
     }//GEN-LAST:event_B5LabelMousePressed
 
     private void D7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D7LabelMousePressed
         handleClick(6, 3);
+        handleSandboxClick(6,3, evt);
     }//GEN-LAST:event_D7LabelMousePressed
 
     private void E2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E2LabelMousePressed
         handleClick(1, 4);
+        handleSandboxClick(1,4, evt);
     }//GEN-LAST:event_E2LabelMousePressed
 
     private void A5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A5LabelMousePressed
         handleClick(4, 0);
+        handleSandboxClick(4,0, evt);
     }//GEN-LAST:event_A5LabelMousePressed
 
     private void F2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F2LabelMousePressed
         handleClick(1, 5);
+        handleSandboxClick(1,5, evt);
     }//GEN-LAST:event_F2LabelMousePressed
 
     private void E7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E7LabelMousePressed
         handleClick(6, 4);
+        handleSandboxClick(6,4, evt);
     }//GEN-LAST:event_E7LabelMousePressed
 
     private void G2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G2LabelMousePressed
         handleClick(1, 6);
+        handleSandboxClick(1,6, evt);
     }//GEN-LAST:event_G2LabelMousePressed
 
     private void F7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F7LabelMousePressed
         handleClick(6, 5);
+        handleSandboxClick(6,5, evt);
     }//GEN-LAST:event_F7LabelMousePressed
 
     private void G7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G7LabelMousePressed
         handleClick(6, 6);
+        handleSandboxClick(6,6, evt);
     }//GEN-LAST:event_G7LabelMousePressed
 
     private void C5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C5LabelMousePressed
         handleClick(4, 2);
+        handleSandboxClick(4,2, evt);
     }//GEN-LAST:event_C5LabelMousePressed
 
     private void D5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D5LabelMousePressed
         handleClick(4, 3);
+        handleSandboxClick(4,3, evt);
     }//GEN-LAST:event_D5LabelMousePressed
 
     private void H2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H2LabelMousePressed
         handleClick(1, 7);
+        handleSandboxClick(1,7, evt);
     }//GEN-LAST:event_H2LabelMousePressed
 
     private void H6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H6LabelMousePressed
         handleClick(5, 7);
+        handleSandboxClick(5,7, evt);
     }//GEN-LAST:event_H6LabelMousePressed
 
     private void B2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B2LabelMousePressed
         handleClick(1, 1);
+        handleSandboxClick(1,1, evt);
     }//GEN-LAST:event_B2LabelMousePressed
 
     private void C6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C6LabelMousePressed
         handleClick(5, 2);
+        handleSandboxClick(5,2, evt);
     }//GEN-LAST:event_C6LabelMousePressed
 
     private void H7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H7LabelMousePressed
         handleClick(6, 7);
+        handleSandboxClick(6,7, evt);
     }//GEN-LAST:event_H7LabelMousePressed
 
     private void B3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B3LabelMousePressed
         handleClick(2, 1);
+        handleSandboxClick(2,1, evt);
     }//GEN-LAST:event_B3LabelMousePressed
 
     private void E5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E5LabelMousePressed
         handleClick(4, 4);
+        handleSandboxClick(4,4, evt);
     }//GEN-LAST:event_E5LabelMousePressed
 
     private void A8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A8LabelMousePressed
         handleClick(7, 0);
+        handleSandboxClick(7,0, evt);
     }//GEN-LAST:event_A8LabelMousePressed
 
     private void A3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A3LabelMousePressed
         handleClick(2, 0);
+        handleSandboxClick(2,0, evt);
     }//GEN-LAST:event_A3LabelMousePressed
 
     private void C3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C3LabelMousePressed
         handleClick(2, 2);
+        handleSandboxClick(2,2, evt);
     }//GEN-LAST:event_C3LabelMousePressed
 
     private void B1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B1LabelMousePressed
         handleClick(0, 1);
+        handleSandboxClick(0,1, evt);
     }//GEN-LAST:event_B1LabelMousePressed
 
     private void B6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B6LabelMousePressed
         handleClick(5, 1);
+        handleSandboxClick(5,1, evt);
     }//GEN-LAST:event_B6LabelMousePressed
 
     private void C8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C8LabelMousePressed
         handleClick(7, 2);
+        handleSandboxClick(7,2, evt);
     }//GEN-LAST:event_C8LabelMousePressed
 
     private void D6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D6LabelMousePressed
         handleClick(5, 3);
+        handleSandboxClick(5,3, evt);
     }//GEN-LAST:event_D6LabelMousePressed
 
     private void C1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C1LabelMousePressed
         handleClick(0, 2);
+        handleSandboxClick(0,2, evt);
     }//GEN-LAST:event_C1LabelMousePressed
 
     private void D3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D3LabelMousePressed
         handleClick(2, 3);
+        handleSandboxClick(2,3, evt);
     }//GEN-LAST:event_D3LabelMousePressed
 
     private void F5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F5LabelMousePressed
         handleClick(4, 5);
+        handleSandboxClick(4,5, evt);
     }//GEN-LAST:event_F5LabelMousePressed
 
     private void D1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D1LabelMousePressed
         handleClick(0, 3);
+        handleSandboxClick(0,3, evt);
     }//GEN-LAST:event_D1LabelMousePressed
 
     private void H4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H4LabelMousePressed
         handleClick(3, 7);
+        handleSandboxClick(3,7, evt);
     }//GEN-LAST:event_H4LabelMousePressed
 
     private void E6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E6LabelMousePressed
         handleClick(5, 4);
+        handleSandboxClick(5,4, evt);
     }//GEN-LAST:event_E6LabelMousePressed
 
     private void C4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C4LabelMousePressed
         handleClick(3, 2);
+        handleSandboxClick(3,2, evt);
     }//GEN-LAST:event_C4LabelMousePressed
 
     private void G5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G5LabelMousePressed
         handleClick(4, 6);
+        handleSandboxClick(4,6, evt);
     }//GEN-LAST:event_G5LabelMousePressed
 
     private void E3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E3LabelMousePressed
         handleClick(2, 4);
+        handleSandboxClick(2,4, evt);
     }//GEN-LAST:event_E3LabelMousePressed
 
     private void B4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B4LabelMousePressed
         handleClick(3, 1);
+        handleSandboxClick(3,1, evt);
     }//GEN-LAST:event_B4LabelMousePressed
 
     private void F6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F6LabelMousePressed
         handleClick(5, 5);
+        handleSandboxClick(5,5, evt);
     }//GEN-LAST:event_F6LabelMousePressed
 
     private void H5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H5LabelMousePressed
         handleClick(4, 7);
+        handleSandboxClick(4,7, evt);
     }//GEN-LAST:event_H5LabelMousePressed
 
     private void A1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A1LabelMousePressed
         handleClick(0, 0);
+        handleSandboxClick(0,0, evt);
     }//GEN-LAST:event_A1LabelMousePressed
 
     private void D4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D4LabelMousePressed
         handleClick(3, 3);
+        handleSandboxClick(3,3, evt);
     }//GEN-LAST:event_D4LabelMousePressed
 
     private void G6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G6LabelMousePressed
         handleClick(5, 6);
+        handleSandboxClick(5,6, evt);
     }//GEN-LAST:event_G6LabelMousePressed
 
     private void F3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F3LabelMousePressed
         handleClick(2, 5);
+        handleSandboxClick(2,5, evt);
     }//GEN-LAST:event_F3LabelMousePressed
 
     private void A6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A6LabelMousePressed
         handleClick(5, 0);
+        handleSandboxClick(5,0, evt);
     }//GEN-LAST:event_A6LabelMousePressed
 
     private void E1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E1LabelMousePressed
         handleClick(0, 4);
+        handleSandboxClick(0,4, evt);
     }//GEN-LAST:event_E1LabelMousePressed
 
     private void E4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E4LabelMousePressed
         handleClick(3, 4);
+        handleSandboxClick(3,4, evt);
     }//GEN-LAST:event_E4LabelMousePressed
 
     private void F1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F1LabelMousePressed
         handleClick(0, 5);
+        handleSandboxClick(0,5, evt);
     }//GEN-LAST:event_F1LabelMousePressed
 
     private void G3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G3LabelMousePressed
         handleClick(2, 6);
+        handleSandboxClick(2,6, evt);
     }//GEN-LAST:event_G3LabelMousePressed
 
     private void G1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G1LabelMousePressed
         handleClick(0, 6);
+        handleSandboxClick(0,6, evt);
     }//GEN-LAST:event_G1LabelMousePressed
 
     private void F4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F4LabelMousePressed
         handleClick(3, 5);
+        handleSandboxClick(3,5, evt);
     }//GEN-LAST:event_F4LabelMousePressed
 
     private void H1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H1LabelMousePressed
         handleClick(0, 7);
+        handleSandboxClick(0,7, evt);
     }//GEN-LAST:event_H1LabelMousePressed
 
     private void A2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A2LabelMousePressed
         handleClick(1, 0);
+        handleSandboxClick(1,0, evt);
     }//GEN-LAST:event_A2LabelMousePressed
 
     private void B7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B7LabelMousePressed
         handleClick(6, 1);
+        handleSandboxClick(6,1, evt);
     }//GEN-LAST:event_B7LabelMousePressed
 
     private void startGameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startGameBtnActionPerformed

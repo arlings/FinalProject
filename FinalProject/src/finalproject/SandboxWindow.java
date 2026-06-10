@@ -1,5 +1,6 @@
 package finalproject;
 
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -7,7 +8,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import pieces.CustomPiece;
@@ -16,12 +16,14 @@ import pieces.Piece;
 import repo.FileImporter;
 
 public class SandboxWindow extends javax.swing.JFrame {
-
+    private Piece[][] exportBoard;
     private GameWindow gameWindow;
     MainWindow mainWindow;
     private JLabel[][] board = new JLabel[8][8];
     private Piece[][] pieces = new Piece[8][8];
     private FileImporter fileImporter = new FileImporter();
+
+    String pieceImg = "Pawn";
 
     //https://stackoverflow.com/questions/16046824/making-a-java-swing-frame-movable-and-setundecorated
     public void MoveJFrame() {
@@ -141,14 +143,19 @@ public class SandboxWindow extends javax.swing.JFrame {
 
     private void startGame() {
         pieces = new Piece[8][8];
-        Piece myPiece = new CustomPiece(3, 4, loadImage("/images/White_Pawn.png"), true, true);
+        Piece myPiece = new CustomPiece(3, 4, loadImage("/images/DefaultWhite_Pawn.png"), true, true);
         pieces[3][4] = myPiece;
         updateBoardUI();
     }
 
     private void showValidMoves(Piece piece) {
+        for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 8; col++) {
+                setTransparentIcon(board[row][col]);
+            }
+        }
         updateBoardUI();
-        ArrayList<Move> validMoves = piece.getValidMoves(pieces);
+        ArrayList<Move> validMoves = ((CustomPiece) piece).getValidMoves(pieces);
         BufferedImage dot = loadImage("/images/LightGreenPicture.png");
 
         for (Move move : validMoves) {
@@ -158,36 +165,209 @@ public class SandboxWindow extends javax.swing.JFrame {
             dotIcon.setDescription("GREEN_DOT");
             board[r][c].setIcon(dotIcon);
         }
+        //updateBoardUI();
     }
-    
-    private void updateMoves(String preset, int offsets[][], JRadioButton button){
+
+    private void updateMoves(String preset, JRadioButton button) {
         CustomPiece customPiece = (CustomPiece) pieces[3][4];
-        if (button.isSelected()) {
-            customPiece.addMoveRules(preset);
-            showValidMoves(customPiece);
-            //System.out.println(customPiece.getValidMoves(pieces).size());
-        } else {
-            customPiece.removeMoveRules(preset);
-            int r = customPiece.getRowNum();
-            int c = customPiece.getColumnNum();
-            for (int[] offset : offsets) {
-                int targetRow = r + offset[0];
-                int targetCol = c + offset[1];
-                if (targetRow >= 0 && targetRow < board.length && targetCol >= 0 && targetCol < board[0].length) {
-                    setTransparentIcon(board[targetRow][targetCol]);
+
+        if (button.isSelected()) { //if button is being selected
+            customPiece.addMoveRules(preset); //add rule
+        } else { //if button is being deselected
+            customPiece.removeMoveRules(preset); //remove rule
+        }
+        showValidMoves(customPiece);
+    }
+
+    private void checkPawnButtons(boolean isGlobalBtn) {
+        if (isGlobalBtn) { //if user clicked the global pawn button
+            boolean state = pawnBtn.isSelected(); //gets whether the pawn button was selected or deselected
+            pawnMoveBtn.setSelected(state); //sets the local move button to global status
+            pawnCaptureBtn.setSelected(state); //sets the local capture button to global status
+        } else { //if the user clicked a local pawn button
+            if (pawnMoveBtn.isSelected() && pawnCaptureBtn.isSelected()) { //checks if both local buttons are selected
+                pawnBtn.setSelected(true); //selects global button
+            } else { //if not all local buttons are selected
+                pawnBtn.setSelected(false); //deselects global button
+            }
+        }
+    }
+
+    private void checkKnightButtons(boolean isGlobalBtn) {
+        JRadioButton[] knightButtons = { //instantiates array to use later for checking
+            knightTopLeftHorzBtn, knightTopRightHorzBtn,
+            knightBottomLeftHorzBtn, knightBottomRightHorzBtn,
+            knightTopLeftVertBtn, knightTopRightVertBtn,
+            knightBottomLeftVertBtn, knightBottomRightVertBtn};
+
+        if (isGlobalBtn) { //if user clicked the global knight button
+            boolean state = knightBtn.isSelected(); //gets whether the knight button was selected or deselected
+            for (JRadioButton btn : knightButtons) { //loops through all local knight buttons
+                btn.setSelected(state); //sets them the same status as the global button
+            }
+        } else { //if the user clicked a local knight button
+            boolean allSelected = true; //boolean tracker for if all the local are all selected, asumes true
+            for (JRadioButton btn : knightButtons) { //loops through all local knight buttons
+                if (!btn.isSelected()) { //if the button is not selected
+                    allSelected = false; //sets boolean tracker to false
+                    break; //stops the loop
                 }
+            }
+            knightBtn.setSelected(allSelected); //sets the global button based on if all the local buttons are selected
         }
-            //System.out.println(customPiece.getValidMoves(pieces).size());
+    }
+
+    private void checkBishopButtons(boolean isGlobalBtn) {
+        JRadioButton[] bishopButtons = { //instantiates array to use later for checking
+            bishopTopLeftBtn, bishopTopRightBtn,
+            bishopBottomLeftBtn, bishopBottomRightBtn};
+
+        if (isGlobalBtn) { //if user clicked the global bishop button
+            boolean state = bishopBtn.isSelected(); //gets whether the bishop button was selected or deselected
+            for (JRadioButton btn : bishopButtons) { //loops through all local bishop buttons
+                btn.setSelected(state); //sets them the same status as the global button
+            }
+        } else { //if the user clicked a local bishop button
+            boolean allSelected = true; //boolean tracker for if all the local are all selected, asumes true
+            for (JRadioButton btn : bishopButtons) { //loops through all local bishop buttons
+                if (!btn.isSelected()) { //if the button is not selected
+                    allSelected = false; //sets boolean tracker to false
+                    break; //stops the loop
+                }
+            }
+            bishopBtn.setSelected(allSelected); //sets the global button based on if all the local buttons are selected
         }
+        queenBtn.setSelected(rookBtn.isSelected() && bishopBtn.isSelected());
+    }
+
+    private void checkRookButtons(boolean isGlobalBtn) {
+        JRadioButton[] rookButtons = { //instantiates array to use later for checking
+            rookUpBtn, rookDownBtn,
+            rookLeftBtn, rookRightBtn};
+
+        if (isGlobalBtn) { //if user clicked the global rook button
+            boolean state = rookBtn.isSelected(); //gets whether the rook button was selected or deselected
+            for (JRadioButton btn : rookButtons) { //loops through all local rook buttons
+                btn.setSelected(state); //sets them the same status as the global button
+            }
+        } else { //if the user clicked a local rook button
+            boolean allSelected = true; //boolean tracker for if all the local are all selected, assumes true
+            for (JRadioButton btn : rookButtons) { //loops through all local rook buttons
+                if (!btn.isSelected()) { //if the button is not selected
+                    allSelected = false; //sets boolean tracker to false
+                    break; //stops the loop
+                }
+            }
+            rookBtn.setSelected(allSelected); //sets the global button based on if all the local buttons are selected
+        }
+        queenBtn.setSelected(rookBtn.isSelected() && bishopBtn.isSelected());
+    }
+
+    private void checkQueenButton() {
+        if (queenBtn.isSelected()) {//if queen button is selected
+            //enable all rook and bishop buttons using existing logic
+            rookBtn.setSelected(true);
+            bishopBtn.setSelected(true);
+            checkRookButtons(true);//sets all rook sub-buttons to selected
+            checkBishopButtons(true);//sets all bishop sub-buttons to selected
+        } else {//if queen button is deselected
+            JRadioButton[] rookButtons = {
+                rookUpBtn, rookDownBtn,
+                rookLeftBtn, rookRightBtn};
+            JRadioButton[] bishopButtons = {
+                bishopTopLeftBtn, bishopTopRightBtn,
+                bishopBottomLeftBtn, bishopBottomRightBtn};
+            boolean allRooksSelected = true;
+            for (JRadioButton btn : rookButtons) {
+                if (!btn.isSelected()) {
+                    allRooksSelected = false;
+                    break;
+                }
+            }
+            boolean allBishopsSelected = true;
+            for (JRadioButton btn : bishopButtons) {
+                if (!btn.isSelected()) {
+                    allBishopsSelected = false;
+                    break;
+                }
+            }
+            //only disable if everything is already fully enabled
+            if (allRooksSelected && allBishopsSelected) {
+                rookBtn.setSelected(false);
+                bishopBtn.setSelected(false);
+                checkRookButtons(true);
+                checkBishopButtons(true);
+            }
+        }
+    }
+
+    private void handleClick(int row, int col) {
+        CustomPiece customPiece = (CustomPiece) pieces[3][4];
+        int dx = row - customPiece.getRowNum();
+        int dy = col - customPiece.getColumnNum();
+        if (isKnightMove(dx, dy)) {
+            toggleKnightMove(customPiece, dx, dy);
+        } else {
+            boolean removed = customPiece.removeMoveRule(dx, dy);
+            if (!removed) {
+                customPiece.addMoveRules(dx, dy);
+            }
+        }
+        syncKnightButtons(customPiece);
+        checkKnightButtons(false);
+        showValidMoves(customPiece);
+    }
+
+    private void toggleKnightMove(CustomPiece piece, int dx, int dy) {
+        if (piece.hasKnight(dx, dy)) {
+            piece.removeKnightMove(dx, dy);
+        } else {
+            piece.addKnightMove(dx, dy);
+        }
+    }
+
+    private boolean isKnightMove(int dx, int dy) {
+        return (dx == 2 && dy == -1)
+                || (dx == 2 && dy == 1)
+                || (dx == -2 && dy == -1)
+                || (dx == -2 && dy == 1)
+                || (dx == 1 && dy == -2)
+                || (dx == 1 && dy == 2)
+                || (dx == -1 && dy == -2)
+                || (dx == -1 && dy == 2);
+    }
+
+    private void syncKnightButtons(CustomPiece piece) {
+        knightTopLeftVertBtn.setSelected(piece.hasKnight(2, -1));
+        knightTopRightVertBtn.setSelected(piece.hasKnight(2, 1));
+        knightBottomLeftVertBtn.setSelected(piece.hasKnight(-2, -1));
+        knightBottomRightVertBtn.setSelected(piece.hasKnight(-2, 1));
+
+        knightTopLeftHorzBtn.setSelected(piece.hasKnight(1, -2));
+        knightTopRightHorzBtn.setSelected(piece.hasKnight(1, 2));
+        knightBottomLeftHorzBtn.setSelected(piece.hasKnight(-1, -2));
+        knightBottomRightHorzBtn.setSelected(piece.hasKnight(-1, 2));
+    }
+
+    public void changeImgIcon(String piece) {
+        int selectedIndex = numWinsSelect.getSelectedIndex();
+        String numWins = numWinsSelect.getItemAt(selectedIndex);
+        if (whiteTeamBtn.isSelected()) {
+            pieces[3][4].setSprite(loadImage("/images/" + numWins + "White_" + piece + ".png"));
+            pieces[3][4].setWhite(true);
+        } else {
+            pieces[3][4].setSprite(loadImage("/images/" + numWins + "Black_" + piece + ".png"));
+            pieces[3][4].setWhite(false);
+        }
+
         updateBoardUI();
     }
-    private void checkAllButtons(int numLocal, JRadioButton global){
-        
-    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         startSandboxGameButton = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
@@ -332,7 +512,7 @@ public class SandboxWindow extends javax.swing.JFrame {
         bishopTopLeftBtn = new javax.swing.JRadioButton();
         bishopTopRightBtn = new javax.swing.JRadioButton();
         bishopBottomLeftBtn = new javax.swing.JRadioButton();
-        bishopBottomRight = new javax.swing.JRadioButton();
+        bishopBottomRightBtn = new javax.swing.JRadioButton();
         rookLeftBtn = new javax.swing.JRadioButton();
         rookRightBtn = new javax.swing.JRadioButton();
         rookUpBtn = new javax.swing.JRadioButton();
@@ -347,9 +527,21 @@ public class SandboxWindow extends javax.swing.JFrame {
         knightTopRightVertBtn = new javax.swing.JRadioButton();
         knightBottomLeftVertBtn = new javax.swing.JRadioButton();
         knightBottomRightVertBtn = new javax.swing.JRadioButton();
+        jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        whiteTeamBtn = new javax.swing.JRadioButton();
+        blackTeamBtn = new javax.swing.JRadioButton();
+        pawnImgBtn = new javax.swing.JButton();
+        knightImgBtn = new javax.swing.JButton();
+        bishopImgBtn = new javax.swing.JButton();
+        rookImgBtn = new javax.swing.JButton();
+        queenImgBtn = new javax.swing.JButton();
+        kingImgBtn = new javax.swing.JButton();
+        numWinsSelect = new javax.swing.JComboBox<>();
+        imgUpdateBtn = new javax.swing.JButton();
+        startGameBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -2077,6 +2269,11 @@ public class SandboxWindow extends javax.swing.JFrame {
 
         knightTopLeftHorzBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         knightTopLeftHorzBtn.setText("Knight Top Left Horz");
+        knightTopLeftHorzBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                knightTopLeftHorzBtnActionPerformed(evt);
+            }
+        });
 
         knightTopRightHorzBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         knightTopRightHorzBtn.setText("Knight Top Right Horz");
@@ -2088,6 +2285,11 @@ public class SandboxWindow extends javax.swing.JFrame {
 
         knightBottomLeftHorzBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         knightBottomLeftHorzBtn.setText("Knight Bottom Left Horz");
+        knightBottomLeftHorzBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                knightBottomLeftHorzBtnActionPerformed(evt);
+            }
+        });
 
         knightBottomRightHorzBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         knightBottomRightHorzBtn.setText("Knight Bottom Right Horz");
@@ -2099,42 +2301,102 @@ public class SandboxWindow extends javax.swing.JFrame {
 
         bishopTopLeftBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         bishopTopLeftBtn.setText("Bishop Top Left");
+        bishopTopLeftBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bishopTopLeftBtnActionPerformed(evt);
+            }
+        });
 
         bishopTopRightBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         bishopTopRightBtn.setText("Bishop Top Right");
+        bishopTopRightBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bishopTopRightBtnActionPerformed(evt);
+            }
+        });
 
         bishopBottomLeftBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         bishopBottomLeftBtn.setText("Bishop Bottom Left");
+        bishopBottomLeftBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bishopBottomLeftBtnActionPerformed(evt);
+            }
+        });
 
-        bishopBottomRight.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        bishopBottomRight.setText("Bishop Bottom Right");
+        bishopBottomRightBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        bishopBottomRightBtn.setText("Bishop Bottom Right");
+        bishopBottomRightBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bishopBottomRightBtnActionPerformed(evt);
+            }
+        });
 
         rookLeftBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         rookLeftBtn.setText("Rook Left");
+        rookLeftBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rookLeftBtnActionPerformed(evt);
+            }
+        });
 
         rookRightBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         rookRightBtn.setText("Rook Right");
+        rookRightBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rookRightBtnActionPerformed(evt);
+            }
+        });
 
         rookUpBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         rookUpBtn.setText("Rook Up");
+        rookUpBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rookUpBtnActionPerformed(evt);
+            }
+        });
 
         rookDownBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         rookDownBtn.setText("Rook Down");
+        rookDownBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rookDownBtnActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         jLabel2.setText("Combine as many presets you want!");
 
         queenBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         queenBtn.setText("Queen");
+        queenBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                queenBtnActionPerformed(evt);
+            }
+        });
 
         knightBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         knightBtn.setText("Knight");
+        knightBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                knightBtnActionPerformed(evt);
+            }
+        });
 
         bishopBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         bishopBtn.setText("Bishop");
+        bishopBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bishopBtnActionPerformed(evt);
+            }
+        });
 
         rookBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         rookBtn.setText("Rook");
+        rookBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rookBtnActionPerformed(evt);
+            }
+        });
 
         pawnBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         pawnBtn.setText("Pawn");
@@ -2154,9 +2416,19 @@ public class SandboxWindow extends javax.swing.JFrame {
 
         knightTopRightVertBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         knightTopRightVertBtn.setText("Knight Top Right Vert");
+        knightTopRightVertBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                knightTopRightVertBtnActionPerformed(evt);
+            }
+        });
 
         knightBottomLeftVertBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         knightBottomLeftVertBtn.setText("Knight Bottom Left Vert");
+        knightBottomLeftVertBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                knightBottomLeftVertBtnActionPerformed(evt);
+            }
+        });
 
         knightBottomRightVertBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         knightBottomRightVertBtn.setText("Knight Bottom Right Vert");
@@ -2165,6 +2437,9 @@ public class SandboxWindow extends javax.swing.JFrame {
                 knightBottomRightVertBtnActionPerformed(evt);
             }
         });
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        jLabel3.setText("(or just click the tiles you want your piece to be able to move to)");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -2194,7 +2469,7 @@ public class SandboxWindow extends javax.swing.JFrame {
                             .addComponent(bishopTopLeftBtn)
                             .addComponent(bishopTopRightBtn)
                             .addComponent(bishopBottomLeftBtn)
-                            .addComponent(bishopBottomRight)
+                            .addComponent(bishopBottomRightBtn)
                             .addComponent(rookLeftBtn)
                             .addComponent(rookRightBtn)
                             .addComponent(rookUpBtn)
@@ -2207,12 +2482,16 @@ public class SandboxWindow extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(34, 34, 34)
                                 .addComponent(jLabel2)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(17, 17, 17))
+                        .addGap(0, 80, Short.MAX_VALUE)))
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel9)
                 .addGap(161, 161, 161))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2221,7 +2500,9 @@ public class SandboxWindow extends javax.swing.JFrame {
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pawnBtn)
                 .addGap(2, 2, 2)
                 .addComponent(pawnMoveBtn)
@@ -2256,7 +2537,7 @@ public class SandboxWindow extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bishopBottomLeftBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bishopBottomRight)
+                .addComponent(bishopBottomRightBtn)
                 .addGap(20, 20, 20)
                 .addComponent(rookBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -2269,39 +2550,156 @@ public class SandboxWindow extends javax.swing.JFrame {
                 .addComponent(rookDownBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(queenBtn)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI Black", 0, 36)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         jLabel10.setText("Icon ");
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/White_Pawn.png"))); // NOI18N
-        jLabel3.setText("jLabel3");
+        jLabel12.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        jLabel12.setText("Select");
+
+        buttonGroup1.add(whiteTeamBtn);
+        whiteTeamBtn.setSelected(true);
+        whiteTeamBtn.setText("White");
+        whiteTeamBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                whiteTeamBtnActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(blackTeamBtn);
+        blackTeamBtn.setText("Black");
+
+        pawnImgBtn.setBackground(java.awt.Color.gray);
+        pawnImgBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/DefaultWhite_Pawn.png"))); // NOI18N
+        pawnImgBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pawnImgBtnActionPerformed(evt);
+            }
+        });
+
+        knightImgBtn.setBackground(java.awt.Color.gray);
+        knightImgBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/DefaultWhite_Knight.png"))); // NOI18N
+        knightImgBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                knightImgBtnActionPerformed(evt);
+            }
+        });
+
+        bishopImgBtn.setBackground(java.awt.Color.gray);
+        bishopImgBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/DefaultWhite_Bishop.png"))); // NOI18N
+        bishopImgBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bishopImgBtnActionPerformed(evt);
+            }
+        });
+
+        rookImgBtn.setBackground(java.awt.Color.gray);
+        rookImgBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/DefaultWhite_Rook.png"))); // NOI18N
+        rookImgBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rookImgBtnActionPerformed(evt);
+            }
+        });
+
+        queenImgBtn.setBackground(java.awt.Color.gray);
+        queenImgBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/DefaultWhite_Queen.png"))); // NOI18N
+        queenImgBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                queenImgBtnActionPerformed(evt);
+            }
+        });
+
+        kingImgBtn.setBackground(java.awt.Color.gray);
+        kingImgBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/DefaultWhite_King.png"))); // NOI18N
+        kingImgBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kingImgBtnActionPerformed(evt);
+            }
+        });
+
+        numWinsSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Default", "10Wins", "20Wins", "30Wins" }));
+
+        imgUpdateBtn.setBackground(new java.awt.Color(204, 204, 204));
+        imgUpdateBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        imgUpdateBtn.setText("Update");
+        imgUpdateBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                imgUpdateBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(38, Short.MAX_VALUE)
-                .addComponent(jLabel10)
-                .addGap(29, 29, 29))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(kingImgBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(queenImgBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(rookImgBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(bishopImgBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(knightImgBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pawnImgBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(29, 29, 29))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10))
+                        .addGap(50, 50, 50))))
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(14, 14, 14)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(imgUpdateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(blackTeamBtn)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(whiteTeamBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(numWinsSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(9, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel10)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pawnImgBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(knightImgBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
+                .addComponent(bishopImgBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(rookImgBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(queenImgBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(kingImgBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(whiteTeamBtn)
+                    .addComponent(numWinsSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(blackTeamBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(imgUpdateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        startGameBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
+        startGameBtn.setText("Start Game");
+        startGameBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startGameBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -2444,15 +2842,21 @@ public class SandboxWindow extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(startSandboxGameButton)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(87, 87, 87)
+                        .addComponent(jLabel4)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(startGameBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2483,7 +2887,9 @@ public class SandboxWindow extends javax.swing.JFrame {
                                     .addComponent(B7, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(A7, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(63, 63, 63)
+                                .addGap(16, 16, 16)
+                                .addComponent(startGameBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel4)))
                         .addGap(0, 0, 0)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2532,7 +2938,7 @@ public class SandboxWindow extends javax.swing.JFrame {
                             .addComponent(B2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(A2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(E2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 0, 0)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(H1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(G1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2543,7 +2949,7 @@ public class SandboxWindow extends javax.swing.JFrame {
                             .addComponent(B1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(A1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
+                        .addGap(36, 36, 36)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -2562,317 +2968,458 @@ public class SandboxWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void startSandboxGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startSandboxGameButtonActionPerformed
-        if (gameWindow == null) {
-            gameWindow = new GameWindow(this, new User("Player 1", 0), new User("Player 1", 0), 300, true);
-        }
-        gameWindow.setVisible(true);
-        this.dispose();
+        
     }//GEN-LAST:event_startSandboxGameButtonActionPerformed
 
     private void G2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G2LabelMousePressed
-
+        handleClick(1, 6);
     }//GEN-LAST:event_G2LabelMousePressed
 
     private void F7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F7LabelMousePressed
-
+        handleClick(6, 5);
     }//GEN-LAST:event_F7LabelMousePressed
 
     private void G3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G3LabelMousePressed
-
+        handleClick(2, 6);
     }//GEN-LAST:event_G3LabelMousePressed
 
     private void G8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G8LabelMousePressed
-
+        handleClick(7, 6);
     }//GEN-LAST:event_G8LabelMousePressed
 
     private void F5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F5LabelMousePressed
-
+        handleClick(4, 5);
     }//GEN-LAST:event_F5LabelMousePressed
 
     private void G1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G1LabelMousePressed
-
+        handleClick(0, 6);
     }//GEN-LAST:event_G1LabelMousePressed
 
     private void D1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D1LabelMousePressed
-
+        handleClick(0, 3);
     }//GEN-LAST:event_D1LabelMousePressed
 
     private void F4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F4LabelMousePressed
-
+        handleClick(3, 5);
     }//GEN-LAST:event_F4LabelMousePressed
 
     private void G7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G7LabelMousePressed
-
+        handleClick(6, 6);
     }//GEN-LAST:event_G7LabelMousePressed
 
     private void E8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E8LabelMousePressed
-
+        handleClick(7, 4);
     }//GEN-LAST:event_E8LabelMousePressed
 
     private void H8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H8LabelMousePressed
-
+        handleClick(7, 7);
     }//GEN-LAST:event_H8LabelMousePressed
 
     private void C5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C5LabelMousePressed
-
+        handleClick(4, 2);
     }//GEN-LAST:event_C5LabelMousePressed
 
     private void H4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H4LabelMousePressed
-
+        handleClick(3, 7);
     }//GEN-LAST:event_H4LabelMousePressed
 
     private void D5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D5LabelMousePressed
-
+        handleClick(4, 3);
     }//GEN-LAST:event_D5LabelMousePressed
 
     private void E6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E6LabelMousePressed
-
+        handleClick(5, 4);
     }//GEN-LAST:event_E6LabelMousePressed
 
     private void H2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H2LabelMousePressed
-
+        handleClick(1, 7);
     }//GEN-LAST:event_H2LabelMousePressed
 
     private void H6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H6LabelMousePressed
-
+        handleClick(5, 7);
     }//GEN-LAST:event_H6LabelMousePressed
 
     private void C7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C7LabelMousePressed
-
+        handleClick(6, 2);
     }//GEN-LAST:event_C7LabelMousePressed
 
     private void H3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H3LabelMousePressed
-
+        handleClick(2, 7);
     }//GEN-LAST:event_H3LabelMousePressed
 
     private void F8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F8LabelMousePressed
-
+        handleClick(7, 5);
     }//GEN-LAST:event_F8LabelMousePressed
 
     private void G4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G4LabelMousePressed
-
+        handleClick(3, 6);
     }//GEN-LAST:event_G4LabelMousePressed
 
     private void C4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C4LabelMousePressed
-
+        handleClick(3, 2);
     }//GEN-LAST:event_C4LabelMousePressed
 
     private void C2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C2LabelMousePressed
-
+        handleClick(1, 2);
     }//GEN-LAST:event_C2LabelMousePressed
 
     private void B2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B2LabelMousePressed
-
+        handleClick(1, 1);
     }//GEN-LAST:event_B2LabelMousePressed
 
     private void G5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G5LabelMousePressed
-
+        handleClick(4, 6);
     }//GEN-LAST:event_G5LabelMousePressed
 
     private void A4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A4LabelMousePressed
-
+        handleClick(3, 0);
     }//GEN-LAST:event_A4LabelMousePressed
 
     private void C6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C6LabelMousePressed
-
+        handleClick(5, 2);
     }//GEN-LAST:event_C6LabelMousePressed
 
     private void E3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E3LabelMousePressed
-
+        handleClick(2, 4);
     }//GEN-LAST:event_E3LabelMousePressed
 
     private void H7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H7LabelMousePressed
-
+        handleClick(6, 7);
     }//GEN-LAST:event_H7LabelMousePressed
 
     private void B4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B4LabelMousePressed
-
+        handleClick(3, 1);
     }//GEN-LAST:event_B4LabelMousePressed
 
     private void B3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B3LabelMousePressed
-
+        handleClick(2, 1);
     }//GEN-LAST:event_B3LabelMousePressed
 
     private void E5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E5LabelMousePressed
-
+        handleClick(4, 4);
     }//GEN-LAST:event_E5LabelMousePressed
 
     private void D2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D2LabelMousePressed
-
+        handleClick(1, 3);
     }//GEN-LAST:event_D2LabelMousePressed
 
     private void B5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B5LabelMousePressed
-
+        handleClick(4, 1);
     }//GEN-LAST:event_B5LabelMousePressed
 
     private void F6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F6LabelMousePressed
-
+        handleClick(5, 5);
     }//GEN-LAST:event_F6LabelMousePressed
 
     private void D7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D7LabelMousePressed
-
+        handleClick(6, 3);
     }//GEN-LAST:event_D7LabelMousePressed
 
     private void H5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H5LabelMousePressed
-
+        handleClick(4, 7);
     }//GEN-LAST:event_H5LabelMousePressed
 
     private void E2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E2LabelMousePressed
-
+        handleClick(1, 4);
     }//GEN-LAST:event_E2LabelMousePressed
 
     private void A8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A8LabelMousePressed
-
+        handleClick(7, 0);
     }//GEN-LAST:event_A8LabelMousePressed
 
     private void A1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A1LabelMousePressed
-
+        handleClick(0, 0);
     }//GEN-LAST:event_A1LabelMousePressed
 
     private void A5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A5LabelMousePressed
-
+        handleClick(4, 0);
     }//GEN-LAST:event_A5LabelMousePressed
 
     private void A3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A3LabelMousePressed
-
+        handleClick(2, 0);
     }//GEN-LAST:event_A3LabelMousePressed
 
     private void D4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D4LabelMousePressed
-
+        handleClick(3, 3);
     }//GEN-LAST:event_D4LabelMousePressed
 
     private void C3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C3LabelMousePressed
-
+        handleClick(2, 2);
     }//GEN-LAST:event_C3LabelMousePressed
 
     private void G6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G6LabelMousePressed
-
+        handleClick(5, 6);
     }//GEN-LAST:event_G6LabelMousePressed
 
     private void B1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B1LabelMousePressed
-
+        handleClick(0, 1);
     }//GEN-LAST:event_B1LabelMousePressed
 
     private void B6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B6LabelMousePressed
-
+        handleClick(5, 1);
     }//GEN-LAST:event_B6LabelMousePressed
 
     private void B7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B7LabelMousePressed
-
+        handleClick(6, 1);
     }//GEN-LAST:event_B7LabelMousePressed
 
     private void F3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F3LabelMousePressed
-
+        handleClick(2, 5);
     }//GEN-LAST:event_F3LabelMousePressed
 
     private void A2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A2LabelMousePressed
-
+        handleClick(1, 0);
     }//GEN-LAST:event_A2LabelMousePressed
 
     private void A6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A6LabelMousePressed
-
+        handleClick(5, 2);
     }//GEN-LAST:event_A6LabelMousePressed
 
     private void B8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B8LabelMousePressed
-
+        handleClick(7, 1);
     }//GEN-LAST:event_B8LabelMousePressed
 
     private void C8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C8LabelMousePressed
-
+        handleClick(7, 2);
     }//GEN-LAST:event_C8LabelMousePressed
 
     private void E1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E1LabelMousePressed
-
+        handleClick(0, 4);
     }//GEN-LAST:event_E1LabelMousePressed
 
     private void H1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H1LabelMousePressed
-
+        handleClick(0, 7);
     }//GEN-LAST:event_H1LabelMousePressed
 
     private void D6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D6LabelMousePressed
-
+        handleClick(5, 3);
     }//GEN-LAST:event_D6LabelMousePressed
 
     private void E4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E4LabelMousePressed
-
+        handleClick(3, 4);
     }//GEN-LAST:event_E4LabelMousePressed
 
     private void A7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A7LabelMousePressed
-
+        handleClick(6, 0);
     }//GEN-LAST:event_A7LabelMousePressed
 
     private void C1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C1LabelMousePressed
-
+        handleClick(0, 2);
     }//GEN-LAST:event_C1LabelMousePressed
 
     private void F1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F1LabelMousePressed
-
+        handleClick(0, 5);
     }//GEN-LAST:event_F1LabelMousePressed
 
     private void F2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F2LabelMousePressed
-
+        handleClick(1, 5);
     }//GEN-LAST:event_F2LabelMousePressed
 
     private void D8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D8LabelMousePressed
-
+        handleClick(7, 3);
     }//GEN-LAST:event_D8LabelMousePressed
 
     private void E7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E7LabelMousePressed
-
+        handleClick(6, 4);
     }//GEN-LAST:event_E7LabelMousePressed
 
     private void D3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D3LabelMousePressed
-
+        handleClick(2, 3);
     }//GEN-LAST:event_D3LabelMousePressed
 
     private void knightBottomRightHorzBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_knightBottomRightHorzBtnActionPerformed
-        // TODO add your handling code here:
+        updateMoves("BOTTOM_RIGHT_HORZ_KNIGHT", knightBottomRightHorzBtn); //updates rule set
+        checkKnightButtons(false); //updates global and local button states
     }//GEN-LAST:event_knightBottomRightHorzBtnActionPerformed
 
     private void knightBottomRightVertBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_knightBottomRightVertBtnActionPerformed
-        // TODO add your handling code here:
+        updateMoves("BOTTOM_RIGHT_VERT_KNIGHT", knightBottomRightVertBtn); //updates rule set
+        checkKnightButtons(false); //updates global and local button states
     }//GEN-LAST:event_knightBottomRightVertBtnActionPerformed
 
     private void knightTopRightHorzBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_knightTopRightHorzBtnActionPerformed
-        // TODO add your handling code here:
+        updateMoves("TOP_RIGHT_HORZ_KNIGHT", knightTopRightHorzBtn); //updates rule set
+        checkKnightButtons(false); //updates global and local button states
     }//GEN-LAST:event_knightTopRightHorzBtnActionPerformed
 
     private void knightTopLeftVertBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_knightTopLeftVertBtnActionPerformed
-        // TODO add your handling code here:
+        updateMoves("TOP_LEFT_VERT_KNIGHT", knightTopLeftVertBtn); //updates rule set
+        checkKnightButtons(false); //updates global and local button states
     }//GEN-LAST:event_knightTopLeftVertBtnActionPerformed
 
     private void pawnBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pawnBtnActionPerformed
-        int[][] pawnOffsets = {{1, 0}, {2, 0}, {1,1}, {1,-1}}; 
-        updateMoves("PAWN", pawnOffsets, pawnBtn);
-        if(pawnBtn.isSelected()){
-            pawnMoveBtn.setSelected(true);
-            pawnCaptureBtn.setSelected(true);
-        }else{
-            pawnMoveBtn.setSelected(false);
-            pawnCaptureBtn.setSelected(false);
-        }
-        
+        updateMoves("PAWN", pawnBtn);
+        checkPawnButtons(true);
     }//GEN-LAST:event_pawnBtnActionPerformed
 
     private void pawnMoveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pawnMoveBtnActionPerformed
-        int[][] pawnOffsets = {{1, 0}, {2, 0}}; 
-        updateMoves("PAWN_MOVE", pawnOffsets, pawnMoveBtn);
-        if(!pawnMoveBtn.isSelected() && pawnBtn.isSelected()){
-            pawnBtn.setSelected(false);
-        }else if(pawnMoveBtn.isSelected() && pawnCaptureBtn.isSelected()){
-           pawnBtn.setSelected(true);
-        }
+        updateMoves("PAWN_MOVE", pawnMoveBtn);
+        checkPawnButtons(false);
     }//GEN-LAST:event_pawnMoveBtnActionPerformed
 
     private void pawnCaptureBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pawnCaptureBtnActionPerformed
-        int[][] pawnOffsets = {{1,1}, {1,-1}}; 
-        updateMoves("PAWN_CAPTURE", pawnOffsets, pawnCaptureBtn);
-        if(!pawnCaptureBtn.isSelected() && pawnBtn.isSelected()){
-            pawnBtn.setSelected(false);
-        }else if(pawnMoveBtn.isSelected() && pawnCaptureBtn.isSelected()){
-           pawnBtn.setSelected(true);
-        }
+        updateMoves("PAWN_CAPTURE", pawnCaptureBtn);
+        checkPawnButtons(false);
     }//GEN-LAST:event_pawnCaptureBtnActionPerformed
+
+    private void knightBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_knightBtnActionPerformed
+        updateMoves("KNIGHT", knightBtn);
+        checkKnightButtons(true);
+    }//GEN-LAST:event_knightBtnActionPerformed
+
+    private void knightTopLeftHorzBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_knightTopLeftHorzBtnActionPerformed
+        updateMoves("TOP_LEFT_HORZ_KNIGHT", knightTopLeftHorzBtn); //updates rule set
+        checkKnightButtons(false); //updates global and local button states
+    }//GEN-LAST:event_knightTopLeftHorzBtnActionPerformed
+
+    private void knightBottomLeftHorzBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_knightBottomLeftHorzBtnActionPerformed
+        updateMoves("BOTTOM_LEFT_HORZ_KNIGHT", knightBottomLeftHorzBtn); //updates rule set
+        checkKnightButtons(false); //updates global and local button states
+    }//GEN-LAST:event_knightBottomLeftHorzBtnActionPerformed
+
+    private void knightTopRightVertBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_knightTopRightVertBtnActionPerformed
+        updateMoves("TOP_RIGHT_VERT_KNIGHT", knightTopRightVertBtn); //updates rule set
+        checkKnightButtons(false); //updates global and local button states
+    }//GEN-LAST:event_knightTopRightVertBtnActionPerformed
+
+    private void knightBottomLeftVertBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_knightBottomLeftVertBtnActionPerformed
+        updateMoves("BOTTOM_LEFT_VERT_KNIGHT", knightBottomLeftVertBtn); //updates rule set
+        checkKnightButtons(false); //updates global and local button states
+    }//GEN-LAST:event_knightBottomLeftVertBtnActionPerformed
+
+    private void bishopTopLeftBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bishopTopLeftBtnActionPerformed
+        updateMoves("TOP_LEFT_BISHOP", bishopTopLeftBtn); //updates rule set
+        checkBishopButtons(false); //updates global and local button states
+    }//GEN-LAST:event_bishopTopLeftBtnActionPerformed
+
+    private void bishopBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bishopBtnActionPerformed
+        updateMoves("BISHOP", bishopBtn); //updates rule set
+        checkBishopButtons(true); //updates global and local button states
+    }//GEN-LAST:event_bishopBtnActionPerformed
+
+    private void bishopTopRightBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bishopTopRightBtnActionPerformed
+        updateMoves("TOP_RIGHT_BISHOP", bishopTopRightBtn); //updates rule set
+        checkBishopButtons(false); //updates global and local button states
+    }//GEN-LAST:event_bishopTopRightBtnActionPerformed
+
+    private void bishopBottomLeftBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bishopBottomLeftBtnActionPerformed
+        updateMoves("BOTTOM_LEFT_BISHOP", bishopBottomLeftBtn); //updates rule set
+        checkBishopButtons(false); //updates global and local button states
+    }//GEN-LAST:event_bishopBottomLeftBtnActionPerformed
+
+    private void bishopBottomRightBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bishopBottomRightBtnActionPerformed
+        updateMoves("BOTTOM_RIGHT_BISHOP", bishopBottomRightBtn); //updates rule set
+        checkBishopButtons(false); //updates global and local button states
+    }//GEN-LAST:event_bishopBottomRightBtnActionPerformed
+
+    private void rookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rookBtnActionPerformed
+        updateMoves("ROOK", rookBtn); //updates rule set
+        checkRookButtons(true); //updates global and local button states
+    }//GEN-LAST:event_rookBtnActionPerformed
+
+    private void rookLeftBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rookLeftBtnActionPerformed
+        updateMoves("LEFT_ROOK", rookLeftBtn); //updates rule set
+        checkRookButtons(false); //updates global and local button states
+    }//GEN-LAST:event_rookLeftBtnActionPerformed
+
+    private void rookRightBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rookRightBtnActionPerformed
+        updateMoves("RIGHT_ROOK", rookRightBtn); //updates rule set
+        checkRookButtons(false); //updates global and local button states
+    }//GEN-LAST:event_rookRightBtnActionPerformed
+
+    private void rookUpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rookUpBtnActionPerformed
+        updateMoves("UP_ROOK", rookUpBtn); //updates rule set
+        checkRookButtons(false); //updates global and local button states
+    }//GEN-LAST:event_rookUpBtnActionPerformed
+
+    private void rookDownBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rookDownBtnActionPerformed
+        updateMoves("DOWN_ROOK", rookDownBtn); //updates rule set
+        checkRookButtons(false); //updates global and local button states
+    }//GEN-LAST:event_rookDownBtnActionPerformed
+
+    private void queenBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_queenBtnActionPerformed
+        updateMoves("QUEEN", queenBtn); //updates rule set
+        checkQueenButton();
+    }//GEN-LAST:event_queenBtnActionPerformed
+
+    private void pawnImgBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pawnImgBtnActionPerformed
+        pieceImg = "Pawn";
+        pawnImgBtn.setBackground(Color.green);
+        knightImgBtn.setBackground(Color.gray);
+        bishopImgBtn.setBackground(Color.gray);
+        rookImgBtn.setBackground(Color.gray);
+        queenImgBtn.setBackground(Color.gray);
+        kingImgBtn.setBackground(Color.gray);
+    }//GEN-LAST:event_pawnImgBtnActionPerformed
+
+    private void knightImgBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_knightImgBtnActionPerformed
+        pieceImg = "Knight";
+        pawnImgBtn.setBackground(Color.gray);
+        knightImgBtn.setBackground(Color.green);
+        bishopImgBtn.setBackground(Color.gray);
+        rookImgBtn.setBackground(Color.gray);
+        queenImgBtn.setBackground(Color.gray);
+        kingImgBtn.setBackground(Color.gray);
+    }//GEN-LAST:event_knightImgBtnActionPerformed
+
+    private void bishopImgBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bishopImgBtnActionPerformed
+        pieceImg = "Bishop";
+        pawnImgBtn.setBackground(Color.gray);
+        knightImgBtn.setBackground(Color.gray);
+        bishopImgBtn.setBackground(Color.green);
+        rookImgBtn.setBackground(Color.gray);
+        queenImgBtn.setBackground(Color.gray);
+        kingImgBtn.setBackground(Color.gray);
+    }//GEN-LAST:event_bishopImgBtnActionPerformed
+
+    private void rookImgBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rookImgBtnActionPerformed
+        pieceImg = "Rook";
+        pawnImgBtn.setBackground(Color.gray);
+        knightImgBtn.setBackground(Color.gray);
+        bishopImgBtn.setBackground(Color.gray);
+        rookImgBtn.setBackground(Color.green);
+        queenImgBtn.setBackground(Color.gray);
+        kingImgBtn.setBackground(Color.gray);
+    }//GEN-LAST:event_rookImgBtnActionPerformed
+
+    private void queenImgBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_queenImgBtnActionPerformed
+        pieceImg = "Queen";
+        pawnImgBtn.setBackground(Color.gray);
+        knightImgBtn.setBackground(Color.gray);
+        bishopImgBtn.setBackground(Color.gray);
+        rookImgBtn.setBackground(Color.gray);
+        queenImgBtn.setBackground(Color.green);
+        kingImgBtn.setBackground(Color.gray);
+    }//GEN-LAST:event_queenImgBtnActionPerformed
+
+    private void kingImgBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kingImgBtnActionPerformed
+        pieceImg = "King";
+        pawnImgBtn.setBackground(Color.gray);
+        knightImgBtn.setBackground(Color.gray);
+        bishopImgBtn.setBackground(Color.gray);
+        rookImgBtn.setBackground(Color.gray);
+        queenImgBtn.setBackground(Color.gray);
+        kingImgBtn.setBackground(Color.green);
+    }//GEN-LAST:event_kingImgBtnActionPerformed
+
+    private void whiteTeamBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_whiteTeamBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_whiteTeamBtnActionPerformed
+
+    private void imgUpdateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imgUpdateBtnActionPerformed
+        changeImgIcon(pieceImg);
+    }//GEN-LAST:event_imgUpdateBtnActionPerformed
+
+    private void startGameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startGameBtnActionPerformed
+        CustomPiece customPiece = (CustomPiece) pieces[3][4];
+        //System.out.println(customPiece);
+        CustomPiece copiedPiece = customPiece.copy(0,0);
+        if (gameWindow == null) {
+            gameWindow = new GameWindow(this, new User("Sandbox 2", 0), new User("Player 1", 0), 300, true, copiedPiece);
+        }
+        gameWindow.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_startGameBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -3005,13 +3552,18 @@ public class SandboxWindow extends javax.swing.JFrame {
     private javax.swing.JPanel H8;
     private javax.swing.JLabel H8Label;
     private javax.swing.JRadioButton bishopBottomLeftBtn;
-    private javax.swing.JRadioButton bishopBottomRight;
+    private javax.swing.JRadioButton bishopBottomRightBtn;
     private javax.swing.JRadioButton bishopBtn;
+    private javax.swing.JButton bishopImgBtn;
     private javax.swing.JRadioButton bishopTopLeftBtn;
     private javax.swing.JRadioButton bishopTopRightBtn;
+    private javax.swing.JRadioButton blackTeamBtn;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton imgUpdateBtn;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -3019,25 +3571,33 @@ public class SandboxWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JButton kingImgBtn;
     private javax.swing.JRadioButton knightBottomLeftHorzBtn;
     private javax.swing.JRadioButton knightBottomLeftVertBtn;
     private javax.swing.JRadioButton knightBottomRightHorzBtn;
     private javax.swing.JRadioButton knightBottomRightVertBtn;
     private javax.swing.JRadioButton knightBtn;
+    private javax.swing.JButton knightImgBtn;
     private javax.swing.JRadioButton knightTopLeftHorzBtn;
     private javax.swing.JRadioButton knightTopLeftVertBtn;
     private javax.swing.JRadioButton knightTopRightHorzBtn;
     private javax.swing.JRadioButton knightTopRightVertBtn;
+    private javax.swing.JComboBox<String> numWinsSelect;
     private javax.swing.JRadioButton pawnBtn;
     private javax.swing.JRadioButton pawnCaptureBtn;
+    private javax.swing.JButton pawnImgBtn;
     private javax.swing.JRadioButton pawnMoveBtn;
     private javax.swing.JRadioButton queenBtn;
+    private javax.swing.JButton queenImgBtn;
     private javax.swing.JRadioButton rookBtn;
     private javax.swing.JRadioButton rookDownBtn;
+    private javax.swing.JButton rookImgBtn;
     private javax.swing.JRadioButton rookLeftBtn;
     private javax.swing.JRadioButton rookRightBtn;
     private javax.swing.JRadioButton rookUpBtn;
+    private javax.swing.JButton startGameBtn;
     private javax.swing.JButton startSandboxGameButton;
+    private javax.swing.JRadioButton whiteTeamBtn;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -147,4 +147,6 @@ public class Pawn extends AbstractPiece {
         return ("Piece Type: Pawn"
                 + super.toString());//calls the toString in the super class
     }
+
+
 }

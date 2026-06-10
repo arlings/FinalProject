@@ -15,6 +15,7 @@ public interface Piece {
     public void setRowNum(int rowNum);
     public void setColumnNum(int columnNum);
     public boolean isWhite();
+    public void setWhite(boolean isWhite);
     public int getValue();//piece value(i.e. Knights=3 pts )
     public void setValue(int value);//piece value
     abstract public void searchDirection(ArrayList<Move> moves, Piece pieces[][], int currentRow, int currentCol, int dRow, int dCol);
@@ -22,4 +23,5 @@ public interface Piece {
     public Piece getPieceAt(int row, int col, Piece pieces[][]);
     public boolean equals(Piece p);
     public String toString();
+
 }
