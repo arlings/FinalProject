@@ -150,8 +150,6 @@ public class MainWindow extends javax.swing.JFrame {
         thirdPlaceLabel = new javax.swing.JLabel();
         viewFullLeaderboardButton = new javax.swing.JButton();
         topBar = new javax.swing.JMenuBar();
-        fileMenu = new javax.swing.JMenu();
-        importGameMenuItem = new javax.swing.JMenuItem();
         newMenu = new javax.swing.JMenu();
         newUserMenuItem = new javax.swing.JMenuItem();
         newGameMenuItem = new javax.swing.JMenu();
@@ -292,32 +290,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         topBar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        fileMenu.setText("File");
-        fileMenu.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuDeselected(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
-                fileMenuMenuSelected(evt);
-            }
-        });
-        fileMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fileMenuActionPerformed(evt);
-            }
-        });
-
-        importGameMenuItem.setText("Import Game...");
-        importGameMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                importGameMenuItemActionPerformed(evt);
-            }
-        });
-        fileMenu.add(importGameMenuItem);
-
-        topBar.add(fileMenu);
-
         newMenu.setText("New");
 
         newUserMenuItem.setText("New User");
@@ -428,28 +400,6 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void importGameMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importGameMenuItemActionPerformed
-        // Used some Gemini AI to help with how to set a file type
-        JFileChooser fileChooser = new JFileChooser();
-        FileNameExtensionFilter filter = new FileNameExtensionFilter(
-                "Text File (*.txt)", "txt");
-        fileChooser.setFileFilter(filter);
-        int userSelection = fileChooser.showOpenDialog(null);
-        Scanner s = new Scanner("");
-        if (userSelection == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = fileChooser.getSelectedFile();
-            try {
-                FileInputStream in = new FileInputStream(selectedFile);
-                Scanner s2 = new Scanner(in);
-                String[] data = s2.nextLine().split(",");
-                
-            } catch (FileNotFoundException e) {
-                warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help.");
-                warningWindow.setVisible(true);   
-            }
-        }
-    }//GEN-LAST:event_importGameMenuItemActionPerformed
-
     private void newUserMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newUserMenuItemActionPerformed
         if (createUser == null) {
             createUser = new CreateUser(this);
@@ -467,14 +417,6 @@ public class MainWindow extends javax.swing.JFrame {
     private void exitMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuActionPerformed
 
     }//GEN-LAST:event_exitMenuActionPerformed
-
-    private void fileMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileMenuActionPerformed
-
-    }//GEN-LAST:event_fileMenuActionPerformed
-
-    private void fileMenuMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_fileMenuMenuSelected
-
-    }//GEN-LAST:event_fileMenuMenuSelected
 
     private void newGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newGameButtonActionPerformed
         if (sandboxWindow == null) {
@@ -580,11 +522,9 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenu competitiveMenu;
     private javax.swing.JMenu customizeMenu;
     private javax.swing.JMenu exitMenu;
-    private javax.swing.JMenu fileMenu;
     private javax.swing.JLabel firstPlaceLabel;
     private javax.swing.JMenuItem fiveMinMenuItem;
     private javax.swing.JMenu helpMenu;
-    private javax.swing.JMenuItem importGameMenuItem;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel leaderboardPanel;
