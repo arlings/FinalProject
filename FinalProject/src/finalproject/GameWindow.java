@@ -3,7 +3,7 @@ package finalproject;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.FileInputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -59,7 +59,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
 
     /**
      * get the promotion column
-     * @return - the cromotion column
+     * @return - the promotion column
      */
     public int getPromotionCol() {
         return promotionCol;
@@ -887,7 +887,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
     }
 
     /**
-     * checks if it is the current player piece
+     * Checks if it is the current player piece
      * @param row- the row
      * @param col- the column
      * @return - true if spot is filled and color field matches current active turn flag
@@ -899,7 +899,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
     }
 
     /**
-     * set the player names
+     * Set the player names on the jLabels
      * @param user1 - user 1
      * @param user2 - user 2
      */
@@ -1048,47 +1048,75 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
      */
     public void win(boolean isWhiteTurn) {
         try {
-            FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
-            FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/Users.txt");
-            Scanner s = new Scanner(in);
-            String[] players = s.nextLine().split(":");
+            // 1. Convert via URI to cleanly parse spaces and special characters
+            java.net.URI jarURI = getClass().getProtectionDomain().getCodeSource().getLocation().toURI();
+            File jarLocation = new File(jarURI);
+            String actualFolder = jarLocation.getParent();
+            File usersFile = new File(actualFolder, "Users.txt");
+
+            // 2. Read all the data into memory FIRST
+            String fileContent = "";
+            try (Scanner s = new Scanner(usersFile)) {
+                if (s.hasNextLine()) {
+                    fileContent = s.nextLine();
+                }
+            }
+
+            // Catch edge-case if the file exists but was left completely empty
+            if (fileContent.trim().isEmpty()) {
+                throw new FileNotFoundException();
+            }
+
+            // 3. Process your player data
+            String[] players = fileContent.split(":");
             for (int i = 0; i < players.length; i++) {
+                String[] data = players[i].split(",");
+                if (data.length < 5) continue; 
+
                 if (isWhiteTurn) {
-                    if (players[i].split(",")[0].equalsIgnoreCase(user2Lbl.getText())) {
-                        players[i] = players[i].split(",")[0] + "," + (Integer.parseInt(players[i].split(",")[1]) + 1) + "," +  players[i].split(",")[2] + "," +  players[i].split(",")[3] +  players[i].split(",")[4];
+                    if (data[0].equalsIgnoreCase(user2Lbl.getText())) {
+                        players[i] = data[0] + "," + (Integer.parseInt(data[1]) + 1) + "," + data[2] + "," + data[3] + "," + data[4];
                     }
                 } else {
-                    if (players[i].split(",")[0].equalsIgnoreCase(user1Lbl.getText())) {
-                        players[i] = players[i].split(",")[0] + "," + (Integer.parseInt(players[i].split(",")[1]) + 1) + "," +  players[i].split(",")[2] + "," +  players[i].split(",")[3] +  players[i].split(",")[4];
+                    if (data[0].equalsIgnoreCase(user1Lbl.getText())) {
+                        players[i] = data[0] + "," + (Integer.parseInt(data[1]) + 1) + "," + data[2] + "," + data[3] + "," + data[4];
                     }
                 }
             }
+
             for (int i = 0; i < players.length; i++) {
+                String[] data = players[i].split(",");
+                if (data.length < 5) continue;
+
                 if (isWhiteTurn) {
-                    if (players[i].split(",")[0].equalsIgnoreCase(user1Lbl.getText())) {
-                        players[i] = players[i].split(",")[0] + "," + players[i].split(",")[1] + "," +  players[i].split(",")[2] + "," + (Integer.parseInt(players[i].split(",")[3]) + 1) +  players[i].split(",")[4];
+                    if (data[0].equalsIgnoreCase(user1Lbl.getText())) {
+                        players[i] = data[0] + "," + data[1] + "," + data[2] + "," + (Integer.parseInt(data[3]) + 1) + "," + data[4];
                     }
                 } else {
-                    if (players[i].split(",")[0].equalsIgnoreCase(user2Lbl.getText())) {
-                        players[i] = players[i].split(",")[0] + "," + players[i].split(",")[1] + "," +  players[i].split(",")[2] + "," + (Integer.parseInt(players[i].split(",")[3]) + 1) +  players[i].split(",")[4];
+                    if (data[0].equalsIgnoreCase(user2Lbl.getText())) {
+                        players[i] = data[0] + "," + data[1] + "," + data[2] + "," + (Integer.parseInt(data[3]) + 1) + "," + data[4];
                     }
                 }
             }
-            String newFile = "";
-            for (int i = 0; i < players.length; i++) {
-                newFile += players[i] + ":";
-            }
-            try {
+
+            // 4. Safely open the output stream and overwrite the file ONLY after processing
+            String newFile = String.join(":", players) + ":";
+            try (FileOutputStream out = new FileOutputStream(usersFile)) {
                 out.write(newFile.getBytes());
-            } catch (IOException e) {
-                
             }
+
             this.dispose();
+
         } catch (FileNotFoundException e) {
             warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help. (You probably haven't made any users yet!)");
             warningWindow.setVisible(true); 
+        } catch (Exception e) {
+            System.out.println("Error parsing user data: " + e.getMessage());
+            e.printStackTrace();
         }
     }
+
+
 
     /**
      * preform post move checks
