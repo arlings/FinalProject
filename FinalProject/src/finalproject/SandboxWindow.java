@@ -3469,6 +3469,10 @@ public class SandboxWindow extends javax.swing.JFrame {
         CustomPiece customPiece = (CustomPiece) pieces[3][4];
         //System.out.println(customPiece);
         CustomPiece copiedPiece = customPiece.copy(0,0);
+        if(customPieceFilePath.equals("")){
+            System.out.println("Image was null");
+            customPieceFilePath = "/images/DefaultWhite_Pawn.png";
+        }
         if (gameWindow == null) {
             gameWindow = new GameWindow(this, new User("Sandbox 2", 0), new User("Player 1", 0), 300, true, copiedPiece, customPieceFilePath);
         }
