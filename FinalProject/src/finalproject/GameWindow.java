@@ -717,6 +717,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
                         whiteTime = 0;
                         matchTimer.stop();
                         JOptionPane.showMessageDialog(null, "Black Wins!");
+                        GameWindow.this.dispose();
                         if (!isSandbox) {
                             win(false);
                         }
@@ -730,6 +731,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
                         blackTime = 0;
                         matchTimer.stop();
                         JOptionPane.showMessageDialog(null, "White Wins!");
+                        GameWindow.this.dispose();
                         if (!isSandbox) {
                             win(true);
                         }
