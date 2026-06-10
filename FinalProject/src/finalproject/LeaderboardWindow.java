@@ -34,8 +34,7 @@ public class LeaderboardWindow extends javax.swing.JFrame {
     public void leaderboardSort() {
         try {
             FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
-            FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/Leaderboard.txt", true);
-            FileOutputStream out2 = new FileOutputStream(System.getProperty("user.dir") + "/Leaderboard.txt", false);
+            FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/Leaderboard.txt");
             Scanner s = new Scanner(in);
             String[] items = s.nextLine().split(":");
             String[] userData = new String[items.length];
@@ -54,7 +53,6 @@ public class LeaderboardWindow extends javax.swing.JFrame {
             }
             leaderboardList.setListData(sLeaderboard); 
             try {
-                out2.write("".getBytes());
                 for (int i = 0; i < sLeaderboard.length; i++) {
                     out.write(sLeaderboard[i].getBytes());
                 }
@@ -62,10 +60,15 @@ public class LeaderboardWindow extends javax.swing.JFrame {
                 warningWindow = new WarningWindow(this, "There was an error with the parsing the Users or Leaderboard file. Please see user manual for more help.");    
                 warningWindow.setVisible(true);
             }
-        } catch (FileNotFoundException e) {
+            
+            s.close();
+            in.close();
+            out.close();
+        } catch (Exception e) {
             warningWindow = new WarningWindow(this, "There was an error with the location of the Users or Leaderboard file. Please see user manual for more help.");
             warningWindow.setVisible(true);    
         }
+        
     }
 
     public static void mergeSort(User[] arr, int l, int r) {

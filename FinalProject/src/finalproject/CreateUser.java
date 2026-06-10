@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 public class CreateUser extends javax.swing.JFrame {
     
@@ -160,6 +161,8 @@ public class CreateUser extends javax.swing.JFrame {
             FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
             Scanner s = new Scanner(in);
             numUsers = s.nextLine().split(":").length;
+            s.close();
+            in.close();
         } catch (Exception e) {
             
         }
@@ -173,6 +176,10 @@ public class CreateUser extends javax.swing.JFrame {
             try {
                 FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
                 Scanner s = new Scanner(in);
+                
+                if(!s.hasNext())
+                    return;
+                
                 String[] items = s.nextLine().split(":");
                 for (int i = 0; i < items.length; i++) {
                     if (!done) {
@@ -185,6 +192,7 @@ public class CreateUser extends javax.swing.JFrame {
                     }
                 }
             } catch (Exception e) {
+                e.printStackTrace();
                 if (numUsers > 1) {
                     warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help");
                 }
@@ -197,6 +205,7 @@ public class CreateUser extends javax.swing.JFrame {
                     out.write((userNameField.getText() + ",0,0,0,Default:").getBytes());
                     userNameField.setText("");
                 } catch (IOException e) {
+                    e.printStackTrace();
                     warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help");
                 }
             }

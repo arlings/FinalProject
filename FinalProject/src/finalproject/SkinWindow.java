@@ -10,6 +10,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -154,6 +155,7 @@ public class SkinWindow extends javax.swing.JFrame {
             FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
             Scanner s = new Scanner(in);
             String[] userInfo = s.nextLine().split(":");
+            System.out.println(Arrays.toString(userInfo));
             for (int i = 0; i < userInfo.length; i++) {
                 if (userInfo[i].split(",")[0].equalsIgnoreCase(userDropdown.getItemAt(userDropdown.getSelectedIndex()))) {
                     wins = Integer.parseInt(userInfo[i].split(",")[1]);
@@ -199,7 +201,6 @@ public class SkinWindow extends javax.swing.JFrame {
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
         try {
             FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
-            FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/Users.txt");
             Scanner s = new Scanner(in);
             String[] userInfo = s.nextLine().split(":");
             String user = userDropdown.getItemAt(userDropdown.getSelectedIndex());
@@ -212,12 +213,18 @@ public class SkinWindow extends javax.swing.JFrame {
             for (int i = 0; i < userInfo.length; i++) {
                 changedFile += userInfo[i] + ":";
             }
+            
+            in.close();
+            FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/Users.txt");
             try {
                 out.write(changedFile.getBytes());
             } catch (IOException e) {
                 
             }
-        } catch (FileNotFoundException e) {
+            
+            s.close();
+            out.close();
+        } catch (Exception e) {
             warningWindow = new WarningWindow(this, "There was an error with the location of the Users or Leaderboard file. Please see user manual for more help.");
             warningWindow.setVisible(true);
         } 
