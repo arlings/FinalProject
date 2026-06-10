@@ -44,55 +44,72 @@ public class MainWindow extends javax.swing.JFrame {
     }
     
     public void getTop3() {
-        try {
-            FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
-            FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/Leaderboard.txt", true);
-            FileOutputStream out2 = new FileOutputStream(System.getProperty("user.dir") + "/Leaderboard.txt", false);
+        String baseDir = System.getProperty("user.dir");
+        java.io.File usersFile = new java.io.File(baseDir, "Users.txt");
+        java.io.File leaderboardFile = new java.io.File(baseDir, "Leaderboard.txt");
+
+        // Phase 1: Read Users, Sort Them, and Write to Leaderboard file
+        try (
+            FileInputStream in = new FileInputStream(usersFile);
             Scanner s = new Scanner(in);
-            String[] items = s.nextLine().split(":");
-            String[] userData = new String[items.length];
+            FileOutputStream out = new FileOutputStream(leaderboardFile, false)
+        ) {
+            if (!s.hasNextLine()) {
+                firstPlaceLabel.setText("No data");
+                secondPlaceLabel.setText("No data");
+                thirdPlaceLabel.setText("No data");
+                return;
+            }
+
+            String line = s.nextLine();
+            if (line.trim().isEmpty()) return;
+
+            String[] items = line.split(":");
             User[] leaderboard = new User[items.length];
             int[] scores = new int[items.length];
+
             for (int i = 0; i < items.length; i++) {
-                int wins = Integer.parseInt(items[i].split(",")[1]);
-                int losses = Integer.parseInt(items[i].split(",")[3]);
+                String[] parts = items[i].split(",");
+                int wins = Integer.parseInt(parts[1].trim());
+                int losses = Integer.parseInt(parts[3].trim());
                 scores[i] = (wins - losses);
-                leaderboard[i] = new User(items[i].split(",")[0], scores[i]);
+                leaderboard[i] = new User(parts[0].trim(), scores[i]);
             }
+
             mergeSort(leaderboard, 0, leaderboard.length - 1);
-            String[] sLeaderboard = new String[leaderboard.length];
+
             for (int i = 0; i < leaderboard.length; i++) {
-                sLeaderboard[i] = "#" + (i + 1) + " " + leaderboard[i].toString();
+                String row = "#" + (i + 1) + " " + leaderboard[i].toString();
+                out.write(row.getBytes());
             }
-            try {
-                out2.write("".getBytes());
-                for (int i = 0; i < sLeaderboard.length; i++) {
-                    out.write(sLeaderboard[i].getBytes());
-                }
-            } catch(IOException e) {
-                warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help.");    
-                warningWindow.setVisible(true);   
-            }
+
         } catch (Exception e) {
             warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help.");
-            warningWindow.setVisible(true);    
+            warningWindow.setVisible(true);
+            return;
         }
-        try {
-            FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Leaderboard.txt");
-            Scanner s = new Scanner(in);
-            String nextLine = s.nextLine();
+
+        // Phase 2: Read back from Leaderboard file and remove the score suffix
+        try (
+            FileInputStream in = new FileInputStream(leaderboardFile);
+            Scanner s = new Scanner(in)
+        ) {
+            String rawLine = s.nextLine().trim();
             try {
-                firstPlaceLabel.setText("#" + nextLine.split("#")[1].split(",")[0]);
-                secondPlaceLabel.setText("#" + nextLine.split("#")[2].split(",")[0]);
-                thirdPlaceLabel.setText("#" + nextLine.split("#")[3].split(",")[0]);
+                firstPlaceLabel.setText("#1 " + rawLine.split("#")[1].split(" ")[1].replace(",", ""));
+                secondPlaceLabel.setText("#2 " + rawLine.split("#")[2].split(" ")[1].replace(",", ""));
+                thirdPlaceLabel.setText("#3 " + rawLine.split("#")[3].split(" ")[1].replace(",", ""));
             } catch (ArrayIndexOutOfBoundsException e) {
                 
             }
+
         } catch (Exception e) {
-            warningWindow = new WarningWindow(this, "There was an error with the Leaderboard file. Please see user manual for more help. it may be empty");
+            warningWindow = new WarningWindow(this, "There was an error with the Leaderboard file. Please see user manual for more help. It may be empty.");
             warningWindow.setVisible(true);
         }
     }
+
+
 
     public static class FrameDragListener extends MouseAdapter {
 
@@ -197,36 +214,39 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(89, 89, 89)
-                .addComponent(firstPlaceLabel)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(thirdPlaceLabel)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(viewFullLeaderboardButton, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGap(146, 146, 146)
-                            .addComponent(thirdPlaceLabel))
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(secondPlaceLabel)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE))))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(viewFullLeaderboardButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(secondPlaceLabel)
+                            .addComponent(firstPlaceLabel))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(secondPlaceLabel)
-                    .addComponent(thirdPlaceLabel))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(0, 17, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(thirdPlaceLabel)))
+                .addGap(1, 1, 1)
+                .addComponent(secondPlaceLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(firstPlaceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(viewFullLeaderboardButton)
                 .addGap(12, 12, 12))
         );
@@ -249,7 +269,7 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(24, 24, 24)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         leaderboardPanelLayout.setVerticalGroup(
             leaderboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -464,11 +484,11 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_newGameButtonActionPerformed
 
     private void viewFullLeaderboardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewFullLeaderboardButtonActionPerformed
+        getTop3();
         if (leaderboardWindow == null) {
             leaderboardWindow = new LeaderboardWindow(mainWindow);
         }
         leaderboardWindow.setVisible(true);
-        getTop3();
     }//GEN-LAST:event_viewFullLeaderboardButtonActionPerformed
 
     private void helpMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_helpMenuMouseClicked

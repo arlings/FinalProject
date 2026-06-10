@@ -20,42 +20,83 @@ public class LeaderboardWindow extends javax.swing.JFrame {
     }
     
     public void leaderboardSort() {
+        String baseDir = System.getProperty("user.dir");
+        java.io.File usersFile = new java.io.File(baseDir, "Users.txt");
+        java.io.File leaderboardFile = new java.io.File(baseDir, "Leaderboard.txt");
+
+        // Initialize to prevent NullPointerExceptions later in the method
+        String[] sLeaderboard = new String[0];
+        User[] leaderboard;
+
+        // Phase 1: Read and verify data entirely in system memory first
         try {
-            FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
-            FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/Leaderboard.txt", true);
-            FileOutputStream out2 = new FileOutputStream(System.getProperty("user.dir") + "/Leaderboard.txt", false);
-            Scanner s = new Scanner(in);
-            String[] items = s.nextLine().split(":");
-            String[] userData = new String[items.length];
-            User[] leaderboard = new User[items.length];
-            int[] scores = new int[items.length];
-            for (int i = 0; i < items.length; i++) {
-                int wins = Integer.parseInt(items[i].split(",")[1]);
-                int losses = Integer.parseInt(items[i].split(",")[3]);
-                scores[i] = (wins - losses);
-                leaderboard[i] = new User(items[i].split(",")[0], scores[i]);
+            if (!usersFile.exists() || usersFile.length() == 0) {
+                // Null check the list component before using it
+                if (leaderboardList != null) {
+                    leaderboardList.setListData(new String[]{"Users file is empty."});
+                }
+                return;
             }
+
+            try (FileInputStream in = new FileInputStream(usersFile);
+                Scanner s = new Scanner(in)) {
+
+                if (!s.hasNextLine()) return;
+                String line = s.nextLine().trim();
+                if (line.isEmpty()) return;
+
+                String[] items = line.split(":");
+                leaderboard = new User[items.length];
+                int[] scores = new int[items.length];
+
+                for (int i = 0; i < items.length; i++) {
+                    String[] parts = items[i].split(",");
+                    if (parts.length < 4) continue; 
+
+                    int wins = Integer.parseInt(parts[1].trim());
+                    int losses = Integer.parseInt(parts[3].trim());
+
+                    scores[i] = (wins - losses);
+                    leaderboard[i] = new User(parts[0].trim(), scores[i]);
+                }
+            }
+
             mergeSort(leaderboard, 0, leaderboard.length - 1);
-            String[] sLeaderboard = new String[leaderboard.length];
+
+            sLeaderboard = new String[leaderboard.length];
             for (int i = 0; i < leaderboard.length; i++) {
                 sLeaderboard[i] = "#" + (i + 1) + " " + leaderboard[i].toString();
             }
-            leaderboardList.setListData(sLeaderboard); 
-            try {
-                out2.write("".getBytes());
-                for (int i = 0; i < sLeaderboard.length; i++) {
-                    out.write(sLeaderboard[i].getBytes());
-                }
-            } catch(IOException e) {
-                warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help.");    
-                warningWindow.setVisible(true);
-            }
-        } catch (FileNotFoundException e) {
+
+        } catch (Exception e) {
             warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help.");
             warningWindow.setVisible(true);    
+            return; 
         }
+
+        // Phase 2: Save everything on a single continuous line (Forces line break removal)
+        try (FileOutputStream out = new FileOutputStream(leaderboardFile, false)) {
+            StringBuilder singleLineData = new StringBuilder();
+            for (int i = 0; i < sLeaderboard.length; i++) {
+                String cleanEntry = sLeaderboard[i].replace("\n", "").replace("\r", "");
+                singleLineData.append(cleanEntry);
+            }
+            out.write(singleLineData.toString().getBytes());
+        } catch (IOException e) {
+            warningWindow = new WarningWindow(this, "Could not save sorted rankings to Leaderboard.txt.");
+            warningWindow.setVisible(true);
+        }
+
+        // Safety check prints: Only print if items actually exist in the array
+        if (sLeaderboard.length > 0) System.out.println("1st: " + sLeaderboard[0]);
+        if (sLeaderboard.length > 1) System.out.println("2nd: " + sLeaderboard[1]);
+
+        leaderboardList.setListData(sLeaderboard);
+        leaderboardList.revalidate();
+        leaderboardList.repaint();
     }
-    
+
+
     public static void mergeSort(User[] arr, int l, int r) {
         if (l < r) {
             int m = l + (r - l) / 2; // Safe midpoint calculation
@@ -105,13 +146,17 @@ public class LeaderboardWindow extends javax.swing.JFrame {
         topBar = new javax.swing.JPanel();
         titleLabel = new javax.swing.JLabel();
         cancelButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 255, 51));
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
 
+        leaderboardList.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "placeholder" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
         leaderboardList.setOpaque(false);
         jScrollPane1.setViewportView(leaderboardList);
 
@@ -141,8 +186,6 @@ public class LeaderboardWindow extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("jLabel1");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -156,11 +199,6 @@ public class LeaderboardWindow extends javax.swing.JFrame {
                         .addGap(0, 134, Short.MAX_VALUE)
                         .addComponent(cancelButton)))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel1)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,11 +209,6 @@ public class LeaderboardWindow extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cancelButton)
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel1)
-                    .addGap(0, 177, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -198,10 +231,9 @@ public class LeaderboardWindow extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList<String> leaderboardList;
+    public javax.swing.JList<String> leaderboardList;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JPanel topBar;
     // End of variables declaration//GEN-END:variables
