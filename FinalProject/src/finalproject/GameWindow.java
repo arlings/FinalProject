@@ -516,10 +516,12 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         return pieces;
     }
     
-    private Piece[][] loadPiecesFromImport(String blackSkin, String whiteSkin) {
+    private Piece[][] export(String blackSkin, String whiteSkin) {
+        String text = "";
         for (int i = 0; i < 8; i++) {
             for (int ii = 0; ii < 8; ii++) {
-                
+                text += pieces[i][ii].getColumnNum() + "," 
+                        + pieces[i][ii].getRowNum();
             }
         }
         return pieces;

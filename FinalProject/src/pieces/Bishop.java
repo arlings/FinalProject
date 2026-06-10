@@ -8,7 +8,7 @@ public class Bishop extends AbstractPiece {
     private static int numBishop = 0;
 
     /**
-     * basic constructor for Bishob
+     * basic constructor for Bishop
      */
     public Bishop() {
         super();//calles the constructor with no paramaters from the super class
