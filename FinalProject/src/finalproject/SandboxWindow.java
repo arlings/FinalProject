@@ -165,7 +165,6 @@ public class SandboxWindow extends javax.swing.JFrame {
         if (button.isSelected()) {
             customPiece.addMoveRules(preset);
             showValidMoves(customPiece);
-            //System.out.println(customPiece.getValidMoves(pieces).size());
         } else {
             customPiece.removeMoveRules(preset);
             int r = customPiece.getRowNum();
@@ -176,14 +175,11 @@ public class SandboxWindow extends javax.swing.JFrame {
                 if (targetRow >= 0 && targetRow < board.length && targetCol >= 0 && targetCol < board[0].length) {
                     setTransparentIcon(board[targetRow][targetCol]);
                 }
-        }
-            //System.out.println(customPiece.getValidMoves(pieces).size());
+            }
         }
         updateBoardUI();
     }
-    private void checkAllButtons(int numLocal, JRadioButton global){
-        
-    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

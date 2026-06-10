@@ -172,8 +172,6 @@ public class EnterUsername extends javax.swing.JFrame {
                                 
                                 String[] p1Data = items[prevIndex].split(",");
                                 String[] p2Data = items[i].split(",");
-                                System.out.print(Arrays.toString(p1Data));
-                                System.out.print(Arrays.toString(p2Data));
                                 gameWindow = new GameWindow(this, 
                                     new User(users[1], Integer.parseInt(p2Data[1]) - Integer.parseInt(p2Data[3]), p2Data[4]), // user2 slot = Player 2
                                     new User(users[0], Integer.parseInt(p1Data[1]) - Integer.parseInt(p1Data[3]), p1Data[4]), // user1 slot = Player 1

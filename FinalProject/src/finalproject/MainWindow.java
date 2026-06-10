@@ -1,11 +1,13 @@
 package finalproject;
 
+import static finalproject.LeaderboardWindow.mergeSort;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Scanner;
@@ -45,6 +47,38 @@ public class MainWindow extends javax.swing.JFrame {
     }
     
     public void getTop3() {
+        try {
+            FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
+            FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/Leaderboard.txt", true);
+            FileOutputStream out2 = new FileOutputStream(System.getProperty("user.dir") + "/Leaderboard.txt", false);
+            Scanner s = new Scanner(in);
+            String[] items = s.nextLine().split(":");
+            String[] userData = new String[items.length];
+            User[] leaderboard = new User[items.length];
+            int[] scores = new int[items.length];
+            for (int i = 0; i < items.length; i++) {
+                int wins = Integer.parseInt(items[i].split(",")[1]);
+                int losses = Integer.parseInt(items[i].split(",")[3]);
+                scores[i] = (wins - losses);
+                leaderboard[i] = new User(items[i].split(",")[0], scores[i]);
+            }
+            mergeSort(leaderboard, 0, leaderboard.length - 1);
+            String[] sLeaderboard = new String[leaderboard.length];
+            for (int i = 0; i < leaderboard.length; i++) {
+                sLeaderboard[i] = "#" + (i + 1) + " " + leaderboard[i].toString();
+            }
+            try {
+                out2.write("".getBytes());
+                for (int i = 0; i < sLeaderboard.length; i++) {
+                    out.write(sLeaderboard[i].getBytes());
+                }
+            } catch(IOException e) {
+                warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help.");    
+            }
+        } catch (FileNotFoundException e) {
+            warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help.");
+            warningWindow.setVisible(true);    
+        }
         try {
             FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Leaderboard.txt");
             Scanner s = new Scanner(in);

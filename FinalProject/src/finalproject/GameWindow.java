@@ -496,7 +496,6 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         pieces[7][4] = new King(7, 4, loadImage("/images/" + blackSkin + "Black_King.png"), false, false, false, false);
 
         //returns the fully configured initial piece position matrix array
-        System.out.print("/images/" + whiteSkin + "White_King.png");
         return pieces;
     }
     
