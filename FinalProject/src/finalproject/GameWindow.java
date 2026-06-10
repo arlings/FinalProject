@@ -1192,23 +1192,23 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
     public void fixBoardAfterPromotion(int col, int row, String piece, boolean isWhite, String whiteSkin, String blackSkin) {
         if (isWhite) {//if the colour is white
             if (piece.equalsIgnoreCase("Queen")) {//if queen create new queen
-                pieces[row][col] = new Queen(row, col, loadImage("/images/" + whiteSkin + "White_Queen.png"), isWhite);
+                pieces[row][col] = new Queen(row, col, loadImage("/images/" + whiteSkin + "DefaultWhite_Queen.png"), isWhite);
             } else if (piece.equalsIgnoreCase("Rook")) {//if rook create new rook
-                pieces[row][col] = new Rook(row, col, loadImage("/images/" + whiteSkin + "White_Rook.png"), isWhite, true);
+                pieces[row][col] = new Rook(row, col, loadImage("/images/" + whiteSkin + "DefaultWhite_Rook.png"), isWhite, true);
             } else if (piece.equalsIgnoreCase("Bishop")) {//if bishop create new bishop
-                pieces[row][col] = new Bishop(row, col, loadImage("/images/" + whiteSkin + "White_Bishop.png"), isWhite);
+                pieces[row][col] = new Bishop(row, col, loadImage("/images/" + whiteSkin + "DefaultWhite_Bishop.png"), isWhite);
             } else if (piece.equalsIgnoreCase("Knight")) {//if knight create new knight
-                pieces[row][col] = new Knight(row, col, loadImage("/images/" + whiteSkin + "White_Knight.png"), isWhite);
+                pieces[row][col] = new Knight(row, col, loadImage("/images/" + whiteSkin + "DefaultWhite_Knight.png"), isWhite);
             }
         } else {//if the colour is black
             if (piece.equalsIgnoreCase("Queen")) {//if queen create new queen
-                pieces[row][col] = new Queen(row, col, loadImage("/images/" + blackSkin + "Black_Queen.png"), isWhite);
+                pieces[row][col] = new Queen(row, col, loadImage("/images/" + blackSkin + "DefaultWhite_Knight.png"), isWhite);
             } else if (piece.equalsIgnoreCase("Rook")) {//if rook create new rook
-                pieces[row][col] = new Rook(row, col, loadImage("/images/" + blackSkin + "Black_Rook.png"), isWhite, true);
+                pieces[row][col] = new Rook(row, col, loadImage("/images/" + blackSkin + "DefaultBlack_Rook.png"), isWhite, true);
             } else if (piece.equalsIgnoreCase("Bishop")) {//if bishop create new bishop
-                pieces[row][col] = new Bishop(row, col, loadImage("/images/" + blackSkin + "Black_Bishop.png"), isWhite);
+                pieces[row][col] = new Bishop(row, col, loadImage("/images/" + blackSkin + "DefaultBlack_Bishop.png"), isWhite);
             } else if (piece.equalsIgnoreCase("Knight")) {//if knight create new knight
-                pieces[row][col] = new Knight(row, col, loadImage("/images/" + blackSkin + "Black_Knight.png"), isWhite);
+                pieces[row][col] = new Knight(row, col, loadImage("/images/" + blackSkin + "DefaultBlack_Knight.png"), isWhite);
             }
         }
         performPostMoveChecks(!isWhite);

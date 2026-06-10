@@ -1,3 +1,8 @@
+/*
+ L Necakov, A Zalli, N Wang
+ May 21- June 10, 2026
+ Creater a file importer 
+*/
 package repo;
 
 import finalproject.User;
@@ -11,6 +16,12 @@ import javax.imageio.ImageIO;
 
 public class FileImporter {
 
+    /**
+     * load a Image
+     * @param filePath - the file path
+     * @return - the image
+     * @throws IOException 
+     */
     public BufferedImage loadImage(String filePath) throws IOException {
         java.io.InputStream inputStream = getClass().getResourceAsStream(filePath);
         if (inputStream == null) {
@@ -20,10 +31,17 @@ public class FileImporter {
         return image;
     }
 
+    /**
+     * load the users
+     * @param filePath- the path of the file
+     * @return - array list of users
+     * @throws IOException
+     * @throws NumberFormatException 
+     */
     public ArrayList<User> loadUsers(String filePath) throws IOException, NumberFormatException {
         try (InputStream in = FileImporter.class.getResourceAsStream(filePath)) {
             Scanner s = new Scanner(in);
-            ArrayList<User> users = new ArrayList<>();
+            ArrayList<User> users = new ArrayList<>();//arrat list
 
             while (s.hasNextLine()) {
                 String tokens[] = s.nextLine().split(",");

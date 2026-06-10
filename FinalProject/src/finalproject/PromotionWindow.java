@@ -1,3 +1,8 @@
+/*
+ L Necakov, A Zalli, N Wang
+ May 21- Jun 10, 2026
+ The promotion window for the pawns
+*/
 package finalproject;
 
 public class PromotionWindow extends javax.swing.JFrame {
@@ -19,6 +24,12 @@ public class PromotionWindow extends javax.swing.JFrame {
         this.setVisible(true);
     }
     
+    /**
+     * PromotionWindow constructor
+     * @param m - game window
+     * @param user1 - user 1
+     * @param user2 - user 2
+     */
     public PromotionWindow(GameWindow m, User user1, User user2) {
         MoveJFrame();
         initComponents();
@@ -192,8 +203,8 @@ public class PromotionWindow extends javax.swing.JFrame {
         int col = gameWindow.getPromotionCol();
         int row = gameWindow.getPromotionRow();
         boolean promotionIsWhite = gameWindow.getPromotionIsWhite();
-        gameWindow.fixBoardAfterPromotion(col, row, "Queen", promotionIsWhite, hiddenInfo.getText().split(",")[0], hiddenInfo.getText().split(",")[1]);
-        this.setVisible(false);
+        gameWindow.fixBoardAfterPromotion(col, row, "Queen", promotionIsWhite, hiddenInfo.getText().split(",")[0], hiddenInfo.getText().split(",")[1]);//replace the promoted pawn with queen
+        PromotionWindow.this.dispose();//dispose the window
         gameWindow.setVisible(true);
     }//GEN-LAST:event_queenPromotionBtnActionPerformed
 
@@ -202,9 +213,9 @@ public class PromotionWindow extends javax.swing.JFrame {
         int row = gameWindow.getPromotionRow();
         boolean promotionIsWhite = gameWindow.getPromotionIsWhite();
         if (promotionIsWhite) {
-            gameWindow.fixBoardAfterPromotion(col, row, "Bishop", promotionIsWhite, hiddenInfo.getText().split(",")[0], hiddenInfo.getText().split(",")[1]);
+            gameWindow.fixBoardAfterPromotion(col, row, "Bishop", promotionIsWhite, hiddenInfo.getText().split(",")[0], hiddenInfo.getText().split(",")[1]);//replace the promoted pawn with bishop
         }
-        this.setVisible(false);
+        PromotionWindow.this.dispose();//dispose the window
         gameWindow.setVisible(true);
     }//GEN-LAST:event_bishopPromotionBtnActionPerformed
 
@@ -212,8 +223,8 @@ public class PromotionWindow extends javax.swing.JFrame {
         int col = gameWindow.getPromotionCol();
         int row = gameWindow.getPromotionRow();
         boolean promotionIsWhite = gameWindow.getPromotionIsWhite();
-        gameWindow.fixBoardAfterPromotion(col, row, "Knight", promotionIsWhite, hiddenInfo.getText().split(",")[0], hiddenInfo.getText().split(",")[1]);
-        PromotionWindow.this.setVisible(false);
+        gameWindow.fixBoardAfterPromotion(col, row, "Knight", promotionIsWhite, hiddenInfo.getText().split(",")[0], hiddenInfo.getText().split(",")[1]);//replace the promoted pawn with the bishop
+        PromotionWindow.this.dispose();//dispose the window
         gameWindow.setVisible(true);
     }//GEN-LAST:event_knightPromotionBtnActionPerformed
 
@@ -221,7 +232,7 @@ public class PromotionWindow extends javax.swing.JFrame {
         int col = gameWindow.getPromotionCol();
         int row = gameWindow.getPromotionRow();
         boolean promotionIsWhite = gameWindow.getPromotionIsWhite();
-        gameWindow.fixBoardAfterPromotion(col, row, "Rook", promotionIsWhite, hiddenInfo.getText().split(",")[0], hiddenInfo.getText().split(",")[1]);
+        gameWindow.fixBoardAfterPromotion(col, row, "Rook", promotionIsWhite, hiddenInfo.getText().split(",")[0], hiddenInfo.getText().split(",")[1]);//replace the promoted pawn with a rook
         PromotionWindow.this.setVisible(false);
         gameWindow.setVisible(true);
     }//GEN-LAST:event_rookPromotionBtnActionPerformed

@@ -1,3 +1,8 @@
+/*
+ L Necakov, A Zalli, N Wany
+ May 21- June 10, 2026
+ The main window that directs the user to do different things such as create users, play chess competitive chess, and play sandbox chess plus more
+*/
 package finalproject;
 
 import static finalproject.LeaderboardWindow.mergeSort;
@@ -42,12 +47,18 @@ public class MainWindow extends javax.swing.JFrame {
         this.setVisible(true);
     }
 
+    /**
+     * main window constructor
+     */
     public MainWindow() {
         MoveJFrame();
         initComponents();
         getTop3();
     }
     
+    /**
+     * get the top 3 users according to their amount of comeptitive wins
+     */
     public void getTop3() {
         try {
             FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
