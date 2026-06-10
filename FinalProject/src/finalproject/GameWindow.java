@@ -67,6 +67,22 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
     private int promotionCol;
     private int promotionRow;
     private boolean promotionIsWhite;
+    
+    /**
+     * A method designed to move the frame white preventing the user from accessing a hard-coded way to exit the frame.
+     * https://stackoverflow.com/questions/16046824/making-a-java-swing-frame-movable-and-setundecorated was used as a resource to
+     * find a clean way to hide the top menu of the window.
+     */
+    public void MoveJFrame() {
+        //removes top frame borders and sets custom drag click mouse tracking listeners
+        this.setUndecorated(true);
+        MainWindow.FrameDragListener frameDragListener = new MainWindow.FrameDragListener(this);
+        this.addMouseListener(frameDragListener);
+        this.addMouseMotionListener(frameDragListener);
+        this.pack();
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+    }
 
     /**
      * get the promotion column
@@ -694,20 +710,6 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
             {A7Label, B7Label, C7Label, D7Label, E7Label, F7Label, G7Label, H7Label},
             {A8Label, B8Label, C8Label, D8Label, E8Label, F8Label, G8Label, H8Label}
         };
-    }
-
-    /**
-     * move the JFrame
-     */
-    public void MoveJFrame() {
-        //removes top frame borders and sets custom drag click mouse tracking listeners
-        this.setUndecorated(true);
-        MainWindow.FrameDragListener frameDragListener = new MainWindow.FrameDragListener(this);
-        this.addMouseListener(frameDragListener);
-        this.addMouseMotionListener(frameDragListener);
-        this.pack();
-        this.setLocationRelativeTo(null);
-        this.setVisible(true);
     }
 
     //AI idea to create a new method for highlighting checks, implemented manually
