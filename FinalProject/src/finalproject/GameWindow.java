@@ -50,6 +50,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
     public Piece[][] pieces = new Piece[8][8];
     public Piece customPiece;
     private String selectedPieceType = "";
+    private String customPieceFilePath = "";
     
     private boolean whiteTurn = true;
 
@@ -58,6 +59,8 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
     private int blackTime;
     private Timer matchTimer;
     private boolean ended = false;
+    private int numWhiteKings = 0;
+    private int numBlackKings = 0;
     
     private User[] users = new User[2];
 
@@ -133,9 +136,10 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
      * @param isSandbox- if mode is sandbox
      * @param customPiece - costom piece
      */
-    public GameWindow(SandboxWindow m, User user2, User user1, int chosenTime, boolean isSandbox, Piece customPiece) {
+    public GameWindow(SandboxWindow m, User user2, User user1, int chosenTime, boolean isSandbox, Piece customPiece, String customPieceFilePath) {
         //starts game setups and sets user labels for sandbox path
         this.isSandbox = isSandbox;
+        this.customPieceFilePath = customPieceFilePath;
         this.customPiece = customPiece;
         startGame(user1, user2, chosenTime);
         users[0] = user1;
@@ -421,6 +425,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
      */
     private Piece findKing(Piece pieces[][], boolean isWhite) {
         //loops rows of the passed board matrix array
+        
         for (int r = 0; r < pieces.length; r++) {
             //loops columns of the passed board matrix array
             for (int c = 0; c < pieces[0].length; c++) {
@@ -1216,26 +1221,26 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         }
     }
     
-    //sandbox logic
-    /*
-    private Piece[][] loadPiecesSandbox(String blackSkin, String whiteSkin) {
-        Piece[][] sandboxBoard = loadPieces(blackSkin, whiteSkin);
-        sandboxBoard[3][4] = ((CustomPiece) customPiece).copy(3,4);
-        return sandboxBoard;
-    }
-    */
+    
     private void handleSandboxClick(int r, int c, java.awt.event.MouseEvent evt){
         if(startGameBtn.isEnabled() && isSandbox){
             if(evt.getButton() == java.awt.event.MouseEvent.BUTTON1){
                 if(getPieceButton(r,c) != null){
-                    pieces[r][c] = getPieceButton(r,c);
+                    if(getPieceButton(r,c) instanceof King && getPieceButton(r,c).isWhite()){
+                        numWhiteKings++;
+                    }else if(getPieceButton(r,c) instanceof King && !getPieceButton(r,c).isWhite()){
+                        numBlackKings++;
+                    }
+                    pieces[r][c] = getPieceButton(r,c); 
                 }
             }else if(evt.getButton() == java.awt.event.MouseEvent.BUTTON3){
-                if(!(pieces[r][c] instanceof King)){
-                    pieces[r][c] = null;
-                }else{
-                    highlightCheck(pieces[r][c], true);
-                } 
+                
+                if(pieces[r][c] instanceof King && getPieceButton(r,c).isWhite()){
+                        numWhiteKings--;
+                    }else if(pieces[r][c] instanceof King && !getPieceButton(r,c).isWhite()){
+                        numBlackKings--;
+                    }
+                pieces[r][c] = null;
             }
             updateBoardUI();
         }
@@ -1252,9 +1257,9 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         if(selectedPieceType.equals("Pawn")){
             return(new Pawn(r, c, loadImage("/images/Default" + team + "_Pawn.png"), isWhite));
         }else if(selectedPieceType.equals("Knight")){
-            return(new Knight(0, 1, loadImage("/images/Defualt" + team + "_Knight.png"), isWhite));
+            return(new Knight(0, 1, loadImage("/images/Default" + team + "_Knight.png"), isWhite));
         }else if(selectedPieceType.equals("Bishop")){
-            return(new Bishop(0, 2, loadImage("/images/Defualt" + team + "_Bishop.png"), isWhite));
+            return(new Bishop(0, 2, loadImage("/images/Default" + team + "_Bishop.png"), isWhite));
         }else if(selectedPieceType.equals("Rook")){
             return(new Rook(0, 0, loadImage("/images/Default" + team + "_Rook.png"), isWhite, false));
         }else if(selectedPieceType.equals("Queen")){
@@ -1263,7 +1268,6 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
             return(new King(0, 4, loadImage("/images/Default" + team + "_King.png"), isWhite, false, false, false));
         }else if(selectedPieceType.equals("Custom")){
             CustomPiece cp = ((CustomPiece) customPiece).copy(r,c);
-            cp.setWhite(isWhite);
             return(((CustomPiece) customPiece).copy(r,c));
         }      
         return null;
@@ -3900,8 +3904,13 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_B7LabelMousePressed
 
     private void startGameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startGameBtnActionPerformed
-        startTimer();
-        startGameBtn.setEnabled(false);
+        if(isSandbox && !(numWhiteKings == 1 && numBlackKings == 1)){
+            JOptionPane.showMessageDialog(null, "Please Ensure there is exactly 1 White King and 1 Black King", "Error!", JOptionPane.ERROR_MESSAGE);
+        }else{
+            startTimer();
+            startGameBtn.setEnabled(false);
+        }
+        
     }//GEN-LAST:event_startGameBtnActionPerformed
 
     private void pawnBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pawnBtnActionPerformed
