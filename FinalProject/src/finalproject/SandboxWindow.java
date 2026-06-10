@@ -134,7 +134,7 @@ public class SandboxWindow extends javax.swing.JFrame {
 
     /**
      * set the transparent icon
-     * @param label - the jlabel
+     * @param label - the jLabel
      */
     private void setTransparentIcon(JLabel label) {
         BufferedImage img = loadImage("/images/Transparent_Background.png");
@@ -164,7 +164,7 @@ public class SandboxWindow extends javax.swing.JFrame {
 
     /**
      * load the board
-     * @return - 2d aray of JLabels with all the pieces on the board
+     * @return - 2d array of JLabels with all the pieces on the board
      */
     private JLabel[][] loadBoard() {
         //returns a hardcoded label mapping matching rows and columns layout of grid swing panel
@@ -211,7 +211,6 @@ public class SandboxWindow extends javax.swing.JFrame {
             dotIcon.setDescription("GREEN_DOT");
             board[r][c].setIcon(dotIcon);
         }
-        //updateBoardUI();
     }
 
     private void updateMoves(String preset, JRadioButton button) {

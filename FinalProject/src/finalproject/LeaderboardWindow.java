@@ -47,11 +47,11 @@ public class LeaderboardWindow extends javax.swing.JFrame {
                     out.write(sLeaderboard[i].getBytes());
                 }
             } catch(IOException e) {
-                warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help.");    
+                warningWindow = new WarningWindow(this, "There was an error with the parsing the Users or Leaderboard file. Please see user manual for more help.");    
                 warningWindow.setVisible(true);
             }
         } catch (FileNotFoundException e) {
-            warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help.");
+            warningWindow = new WarningWindow(this, "There was an error with the location of the Users or Leaderboard file. Please see user manual for more help.");
             warningWindow.setVisible(true);    
         }
     }
@@ -105,6 +105,7 @@ public class LeaderboardWindow extends javax.swing.JFrame {
         topBar = new javax.swing.JPanel();
         titleLabel = new javax.swing.JLabel();
         cancelButton = new javax.swing.JButton();
+        loadButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 255, 51));
@@ -145,6 +146,13 @@ public class LeaderboardWindow extends javax.swing.JFrame {
             }
         });
 
+        loadButton.setText("Load");
+        loadButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -155,7 +163,8 @@ public class LeaderboardWindow extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 134, Short.MAX_VALUE)
+                        .addComponent(loadButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                         .addComponent(cancelButton)))
                 .addContainerGap())
         );
@@ -166,7 +175,9 @@ public class LeaderboardWindow extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cancelButton)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cancelButton)
+                    .addComponent(loadButton))
                 .addContainerGap())
         );
 
@@ -185,14 +196,20 @@ public class LeaderboardWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        leaderboardSort();
         this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
+        leaderboardSort();
+    }//GEN-LAST:event_loadButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JList<String> leaderboardList;
+    private javax.swing.JButton loadButton;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JPanel topBar;
     // End of variables declaration//GEN-END:variables

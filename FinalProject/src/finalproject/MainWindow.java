@@ -9,6 +9,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -44,73 +45,57 @@ public class MainWindow extends javax.swing.JFrame {
     }
     
     public void getTop3() {
-        String baseDir = System.getProperty("user.dir");
-        java.io.File usersFile = new java.io.File(baseDir, "Users.txt");
-        java.io.File leaderboardFile = new java.io.File(baseDir, "Leaderboard.txt");
-
-        // Phase 1: Read Users, Sort Them, and Write to Leaderboard file
-        try (
-            FileInputStream in = new FileInputStream(usersFile);
+        try {
+            FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
+            FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/Leaderboard.txt", true);
+            FileOutputStream out2 = new FileOutputStream(System.getProperty("user.dir") + "/Leaderboard.txt", false);
             Scanner s = new Scanner(in);
-            FileOutputStream out = new FileOutputStream(leaderboardFile, false)
-        ) {
-            if (!s.hasNextLine()) {
-                firstPlaceLabel.setText("No data");
-                secondPlaceLabel.setText("No data");
-                thirdPlaceLabel.setText("No data");
-                return;
-            }
-
-            String line = s.nextLine();
-            if (line.trim().isEmpty()) return;
-
-            String[] items = line.split(":");
+            String[] items = s.nextLine().split(":");
             User[] leaderboard = new User[items.length];
             int[] scores = new int[items.length];
-
             for (int i = 0; i < items.length; i++) {
-                String[] parts = items[i].split(",");
-                int wins = Integer.parseInt(parts[1].trim());
-                int losses = Integer.parseInt(parts[3].trim());
+                int wins = Integer.parseInt(items[i].split(",")[1]);
+                int losses = Integer.parseInt(items[i].split(",")[3]);
                 scores[i] = (wins - losses);
-                leaderboard[i] = new User(parts[0].trim(), scores[i]);
+                leaderboard[i] = new User(items[i].split(",")[0], scores[i]);
             }
-
             mergeSort(leaderboard, 0, leaderboard.length - 1);
-
+            String[] sLeaderboard = new String[leaderboard.length];
             for (int i = 0; i < leaderboard.length; i++) {
-                String row = "#" + (i + 1) + " " + leaderboard[i].toString();
-                out.write(row.getBytes());
+                sLeaderboard[i] = "#" + (i + 1) + " " + leaderboard[i].toString();
             }
-
-        } catch (Exception e) {
-            warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help.");
-            warningWindow.setVisible(true);
-            return;
-        }
-
-        // Phase 2: Read back from Leaderboard file and remove the score suffix
-        try (
-            FileInputStream in = new FileInputStream(leaderboardFile);
-            Scanner s = new Scanner(in)
-        ) {
-            String rawLine = s.nextLine().trim();
             try {
-                firstPlaceLabel.setText("#1 " + rawLine.split("#")[1].split(" ")[1].replace(",", ""));
-                secondPlaceLabel.setText("#2 " + rawLine.split("#")[2].split(" ")[1].replace(",", ""));
-                thirdPlaceLabel.setText("#3 " + rawLine.split("#")[3].split(" ")[1].replace(",", ""));
+                out2.write("".getBytes());
+                for (int i = 0; i < sLeaderboard.length; i++) {
+                    out.write(sLeaderboard[i].getBytes());
+                }
+            } catch(IOException e) {
+                warningWindow = new WarningWindow(this, "There was an error with the parsing the Users file. Please see user manual for more help.");    
+            }
+        } catch (NoSuchElementException e) {
+            
+        } catch (FileNotFoundException e) {
+            warningWindow = new WarningWindow(this, "There was an error with the location of the Users file. Please see user manual for more help.");    
+        }
+        try {
+            FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Leaderboard.txt");
+            Scanner s = new Scanner(in);
+            String nextLine = s.nextLine();
+            try {
+                firstPlaceLabel.setText("#" + nextLine.split("#")[1].split(",")[0]);
+                secondPlaceLabel.setText("#" + nextLine.split("#")[2].split(",")[0]);
+                thirdPlaceLabel.setText("#" + nextLine.split("#")[3].split(",")[0]);
             } catch (ArrayIndexOutOfBoundsException e) {
                 
-            }
-
-        } catch (Exception e) {
-            warningWindow = new WarningWindow(this, "There was an error with the Leaderboard file. Please see user manual for more help. It may be empty.");
+            }   
+        } catch (NoSuchElementException e) {
+            
+        } catch (FileNotFoundException e) {
+            warningWindow = new WarningWindow(this, "There was an error with the location of the Leaderboard file. Please see user manual for more help");
             warningWindow.setVisible(true);
-        }
+        } 
     }
-
-
-
+    
     public static class FrameDragListener extends MouseAdapter {
 
         private final JFrame frame;

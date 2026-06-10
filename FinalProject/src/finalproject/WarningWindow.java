@@ -89,7 +89,7 @@ public class WarningWindow extends javax.swing.JFrame {
     }
     
     /**
-     * wargning window constructor
+     * warning window constructor
      * @param m - skin window jframe
      * @param txt - String text
      */

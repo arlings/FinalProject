@@ -2,7 +2,7 @@ package finalproject;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class EnterUsername extends javax.swing.JFrame {
@@ -200,14 +200,13 @@ public class EnterUsername extends javax.swing.JFrame {
                 warningWindow.setVisible(true);
                 resetSystem();
             }
+        } catch (NoSuchElementException e) {
+            warningWindow = new WarningWindow(this, "No users exist!");
         } catch (FileNotFoundException e) {
             resetSystem();
             warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help");
             warningWindow.setVisible(true);
-        } catch (Exception e) {
-            resetSystem();
-            e.printStackTrace(); 
-        }
+        } 
     }//GEN-LAST:event_goBtnActionPerformed
 
     private void resetSystem() {

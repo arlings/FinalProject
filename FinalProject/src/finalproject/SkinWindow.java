@@ -9,6 +9,8 @@ import static finalproject.LeaderboardWindow.mergeSort;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class SkinWindow extends javax.swing.JFrame {
@@ -176,8 +178,10 @@ public class SkinWindow extends javax.swing.JFrame {
             } catch (ArrayIndexOutOfBoundsException e) {
                     
             }
-        } catch (FileNotFoundException e) {
+        } catch (NoSuchElementException e) {
             
+        } catch (FileNotFoundException e) {
+            warningWindow = new WarningWindow(this, "There was an error with the location of the Users file. Please see user manual for more help.");    
         }
         
         if (wins >= 30) {
@@ -210,11 +214,12 @@ public class SkinWindow extends javax.swing.JFrame {
             }
             try {
                 out.write(changedFile.getBytes());
-            } catch (Exception e) {
-                System.out.print(e);
+            } catch (IOException e) {
+                
             }
-        } catch (Exception e) {
-            warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help.");
+        } catch (FileNotFoundException e) {
+            warningWindow = new WarningWindow(this, "There was an error with the location of the Users or Leaderboard file. Please see user manual for more help.");
+            warningWindow.setVisible(true);
         } 
         this.dispose();
     }//GEN-LAST:event_exitButtonActionPerformed

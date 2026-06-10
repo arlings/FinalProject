@@ -1095,7 +1095,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
                 String[] data = players[i].split(",");
                 if (data.length < 5) continue; 
 
-                if (isWhiteTurn) {
+                if (!isWhiteTurn) {
                     if (data[0].equalsIgnoreCase(user2Lbl.getText())) {
                         players[i] = data[0] + "," + (Integer.parseInt(data[1]) + 1) + "," + data[2] + "," + data[3] + "," + data[4];
                     }
@@ -1110,7 +1110,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
                 String[] data = players[i].split(",");
                 if (data.length < 5) continue;
 
-                if (isWhiteTurn) {
+                if (!isWhiteTurn) {
                     if (data[0].equalsIgnoreCase(user1Lbl.getText())) {
                         players[i] = data[0] + "," + data[1] + "," + data[2] + "," + (Integer.parseInt(data[3]) + 1) + "," + data[4];
                     }

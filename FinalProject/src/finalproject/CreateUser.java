@@ -37,13 +37,6 @@ public class CreateUser extends javax.swing.JFrame {
     public CreateUser(MainWindow m) {
         MoveJFrame();
         initComponents();
-        try {
-            FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
-            Scanner s = new Scanner(in);
-            numUsers = s.nextLine().split(":").length;
-        } catch (Exception e) {
-            
-        }
         mainWindow = m;
     }
 
@@ -163,6 +156,14 @@ public class CreateUser extends javax.swing.JFrame {
 
     
     private void goBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBtnActionPerformed
+        try {
+            FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
+            Scanner s = new Scanner(in);
+            numUsers = s.nextLine().split(":").length;
+        } catch (Exception e) {
+            
+        }
+        
         if (userNameField.getText().contains(",") || userNameField.getText().contains(":")) {
             userNameField.setText("");
             warningWindow = new WarningWindow(this, "Your username cannot contain characters : or ,");
@@ -193,16 +194,14 @@ public class CreateUser extends javax.swing.JFrame {
                 try {
                     //saves directory is located beside the src folder or JAR
                     FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/Users.txt", true);
-                    FileOutputStream out2 = new FileOutputStream(System.getProperty("user.dir") + "/Leaderboard.txt", true);
                     out.write((userNameField.getText() + ",0,0,0,Default:").getBytes());
-                    out2.write("".getBytes());
                     userNameField.setText("");
                 } catch (IOException e) {
                     warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help");
                 }
-                this.dispose();
             }
         }
+        this.dispose();
     }//GEN-LAST:event_goBtnActionPerformed
 
     private void userNameFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_userNameFieldKeyTyped
