@@ -1,7 +1,7 @@
-
 package pieces;
 
 public class Move {
+
     private int rowNum;
     private int columnNum;
 
@@ -14,7 +14,8 @@ public class Move {
     }
 
     /**
-     * Move constrctor
+     * Move constructor
+     *
      * @param rowNum- row number
      * @param columnNum - column number
      */
@@ -25,6 +26,7 @@ public class Move {
 
     /**
      * get the row number
+     *
      * @return - the row number
      */
     public int getRowNum() {
@@ -33,6 +35,7 @@ public class Move {
 
     /**
      * get the column number
+     *
      * @return - the column number
      */
     public int getColumnNum() {
@@ -41,6 +44,7 @@ public class Move {
 
     /**
      * set the row number
+     *
      * @param rowNum - new row number
      */
     public void setRowNum(int rowNum) {
@@ -49,6 +53,7 @@ public class Move {
 
     /**
      * set the column number
+     *
      * @param columnNum - new column number
      */
     public void setColumnNum(int columnNum) {
@@ -57,8 +62,10 @@ public class Move {
 
     /**
      * check if 2 objects are the same
-     * @param obj - the second object or the object that is being compared to the given index
-     * @return 
+     *
+     * @param obj - the second object or the object that is being compared to
+     * the given index
+     * @return
      */
     public boolean equals(Object obj) {
         if (this == obj) {//if the same reference
@@ -79,11 +86,11 @@ public class Move {
 
     /**
      * return the status of the current move object
+     *
      * @return - the status
      */
     public String toString() {
         return "Move{" + "rowNum=" + rowNum + ", columnNum=" + columnNum + '}';
     }
-    
-    
+
 }

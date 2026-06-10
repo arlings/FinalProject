@@ -16,6 +16,7 @@ public class Knight extends AbstractPiece {
 
     /**
      * Knight constructor
+     *
      * @param rowNum - row number
      * @param columnNum - col number
      * @param sprite - sprite
@@ -27,6 +28,7 @@ public class Knight extends AbstractPiece {
 
     /**
      * ger the valid moves
+     *
      * @param pieces - 2d array of pieces
      * @return - array list of valid moves
      */
@@ -48,6 +50,7 @@ public class Knight extends AbstractPiece {
 
     /**
      * search the direction
+     *
      * @param moves - array list of moves
      * @param pieces - 2d array of pieces
      * @param currentRow - current row
@@ -65,7 +68,7 @@ public class Knight extends AbstractPiece {
 
             if (piece == null) {
                 moves.add(new Move(targetRow, targetCol));
-            } else if (piece.isWhite() != this.isWhite()) { 
+            } else if (piece.isWhite() != this.isWhite()) {
                 moves.add(new Move(targetRow, targetCol));
             }
         }
@@ -73,6 +76,7 @@ public class Knight extends AbstractPiece {
 
     /**
      * get the number of knights
+     *
      * @return - the number of knights
      */
     public static int getNumKnights() {
@@ -81,6 +85,7 @@ public class Knight extends AbstractPiece {
 
     /**
      * return the status of the knight
+     *
      * @return - toString status
      */
     public String toString() {

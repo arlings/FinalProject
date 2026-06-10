@@ -1,13 +1,13 @@
-
 package pieces;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public class Rook extends AbstractPiece{
+public class Rook extends AbstractPiece {
+
     private static int numRooks;
     private boolean hasMoved;
-    
+
     /**
      * default constructor
      */
@@ -17,6 +17,7 @@ public class Rook extends AbstractPiece{
 
     /**
      * Rook constructor
+     *
      * @param rowNum- row number
      * @param columnNum- column number
      * @param sprite- sprite
@@ -27,9 +28,10 @@ public class Rook extends AbstractPiece{
         super(rowNum, columnNum, sprite, isWhite, 5);//calls the super constructor with the following paramaters
         this.hasMoved = hasMoved;
     }
-    
+
     /**
      * returns the valid moves
+     *
      * @param pieces- 2d array of pieces
      * @return - array list of valid moves
      */
@@ -47,35 +49,39 @@ public class Rook extends AbstractPiece{
 
     /**
      * get if the rook has moved yet
+     *
      * @return - true if rook has already moved and false otherwise
      */
-    public boolean hasMoved(){
+    public boolean hasMoved() {
         return hasMoved;
     }
-    
+
     /**
      * set if the rook has moved yet
+     *
      * @param hasMoved - boolean of if the rook has moved yet
      */
-    public void setHasMoved(boolean hasMoved){
+    public void setHasMoved(boolean hasMoved) {
         this.hasMoved = hasMoved;
     }
 
     /**
      * get the number of rooks
+     *
      * @return - the number of rooks
      */
     public static int getNumRooks() {
         return numRooks;
     }
-    
+
     /**
      * returns the status of the current instance of the rook
+     *
      * @return - the status
      */
     public String toString() {
         return ("Piece Type: Rook"
                 + super.toString());//calls the super constructor for toString()
     }
-    
+
 }

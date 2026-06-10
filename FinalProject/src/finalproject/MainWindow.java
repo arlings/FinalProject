@@ -1,11 +1,13 @@
 package finalproject;
 
+import static finalproject.LeaderboardWindow.mergeSort;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Scanner;
@@ -45,6 +47,38 @@ public class MainWindow extends javax.swing.JFrame {
     }
     
     public void getTop3() {
+        try {
+            FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
+            FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/Leaderboard.txt", true);
+            FileOutputStream out2 = new FileOutputStream(System.getProperty("user.dir") + "/Leaderboard.txt", false);
+            Scanner s = new Scanner(in);
+            String[] items = s.nextLine().split(":");
+            String[] userData = new String[items.length];
+            User[] leaderboard = new User[items.length];
+            int[] scores = new int[items.length];
+            for (int i = 0; i < items.length; i++) {
+                int wins = Integer.parseInt(items[i].split(",")[1]);
+                int losses = Integer.parseInt(items[i].split(",")[3]);
+                scores[i] = (wins - losses);
+                leaderboard[i] = new User(items[i].split(",")[0], scores[i]);
+            }
+            mergeSort(leaderboard, 0, leaderboard.length - 1);
+            String[] sLeaderboard = new String[leaderboard.length];
+            for (int i = 0; i < leaderboard.length; i++) {
+                sLeaderboard[i] = "#" + (i + 1) + " " + leaderboard[i].toString();
+            }
+            try {
+                out2.write("".getBytes());
+                for (int i = 0; i < sLeaderboard.length; i++) {
+                    out.write(sLeaderboard[i].getBytes());
+                }
+            } catch(IOException e) {
+                warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help.");    
+            }
+        } catch (FileNotFoundException e) {
+            warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help.");
+            warningWindow.setVisible(true);    
+        }
         try {
             FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Leaderboard.txt");
             Scanner s = new Scanner(in);
@@ -154,7 +188,7 @@ public class MainWindow extends javax.swing.JFrame {
         thirdPlaceLabel.setForeground(new java.awt.Color(192, 142, 78));
         thirdPlaceLabel.setText("N/A");
 
-        viewFullLeaderboardButton.setText("View Full Leaderboard");
+        viewFullLeaderboardButton.setText("Load Full Leaderboard");
         viewFullLeaderboardButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 viewFullLeaderboardButtonActionPerformed(evt);
@@ -166,24 +200,24 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
+                .addGap(89, 89, 89)
+                .addComponent(firstPlaceLabel)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(viewFullLeaderboardButton, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGap(146, 146, 146)
+                            .addComponent(thirdPlaceLabel))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(28, 28, 28))
-                            .addComponent(viewFullLeaderboardButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addComponent(secondPlaceLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(thirdPlaceLabel)
-                                .addGap(42, 42, 42))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(73, 73, 73)
-                        .addComponent(firstPlaceLabel)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE))))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,9 +227,9 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(secondPlaceLabel)
                     .addComponent(thirdPlaceLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(firstPlaceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(firstPlaceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(viewFullLeaderboardButton)
                 .addGap(12, 12, 12))
         );
@@ -218,7 +252,7 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(24, 24, 24)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         leaderboardPanelLayout.setVerticalGroup(
             leaderboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

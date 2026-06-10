@@ -1,4 +1,3 @@
-
 package pieces;
 
 import java.awt.image.BufferedImage;
@@ -18,12 +17,13 @@ abstract public class AbstractPiece implements Piece {
     /**
      * Basic constructor with no parameters
      */
-    public AbstractPiece(){
-        
+    public AbstractPiece() {
+
     }
-    
+
     /**
      * Abstract Piece constructor
+     *
      * @param rowNum - row number
      * @param columnNum - colomn number
      * @param sprite - the buffered image
@@ -40,6 +40,7 @@ abstract public class AbstractPiece implements Piece {
 
     /**
      * get the row number
+     *
      * @return - the row number
      */
     public int getRowNum() {
@@ -48,6 +49,7 @@ abstract public class AbstractPiece implements Piece {
 
     /**
      * get the column number
+     *
      * @return - the column number
      */
     public int getColumnNum() {
@@ -56,6 +58,7 @@ abstract public class AbstractPiece implements Piece {
 
     /**
      * get the Sprite
+     *
      * @return Sprite
      */
     public BufferedImage getSprite() {
@@ -64,6 +67,7 @@ abstract public class AbstractPiece implements Piece {
 
     /**
      * get the boolean of if the piece is white
+     *
      * @return - the boolean isWhite
      */
     public boolean isWhite() {
@@ -72,6 +76,7 @@ abstract public class AbstractPiece implements Piece {
 
     /**
      * returns the team
+     *
      * @return - the team
      */
     public String getTeam() {
@@ -83,6 +88,7 @@ abstract public class AbstractPiece implements Piece {
 
     /**
      * get the value
+     *
      * @return - the value
      */
     public int getValue() {
@@ -91,6 +97,7 @@ abstract public class AbstractPiece implements Piece {
 
     /**
      * set the rown numer
+     *
      * @param rowNum - the row number
      */
     public void setRowNum(int rowNum) {
@@ -99,6 +106,7 @@ abstract public class AbstractPiece implements Piece {
 
     /**
      * set the column number
+     *
      * @param columnNum - the column number
      */
     public void setColumnNum(int columnNum) {
@@ -107,6 +115,7 @@ abstract public class AbstractPiece implements Piece {
 
     /**
      * set the Sprite
+     *
      * @param sprite - the Sprite
      */
     public void setSprite(BufferedImage sprite) {
@@ -115,6 +124,7 @@ abstract public class AbstractPiece implements Piece {
 
     /**
      * set if the piece is white
+     *
      * @param isWhite - boolean isWhite
      */
     public void setWhite(boolean isWhite) {
@@ -123,6 +133,7 @@ abstract public class AbstractPiece implements Piece {
 
     /**
      * set the number of pieces
+     *
      * @param numPieces - the number of pieces
      */
     public static void setNumPieces(int numPieces) {
@@ -131,6 +142,7 @@ abstract public class AbstractPiece implements Piece {
 
     /**
      * set the value of the piece
+     *
      * @param value - the value of the piece
      */
     public void setValue(int value) {
@@ -139,6 +151,7 @@ abstract public class AbstractPiece implements Piece {
 
     /**
      * set the valid moves
+     *
      * @param validMoves - array list of valid moves
      */
     public void setValidMoves(ArrayList<Move> validMoves) {
@@ -149,6 +162,7 @@ abstract public class AbstractPiece implements Piece {
 
     /**
      * search the direction
+     *
      * @param moves - the array list of moves
      * @param pieces - 2d array of pieces
      * @param currentRow - current row
@@ -175,6 +189,7 @@ abstract public class AbstractPiece implements Piece {
 
     /**
      * if inside the board
+     *
      * @param row - the row
      * @param col- the column
      * @return - true if inside the board and false otherwise
@@ -185,6 +200,7 @@ abstract public class AbstractPiece implements Piece {
 
     /**
      * get piece at a given index
+     *
      * @param row - the row
      * @param col - the col
      * @param pieces- 2d array of pieces
@@ -196,6 +212,7 @@ abstract public class AbstractPiece implements Piece {
 
     /**
      * get the number of pieces
+     *
      * @return - the number of pieces
      */
     public static int getNumPieces() {
@@ -204,6 +221,7 @@ abstract public class AbstractPiece implements Piece {
 
     /**
      * checks if 2 pieces are equal
+     *
      * @param - a piece
      * @return - true if equal and false otherwise
      */
@@ -229,6 +247,7 @@ abstract public class AbstractPiece implements Piece {
 
     /**
      * toString - returns the toString
+     *
      * @return - the status of the piece
      */
     public String toString() {

@@ -1,4 +1,3 @@
-
 package pieces;
 
 import java.awt.image.BufferedImage;
@@ -9,16 +8,16 @@ public class Pawn extends AbstractPiece {
     private static int numPawns = 0;
     private boolean firstMove = true;
     private boolean enPassantEligible = false;
-    
+
     /**
      * default Pawn constructor
      */
     public Pawn() {
     }
-    
 
     /**
      * Pawn constructor
+     *
      * @param rowNum - row number
      * @param columnNum - column number
      * @param sprite - sprite
@@ -30,6 +29,7 @@ public class Pawn extends AbstractPiece {
 
     /**
      * returns all the valid moves
+     *
      * @param pieces - 2d array of pieces
      * @return - array list of all possible moves
      */
@@ -52,7 +52,7 @@ public class Pawn extends AbstractPiece {
                 moves.add(new Move(twoStepRow, columnNum));
             }
         }
-        
+
         if (columnNum - 1 >= 0) {
             Piece leftPiece = pieces[rowNum][columnNum - 1];
             if (leftPiece instanceof Pawn && leftPiece.isWhite() != this.isWhite()) {
@@ -75,6 +75,7 @@ public class Pawn extends AbstractPiece {
 
     /**
      * gets the direction
+     *
      * @param moves - array list of moves
      * @param pieces - 2d array of pieces
      * @param targetRow - target row
@@ -107,40 +108,43 @@ public class Pawn extends AbstractPiece {
 
     /**
      * get the number of pawns
+     *
      * @return - the number of pawns
      */
     public static int getNumPawns() {
         return numPawns;
     }
-    
+
     /**
      * if enPassang is eligible
+     *
      * @return - true if eligible false otherwise
      */
     public boolean isEnPassantEligible() {
         return enPassantEligible;
     }
-    
+
     /**
      * set first move
-     * @param firstMove- the first move 
+     *
+     * @param firstMove- the first move
      */
     public void setFirstMove(boolean firstMove) {
         this.firstMove = firstMove;
     }
-    
+
     /**
      * set if enPassang is eligible
+     *
      * @param enPassantEligible - boolean of if enPassant is eligible
      */
-    public void setEnPassantEligible(boolean enPassantEligible){
+    public void setEnPassantEligible(boolean enPassantEligible) {
         this.enPassantEligible = enPassantEligible;
     }
-    
-    
 
     /**
      * returns the status of the current pawn
+     *
      * @return - the status
      */
     public String toString() {

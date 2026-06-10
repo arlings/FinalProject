@@ -194,28 +194,29 @@ public class SandboxWindow extends javax.swing.JFrame {
     }
 
     private void checkKnightButtons(boolean isGlobalBtn) {
-        JRadioButton[] knightButtons = { //instantiates array to use later for checking
-            knightTopLeftHorzBtn, knightTopRightHorzBtn,
-            knightBottomLeftHorzBtn, knightBottomRightHorzBtn,
-            knightTopLeftVertBtn, knightTopRightVertBtn,
-            knightBottomLeftVertBtn, knightBottomRightVertBtn};
+    JRadioButton[] knightButtons = { //instantiates array for check logic
+        knightTopLeftHorzBtn, knightTopRightHorzBtn,
+        knightBottomLeftHorzBtn, knightBottomRightHorzBtn,
+        knightTopLeftVertBtn, knightTopRightVertBtn,
+        knightBottomLeftVertBtn, knightBottomRightVertBtn};
 
-        if (isGlobalBtn) { //if user clicked the global knight button
-            boolean state = knightBtn.isSelected(); //gets whether the knight button was selected or deselected
-            for (JRadioButton btn : knightButtons) { //loops through all local knight buttons
-                btn.setSelected(state); //sets them the same status as the global button
-            }
-        } else { //if the user clicked a local knight button
-            boolean allSelected = true; //boolean tracker for if all the local are all selected, asumes true
-            for (JRadioButton btn : knightButtons) { //loops through all local knight buttons
-                if (!btn.isSelected()) { //if the button is not selected
-                    allSelected = false; //sets boolean tracker to false
-                    break; //stops the loop
-                }
-            }
-            knightBtn.setSelected(allSelected); //sets the global button based on if all the local buttons are selected
+    if (isGlobalBtn) { //if user clicked the global knight button
+        boolean state = knightBtn.isSelected();
+        for (JRadioButton btn : knightButtons) { //sync all local buttons
+            btn.setSelected(state);
+            //optionally trigger rule logic for every button here if needed
         }
+    } else { //if the user clicked a local knight button
+        boolean allSelected = true;
+        for (JRadioButton btn : knightButtons) { //sync the global button
+            if (!btn.isSelected()) {
+                allSelected = false;
+                break;
+            }
+        }
+        knightBtn.setSelected(allSelected);
     }
+}
 
     private void checkBishopButtons(boolean isGlobalBtn) {
         JRadioButton[] bishopButtons = { //instantiates array to use later for checking
@@ -363,8 +364,6 @@ public class SandboxWindow extends javax.swing.JFrame {
         updateBoardUI();
     }
 
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
@@ -2961,7 +2960,7 @@ public class SandboxWindow extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
