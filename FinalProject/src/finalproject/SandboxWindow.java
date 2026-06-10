@@ -191,7 +191,7 @@ public class SandboxWindow extends javax.swing.JFrame {
     }
 
     /**
-     * show the valid moves
+     * show the valid moves by setting a green dot over each valid move
      * @param piece - the piece that to display the valid moves for
      */
     private void showValidMoves(Piece piece) {
@@ -204,15 +204,20 @@ public class SandboxWindow extends javax.swing.JFrame {
         ArrayList<Move> validMoves = ((CustomPiece) piece).getValidMoves(pieces);
         BufferedImage dot = loadImage("/images/LightGreenPicture.png");
 
-        for (Move move : validMoves) {
+        for (Move move : validMoves) {//go through all the valid moves
             int r = move.getRowNum();
             int c = move.getColumnNum();
-            ImageIcon dotIcon = new ImageIcon(dot);
+            ImageIcon dotIcon = new ImageIcon(dot);//put a dot over
             dotIcon.setDescription("GREEN_DOT");
             board[r][c].setIcon(dotIcon);
         }
     }
 
+    /**
+     * update the moves
+     * @param preset- 
+     * @param button - radio button
+     */
     private void updateMoves(String preset, JRadioButton button) {
         CustomPiece customPiece = (CustomPiece) pieces[3][4];
 
@@ -224,6 +229,10 @@ public class SandboxWindow extends javax.swing.JFrame {
         showValidMoves(customPiece);
     }
 
+    /**
+     * check the bawn buttons
+     * @param isGlobalBtn -
+     */
     private void checkPawnButtons(boolean isGlobalBtn) {
         if (isGlobalBtn) { //if user clicked the global pawn button
             boolean state = pawnBtn.isSelected(); //gets whether the pawn button was selected or deselected

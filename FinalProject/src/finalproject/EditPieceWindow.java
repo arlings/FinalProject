@@ -1,9 +1,17 @@
+/*
+ L Necakov, A Zalli, N Wang
+ May 21- June 10, 2026
+ Create a EditPieceWindow that edits pieces
+*/
 package finalproject;
 
 public class EditPieceWindow extends javax.swing.JFrame {
     
     private SandboxWindow sandboxWindow;
 
+    /**
+     * be able to move the jframe around the screen
+     */
     public void MoveJFrame() {
         this.setUndecorated(true);
         MainWindow.FrameDragListener frameDragListener = new MainWindow.FrameDragListener(this);
@@ -14,6 +22,11 @@ public class EditPieceWindow extends javax.swing.JFrame {
         this.setVisible(true);
     }
     
+    /**
+     * EditPieceWindow constructor
+     * @param m - sandbox window
+     * @param piece - piece
+     */
     public EditPieceWindow(SandboxWindow m, int piece) {
         MoveJFrame();
         initComponents();

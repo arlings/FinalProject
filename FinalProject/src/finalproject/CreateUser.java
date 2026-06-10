@@ -151,7 +151,7 @@ public class CreateUser extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-        this.dispose();
+        this.dispose();//dispose of the window if the cancel button is selected
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     
@@ -205,7 +205,7 @@ public class CreateUser extends javax.swing.JFrame {
     }//GEN-LAST:event_goBtnActionPerformed
 
     private void userNameFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_userNameFieldKeyTyped
-        if (userNameField.getText().length() > 15) {
+        if (userNameField.getText().length() > 15) {//if the username is over 15 characters then just make the username the first 14 characters
             userNameField.setText(userNameField.getText().substring(0, 15));
         }
     }//GEN-LAST:event_userNameFieldKeyTyped
