@@ -32,9 +32,10 @@ public class MainWindow extends javax.swing.JFrame {
     private WarningWindow warningWindow;
     private SkinWindow skinWindow;
    
-    // https://stackoverflow.com/questions/16046824/making-a-java-swing-frame-movable-and-setundecorated
     /**
-     * move the JFrame
+     * A method designed to move the frame white preventing the user from accessing a hard-coded way to exit the frame.
+     * https://stackoverflow.com/questions/16046824/making-a-java-swing-frame-movable-and-setundecorated was used as a resource to
+     * find a clean way to hide the top menu of the window.
      */
     public void MoveJFrame() {
         this.setUndecorated(true);

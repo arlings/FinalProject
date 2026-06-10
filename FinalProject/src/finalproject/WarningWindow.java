@@ -1,10 +1,10 @@
 /*
 L Necakov, A Zalli, N Wang
 May 21- June 10, 2026
-Warning Window
+Warning window that displays any exceptions in a user friendly manner.
 */
-package finalproject;
 
+package finalproject;
 
 public class WarningWindow extends javax.swing.JFrame {
     
@@ -16,7 +16,9 @@ public class WarningWindow extends javax.swing.JFrame {
     private SkinWindow skinWindow;
     
     /**
-     * move the jframe
+     * A method designed to move the frame white preventing the user from accessing a hard-coded way to exit the frame.
+     * https://stackoverflow.com/questions/16046824/making-a-java-swing-frame-movable-and-setundecorated was used as a resource to
+     * find a clean way to hide the top menu of the window.
      */
     public void MoveJFrame() {
         this.setUndecorated(true);
@@ -29,9 +31,9 @@ public class WarningWindow extends javax.swing.JFrame {
     }
     
     /**
-     * warning window constructor
-     * @param m- create user jFrame
-     * @param txt - string text
+     * Warning window constructor connected to any call from the frame CreateUser
+     * @param m - The CreateUser frame
+     * @param txt - Warning message text
      */
     public WarningWindow(CreateUser m, String txt) {
         MoveJFrame();
@@ -41,9 +43,9 @@ public class WarningWindow extends javax.swing.JFrame {
     }
     
     /**
-     * warning window constructor
-     * @param m- enter username jframe
-     * @param txt - string text
+     * Warning window constructor connected to any call from the frame EnterUsername
+     * @param m- The EnterUsername frame
+     * @param txt - Warning message text
      */
     public WarningWindow(EnterUsername m, String txt) {
         MoveJFrame();
@@ -53,9 +55,9 @@ public class WarningWindow extends javax.swing.JFrame {
     }
     
     /**
-     * wargning window constructor
-     * @param m - leaderboard jframe
-     * @param txt - string text
+     * Warning window constructor connected to any call from the frame LeaderboardWindow
+     * @param m- The LeaderboardWindow frame
+     * @param txt - Warning message text
      */
     public WarningWindow(LeaderboardWindow m, String txt) {
         MoveJFrame();
@@ -65,9 +67,9 @@ public class WarningWindow extends javax.swing.JFrame {
     }
     
     /**
-     * warning window constructor
-     * @param m - game window jframe
-     * @param txt - string text
+     * Warning window constructor connected to any call from the frame GameWindow
+     * @param m- The GameWindow frame
+     * @param txt - Warning message text
      */
     public WarningWindow(GameWindow m, String txt) {
         MoveJFrame();
@@ -77,9 +79,9 @@ public class WarningWindow extends javax.swing.JFrame {
     }
     
     /**
-     * Warning window constructor
-     * @param m- main window jframe
-     * @param txt - string text
+     * Warning window constructor connected to any call from the frame MainWindow
+     * @param m- The MainWindow frame
+     * @param txt - Warning message text
      */
     public WarningWindow(MainWindow m, String txt) {
         MoveJFrame();
@@ -89,9 +91,9 @@ public class WarningWindow extends javax.swing.JFrame {
     }
     
     /**
-     * warning window constructor
-     * @param m - skin window jframe
-     * @param txt - String text
+     * Warning window constructor connected to any call from the frame SkinWindow
+     * @param m- The SkinWindow frame
+     * @param txt - Warning message text
      */
     public WarningWindow(SkinWindow m, String txt) {
         MoveJFrame();
@@ -192,7 +194,7 @@ public class WarningWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
-        this.dispose();//dispose of window when ok button is selected
+        this.dispose(); 
     }//GEN-LAST:event_okButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
