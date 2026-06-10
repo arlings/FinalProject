@@ -11,6 +11,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -165,6 +166,7 @@ public class SkinWindow extends javax.swing.JFrame {
             // Get the file called Users.txt beside the JAR file in the same folder and put it into a Scanner to be read.
             String[] userInfo = s.nextLine().split(":");
             // Split this line based on regex of :, that separates each user. Store this in an array.
+            System.out.println(Arrays.toString(userInfo));
             for (int i = 0; i < userInfo.length; i++) {
                 // For each user information bit in the array, split this on regex of "," to select for specific user information.
                 if (userInfo[i].split(",")[0].equalsIgnoreCase(userDropdown.getItemAt(userDropdown.getSelectedIndex()))) {
@@ -195,7 +197,6 @@ public class SkinWindow extends javax.swing.JFrame {
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
         try { // Try the following code
             FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
-            FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/Users.txt");
             Scanner s = new Scanner(in);
             // Get the file called Users.txt beside the JAR file in the same folder and put it into a Scanner to be read.
             // Create an output stream to write to the Users.txt file in the same location.
@@ -213,12 +214,18 @@ public class SkinWindow extends javax.swing.JFrame {
             // Go through the edited user info 
                 changedFile += userInfo[i] + ":";
             }
+            
+            in.close();
+            FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/Users.txt");
             try {
                 out.write(changedFile.getBytes());
             } catch (IOException e) {
                 
             }
-        } catch (FileNotFoundException e) {
+            
+            s.close();
+            out.close();
+        } catch (Exception e) {
             warningWindow = new WarningWindow(this, "There was an error with the location of the Users or Leaderboard file. Please see user manual for more help.");
             warningWindow.setVisible(true);
         } 

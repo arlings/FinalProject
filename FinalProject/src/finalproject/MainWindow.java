@@ -69,6 +69,7 @@ public class MainWindow extends javax.swing.JFrame {
             User[] leaderboard = new User[items.length];
             int[] scores = new int[items.length];
             for (int i = 0; i < items.length; i++) {
+                System.out.println(items[i]);
                 int wins = Integer.parseInt(items[i].split(",")[1]);
                 int losses = Integer.parseInt(items[i].split(",")[3]);
                 scores[i] = (wins - losses);
