@@ -1,3 +1,8 @@
+/*
+L Necakov, A Zalli, N Wang
+May 21- June 10, 2026
+Sandbox Window
+*/
 package finalproject;
 
 import java.awt.Color;
@@ -26,6 +31,9 @@ public class SandboxWindow extends javax.swing.JFrame {
     String pieceImg = "Pawn";
 
     //https://stackoverflow.com/questions/16046824/making-a-java-swing-frame-movable-and-setundecorated
+    /**
+     * move the JFrame
+     */
     public void MoveJFrame() {
         this.setUndecorated(true);
         MainWindow.FrameDragListener frameDragListener = new MainWindow.FrameDragListener(this);
@@ -36,6 +44,10 @@ public class SandboxWindow extends javax.swing.JFrame {
         this.setVisible(true);
     }
 
+    /**
+     * sandbox window constructor
+     * @param m - main window
+     */
     public SandboxWindow(MainWindow m) {
         MoveJFrame();
         initComponents();
@@ -44,6 +56,9 @@ public class SandboxWindow extends javax.swing.JFrame {
         startGame();
     }
 
+    /**
+     * update the board
+     */
     private void updateBoardUI() {
         //loops through all board rows to synchronize graphic frame boxes
         for (int row = 0; row < 8; row++) {
@@ -73,6 +88,11 @@ public class SandboxWindow extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * get if there is a green dot icon
+     * @param icon- the icon
+     * @return - true if there is an icon and false otherwise
+     */
     private boolean isGreenDotIcon(Icon icon) {
         if (icon == null) {
             return false;
@@ -81,6 +101,12 @@ public class SandboxWindow extends javax.swing.JFrame {
         return "GREEN_DOT".equals(dot.getDescription()); //AI
     }
 
+    /**
+     * overlay images
+     * @param piece - the piece
+     * @param dot - the dot image that is the overlayed image
+     * @return - image with the dot on top
+     */
     private ImageIcon overlayImages(Piece piece, BufferedImage dot) {
 
         //if piece object is null it just prints the plain dot indicator image
@@ -106,6 +132,10 @@ public class SandboxWindow extends javax.swing.JFrame {
         return new ImageIcon(combined);
     }
 
+    /**
+     * set the transparent icon
+     * @param label - the jlabel
+     */
     private void setTransparentIcon(JLabel label) {
         BufferedImage img = loadImage("/images/Transparent_Background.png");
 
@@ -117,6 +147,11 @@ public class SandboxWindow extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * load the image
+     * @param filePath- the file path
+     * @return - the image
+     */
     private BufferedImage loadImage(String filePath) {
         try {
             return fileImporter.loadImage(filePath);
@@ -127,6 +162,10 @@ public class SandboxWindow extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * load the board
+     * @return - 2d aray of JLabels with all the pieces on the board
+     */
     private JLabel[][] loadBoard() {
         //returns a hardcoded label mapping matching rows and columns layout of grid swing panel
         return new JLabel[][]{
@@ -141,6 +180,9 @@ public class SandboxWindow extends javax.swing.JFrame {
         };
     }
 
+    /**
+     * start the game
+     */
     private void startGame() {
         pieces = new Piece[8][8];
         Piece myPiece = new CustomPiece(3, 4, loadImage("/images/DefaultWhite_Pawn.png"), true, true);
@@ -148,6 +190,10 @@ public class SandboxWindow extends javax.swing.JFrame {
         updateBoardUI();
     }
 
+    /**
+     * show the valid moves
+     * @param piece - the piece that to display the valid moves for
+     */
     private void showValidMoves(Piece piece) {
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {

@@ -1,3 +1,9 @@
+/*
+/*
+L Necakov, Arlind Zalli, Neo Wang
+May 21- June 10
+Game window of chess
+*/
 package finalproject;
 
 import java.awt.Color;

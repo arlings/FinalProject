@@ -1,3 +1,8 @@
+/*
+L Necakov, A Zalli, Neo Wang
+May 21-June 10
+Skin window
+*/
 package finalproject;
 
 import static finalproject.LeaderboardWindow.mergeSort;
@@ -12,6 +17,9 @@ public class SkinWindow extends javax.swing.JFrame {
     private WarningWindow warningWindow;
     
     // https://stackoverflow.com/questions/16046824/making-a-java-swing-frame-movable-and-setundecorated
+    /**
+     * moves the jframe
+     */
     public void MoveJFrame() {
         this.setUndecorated(true);
         MainWindow.FrameDragListener frameDragListener = new MainWindow.FrameDragListener(this);
@@ -22,6 +30,10 @@ public class SkinWindow extends javax.swing.JFrame {
         this.setVisible(true);
     }
     
+    /**
+     * skin window constructor
+     * @param m - main window
+     */
     public SkinWindow(MainWindow m) {
         MoveJFrame();
         initComponents();

@@ -1,3 +1,8 @@
+/*
+A Zalli, L Necakov, N Wang
+May 21- June 10
+Create user window
+*/
 package finalproject;
 
 import java.io.FileInputStream;
@@ -13,7 +18,7 @@ public class CreateUser extends javax.swing.JFrame {
     private WarningWindow warningWindow;
     int numUsers = 0;
     /**
-     * moves teh JFrame
+     * moves the JFrame
      */
     public void MoveJFrame() {
         this.setUndecorated(true);
@@ -156,6 +161,7 @@ public class CreateUser extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
+    
     private void goBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBtnActionPerformed
         if (userNameField.getText().contains(",") || userNameField.getText().contains(":")) {
             userNameField.setText("");

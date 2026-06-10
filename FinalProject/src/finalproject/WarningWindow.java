@@ -1,3 +1,8 @@
+/*
+L Necakov, A Zalli, N Wang
+May 21- June 10, 2026
+Warning Window
+*/
 package finalproject;
 
 
@@ -10,6 +15,9 @@ public class WarningWindow extends javax.swing.JFrame {
     private MainWindow mainWindow;
     private SkinWindow skinWindow;
     
+    /**
+     * move the jframe
+     */
     public void MoveJFrame() {
         this.setUndecorated(true);
         MainWindow.FrameDragListener frameDragListener = new MainWindow.FrameDragListener(this);
@@ -20,6 +28,11 @@ public class WarningWindow extends javax.swing.JFrame {
         this.setVisible(true);
     }
     
+    /**
+     * warning window constructor
+     * @param m- create user jFrame
+     * @param txt - string text
+     */
     public WarningWindow(CreateUser m, String txt) {
         MoveJFrame();
         initComponents();
@@ -27,6 +40,11 @@ public class WarningWindow extends javax.swing.JFrame {
         createUser = m;
     }
     
+    /**
+     * warning window constructor
+     * @param m- enter username jframe
+     * @param txt - string text
+     */
     public WarningWindow(EnterUsername m, String txt) {
         MoveJFrame();
         initComponents();
@@ -34,6 +52,11 @@ public class WarningWindow extends javax.swing.JFrame {
         enterUsername = m;
     }
     
+    /**
+     * wargning window constructor
+     * @param m - leaderboard jframe
+     * @param txt - string text
+     */
     public WarningWindow(LeaderboardWindow m, String txt) {
         MoveJFrame();
         initComponents();
@@ -41,6 +64,11 @@ public class WarningWindow extends javax.swing.JFrame {
         leaderboardWindow = m;
     }
     
+    /**
+     * warning window constructor
+     * @param m - game window jframe
+     * @param txt - string text
+     */
     public WarningWindow(GameWindow m, String txt) {
         MoveJFrame();
         initComponents();
@@ -48,6 +76,11 @@ public class WarningWindow extends javax.swing.JFrame {
         gameWindow = m;
     }
     
+    /**
+     * Warning window constructor
+     * @param m- main window jframe
+     * @param txt - string text
+     */
     public WarningWindow(MainWindow m, String txt) {
         MoveJFrame();
         initComponents();
@@ -55,6 +88,11 @@ public class WarningWindow extends javax.swing.JFrame {
         mainWindow = m;
     }
     
+    /**
+     * wargning window constructor
+     * @param m - skin window jframe
+     * @param txt - String text
+     */
     public WarningWindow(SkinWindow m, String txt) {
         MoveJFrame();
         initComponents();
@@ -154,7 +192,7 @@ public class WarningWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
-        this.dispose();
+        this.dispose();//dispose of window when ok button is selected
     }//GEN-LAST:event_okButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
