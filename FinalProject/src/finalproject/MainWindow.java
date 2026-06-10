@@ -9,13 +9,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Scanner;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import java.util.ArrayList;
-import repo.FileImporter;
 
 public class MainWindow extends javax.swing.JFrame {
 
@@ -137,7 +134,6 @@ public class MainWindow extends javax.swing.JFrame {
         topBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         importGameMenuItem = new javax.swing.JMenuItem();
-        exportGameMenuItem = new javax.swing.JMenuItem();
         newMenu = new javax.swing.JMenu();
         newUserMenuItem = new javax.swing.JMenuItem();
         newGameMenuItem = new javax.swing.JMenu();
@@ -299,9 +295,6 @@ public class MainWindow extends javax.swing.JFrame {
         });
         fileMenu.add(importGameMenuItem);
 
-        exportGameMenuItem.setText("Export Game...");
-        fileMenu.add(exportGameMenuItem);
-
         topBar.add(fileMenu);
 
         newMenu.setText("New");
@@ -424,10 +417,13 @@ public class MainWindow extends javax.swing.JFrame {
         Scanner s = new Scanner("");
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
-            try (InputStream is = new FileInputStream(selectedFile)) {
-
-            } catch (IOException e) {
-                System.err.println("Error reading the file: " + e.getMessage());
+            try {
+                FileInputStream in = new FileInputStream(selectedFile);
+                Scanner s2 = new Scanner(in);
+                String[] data = s2.nextLine().split(",");
+                
+            } catch (FileNotFoundException e) {
+                warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help.");
             }
         }
     }//GEN-LAST:event_importGameMenuItemActionPerformed
@@ -561,7 +557,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenu competitiveMenu;
     private javax.swing.JMenu customizeMenu;
     private javax.swing.JMenu exitMenu;
-    private javax.swing.JMenuItem exportGameMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JLabel firstPlaceLabel;
     private javax.swing.JMenuItem fiveMinMenuItem;
