@@ -22,7 +22,7 @@ public class SandboxWindow extends javax.swing.JFrame {
     private JLabel[][] board = new JLabel[8][8];
     private Piece[][] pieces = new Piece[8][8];
     private FileImporter fileImporter = new FileImporter();
-
+    String customPieceFilePath = "";
     String pieceImg = "Pawn";
 
     //https://stackoverflow.com/questions/16046824/making-a-java-swing-frame-movable-and-setundecorated
@@ -354,10 +354,12 @@ public class SandboxWindow extends javax.swing.JFrame {
         int selectedIndex = numWinsSelect.getSelectedIndex();
         String numWins = numWinsSelect.getItemAt(selectedIndex);
         if (whiteTeamBtn.isSelected()) {
-            pieces[3][4].setSprite(loadImage("/images/" + numWins + "White_" + piece + ".png"));
+            customPieceFilePath = "/images/" + numWins + "White_" + piece + ".png";
+            pieces[3][4].setSprite(loadImage(customPieceFilePath));
             pieces[3][4].setWhite(true);
         } else {
-            pieces[3][4].setSprite(loadImage("/images/" + numWins + "Black_" + piece + ".png"));
+            customPieceFilePath = "/images/" + numWins + "Black_" + piece + ".png";
+            pieces[3][4].setSprite(loadImage(customPieceFilePath));
             pieces[3][4].setWhite(false);
         }
 
@@ -3414,7 +3416,7 @@ public class SandboxWindow extends javax.swing.JFrame {
         //System.out.println(customPiece);
         CustomPiece copiedPiece = customPiece.copy(0,0);
         if (gameWindow == null) {
-            gameWindow = new GameWindow(this, new User("Sandbox 2", 0), new User("Player 1", 0), 300, true, copiedPiece);
+            gameWindow = new GameWindow(this, new User("Sandbox 2", 0), new User("Player 1", 0), 300, true, copiedPiece, customPieceFilePath);
         }
         this.dispose();
         gameWindow.setVisible(true);
