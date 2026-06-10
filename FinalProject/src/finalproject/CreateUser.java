@@ -12,7 +12,9 @@ public class CreateUser extends javax.swing.JFrame {
     private MainWindow mainWindow;
     private WarningWindow warningWindow;
     int numUsers = 0;
-    
+    /**
+     * moves teh JFrame
+     */
     public void MoveJFrame() {
         this.setUndecorated(true);
         MainWindow.FrameDragListener frameDragListener = new MainWindow.FrameDragListener(this);
@@ -23,6 +25,10 @@ public class CreateUser extends javax.swing.JFrame {
         this.setVisible(true);
     }
     
+    /**
+     * creates a new user
+     * @param m - main window
+     */
     public CreateUser(MainWindow m) {
         MoveJFrame();
         initComponents();
