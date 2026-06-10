@@ -42,7 +42,10 @@ public class User {
         return userName;
     }
     
-    
+    /**
+     * Set the username of a user.
+     * @param userName The desired username of the user as a String.
+     */
     public void setUserName(String userName) {
         this.userName = userName;
     }
@@ -55,10 +58,18 @@ public class User {
         return score;
     }
 
+    /**
+     * Set the score of a user.
+     * @param score The desired score of the user as an integer.
+     */
     public void setScore(int score) {
         this.score = score;
     }
     
+    /**
+     * Set the skin of a user.
+     * @param skin The desired skin of the user as an integer.
+     */
     public void setSkin(String skin) {
         this.skin = skin;
     }
