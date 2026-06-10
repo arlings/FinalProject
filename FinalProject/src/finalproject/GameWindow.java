@@ -270,7 +270,8 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
             handleCastlingRookMove(movingPiece, orgCol, newCol, orgRow);
         }
         //if moving piece is a rook it sets moved flag to true to prevent future castling
-        if (movingPiece instanceof Rook rook) {
+        if (movingPiece instanceof Rook) {
+            Rook rook = (Rook) movingPiece;
             rook.setHasMoved(true);
         }
 
@@ -343,7 +344,8 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         }
 
         //if moving piece is a pawn we handle first move and double step eligibility
-        if (movingPiece instanceof Pawn pawn) {
+        if (movingPiece instanceof Pawn) {
+            Pawn pawn = (Pawn) movingPiece;
             //sets pawn first move to false since it just moved
             pawn.setFirstMove(false);
             //if row distance is exactly two squares then pawn is eligible to be captured via enpassant
@@ -358,7 +360,8 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
             for (int c = 0; c < 8; c++) {
                 Piece piece = pieces[r][c];
                 //if the piece is not the one currently moving and is a pawn we clear its flag
-                if (piece != movingPiece && piece instanceof Pawn pawn) {
+                if (piece != movingPiece && piece instanceof Pawn) {
+                    Pawn pawn = (Pawn) piece;
                     //sets enpassant eligible to false since it expired after one turn
                     pawn.setEnPassantEligible(false);
                 }
@@ -578,15 +581,17 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         java.awt.Dimension currentSize = this.getSize();
         if (isSandbox) {
             JOptionPane.showMessageDialog(null, "Sandbox Rules"
-                + "\n1. Left Click to add your custom piece to any tile"
-                + "\n2. Right Click to delete any piece on any tile "
-                + "\n3. Exceptions: Kings cannot be deleted."
-                + "\nSee user manual for more details.");
+                    + "\n1. Select any piece from the piece select side bar to add it"
+                    + "\n2. Right click to add a piece, left click to remove a piece"
+                    + "\n3. To start the game, there must be EXACTLY 1 white and 1 black king on the board"
+                    + "\nHave fun customising the board and using your custom piece!");
+            
+            
             customPieceBtn.setIcon(new ImageIcon(customPiece.getSprite()));
         } else {
             pieces = loadPieces(user1.getSkin(), user2.getSkin());
             this.remove(pieceSelectPanel);
-            this.setSize(currentSize.width - 135, currentSize.height);
+            this.setSize(currentSize.width - 145, currentSize.height);
         }
         this.revalidate();
         this.repaint();
@@ -821,9 +826,13 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         for (int row = 0; row < 8; row++) {
             //loops through all board columns to synchronize graphic frame boxes
             for (int col = 0; col < 8; col++) {
-
                 Piece piece = pieces[row][col];
-
+                if (piece instanceof CustomPiece) {
+                    board[row][col].setOpaque(true);
+                    board[row][col].setBackground(new Color(255, 255, 180)); // light yellow
+                } else {
+                    board[row][col].setOpaque(false);
+                }
                 //if a piece sits on this array slot it pulls its sprite image file
                 if (piece != null) {
                     BufferedImage img = piece.getSprite();
@@ -3911,9 +3920,14 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
             }
         }
         
+        java.awt.Dimension currentSize = this.getSize();
         if(isSandbox && !(whiteKings == 1 && blackKings == 1)){
             JOptionPane.showMessageDialog(null, "Please Ensure there is exactly 1 White King and 1 Black King", "Error!", JOptionPane.ERROR_MESSAGE);
         }else{
+            this.remove(pieceSelectPanel);
+            this.setSize(currentSize.width - 145, currentSize.height);
+            this.revalidate();
+            this.repaint();
             startTimer();
             startGameBtn.setEnabled(false);
         }

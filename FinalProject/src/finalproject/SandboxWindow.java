@@ -3017,7 +3017,7 @@ public class SandboxWindow extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>                        
+    }                       
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
@@ -3475,7 +3475,7 @@ public class SandboxWindow extends javax.swing.JFrame {
             customPieceFilePath = "/images/DefaultWhite_Pawn.png";
         }
         if (gameWindow == null) {
-            gameWindow = new GameWindow(this, new User("Sandbox 2", 0), new User("Player 1", 0), 300, true, copiedPiece, customPieceFilePath);
+            gameWindow = new GameWindow(this, new User("Sandbox 2", 0), new User("Player 1", 0), 3599, true, copiedPiece, customPieceFilePath);
         }
         this.dispose();
         gameWindow.setVisible(true);
