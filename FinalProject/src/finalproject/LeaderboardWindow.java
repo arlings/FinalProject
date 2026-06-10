@@ -20,82 +20,41 @@ public class LeaderboardWindow extends javax.swing.JFrame {
     }
     
     public void leaderboardSort() {
-        String baseDir = System.getProperty("user.dir");
-        java.io.File usersFile = new java.io.File(baseDir, "Users.txt");
-        java.io.File leaderboardFile = new java.io.File(baseDir, "Leaderboard.txt");
-
-        // Initialize to prevent NullPointerExceptions later in the method
-        String[] sLeaderboard = new String[0];
-        User[] leaderboard;
-
-        // Phase 1: Read and verify data entirely in system memory first
         try {
-            if (!usersFile.exists() || usersFile.length() == 0) {
-                // Null check the list component before using it
-                if (leaderboardList != null) {
-                    leaderboardList.setListData(new String[]{"Users file is empty."});
-                }
-                return;
+            FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
+            FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/Leaderboard.txt", true);
+            FileOutputStream out2 = new FileOutputStream(System.getProperty("user.dir") + "/Leaderboard.txt", false);
+            Scanner s = new Scanner(in);
+            String[] items = s.nextLine().split(":");
+            String[] userData = new String[items.length];
+            User[] leaderboard = new User[items.length];
+            int[] scores = new int[items.length];
+            for (int i = 0; i < items.length; i++) {
+                int wins = Integer.parseInt(items[i].split(",")[1]);
+                int losses = Integer.parseInt(items[i].split(",")[3]);
+                scores[i] = (wins - losses);
+                leaderboard[i] = new User(items[i].split(",")[0], scores[i]);
             }
-
-            try (FileInputStream in = new FileInputStream(usersFile);
-                Scanner s = new Scanner(in)) {
-
-                if (!s.hasNextLine()) return;
-                String line = s.nextLine().trim();
-                if (line.isEmpty()) return;
-
-                String[] items = line.split(":");
-                leaderboard = new User[items.length];
-                int[] scores = new int[items.length];
-
-                for (int i = 0; i < items.length; i++) {
-                    String[] parts = items[i].split(",");
-                    if (parts.length < 4) continue; 
-
-                    int wins = Integer.parseInt(parts[1].trim());
-                    int losses = Integer.parseInt(parts[3].trim());
-
-                    scores[i] = (wins - losses);
-                    leaderboard[i] = new User(parts[0].trim(), scores[i]);
-                }
-            }
-
             mergeSort(leaderboard, 0, leaderboard.length - 1);
-
-            sLeaderboard = new String[leaderboard.length];
+            String[] sLeaderboard = new String[leaderboard.length];
             for (int i = 0; i < leaderboard.length; i++) {
                 sLeaderboard[i] = "#" + (i + 1) + " " + leaderboard[i].toString();
             }
-
-        } catch (Exception e) {
+            leaderboardList.setListData(sLeaderboard); 
+            try {
+                out2.write("".getBytes());
+                for (int i = 0; i < sLeaderboard.length; i++) {
+                    out.write(sLeaderboard[i].getBytes());
+                }
+            } catch(IOException e) {
+                warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help.");    
+                warningWindow.setVisible(true);
+            }
+        } catch (FileNotFoundException e) {
             warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help.");
             warningWindow.setVisible(true);    
-            return; 
         }
-
-        // Phase 2: Save everything on a single continuous line (Forces line break removal)
-        try (FileOutputStream out = new FileOutputStream(leaderboardFile, false)) {
-            StringBuilder singleLineData = new StringBuilder();
-            for (int i = 0; i < sLeaderboard.length; i++) {
-                String cleanEntry = sLeaderboard[i].replace("\n", "").replace("\r", "");
-                singleLineData.append(cleanEntry);
-            }
-            out.write(singleLineData.toString().getBytes());
-        } catch (IOException e) {
-            warningWindow = new WarningWindow(this, "Could not save sorted rankings to Leaderboard.txt.");
-            warningWindow.setVisible(true);
-        }
-
-        // Safety check prints: Only print if items actually exist in the array
-        if (sLeaderboard.length > 0) System.out.println("1st: " + sLeaderboard[0]);
-        if (sLeaderboard.length > 1) System.out.println("2nd: " + sLeaderboard[1]);
-
-        leaderboardList.setListData(sLeaderboard);
-        leaderboardList.revalidate();
-        leaderboardList.repaint();
     }
-
 
     public static void mergeSort(User[] arr, int l, int r) {
         if (l < r) {
