@@ -479,7 +479,8 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_helpMenuMouseClicked
 
     private void exitMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMenuMouseClicked
-        this.dispose();
+        System.exit(0);
+        
     }//GEN-LAST:event_exitMenuMouseClicked
 
     private void customizeMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customizeMenuMouseClicked
