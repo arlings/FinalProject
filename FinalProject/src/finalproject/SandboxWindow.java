@@ -3416,8 +3416,9 @@ public class SandboxWindow extends javax.swing.JFrame {
         if (gameWindow == null) {
             gameWindow = new GameWindow(this, new User("Sandbox 2", 0), new User("Player 1", 0), 300, true, copiedPiece);
         }
-        gameWindow.setVisible(true);
         this.dispose();
+        gameWindow.setVisible(true);
+        
     }//GEN-LAST:event_startGameBtnActionPerformed
 
 
