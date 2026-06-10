@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class SkinWindow extends javax.swing.JFrame {
     
     private MainWindow mainWindow;
+    private WarningWindow warningWindow;
     
     // https://stackoverflow.com/questions/16046824/making-a-java-swing-frame-movable-and-setundecorated
     public void MoveJFrame() {
@@ -200,9 +201,9 @@ public class SkinWindow extends javax.swing.JFrame {
             } catch (Exception e) {
                 System.out.print(e);
             }
-        } catch (FileNotFoundException e) {
-            
-        }
+        } catch (Exception e) {
+            warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help.");
+        } 
         this.dispose();
     }//GEN-LAST:event_exitButtonActionPerformed
 

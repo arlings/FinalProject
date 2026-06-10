@@ -71,8 +71,9 @@ public class MainWindow extends javax.swing.JFrame {
                 }
             } catch(IOException e) {
                 warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help.");    
+                warningWindow.setVisible(true);   
             }
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
             warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help.");
             warningWindow.setVisible(true);    
         }
@@ -424,6 +425,7 @@ public class MainWindow extends javax.swing.JFrame {
                 
             } catch (FileNotFoundException e) {
                 warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help.");
+                warningWindow.setVisible(true);   
             }
         }
     }//GEN-LAST:event_importGameMenuItemActionPerformed
