@@ -610,7 +610,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         } else {
             pieces = loadPieces(user1.getSkin(), user2.getSkin());
             this.remove(pieceSelectPanel);
-            this.setSize(currentSize.width - 135, currentSize.height);
+            this.setSize(currentSize.width - 125, currentSize.height);
         }
         this.revalidate();
         this.repaint();
@@ -3951,7 +3951,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
             JOptionPane.showMessageDialog(null, "Please Ensure there is exactly 1 White King and 1 Black King", "Error!", JOptionPane.ERROR_MESSAGE);
         } else {
             this.remove(pieceSelectPanel);
-            this.setSize(currentSize.width - 135, currentSize.height);
+            this.setSize(currentSize.width - 125, currentSize.height);
             this.revalidate();
             this.repaint();
             startTimer();
