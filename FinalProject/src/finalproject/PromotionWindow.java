@@ -1,3 +1,8 @@
+/*
+A Zalli, L Necakov, N Wang
+May 21- June 10
+A window the user will see once they promote their pawn. They can select most pieces to promote to.
+ */
 package finalproject;
 
 public class PromotionWindow extends javax.swing.JFrame {
@@ -20,7 +25,13 @@ public class PromotionWindow extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
-
+    
+    /**
+     * The constructor for the promotion window, coming from GameWindow.
+     * @param m The game window the promotion window is being created from.
+     * @param user1 User1 playing the chess game
+     * @param user2 User2 playing the chess game
+     */
     public PromotionWindow(GameWindow m, User user1, User user2) {
         MoveJFrame();
         initComponents();
@@ -197,6 +208,7 @@ public class PromotionWindow extends javax.swing.JFrame {
         gameWindow.fixBoardAfterPromotion(col, row, "Queen", promotionIsWhite, hiddenInfo.getText().split(",")[0], hiddenInfo.getText().split(",")[1]);
         this.setVisible(false);
         gameWindow.setVisible(true);
+        // When the user promotes to a queen, replace their pawn with a queen at the exact same position in the same turn
     }//GEN-LAST:event_queenPromotionBtnActionPerformed
 
     private void bishopPromotionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bishopPromotionBtnActionPerformed
@@ -208,6 +220,7 @@ public class PromotionWindow extends javax.swing.JFrame {
         }
         this.setVisible(false);
         gameWindow.setVisible(true);
+        // When the user promotes to a bishop, replace their pawn with a bishop at the exact same position in the same turn
     }//GEN-LAST:event_bishopPromotionBtnActionPerformed
 
     private void knightPromotionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_knightPromotionBtnActionPerformed
@@ -217,6 +230,7 @@ public class PromotionWindow extends javax.swing.JFrame {
         gameWindow.fixBoardAfterPromotion(col, row, "Knight", promotionIsWhite, hiddenInfo.getText().split(",")[0], hiddenInfo.getText().split(",")[1]);
         PromotionWindow.this.setVisible(false);
         gameWindow.setVisible(true);
+        // When the user promotes to a knight, replace their pawn with a knight at the exact same position in the same turn
     }//GEN-LAST:event_knightPromotionBtnActionPerformed
 
     private void rookPromotionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rookPromotionBtnActionPerformed
@@ -226,6 +240,7 @@ public class PromotionWindow extends javax.swing.JFrame {
         gameWindow.fixBoardAfterPromotion(col, row, "Rook", promotionIsWhite, hiddenInfo.getText().split(",")[0], hiddenInfo.getText().split(",")[1]);
         PromotionWindow.this.setVisible(false);
         gameWindow.setVisible(true);
+        // When the user promotes to a rook, replace their pawn with a rook at the exact same position in the same turn
     }//GEN-LAST:event_rookPromotionBtnActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

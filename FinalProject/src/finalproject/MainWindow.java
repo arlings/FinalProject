@@ -1,3 +1,8 @@
+/*
+A Zalli, L Necakov, N Wang
+May 21- June 10
+The splash pane that the user is introduced to once they run the JAR file.
+ */
 package finalproject;
 
 import static finalproject.LeaderboardWindow.mergeSort;

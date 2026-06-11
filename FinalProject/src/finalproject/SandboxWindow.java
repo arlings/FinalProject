@@ -49,9 +49,9 @@ public class SandboxWindow extends javax.swing.JFrame {
     }
 
     /**
-     * sandbox window constructor
+     * Sandbox window constructor
      *
-     * @param m - main window
+     * @param m The main window the sandbox window is being created from
      */
     public SandboxWindow(MainWindow m) {
         MoveJFrame();
@@ -62,7 +62,7 @@ public class SandboxWindow extends javax.swing.JFrame {
     }
 
     /**
-     * update the board
+     * Update the board based on the current state of the pieces
      */
     private void updateBoardUI() {
         //loops through all board rows to synchronize graphic frame boxes
@@ -94,60 +94,59 @@ public class SandboxWindow extends javax.swing.JFrame {
     }
 
     /**
-     * get if there is a green dot icon
+     * Checks if the given icon represents a green‑dot indicator
      *
-     * @param icon- the icon
-     * @return - true if there is an icon and false otherwise
+     * @param icon the icon to inspect
+     * @return true if the icon exists and its description matches "GREEN_DOT"
      */
     private boolean isGreenDotIcon(Icon icon) {
         if (icon == null) {
             return false;
         }
         ImageIcon dot = (ImageIcon) icon;
-        return "GREEN_DOT".equals(dot.getDescription()); //AI
+        return "GREEN_DOT".equals(dot.getDescription());
     }
 
     /**
-     * overlay images
+     * Overlays a dot image on top of a piece sprite
      *
-     * @param piece - the piece
-     * @param dot - the dot image that is the overlayed image
-     * @return - image with the dot on top
+     * @param piece the piece whose sprite will be used as the base image
+     * @param dot the dot image to overlay on top of the piece
+     * @return an ImageIcon containing the combined base sprite and dot overlay
      */
     private ImageIcon overlayImages(Piece piece, BufferedImage dot) {
 
-        //if piece object is null it just prints the plain dot indicator image
+        // If no piece exists, return the dot alone
         if (piece == null) {
             return new ImageIcon(dot);
         }
 
         BufferedImage base = piece.getSprite();
 
-        //creates container canvas matching width and height dimensions of base piece image
+        // Create a new transparent canvas matching the piece sprite size
         BufferedImage combined = new BufferedImage(
                 base.getWidth(),
                 base.getHeight(),
                 BufferedImage.TYPE_INT_ARGB);
 
-        //draws piece sprite onto canvas first then paints indicator dot directly on top
+        // Draw the piece first, then the dot on top
         java.awt.Graphics g = combined.getGraphics();
         g.drawImage(base, 0, 0, null);
         g.drawImage(dot, 0, 0, null);
         g.dispose();
 
-        //returns the merged combined image wrapped inside a swing icon object container
         return new ImageIcon(combined);
     }
 
     /**
-     * set the transparent icon
+     * Sets a transparent placeholder icon on a label
      *
-     * @param label - the jLabel
+     * @param label the JLabel to update
      */
     private void setTransparentIcon(JLabel label) {
         BufferedImage img = loadImage("/images/Transparent_Background.png");
 
-        //assigns transparent asset icon to label or sets null if image fails file stream check
+        // Assign transparent image if loaded successfully, otherwise clear the icon
         if (img != null) {
             label.setIcon(new ImageIcon(img));
         } else {
@@ -156,10 +155,10 @@ public class SandboxWindow extends javax.swing.JFrame {
     }
 
     /**
-     * load the image
+     * Loads an image from the given file path
      *
-     * @param filePath- the file path
-     * @return - the image
+     * @param filePath the path to the image file
+     * @return the loaded BufferedImage, or null if loading fails
      */
     private BufferedImage loadImage(String filePath) {
         try {
@@ -201,70 +200,116 @@ public class SandboxWindow extends javax.swing.JFrame {
     }
 
     /**
-     * show the valid moves
+     * Displays all valid moves for the given piece by placing green‑dot
+     * indicators
      *
-     * @param piece - the piece that to display the valid moves for
+     * @param piece the piece whose valid moves should be highlighted
      */
     private void showValidMoves(Piece piece) {
+
+        // Clear all previous indicators by resetting every board square to transparent
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
                 setTransparentIcon(board[row][col]);
             }
         }
+
+        // Refresh the board before drawing new indicators
         updateBoardUI();
+
+        // Get the valid moves for the custom piece
         ArrayList<Move> validMoves = ((CustomPiece) piece).getValidMoves(pieces);
+
+        // Load the green dot image used to mark valid squares
         BufferedImage dot = loadImage("/images/LightGreenPicture.png");
 
+        // Place a green dot icon on each valid move square
         for (Move move : validMoves) {
             int r = move.getRowNum();
             int c = move.getColumnNum();
+
             ImageIcon dotIcon = new ImageIcon(dot);
-            dotIcon.setDescription("GREEN_DOT");
+            dotIcon.setDescription("GREEN_DOT"); // used to identify dot icons later
+
             board[r][c].setIcon(dotIcon);
         }
     }
 
+    /**
+     * Updates movement rules when a preset button is toggled
+     *
+     * @param preset the movement preset name
+     * @param button the UI button that was clicked
+     */
     private void updateMoves(String preset, JRadioButton button) {
+
+        // The custom piece being edited always lives at (3,4) in sandbox mode
         CustomPiece customPiece = (CustomPiece) pieces[3][4];
 
-        if (button.isSelected()) { //if button is being selected
-            customPiece.addMoveRules(preset); //add rule
-        } else { //if button is being deselected
-            customPiece.removeMoveRules(preset); //remove rule
+        if (button.isSelected()) {
+            // Button turned ON → add the movement rule
+            customPiece.addMoveRules(preset);
+        } else {
+            // Button turned OFF → remove the movement rule
+            customPiece.removeMoveRules(preset);
         }
+
+        // Refresh the board to show updated valid moves
         showValidMoves(customPiece);
     }
 
+    /**
+     * Syncs pawn movement buttons between the global pawn toggle and the two
+     * local pawn options
+     *
+     * @param isGlobalBtn true if the global pawn button was clicked, false if a
+     * local button was clicked
+     */
     private void checkPawnButtons(boolean isGlobalBtn) {
-        if (isGlobalBtn) { //if user clicked the global pawn button
-            boolean state = pawnBtn.isSelected(); //gets whether the pawn button was selected or deselected
-            pawnMoveBtn.setSelected(state); //sets the local move button to global status
-            pawnCaptureBtn.setSelected(state); //sets the local capture button to global status
-        } else { //if the user clicked a local pawn button
-            if (pawnMoveBtn.isSelected() && pawnCaptureBtn.isSelected()) { //checks if both local buttons are selected
-                pawnBtn.setSelected(true); //selects global button
-            } else { //if not all local buttons are selected
-                pawnBtn.setSelected(false); //deselects global button
+
+        if (isGlobalBtn) {
+            // User clicked the global Pawn button, mirror its state to both local buttons
+            boolean state = pawnBtn.isSelected();
+            pawnMoveBtn.setSelected(state);
+            pawnCaptureBtn.setSelected(state);
+
+        } else {
+            if (pawnMoveBtn.isSelected() && pawnCaptureBtn.isSelected()) {
+                pawnBtn.setSelected(true);
+            } else {
+                pawnBtn.setSelected(false);
             }
         }
     }
 
+    /**
+     * Syncs knight movement buttons between the global knight toggle and all
+     * eight knight jump buttons
+     *
+     * @param isGlobalBtn true if the global knight button was clicked, false if
+     * a local button was clicked
+     */
     private void checkKnightButtons(boolean isGlobalBtn) {
-        JRadioButton[] knightButtons = { //instantiates array for check logic
+
+        // All eight knight jump buttons grouped for easy iteration
+        JRadioButton[] knightButtons = {
             knightTopLeftHorzBtn, knightTopRightHorzBtn,
             knightBottomLeftHorzBtn, knightBottomRightHorzBtn,
             knightTopLeftVertBtn, knightTopRightVertBtn,
-            knightBottomLeftVertBtn, knightBottomRightVertBtn};
+            knightBottomLeftVertBtn, knightBottomRightVertBtn
+        };
 
-        if (isGlobalBtn) { //if user clicked the global knight button
+        if (isGlobalBtn) {
+            // Global Knight button clicked, set all local buttons to match its state
             boolean state = knightBtn.isSelected();
-            for (JRadioButton btn : knightButtons) { //sync all local buttons
+            for (JRadioButton btn : knightButtons) {
                 btn.setSelected(state);
-                //optionally trigger rule logic for every button here if needed
             }
-        } else { //if the user clicked a local knight button
+
+        } else {
+            // Local knight button clicked, global button is selected only if ALL locals are selected
             boolean allSelected = true;
-            for (JRadioButton btn : knightButtons) { //sync the global button
+            for (JRadioButton btn : knightButtons) {
                 if (!btn.isSelected()) {
                     allSelected = false;
                     break;
@@ -274,29 +319,51 @@ public class SandboxWindow extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Syncs bishop movement buttons between the global bishop toggle and the
+     * four diagonal bishop buttons
+     *
+     * @param isGlobalBtn true if the global bishop button was clicked, false if
+     * a local button was clicked
+     */
     private void checkBishopButtons(boolean isGlobalBtn) {
-        JRadioButton[] bishopButtons = { //instantiates array to use later for checking
-            bishopTopLeftBtn, bishopTopRightBtn,
-            bishopBottomLeftBtn, bishopBottomRightBtn};
 
-        if (isGlobalBtn) { //if user clicked the global bishop button
-            boolean state = bishopBtn.isSelected(); //gets whether the bishop button was selected or deselected
-            for (JRadioButton btn : bishopButtons) { //loops through all local bishop buttons
-                btn.setSelected(state); //sets them the same status as the global button
+        // Four bishop direction buttons
+        JRadioButton[] bishopButtons = {
+            bishopTopLeftBtn, bishopTopRightBtn,
+            bishopBottomLeftBtn, bishopBottomRightBtn
+        };
+
+        if (isGlobalBtn) {
+            // Global Bishop button clicked, set all local buttons to match its state
+            boolean state = bishopBtn.isSelected();
+            for (JRadioButton btn : bishopButtons) {
+                btn.setSelected(state);
             }
-        } else { //if the user clicked a local bishop button
-            boolean allSelected = true; //boolean tracker for if all the local are all selected, asumes true
-            for (JRadioButton btn : bishopButtons) { //loops through all local bishop buttons
-                if (!btn.isSelected()) { //if the button is not selected
-                    allSelected = false; //sets boolean tracker to false
-                    break; //stops the loop
+
+        } else {
+            // Local bishop button clicked, global button is selected only if ALL locals are selected
+            boolean allSelected = true;
+            for (JRadioButton btn : bishopButtons) {
+                if (!btn.isSelected()) {
+                    allSelected = false;
+                    break;
                 }
             }
-            bishopBtn.setSelected(allSelected); //sets the global button based on if all the local buttons are selected
+            bishopBtn.setSelected(allSelected);
         }
+
+        // Queen = Rook + Bishop, update queen button automatically
         queenBtn.setSelected(rookBtn.isSelected() && bishopBtn.isSelected());
     }
 
+    /**
+     * Syncs rook movement buttons between the global rook toggle and the four
+     * rook direction buttons
+     *
+     * @param isGlobalBtn true if the global rook button was clicked, false if a
+     * local button was clicked
+     */
     private void checkRookButtons(boolean isGlobalBtn) {
         JRadioButton[] rookButtons = { //instantiates array to use later for checking
             rookUpBtn, rookDownBtn,
@@ -320,6 +387,10 @@ public class SandboxWindow extends javax.swing.JFrame {
         queenBtn.setSelected(rookBtn.isSelected() && bishopBtn.isSelected());
     }
 
+    /**
+     * Syncs queen movement with rook + bishop presets Selecting Queen enables
+     * all rook and bishop directions.
+     */
     private void checkQueenButton() {
         if (queenBtn.isSelected()) {//if queen button is selected
             //enable all rook and bishop buttons using existing logic
@@ -358,24 +429,48 @@ public class SandboxWindow extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Handles board clicks for adding/removing custom movement offsets
+     *
+     * @param row clicked row
+     * @param col clicked column
+     */
     private void handleClick(int row, int col) {
+
+        // The custom piece being edited always lives at (3,4)
         CustomPiece customPiece = (CustomPiece) pieces[3][4];
+
+        // Compute movement offset relative to the custom piece
         int dx = row - customPiece.getRowNum();
         int dy = col - customPiece.getColumnNum();
+
         if (isKnightMove(dx, dy)) {
+            // Knight move, toggle knight jump rule
             toggleKnightMove(customPiece, dx, dy);
+
         } else {
+            // Non‑knight move, toggle custom jump rule
             boolean removed = customPiece.removeMoveRule(dx, dy);
             if (!removed) {
                 customPiece.addMoveRules(dx, dy);
             }
         }
+
+        // Sync buttons and show new valid moves
         syncKnightButtons(customPiece);
         checkKnightButtons(false);
         showValidMoves(customPiece);
     }
 
+    /**
+     * Toggles a knight move rule on or off
+     *
+     * @param piece the custom piece
+     * @param dx row offset
+     * @param dy column offset
+     */
     private void toggleKnightMove(CustomPiece piece, int dx, int dy) {
+        // If the move already exists remove it, otherwise add it
         if (piece.hasKnight(dx, dy)) {
             piece.removeKnightMove(dx, dy);
         } else {
@@ -383,7 +478,15 @@ public class SandboxWindow extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Checks if the given offset is a knight move
+     *
+     * @param dx row offset
+     * @param dy column offset
+     * @return true if the offset matches a knight pattern
+     */
     private boolean isKnightMove(int dx, int dy) {
+        // All eight possible knight jumps
         return (dx == 2 && dy == -1)
                 || (dx == 2 && dy == 1)
                 || (dx == -2 && dy == -1)
@@ -394,21 +497,38 @@ public class SandboxWindow extends javax.swing.JFrame {
                 || (dx == -1 && dy == 2);
     }
 
+    /**
+     * Updates knight direction buttons to match the custom piece rules
+     *
+     * @param piece the custom piece
+     */
     private void syncKnightButtons(CustomPiece piece) {
+
+        // Vertical knight jumps
         knightTopLeftVertBtn.setSelected(piece.hasKnight(2, -1));
         knightTopRightVertBtn.setSelected(piece.hasKnight(2, 1));
         knightBottomLeftVertBtn.setSelected(piece.hasKnight(-2, -1));
         knightBottomRightVertBtn.setSelected(piece.hasKnight(-2, 1));
 
+        // Horizontal knight jumps
         knightTopLeftHorzBtn.setSelected(piece.hasKnight(1, -2));
         knightTopRightHorzBtn.setSelected(piece.hasKnight(1, 2));
         knightBottomLeftHorzBtn.setSelected(piece.hasKnight(-1, -2));
         knightBottomRightHorzBtn.setSelected(piece.hasKnight(-1, 2));
     }
 
+    /**
+     * Changes the custom piece sprite based on team and piece type
+     *
+     * @param piece the piece name to load
+     */
     public void changeImgIcon(String piece) {
+
+        // Get selected win count prefix
         int selectedIndex = numWinsSelect.getSelectedIndex();
         String numWins = numWinsSelect.getItemAt(selectedIndex);
+
+        // Build file path based on team
         if (whiteTeamBtn.isSelected()) {
             customPieceFilePath = "/images/" + numWins + "White_" + piece + ".png";
             pieces[3][4].setSprite(loadImage(customPieceFilePath));
@@ -419,6 +539,7 @@ public class SandboxWindow extends javax.swing.JFrame {
             pieces[3][4].setWhite(false);
         }
 
+        // Refresh board display
         updateBoardUI();
     }
 

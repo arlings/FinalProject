@@ -1,7 +1,7 @@
 /*
 L Necakov, Arlind Zalli, Neo Wang
 May 21- June 10
-Game window of chess
+Game window of chess, for the competitive pane.
  */
 package finalproject;
 

@@ -1,3 +1,8 @@
+/*
+A Zalli, L Necakov, N Wang
+May 21- June 10
+A window where the user can get help if they encounter any bugs.
+ */
 package finalproject;
 
 public class HelpWindow extends javax.swing.JFrame {

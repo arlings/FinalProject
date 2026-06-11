@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package pieces;
 
 import java.awt.image.BufferedImage;

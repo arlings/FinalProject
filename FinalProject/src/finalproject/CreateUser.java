@@ -1,7 +1,7 @@
 /*
 A Zalli, L Necakov, N Wang
 May 21- June 10
-A window where the user can create
+A window where the user can create their own user with a username and statistics associated with it
  */
 package finalproject;
 

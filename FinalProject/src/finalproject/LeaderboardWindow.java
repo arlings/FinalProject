@@ -1,3 +1,8 @@
+/*
+A Zalli, L Necakov, N Wang
+May 21- June 10
+A window where the user can view the other users on the leaderboard based on points.
+ */
 package finalproject;
 
 import java.io.FileInputStream;

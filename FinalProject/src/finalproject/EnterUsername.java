@@ -1,3 +1,8 @@
+/*
+A Zalli, L Necakov, N Wang
+May 21- June 10
+A window where the user can enter their username to be added to a competitive game.
+ */
 package finalproject;
 
 import java.io.FileInputStream;
