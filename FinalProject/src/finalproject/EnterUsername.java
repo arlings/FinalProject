@@ -196,7 +196,7 @@ public class EnterUsername extends javax.swing.JFrame {
                                         new User(users[1], Integer.parseInt(p2Data[1]) - Integer.parseInt(p2Data[3]), p2Data[4]), // user2 slot = Player 2
                                         new User(users[0], Integer.parseInt(p1Data[1]) - Integer.parseInt(p1Data[3]), p1Data[4]), // user1 slot = Player 1
                                         chosenTime, false);
-
+                                
                                 gameWindow.setVisible(true);
                                 s.close();
                                 this.dispose();

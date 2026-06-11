@@ -56,6 +56,11 @@ public class SandboxWindow extends javax.swing.JFrame {
     public SandboxWindow(MainWindow m) {
         MoveJFrame();
         initComponents();
+        java.awt.Dimension currentSize = this.getSize();
+        this.remove(startGameBtn);
+        this.setSize(currentSize.width - 130, currentSize.height);
+        this.revalidate();
+        this.repaint();
         mainWindow = m;
         board = loadBoard();
         startGame();
@@ -3138,7 +3143,16 @@ public class SandboxWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void startSandboxGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startSandboxGameButtonActionPerformed
-
+        CustomPiece customPiece = (CustomPiece) pieces[3][4];
+        CustomPiece copiedPiece = customPiece.copy(0, 0);
+        if (customPieceFilePath.equals("")) {
+            customPieceFilePath = "/images/DefaultWhite_Pawn.png";
+        }
+        if (gameWindow == null) {
+            gameWindow = new GameWindow(this, new User("Sandbox 2", 0), new User("Player 1", 0), 3599, true, copiedPiece, customPieceFilePath);
+        }
+        this.dispose();
+        gameWindow.setVisible(true);
     }//GEN-LAST:event_startSandboxGameButtonActionPerformed
 
     private void G2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G2LabelMousePressed
