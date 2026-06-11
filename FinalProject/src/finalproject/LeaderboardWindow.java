@@ -46,16 +46,16 @@ public class LeaderboardWindow extends javax.swing.JFrame {
     }
 
     /**
-     * sorts the leaderboard in descending order according to their number of
+     * Sorts the leaderboard in descending order according to their number of
      * points(i.e. wins-losses)
      */
     public void leaderboardSort() {
-        try {
+        try { // Try the following code,
             FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
             FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/Leaderboard.txt");
             Scanner s = new Scanner(in);
             String[] items = s.nextLine().split(":");
-            String[] userData = new String[items.length];
+            // Import necessary data and split based on regex of :, storing user data in an array from the Users.txt text file.
             User[] leaderboard = new User[items.length];
             int[] scores = new int[items.length];
             for (int i = 0; i < items.length; i++) {//goes through all the users
@@ -65,11 +65,13 @@ public class LeaderboardWindow extends javax.swing.JFrame {
                 leaderboard[i] = new User(items[i].split(",")[0], scores[i]);
             }
             mergeSort(leaderboard, 0, leaderboard.length - 1);
+            // Merge sort the leaderboard
             String[] sLeaderboard = new String[leaderboard.length];
             for (int i = 0; i < leaderboard.length; i++) {
                 sLeaderboard[i] = "#" + (i + 1) + " " + leaderboard[i].toString();
             }
             leaderboardList.setListData(sLeaderboard);
+            // Update the leaderboard
             try {
                 for (int i = 0; i < sLeaderboard.length; i++) {
                     out.write(sLeaderboard[i].getBytes());
@@ -78,41 +80,74 @@ public class LeaderboardWindow extends javax.swing.JFrame {
                 warningWindow = new WarningWindow(this, "There was an error with the parsing the Users or Leaderboard file. Please see user manual for more help.");
                 warningWindow.setVisible(true);
             }
+            // Rewrite to the leaderboard, informing the user of any errors that may have occured.
 
             s.close();
             in.close();
             out.close();
-        } catch (Exception e) {
+        } catch (Exception e) { // If there is any sort of exception,
             warningWindow = new WarningWindow(this, "There was an error with the location of the Users or Leaderboard file. Please see user manual for more help.");
             warningWindow.setVisible(true);
+            // Inform the user
         }
 
     }
 
+    /**
+     * A method that sorts an array of users, type User.
+     *
+     * @param arr The array of users.
+     * @param l The leftmost point of the array.
+     * @param r The rightmost point of the array.
+     */
     public static void mergeSort(User[] arr, int l, int r) {
         if (l < r) {
             int m = l + (r - l) / 2; // Safe midpoint calculation
+            // Merge sort the left and right side of the array.
             mergeSort(arr, l, m);
             mergeSort(arr, m + 1, r);
+            // Merge the two sides together
             merge(arr, l, m, r);
         }
     }
 
+    /**
+     * Merging method with leftpoint, midpoint, and rightpoint being passed into
+     * the method. This merges two arrays together after swapping some of their
+     * elements based on sort requirements.
+     *
+     * @param arr Array of users
+     * @param l Leftmost point of the array
+     * @param m Midpoint of the array
+     * @param r Rightmost point of the array
+     */
     private static void merge(User[] arr, int l, int m, int r) {
+        // copy left half of the array
         User[] left = Arrays.copyOfRange(arr, l, m + 1);
+
+        // copy right half of the array
         User[] right = Arrays.copyOfRange(arr, m + 1, r + 1);
+
+        // i tracks left, j tracks right, k writes back into arr
         int i = 0, j = 0, k = l;
+
+        // merge while both halves still have elements
         while (i < left.length && j < right.length) {
-            // Descending order: pick larger element
+
+            // pick the larger score first for descending order
             if (left[i].getScore() >= right[j].getScore()) {
                 arr[k++] = left[i++];
             } else {
                 arr[k++] = right[j++];
             }
         }
+
+        // copy any leftover elements from left side
         while (i < left.length) {
             arr[k++] = left[i++];
         }
+
+        // copy any leftover elements from right side
         while (j < right.length) {
             arr[k++] = right[j++];
         }
@@ -271,6 +306,60 @@ public class LeaderboardWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String nameToSearch = jTextField1.getText().trim();
+        String searchResult = "User not found";
+
+        try {
+            // Scanner used to read the entire file as a single line
+            Scanner fileScanner = new Scanner(new FileInputStream("leaderboard.txt"));
+            fileScanner.useDelimiter("\\Z"); // read until end of file
+
+            // Full leaderboard text stored in one string
+            String fullLine = fileScanner.next();
+            fileScanner.close();
+
+            // Split entries by "#" to isolate each user record
+            String[] userEntries = fullLine.split("#");
+
+            // Sort entries alphabetically for binary search
+            Arrays.sort(userEntries, String.CASE_INSENSITIVE_ORDER);
+
+            // Binary search boundaries
+            int left = 0;
+            int right = userEntries.length - 1;
+
+            // Binary search loop
+            while (left <= right) {
+                int mid = (left + right) / 2;
+
+                // Extract only the name portion for comparison
+                String entry = userEntries[mid].trim();
+                String[] parts = entry.split(",");
+                String namePart = parts[0].replaceAll("[0-9 ]", "").trim();
+
+                int compare = namePart.compareToIgnoreCase(nameToSearch);
+
+                if (compare == 0) {
+                    // Matching user found
+                    searchResult = "#" + entry;
+                    left = right + 1; // ends loop without break
+                } else if (compare < 0) {
+                    // Target name is alphabetically later
+                    left = mid + 1;
+                } else {
+                    // Target name is alphabetically earlier
+                    right = mid - 1;
+                }
+            }
+
+        } catch (Exception e) {
+            warningWindow = new WarningWindow(this,
+                    "There was an error with the location of the Users or Leaderboard file. Please see user manual for more help.");
+            warningWindow.setVisible(true);
+        }
+
+        // Display the result in the label
+        jLabel2.setText(searchResult);
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
