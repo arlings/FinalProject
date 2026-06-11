@@ -10,17 +10,20 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class LeaderboardWindow extends javax.swing.JFrame {
-    
+
     private MainWindow mainWindow;
     private WarningWindow warningWindow;
-    
+
     /**
-     * A method designed to move the frame white preventing the user from accessing a hard-coded way to exit the frame.
-     * https://stackoverflow.com/questions/16046824/making-a-java-swing-frame-movable-and-setundecorated was used as a resource to
-     * find a clean way to hide the top menu of the window.
+     * A method designed to move the frame white preventing the user from
+     * accessing a hard-coded way to exit the frame.
+     * https://stackoverflow.com/questions/16046824/making-a-java-swing-frame-movable-and-setundecorated
+     * was used as a resource to find a clean way to hide the top menu of the
+     * window.
      */
     public void MoveJFrame() {
         this.setUndecorated(true);
@@ -66,13 +69,13 @@ public class LeaderboardWindow extends javax.swing.JFrame {
             for (int i = 0; i < leaderboard.length; i++) {
                 sLeaderboard[i] = "#" + (i + 1) + " " + leaderboard[i].toString();
             }
-            leaderboardList.setListData(sLeaderboard); 
+            leaderboardList.setListData(sLeaderboard);
             try {
                 for (int i = 0; i < sLeaderboard.length; i++) {
                     out.write(sLeaderboard[i].getBytes());
                 }
-            } catch(IOException e) {
-                warningWindow = new WarningWindow(this, "There was an error with the parsing the Users or Leaderboard file. Please see user manual for more help.");    
+            } catch (IOException e) {
+                warningWindow = new WarningWindow(this, "There was an error with the parsing the Users or Leaderboard file. Please see user manual for more help.");
                 warningWindow.setVisible(true);
             }
             
@@ -81,7 +84,7 @@ public class LeaderboardWindow extends javax.swing.JFrame {
             out.close();
         } catch (Exception e) {
             warningWindow = new WarningWindow(this, "There was an error with the location of the Users or Leaderboard file. Please see user manual for more help.");
-            warningWindow.setVisible(true);    
+            warningWindow.setVisible(true);
         }
         
     }
@@ -136,11 +139,6 @@ public class LeaderboardWindow extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
 
-        leaderboardList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "placeholder" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         leaderboardList.setOpaque(false);
         jScrollPane1.setViewportView(leaderboardList);
 
@@ -188,7 +186,7 @@ public class LeaderboardWindow extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(loadButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cancelButton)))
                 .addContainerGap())
         );
@@ -227,18 +225,19 @@ public class LeaderboardWindow extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel2))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -268,11 +267,11 @@ public class LeaderboardWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_loadButtonActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        
+
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

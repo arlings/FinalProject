@@ -16,14 +16,16 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class SkinWindow extends javax.swing.JFrame {
-    
+
     private MainWindow mainWindow;
     private WarningWindow warningWindow;
     
     /**
-     * A method designed to move the frame white preventing the user from accessing a hard-coded way to exit the frame.
-     * https://stackoverflow.com/questions/16046824/making-a-java-swing-frame-movable-and-setundecorated was used as a resource to
-     * find a clean way to hide the top menu of the window.
+     * A method designed to move the frame white preventing the user from
+     * accessing a hard-coded way to exit the frame.
+     * https://stackoverflow.com/questions/16046824/making-a-java-swing-frame-movable-and-setundecorated
+     * was used as a resource to find a clean way to hide the top menu of the
+     * window.
      */
     public void MoveJFrame() {
         this.setUndecorated(true);
@@ -34,7 +36,7 @@ public class SkinWindow extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
-    
+
     /**
      * The primary and only constructor for the skin window.
      * @param m The main window of type MainWindow, that flows into the opening of the skin window.
@@ -191,7 +193,7 @@ public class SkinWindow extends javax.swing.JFrame {
             skinDropdown.addItem("10Wins");
         } else if (wins >= 10) { // Otherwise, if the users wins are equal to or exceed 10, add 10 wins to the skin dropdown.
             skinDropdown.addItem("10Wins");
-        } 
+        }
     }//GEN-LAST:event_userDropdownActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
@@ -220,7 +222,7 @@ public class SkinWindow extends javax.swing.JFrame {
             try {
                 out.write(changedFile.getBytes());
             } catch (IOException e) {
-                
+
             }
             
             s.close();
@@ -234,7 +236,7 @@ public class SkinWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_exitButtonActionPerformed
 
     private void skinDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skinDropdownActionPerformed
-        
+
     }//GEN-LAST:event_skinDropdownActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

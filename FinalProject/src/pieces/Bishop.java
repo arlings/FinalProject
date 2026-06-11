@@ -30,6 +30,7 @@ public class Bishop extends AbstractPiece {
 
     /**
      * Get the valid moves for a specific array of pieces of type Piece
+     *
      * @param pieces - 2d array of piece
      * @return - the array list
      */
@@ -47,6 +48,7 @@ public class Bishop extends AbstractPiece {
 
     /**
      * Get the number of instantiated bishops as an integer
+     *
      * @return - the number of bishops
      */
     public static int getNumBishop() {
@@ -55,6 +57,7 @@ public class Bishop extends AbstractPiece {
 
     /**
      * Returns a string that describes the bishops properties.
+     *
      * @return - the String
      */
     public String toString() {

@@ -1,9 +1,8 @@
 /*
-/*
 L Necakov, Arlind Zalli, Neo Wang
 May 21- June 10
 Game window of chess
-*/
+ */
 package finalproject;
 
 import java.awt.Color;
@@ -51,7 +50,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
     public Piece customPiece;
     private String selectedPieceType = "";
     private String customPieceFilePath = "";
-    
+
     private boolean whiteTurn = true;
 
     private int totalTime;
@@ -65,11 +64,13 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
     private int promotionCol;
     private int promotionRow;
     private boolean promotionIsWhite;
-    
+
     /**
-     * A method designed to move the frame white preventing the user from accessing a hard-coded way to exit the frame.
-     * https://stackoverflow.com/questions/16046824/making-a-java-swing-frame-movable-and-setundecorated was used as a resource to
-     * find a clean way to hide the top menu of the window.
+     * A method designed to move the frame white preventing the user from
+     * accessing a hard-coded way to exit the frame.
+     * https://stackoverflow.com/questions/16046824/making-a-java-swing-frame-movable-and-setundecorated
+     * was used as a resource to find a clean way to hide the top menu of the
+     * window.
      */
     public void MoveJFrame() {
         //removes top frame borders and sets custom drag click mouse tracking listeners
@@ -84,6 +85,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
 
     /**
      * get the promotion column
+     *
      * @return - the promotion column
      */
     public int getPromotionCol() {
@@ -92,6 +94,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
 
     /**
      * get the promotion row
+     *
      * @return - the promotion row
      */
     public int getPromotionRow() {
@@ -100,6 +103,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
 
     /**
      * get is the promotion is white
+     *
      * @return - true if white and false if black
      */
     public boolean getPromotionIsWhite() {
@@ -108,6 +112,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
 
     /**
      * Game window constructor
+     *
      * @param m - main window
      * @param user2- user 2
      * @param user1 - user 1
@@ -122,10 +127,11 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         users[1] = user2;
         mainWindow = m;
     }
-    
+
     /**
      * Game Window constructor
-     * @param m - maing window
+     *
+     * @param m - main window
      * @param user2 - user 2
      * @param user1 - user 1
      * @param chosenTime - time of game
@@ -143,12 +149,13 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
 
     /**
      * GameWindow constructor
+     *
      * @param m - sandbox window
      * @param user2 - user 2
      * @param user1 - user 1
      * @param chosenTime- time of game
      * @param isSandbox- if mode is sandbox
-     * @param customPiece - costom piece
+     * @param customPiece - custom piece
      */
     public GameWindow(SandboxWindow m, User user2, User user1, int chosenTime, boolean isSandbox, Piece customPiece, String customPieceFilePath) {
         //starts game setups and sets user labels for sandbox path
@@ -163,6 +170,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
 
     /**
      * Game window constructor
+     *
      * @param m - enter username window
      * @param user2 - user 2
      * @param user1 - user 1
@@ -180,7 +188,8 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
 
     /**
      * updates chess game when clicked
-     * @param row - row 
+     *
+     * @param row - row
      * @param col - col
      */
     private void handleClick(int row, int col) {
@@ -253,6 +262,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
 
     /**
      * moves piece
+     *
      * @param orgPos- original position
      * @param newPos - final position
      */
@@ -295,6 +305,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
 
     /**
      * gets the valid moves
+     *
      * @param piece - a piece
      */
     public void getValidMoves(Piece piece) {
@@ -330,6 +341,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
 
     /**
      * handle enPassant
+     *
      * @param movingPiece- the moving piece
      * @param orgRow- the original row
      * @param orgCol - the original column
@@ -371,6 +383,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
 
     /**
      * handle castling
+     *
      * @param king - king piece
      * @param orgCol - original column
      * @param newCol- new column
@@ -404,6 +417,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
 
     /**
      * check if king is in check
+     *
      * @param king - the king piece
      * @param pieces - 2d array of pieces
      * @return - true if in check and false otherwise
@@ -436,13 +450,14 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
 
     /**
      * find the king
+     *
      * @param pieces - 2d array of pieces
      * @param isWhite - true if on white team and false if on black team
      * @return - king piece
      */
     private Piece findKing(Piece pieces[][], boolean isWhite) {
         //loops rows of the passed board matrix array
-        
+
         for (int r = 0; r < pieces.length; r++) {
             //loops columns of the passed board matrix array
             for (int c = 0; c < pieces[0].length; c++) {
@@ -459,6 +474,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
 
     /**
      * check if a move is legal
+     *
      * @param orgPos - original position
      * @param futurePos - future position
      * @param isWhite - team of the piece
@@ -518,6 +534,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
 
     /**
      * copy the board
+     *
      * @param original- original 2d array board
      * @return - copied 2d array board
      */
@@ -536,10 +553,11 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
 
     /**
      * check if a square is attacked
+     *
      * @param row - row
      * @param col- col
      * @param isKingWhite- boolean of if king is white or not
-     * @return 
+     * @return
      */
     private boolean isSquareAttacked(int row, int col, boolean isKingWhite) {
         boolean opponentColor = !isKingWhite;
@@ -570,6 +588,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
 
     /**
      * start the game
+     *
      * @param user1 - user 1
      * @param user2- user 2
      * @param chosenTime - chosen time
@@ -586,13 +605,12 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
                     + "\n3. To start the game, there must be EXACTLY 1 white and 1 black king on the board"
                     + "\n4. Custom Pieces will be highlighted yellow for clarity while playing"
                     + "\nHave fun customising the board and using your custom piece!");
-            
-            
+
             customPieceBtn.setIcon(new ImageIcon(customPiece.getSprite()));
         } else {
             pieces = loadPieces(user1.getSkin(), user2.getSkin());
             this.remove(pieceSelectPanel);
-            this.setSize(currentSize.width - 145, currentSize.height);
+            this.setSize(currentSize.width - 135, currentSize.height);
         }
         this.revalidate();
         this.repaint();
@@ -615,6 +633,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
 
     /**
      * reset the game
+     *
      * @param user1 - user 1
      * @param user2 - user 2
      */
@@ -636,9 +655,10 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         whiteAdvantageLbl.setText("+0");
         blackAdvantageLbl.setText("+0");
     }
-    
+
     /**
      * load the pieces
+     *
      * @param blackSkin- black skin
      * @param whiteSkin- white skin
      * @return - 2d array of pieces
@@ -680,26 +700,10 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         //returns the fully configured initial piece position matrix array
         return pieces;
     }
-    
+
     /**
-     * exporting game in txt form
-     * @param blackSkin - black skins
-     * @param whiteSkin - white skins
-     * @return - 2d array of pieces
-     */
-    private Piece[][] export(String blackSkin, String whiteSkin) {
-        String text = "";
-        for (int i = 0; i < 8; i++) {
-            for (int ii = 0; ii < 8; ii++) {
-                text += pieces[i][ii].getColumnNum() + "," 
-                        + pieces[i][ii].getRowNum();
-            }
-        }
-        return pieces;
-    }
-    
-    /**
-     * load the board
+     * Load the board in based on the jLabels.
+     *
      * @return - the board
      */
     private JLabel[][] loadBoard() {
@@ -733,10 +737,11 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
     }
 
     /**
-     * check if the king is in checkmate
-     * @param king - the king
-     * @param isWhiteTurn- if it is the white teams turn
-     * @return - true if in check mate and false otherwise
+     * Check if the king is in checkmate.
+     *
+     * @param king the king as an object of type King
+     * @param isWhiteTurn if it is the white teams turn
+     * @return true if in check mate and false otherwise
      */
     private boolean isCheckmate(Piece king, boolean isWhiteTurn) {
         //if king reference is missing or if king is not currently checked it is not checkmate
@@ -766,9 +771,10 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         //returns true if king is in check and absolutely no legal move stops the threat
         return true;
     }
-    
+
     /**
      * check if it is a stalemate
+     *
      * @param king - the king
      * @param isWhiteTurn - if it is white's turn
      * @return - true if it is a stalemate and false otherwise
@@ -801,10 +807,10 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         //returns true if king is in check and absolutely no legal move stops the threat
         return true;
     }
-    
-    
+
     /**
      * maintains the red in when king is in check
+     *
      * @param e - action event
      */
     public void actionPerformed(ActionEvent e) {
@@ -857,6 +863,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
 
     /**
      * overlay images
+     *
      * @param piece -the piece
      * @param dot - the dot image
      * @return - image icon
@@ -888,6 +895,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
 
     /**
      * set the jlabel to transparent
+     *
      * @param label - the JLabel
      */
     private void setTransparentIcon(JLabel label) {
@@ -903,6 +911,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
 
     /**
      * load the image
+     *
      * @param filePath- the file path
      * @return - the image
      */
@@ -920,9 +929,11 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
 
     /**
      * Checks if it is the current player piece
+     *
      * @param row- the row
      * @param col- the column
-     * @return - true if spot is filled and color field matches current active turn flag
+     * @return - true if spot is filled and color field matches current active
+     * turn flag
      */
     private boolean isCurrentPlayerPiece(int row, int col) {
         Piece p = pieces[row][col];
@@ -932,6 +943,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
 
     /**
      * Set the player names on the jLabels
+     *
      * @param user1 - user 1
      * @param user2 - user 2
      */
@@ -947,14 +959,14 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
      * start the timer
      */
     private void startTimer() {
-        
+
         //creates countdown timer task executing once every one thousand milliseconds
         matchTimer = new Timer(1000, new ActionListener() {
             /**
              * action when the user clicks on a piece
              */
             public void actionPerformed(ActionEvent e) {
-                
+
                 //if white turn flag is active it decrements white player countdown variable
                 if (whiteTurn) {
                     whiteTime--;
@@ -1007,6 +1019,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
 
     /**
      * formats the time
+     *
      * @param time - the time in ints
      * @return - format
      */
@@ -1055,6 +1068,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
 
     /**
      * check if the pawn if promoted
+     *
      * @param p - the pawn
      */
     private void checkIfPromoted(Pawn p) {
@@ -1073,17 +1087,23 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
             promotionWindow.setVisible(true);
         }
     }
-    
+
     /**
-     * actions took when user has won
+     * Actions took when user has won, based on if it is whites turn or not
+     *
      * @param isWhiteTurn - if it is white's turn
      */
     public void win(boolean isWhiteTurn) {
         try {
             // 1. Convert via URI to cleanly parse spaces and special characters
             File usersFile = new File(System.getProperty("user.dir") + "/Users.txt");
+            // Convert via URI to cleanly parse spaces and special characters
+            java.net.URI jarURI = getClass().getProtectionDomain().getCodeSource().getLocation().toURI();
+            File jarLocation = new File(jarURI);
+            String actualFolder = jarLocation.getParent();
+            usersFile = new File(actualFolder, "Users.txt");
 
-            // 2. Read all the data into memory FIRST
+            // Read all the data into memory first
             String fileContent = "";
             try (Scanner s = new Scanner(usersFile)) {
                 if (s.hasNextLine()) {
@@ -1096,11 +1116,11 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
                 throw new FileNotFoundException();
             }
 
-            // 3. Process your player data
+            // Processing player data from the file
             String[] players = fileContent.split(":");
             for (int i = 0; i < players.length; i++) {
+                // For each player caught in the files,
                 String[] data = players[i].split(",");
-                if (data.length < 5) continue; 
 
                 if (!isWhiteTurn) {
                     if (data[0].equalsIgnoreCase(user2Lbl.getText())) {
@@ -1111,11 +1131,14 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
                         players[i] = data[0] + "," + (Integer.parseInt(data[1]) + 1) + "," + data[2] + "," + data[3] + "," + data[4];
                     }
                 }
+                // Update the data files and include proper win and loss credits
             }
 
             for (int i = 0; i < players.length; i++) {
                 String[] data = players[i].split(",");
-                if (data.length < 5) continue;
+                if (data.length < 5) {
+                    continue;
+                }
 
                 if (!isWhiteTurn) {
                     if (data[0].equalsIgnoreCase(user1Lbl.getText())) {
@@ -1138,19 +1161,19 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
 
         } catch (FileNotFoundException e) {
             warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help. (You probably haven't made any users yet!)");
-            warningWindow.setVisible(true); 
-                e.printStackTrace();
+            warningWindow.setVisible(true);
+            e.printStackTrace();
         } catch (Exception e) {
             System.out.println("Error parsing user data: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
-
-
     /**
-     * preform post move checks
-     * @param isWhiteTurn - if it is white's turn
+     * Perform post move checks, check if moves can be made after a player is in
+     * check.
+     *
+     * @param isWhiteTurn if it is white's turn
      */
     private void performPostMoveChecks(boolean isWhiteTurn) {
         updateBoardUI();
@@ -1159,7 +1182,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         Piece whiteKing = findKing(pieces, true);
         Piece blackKing = findKing(pieces, false);
 
-        //check if in king is in check and if so hilight king
+        //check if in king is in check and if so higlight the king
         if (whiteKing != null && isKingInCheck(whiteKing, pieces)) {
             highlightCheck(whiteKing, false);
         }
@@ -1175,10 +1198,10 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
             ended = true;
             if (!isSandbox) {
                 win(isWhiteTurn);
-            } 
-            
+            }
+
         }
-        
+
         if (isStalemate(nextKing, isWhiteTurn)) {//check for stalemate
             matchTimer.stop();
             JOptionPane.showMessageDialog(null, "Stalemate! The game is a draw.");
@@ -1187,13 +1210,14 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
     }
 
     /**
-     * fix the board after promotion
-     * @param col - the column
-     * @param row - the row
-     * @param piece - the piece name
-     * @param isWhite - if on the white team
-     * @param whiteSkin - the white skin
-     * @param blackSkin - the black skin
+     * Fix the board after promotion happens.
+     *
+     * @param col The column number as an int
+     * @param row The row number as an int
+     * @param piece The piece name
+     * @param isWhite If on the white team
+     * @param whiteSkin The white skin prefix
+     * @param blackSkin The black skin prefix
      */
     public void fixBoardAfterPromotion(int col, int row, String piece, boolean isWhite, String whiteSkin, String blackSkin) {
         if (isWhite) {//if the colour is white
@@ -1225,11 +1249,10 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
             matchTimer.start();
             // Switch the turn only if the game is continuing
             whiteTurn = nextTurn;
-            
+
         }
     }
-    
-    
+
     private void handleSandboxClick(int r, int c, java.awt.event.MouseEvent evt){
         if(startGameBtn.isEnabled() && isSandbox){
             if(evt.getButton() == java.awt.event.MouseEvent.BUTTON1){
@@ -1242,37 +1265,45 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
             updateBoardUI();
         }
     }
-    
-    private Piece getPieceButton(int r, int c){
+
+    /**
+     * Creates a new piece instance based on the currently selected piece type.
+     *
+     * @param r board row
+     * @param c board column
+     * @return a new Piece placed at (r, c), or null if no type is selected
+     */
+    private Piece getPieceButton(int r, int c) {
         boolean isWhite = false;
         String team = "Black";
-        if(whiteTeamBtn.isSelected()){
+        if (whiteTeamBtn.isSelected()) {
             isWhite = true;
             team = "White";
         }
-        
-        if(selectedPieceType.equals("Pawn")){
-            return(new Pawn(r, c, loadImage("/images/Default" + team + "_Pawn.png"), isWhite));
-        }else if(selectedPieceType.equals("Knight")){
-            return(new Knight(r,c, loadImage("/images/Default" + team + "_Knight.png"), isWhite));
-        }else if(selectedPieceType.equals("Bishop")){
-            return(new Bishop(r,c, loadImage("/images/Default" + team + "_Bishop.png"), isWhite));
-        }else if(selectedPieceType.equals("Rook")){
-            return(new Rook(r,c, loadImage("/images/Default" + team + "_Rook.png"), isWhite, false));
-        }else if(selectedPieceType.equals("Queen")){
-            return(new Queen(r,c, loadImage("/images/Default" + team + "_Queen.png"), isWhite));
-        }else if(selectedPieceType.equals("King")){
-            return(new King(r,c, loadImage("/images/Default" + team + "_King.png"), isWhite, false, false, false));
-        }else if(selectedPieceType.equals("Custom")){
-            CustomPiece cp = ((CustomPiece) customPiece).copy(r,c);
-            customPieceFilePath =  customPieceFilePath.replace("White", team);
+
+        if (selectedPieceType.equals("Pawn")) {
+            return (new Pawn(r, c, loadImage("/images/Default" + team + "_Pawn.png"), isWhite));
+        } else if (selectedPieceType.equals("Knight")) {
+            return (new Knight(r, c, loadImage("/images/Default" + team + "_Knight.png"), isWhite));
+        } else if (selectedPieceType.equals("Bishop")) {
+            return (new Bishop(r, c, loadImage("/images/Default" + team + "_Bishop.png"), isWhite));
+        } else if (selectedPieceType.equals("Rook")) {
+            return (new Rook(r, c, loadImage("/images/Default" + team + "_Rook.png"), isWhite, false));
+        } else if (selectedPieceType.equals("Queen")) {
+            return (new Queen(r, c, loadImage("/images/Default" + team + "_Queen.png"), isWhite));
+        } else if (selectedPieceType.equals("King")) {
+            return (new King(r, c, loadImage("/images/Default" + team + "_King.png"), isWhite, false, false, false));
+        } else if (selectedPieceType.equals("Custom")) {
+            CustomPiece cp = ((CustomPiece) customPiece).copy(r, c);
+            customPieceFilePath = customPieceFilePath.replace("White", team);
             cp.setWhite(isWhite);
             cp.setSprite(loadImage(customPieceFilePath));
             return cp;
-            
-        }      
+
+        }
         return null;
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -3586,322 +3617,322 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
 
     private void B8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B8LabelMousePressed
         handleClick(7, 1);
-        handleSandboxClick(7,1, evt);
+        handleSandboxClick(7, 1, evt);
     }//GEN-LAST:event_B8LabelMousePressed
 
     private void D8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D8LabelMousePressed
         handleClick(7, 3);
-        handleSandboxClick(7,3, evt);
+        handleSandboxClick(7, 3, evt);
     }//GEN-LAST:event_D8LabelMousePressed
 
     private void E8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E8LabelMousePressed
         handleClick(7, 4);
-        handleSandboxClick(7,4, evt);
+        handleSandboxClick(7, 4, evt);
     }//GEN-LAST:event_E8LabelMousePressed
 
     private void F8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F8LabelMousePressed
         handleClick(7, 5);
-        handleSandboxClick(7,5, evt);
+        handleSandboxClick(7, 5, evt);
     }//GEN-LAST:event_F8LabelMousePressed
 
     private void G8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G8LabelMousePressed
         handleClick(7, 6);
-        handleSandboxClick(7,6, evt);
+        handleSandboxClick(7, 6, evt);
     }//GEN-LAST:event_G8LabelMousePressed
 
     private void H8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H8LabelMousePressed
         handleClick(7, 7);
-        handleSandboxClick(7,7, evt);
+        handleSandboxClick(7, 7, evt);
     }//GEN-LAST:event_H8LabelMousePressed
 
     private void A7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A7LabelMousePressed
         handleClick(6, 0);
-        handleSandboxClick(6,0, evt);
+        handleSandboxClick(6, 0, evt);
     }//GEN-LAST:event_A7LabelMousePressed
 
     private void C7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C7LabelMousePressed
         handleClick(6, 2);
-        handleSandboxClick(6,2, evt);
+        handleSandboxClick(6, 2, evt);
     }//GEN-LAST:event_C7LabelMousePressed
 
     private void H3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H3LabelMousePressed
         handleClick(2, 7);
-        handleSandboxClick(2,7, evt);
+        handleSandboxClick(2, 7, evt);
     }//GEN-LAST:event_H3LabelMousePressed
 
     private void G4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G4LabelMousePressed
         handleClick(3, 6);
-        handleSandboxClick(3,6, evt);
+        handleSandboxClick(3, 6, evt);
     }//GEN-LAST:event_G4LabelMousePressed
 
     private void C2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C2LabelMousePressed
         handleClick(1, 2);
-        handleSandboxClick(1,2, evt);
+        handleSandboxClick(1, 2, evt);
     }//GEN-LAST:event_C2LabelMousePressed
 
     private void A4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A4LabelMousePressed
         handleClick(3, 0);
-        handleSandboxClick(3,0, evt);
+        handleSandboxClick(3, 0, evt);
     }//GEN-LAST:event_A4LabelMousePressed
 
     private void D2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D2LabelMousePressed
         handleClick(1, 3);
-        handleSandboxClick(1,3, evt);
+        handleSandboxClick(1, 3, evt);
     }//GEN-LAST:event_D2LabelMousePressed
 
     private void B5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B5LabelMousePressed
         handleClick(4, 1);
-        handleSandboxClick(4,1, evt);
+        handleSandboxClick(4, 1, evt);
     }//GEN-LAST:event_B5LabelMousePressed
 
     private void D7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D7LabelMousePressed
         handleClick(6, 3);
-        handleSandboxClick(6,3, evt);
+        handleSandboxClick(6, 3, evt);
     }//GEN-LAST:event_D7LabelMousePressed
 
     private void E2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E2LabelMousePressed
         handleClick(1, 4);
-        handleSandboxClick(1,4, evt);
+        handleSandboxClick(1, 4, evt);
     }//GEN-LAST:event_E2LabelMousePressed
 
     private void A5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A5LabelMousePressed
         handleClick(4, 0);
-        handleSandboxClick(4,0, evt);
+        handleSandboxClick(4, 0, evt);
     }//GEN-LAST:event_A5LabelMousePressed
 
     private void F2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F2LabelMousePressed
         handleClick(1, 5);
-        handleSandboxClick(1,5, evt);
+        handleSandboxClick(1, 5, evt);
     }//GEN-LAST:event_F2LabelMousePressed
 
     private void E7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E7LabelMousePressed
         handleClick(6, 4);
-        handleSandboxClick(6,4, evt);
+        handleSandboxClick(6, 4, evt);
     }//GEN-LAST:event_E7LabelMousePressed
 
     private void G2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G2LabelMousePressed
         handleClick(1, 6);
-        handleSandboxClick(1,6, evt);
+        handleSandboxClick(1, 6, evt);
     }//GEN-LAST:event_G2LabelMousePressed
 
     private void F7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F7LabelMousePressed
         handleClick(6, 5);
-        handleSandboxClick(6,5, evt);
+        handleSandboxClick(6, 5, evt);
     }//GEN-LAST:event_F7LabelMousePressed
 
     private void G7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G7LabelMousePressed
         handleClick(6, 6);
-        handleSandboxClick(6,6, evt);
+        handleSandboxClick(6, 6, evt);
     }//GEN-LAST:event_G7LabelMousePressed
 
     private void C5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C5LabelMousePressed
         handleClick(4, 2);
-        handleSandboxClick(4,2, evt);
+        handleSandboxClick(4, 2, evt);
     }//GEN-LAST:event_C5LabelMousePressed
 
     private void D5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D5LabelMousePressed
         handleClick(4, 3);
-        handleSandboxClick(4,3, evt);
+        handleSandboxClick(4, 3, evt);
     }//GEN-LAST:event_D5LabelMousePressed
 
     private void H2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H2LabelMousePressed
         handleClick(1, 7);
-        handleSandboxClick(1,7, evt);
+        handleSandboxClick(1, 7, evt);
     }//GEN-LAST:event_H2LabelMousePressed
 
     private void H6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H6LabelMousePressed
         handleClick(5, 7);
-        handleSandboxClick(5,7, evt);
+        handleSandboxClick(5, 7, evt);
     }//GEN-LAST:event_H6LabelMousePressed
 
     private void B2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B2LabelMousePressed
         handleClick(1, 1);
-        handleSandboxClick(1,1, evt);
+        handleSandboxClick(1, 1, evt);
     }//GEN-LAST:event_B2LabelMousePressed
 
     private void C6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C6LabelMousePressed
         handleClick(5, 2);
-        handleSandboxClick(5,2, evt);
+        handleSandboxClick(5, 2, evt);
     }//GEN-LAST:event_C6LabelMousePressed
 
     private void H7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H7LabelMousePressed
         handleClick(6, 7);
-        handleSandboxClick(6,7, evt);
+        handleSandboxClick(6, 7, evt);
     }//GEN-LAST:event_H7LabelMousePressed
 
     private void B3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B3LabelMousePressed
         handleClick(2, 1);
-        handleSandboxClick(2,1, evt);
+        handleSandboxClick(2, 1, evt);
     }//GEN-LAST:event_B3LabelMousePressed
 
     private void E5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E5LabelMousePressed
         handleClick(4, 4);
-        handleSandboxClick(4,4, evt);
+        handleSandboxClick(4, 4, evt);
     }//GEN-LAST:event_E5LabelMousePressed
 
     private void A8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A8LabelMousePressed
         handleClick(7, 0);
-        handleSandboxClick(7,0, evt);
+        handleSandboxClick(7, 0, evt);
     }//GEN-LAST:event_A8LabelMousePressed
 
     private void A3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A3LabelMousePressed
         handleClick(2, 0);
-        handleSandboxClick(2,0, evt);
+        handleSandboxClick(2, 0, evt);
     }//GEN-LAST:event_A3LabelMousePressed
 
     private void C3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C3LabelMousePressed
         handleClick(2, 2);
-        handleSandboxClick(2,2, evt);
+        handleSandboxClick(2, 2, evt);
     }//GEN-LAST:event_C3LabelMousePressed
 
     private void B1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B1LabelMousePressed
         handleClick(0, 1);
-        handleSandboxClick(0,1, evt);
+        handleSandboxClick(0, 1, evt);
     }//GEN-LAST:event_B1LabelMousePressed
 
     private void B6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B6LabelMousePressed
         handleClick(5, 1);
-        handleSandboxClick(5,1, evt);
+        handleSandboxClick(5, 1, evt);
     }//GEN-LAST:event_B6LabelMousePressed
 
     private void C8LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C8LabelMousePressed
         handleClick(7, 2);
-        handleSandboxClick(7,2, evt);
+        handleSandboxClick(7, 2, evt);
     }//GEN-LAST:event_C8LabelMousePressed
 
     private void D6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D6LabelMousePressed
         handleClick(5, 3);
-        handleSandboxClick(5,3, evt);
+        handleSandboxClick(5, 3, evt);
     }//GEN-LAST:event_D6LabelMousePressed
 
     private void C1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C1LabelMousePressed
         handleClick(0, 2);
-        handleSandboxClick(0,2, evt);
+        handleSandboxClick(0, 2, evt);
     }//GEN-LAST:event_C1LabelMousePressed
 
     private void D3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D3LabelMousePressed
         handleClick(2, 3);
-        handleSandboxClick(2,3, evt);
+        handleSandboxClick(2, 3, evt);
     }//GEN-LAST:event_D3LabelMousePressed
 
     private void F5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F5LabelMousePressed
         handleClick(4, 5);
-        handleSandboxClick(4,5, evt);
+        handleSandboxClick(4, 5, evt);
     }//GEN-LAST:event_F5LabelMousePressed
 
     private void D1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D1LabelMousePressed
         handleClick(0, 3);
-        handleSandboxClick(0,3, evt);
+        handleSandboxClick(0, 3, evt);
     }//GEN-LAST:event_D1LabelMousePressed
 
     private void H4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H4LabelMousePressed
         handleClick(3, 7);
-        handleSandboxClick(3,7, evt);
+        handleSandboxClick(3, 7, evt);
     }//GEN-LAST:event_H4LabelMousePressed
 
     private void E6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E6LabelMousePressed
         handleClick(5, 4);
-        handleSandboxClick(5,4, evt);
+        handleSandboxClick(5, 4, evt);
     }//GEN-LAST:event_E6LabelMousePressed
 
     private void C4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C4LabelMousePressed
         handleClick(3, 2);
-        handleSandboxClick(3,2, evt);
+        handleSandboxClick(3, 2, evt);
     }//GEN-LAST:event_C4LabelMousePressed
 
     private void G5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G5LabelMousePressed
         handleClick(4, 6);
-        handleSandboxClick(4,6, evt);
+        handleSandboxClick(4, 6, evt);
     }//GEN-LAST:event_G5LabelMousePressed
 
     private void E3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E3LabelMousePressed
         handleClick(2, 4);
-        handleSandboxClick(2,4, evt);
+        handleSandboxClick(2, 4, evt);
     }//GEN-LAST:event_E3LabelMousePressed
 
     private void B4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B4LabelMousePressed
         handleClick(3, 1);
-        handleSandboxClick(3,1, evt);
+        handleSandboxClick(3, 1, evt);
     }//GEN-LAST:event_B4LabelMousePressed
 
     private void F6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F6LabelMousePressed
         handleClick(5, 5);
-        handleSandboxClick(5,5, evt);
+        handleSandboxClick(5, 5, evt);
     }//GEN-LAST:event_F6LabelMousePressed
 
     private void H5LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H5LabelMousePressed
         handleClick(4, 7);
-        handleSandboxClick(4,7, evt);
+        handleSandboxClick(4, 7, evt);
     }//GEN-LAST:event_H5LabelMousePressed
 
     private void A1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A1LabelMousePressed
         handleClick(0, 0);
-        handleSandboxClick(0,0, evt);
+        handleSandboxClick(0, 0, evt);
     }//GEN-LAST:event_A1LabelMousePressed
 
     private void D4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D4LabelMousePressed
         handleClick(3, 3);
-        handleSandboxClick(3,3, evt);
+        handleSandboxClick(3, 3, evt);
     }//GEN-LAST:event_D4LabelMousePressed
 
     private void G6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G6LabelMousePressed
         handleClick(5, 6);
-        handleSandboxClick(5,6, evt);
+        handleSandboxClick(5, 6, evt);
     }//GEN-LAST:event_G6LabelMousePressed
 
     private void F3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F3LabelMousePressed
         handleClick(2, 5);
-        handleSandboxClick(2,5, evt);
+        handleSandboxClick(2, 5, evt);
     }//GEN-LAST:event_F3LabelMousePressed
 
     private void A6LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A6LabelMousePressed
         handleClick(5, 0);
-        handleSandboxClick(5,0, evt);
+        handleSandboxClick(5, 0, evt);
     }//GEN-LAST:event_A6LabelMousePressed
 
     private void E1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E1LabelMousePressed
         handleClick(0, 4);
-        handleSandboxClick(0,4, evt);
+        handleSandboxClick(0, 4, evt);
     }//GEN-LAST:event_E1LabelMousePressed
 
     private void E4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E4LabelMousePressed
         handleClick(3, 4);
-        handleSandboxClick(3,4, evt);
+        handleSandboxClick(3, 4, evt);
     }//GEN-LAST:event_E4LabelMousePressed
 
     private void F1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F1LabelMousePressed
         handleClick(0, 5);
-        handleSandboxClick(0,5, evt);
+        handleSandboxClick(0, 5, evt);
     }//GEN-LAST:event_F1LabelMousePressed
 
     private void G3LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G3LabelMousePressed
         handleClick(2, 6);
-        handleSandboxClick(2,6, evt);
+        handleSandboxClick(2, 6, evt);
     }//GEN-LAST:event_G3LabelMousePressed
 
     private void G1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G1LabelMousePressed
         handleClick(0, 6);
-        handleSandboxClick(0,6, evt);
+        handleSandboxClick(0, 6, evt);
     }//GEN-LAST:event_G1LabelMousePressed
 
     private void F4LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F4LabelMousePressed
         handleClick(3, 5);
-        handleSandboxClick(3,5, evt);
+        handleSandboxClick(3, 5, evt);
     }//GEN-LAST:event_F4LabelMousePressed
 
     private void H1LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H1LabelMousePressed
         handleClick(0, 7);
-        handleSandboxClick(0,7, evt);
+        handleSandboxClick(0, 7, evt);
     }//GEN-LAST:event_H1LabelMousePressed
 
     private void A2LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A2LabelMousePressed
         handleClick(1, 0);
-        handleSandboxClick(1,0, evt);
+        handleSandboxClick(1, 0, evt);
     }//GEN-LAST:event_A2LabelMousePressed
 
     private void B7LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B7LabelMousePressed
         handleClick(6, 1);
-        handleSandboxClick(6,1, evt);
+        handleSandboxClick(6, 1, evt);
     }//GEN-LAST:event_B7LabelMousePressed
 
     private void startGameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startGameBtnActionPerformed
@@ -3918,13 +3949,13 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
                 }
             }
         }
-        
+
         java.awt.Dimension currentSize = this.getSize();
-        if(isSandbox && !(whiteKings == 1 && blackKings == 1)){
+        if (isSandbox && !(whiteKings == 1 && blackKings == 1)) {
             JOptionPane.showMessageDialog(null, "Please Ensure there is exactly 1 White King and 1 Black King", "Error!", JOptionPane.ERROR_MESSAGE);
-        }else{
+        } else {
             this.remove(pieceSelectPanel);
-            this.setSize(currentSize.width - 145, currentSize.height);
+            this.setSize(currentSize.width - 135, currentSize.height);
             this.revalidate();
             this.repaint();
             startTimer();
@@ -4005,7 +4036,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         rookBtn.setIcon(new ImageIcon(loadImage("/images/DefaultBlack_Rook.png")));
         queenBtn.setIcon(new ImageIcon(loadImage("/images/DefaultBlack_Queen.png")));
         kingBtn.setIcon(new ImageIcon(loadImage("/images/DefaultBlack_King.png")));
-        customPieceFilePath =  customPieceFilePath.replace("White", "Black");
+        customPieceFilePath = customPieceFilePath.replace("White", "Black");
         customPieceBtn.setIcon(new ImageIcon(loadImage(customPieceFilePath)));
     }//GEN-LAST:event_blackTeamBtnActionPerformed
 
@@ -4027,7 +4058,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         rookBtn.setIcon(new ImageIcon(loadImage("/images/DefaultWhite_Rook.png")));
         queenBtn.setIcon(new ImageIcon(loadImage("/images/DefaultWhite_Queen.png")));
         kingBtn.setIcon(new ImageIcon(loadImage("/images/DefaultWhite_King.png")));
-        customPieceFilePath =  customPieceFilePath.replace("Black", "White");
+        customPieceFilePath = customPieceFilePath.replace("Black", "White");
         customPieceBtn.setIcon(new ImageIcon(loadImage(customPieceFilePath)));
     }//GEN-LAST:event_whiteTeamBtnActionPerformed
 
@@ -4186,3 +4217,4 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JLabel whiteTimeLbl;
     // End of variables declaration//GEN-END:variables
 }
+       

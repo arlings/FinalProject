@@ -8,11 +8,13 @@ package finalproject;
 public class PromotionWindow extends javax.swing.JFrame {
 
     private GameWindow gameWindow;
-    
+
     /**
-     * A method designed to move the frame white preventing the user from accessing a hard-coded way to exit the frame.
-     * https://stackoverflow.com/questions/16046824/making-a-java-swing-frame-movable-and-setundecorated was used as a resource to
-     * find a clean way to hide the top menu of the window.
+     * A method designed to move the frame white preventing the user from
+     * accessing a hard-coded way to exit the frame.
+     * https://stackoverflow.com/questions/16046824/making-a-java-swing-frame-movable-and-setundecorated
+     * was used as a resource to find a clean way to hide the top menu of the
+     * window.
      */
     public void MoveJFrame() {
         this.setUndecorated(true);
@@ -36,7 +38,7 @@ public class PromotionWindow extends javax.swing.JFrame {
         gameWindow = m;
         hiddenInfo.setText(user1.getUserName() + "," + user2.getUserName());
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -237,7 +239,7 @@ public class PromotionWindow extends javax.swing.JFrame {
         PromotionWindow.this.setVisible(false);
         gameWindow.setVisible(true);
     }//GEN-LAST:event_rookPromotionBtnActionPerformed
-   
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bishopPromotionBtn;
     private javax.swing.JLabel hiddenInfo;

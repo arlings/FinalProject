@@ -152,5 +152,4 @@ public class Pawn extends AbstractPiece {
                 + super.toString());//calls the toString in the super class
     }
 
-
 }
