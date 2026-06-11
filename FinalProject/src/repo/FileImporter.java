@@ -29,11 +29,11 @@ public class FileImporter {
                 String tokens[] = s.nextLine().split(",");
                 String userName = tokens[0];
                 int numWins = Integer.parseInt(tokens[1]);
-                User user = new User(userName, numWins); 
+                User user = new User(userName, numWins);
                 users.add(user);
                 //will import the other image #s later, after we have all the images
             }
-            return users; 
+            return users;
         }
     }
 }

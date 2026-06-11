@@ -1,8 +1,8 @@
 /*
 A Zalli, L Necakov, N Wang
 May 21- June 10
-Create user window
-*/
+A window where the user can create
+ */
 package finalproject;
 
 import java.io.FileInputStream;
@@ -13,15 +13,17 @@ import java.io.ObjectOutputStream;
 import java.util.Scanner;
 
 public class CreateUser extends javax.swing.JFrame {
-    
+
     private MainWindow mainWindow;
     private WarningWindow warningWindow;
     int numUsers = 0;
-    
+
     /**
-     * A method designed to move the frame white preventing the user from accessing a hard-coded way to exit the frame.
-     * https://stackoverflow.com/questions/16046824/making-a-java-swing-frame-movable-and-setundecorated was used as a resource to
-     * find a clean way to hide the top menu of the window.
+     * A method designed to move the frame white preventing the user from
+     * accessing a hard-coded way to exit the frame.
+     * https://stackoverflow.com/questions/16046824/making-a-java-swing-frame-movable-and-setundecorated
+     * was used as a resource to find a clean way to hide the top menu of the
+     * window.
      */
     public void MoveJFrame() {
         this.setUndecorated(true);
@@ -32,9 +34,10 @@ public class CreateUser extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
-    
+
     /**
      * creates a new user
+     *
      * @param m - main window
      */
     public CreateUser(MainWindow m) {
@@ -157,16 +160,16 @@ public class CreateUser extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
-    
+
     private void goBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBtnActionPerformed
         try {
             FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
             Scanner s = new Scanner(in);
             numUsers = s.nextLine().split(":").length;
         } catch (Exception e) {
-            
+
         }
-        
+
         if (userNameField.getText().contains(",") || userNameField.getText().contains(":")) {
             userNameField.setText("");
             warningWindow = new WarningWindow(this, "Your username cannot contain characters : or ,");

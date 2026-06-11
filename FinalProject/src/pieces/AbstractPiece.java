@@ -174,7 +174,7 @@ abstract public class AbstractPiece implements Piece {
         if (!isInsideBoard(currentRow, currentCol)) {//if it is outside the board
             return;
         }
-        
+
         Piece piece = getPieceAt(currentRow, currentCol, pieces);
 
         if (piece == null) {//if the piece is null

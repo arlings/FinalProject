@@ -26,11 +26,13 @@ public class MainWindow extends javax.swing.JFrame {
     private LeaderboardWindow leaderboardWindow;
     private WarningWindow warningWindow;
     private SkinWindow skinWindow;
-   
+
     /**
-     * A method designed to move the frame white preventing the user from accessing a hard-coded way to exit the frame.
-     * https://stackoverflow.com/questions/16046824/making-a-java-swing-frame-movable-and-setundecorated was used as a resource to
-     * find a clean way to hide the top menu of the window.
+     * A method designed to move the frame white preventing the user from
+     * accessing a hard-coded way to exit the frame.
+     * https://stackoverflow.com/questions/16046824/making-a-java-swing-frame-movable-and-setundecorated
+     * was used as a resource to find a clean way to hide the top menu of the
+     * window.
      */
     public void MoveJFrame() {
         this.setUndecorated(true);
@@ -47,7 +49,7 @@ public class MainWindow extends javax.swing.JFrame {
         initComponents();
         getTop3();
     }
-    
+
     public void getTop3() {
         try {
             FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
@@ -73,13 +75,13 @@ public class MainWindow extends javax.swing.JFrame {
                 for (int i = 0; i < sLeaderboard.length; i++) {
                     out.write(sLeaderboard[i].getBytes());
                 }
-            } catch(IOException e) {
-                warningWindow = new WarningWindow(this, "There was an error with the parsing the Users file. Please see user manual for more help.");    
+            } catch (IOException e) {
+                warningWindow = new WarningWindow(this, "There was an error with the parsing the Users file. Please see user manual for more help.");
             }
         } catch (NoSuchElementException e) {
-            
+
         } catch (FileNotFoundException e) {
-            warningWindow = new WarningWindow(this, "There was an error with the location of the Users file. Please see user manual for more help.");    
+            warningWindow = new WarningWindow(this, "There was an error with the location of the Users file. Please see user manual for more help.");
         }
         try {
             FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Leaderboard.txt");
@@ -90,16 +92,16 @@ public class MainWindow extends javax.swing.JFrame {
                 secondPlaceLabel.setText("#" + nextLine.split("#")[2].split(",")[0]);
                 thirdPlaceLabel.setText("#" + nextLine.split("#")[3].split(",")[0]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                
-            }   
+
+            }
         } catch (NoSuchElementException e) {
-            
+
         } catch (FileNotFoundException e) {
             warningWindow = new WarningWindow(this, "There was an error with the location of the Leaderboard file. Please see user manual for more help");
             warningWindow.setVisible(true);
-        } 
+        }
     }
-    
+
     public static class FrameDragListener extends MouseAdapter {
 
         private final JFrame frame;
@@ -431,7 +433,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void exitMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMenuMouseClicked
         System.exit(0);
-        
+
     }//GEN-LAST:event_exitMenuMouseClicked
 
     private void customizeMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customizeMenuMouseClicked

@@ -2,7 +2,7 @@
 L Necakov, A Zalli, Neo Wang
 May 21-June 10
 Skin window
-*/
+ */
 package finalproject;
 
 import static finalproject.LeaderboardWindow.mergeSort;
@@ -14,15 +14,16 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class SkinWindow extends javax.swing.JFrame {
-    
+
     private MainWindow mainWindow;
     private WarningWindow warningWindow;
-    
-    
+
     /**
-     * A method designed to move the frame white preventing the user from accessing a hard-coded way to exit the frame.
-     * https://stackoverflow.com/questions/16046824/making-a-java-swing-frame-movable-and-setundecorated was used as a resource to
-     * find a clean way to hide the top menu of the window.
+     * A method designed to move the frame white preventing the user from
+     * accessing a hard-coded way to exit the frame.
+     * https://stackoverflow.com/questions/16046824/making-a-java-swing-frame-movable-and-setundecorated
+     * was used as a resource to find a clean way to hide the top menu of the
+     * window.
      */
     public void MoveJFrame() {
         this.setUndecorated(true);
@@ -33,9 +34,10 @@ public class SkinWindow extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
-    
+
     /**
      * skin window constructor
+     *
      * @param m - main window
      */
     public SkinWindow(MainWindow m) {
@@ -50,7 +52,7 @@ public class SkinWindow extends javax.swing.JFrame {
                 userDropdown.addItem(userInfo[i].split(",")[0]);
             }
         } catch (FileNotFoundException e) {
-            
+
         }
     }
 
@@ -178,14 +180,14 @@ public class SkinWindow extends javax.swing.JFrame {
                     skinDropdown.addItem("3rdplace");
                 }
             } catch (ArrayIndexOutOfBoundsException e) {
-                    
+
             }
         } catch (NoSuchElementException e) {
-            
+
         } catch (FileNotFoundException e) {
-            warningWindow = new WarningWindow(this, "There was an error with the location of the Users file. Please see user manual for more help.");    
+            warningWindow = new WarningWindow(this, "There was an error with the location of the Users file. Please see user manual for more help.");
         }
-        
+
         if (wins >= 30) {
             skinDropdown.addItem("30Wins");
             skinDropdown.addItem("20Wins");
@@ -195,7 +197,7 @@ public class SkinWindow extends javax.swing.JFrame {
             skinDropdown.addItem("10Wins");
         } else if (wins >= 10) {
             skinDropdown.addItem("10Wins");
-        } 
+        }
     }//GEN-LAST:event_userDropdownActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
@@ -217,17 +219,17 @@ public class SkinWindow extends javax.swing.JFrame {
             try {
                 out.write(changedFile.getBytes());
             } catch (IOException e) {
-                
+
             }
         } catch (FileNotFoundException e) {
             warningWindow = new WarningWindow(this, "There was an error with the location of the Users or Leaderboard file. Please see user manual for more help.");
             warningWindow.setVisible(true);
-        } 
+        }
         this.dispose();
     }//GEN-LAST:event_exitButtonActionPerformed
 
     private void skinDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skinDropdownActionPerformed
-        
+
     }//GEN-LAST:event_skinDropdownActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

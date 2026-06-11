@@ -8,14 +8,16 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class LeaderboardWindow extends javax.swing.JFrame {
-    
+
     private MainWindow mainWindow;
     private WarningWindow warningWindow;
-    
+
     /**
-     * A method designed to move the frame white preventing the user from accessing a hard-coded way to exit the frame.
-     * https://stackoverflow.com/questions/16046824/making-a-java-swing-frame-movable-and-setundecorated was used as a resource to
-     * find a clean way to hide the top menu of the window.
+     * A method designed to move the frame white preventing the user from
+     * accessing a hard-coded way to exit the frame.
+     * https://stackoverflow.com/questions/16046824/making-a-java-swing-frame-movable-and-setundecorated
+     * was used as a resource to find a clean way to hide the top menu of the
+     * window.
      */
     public void MoveJFrame() {
         this.setUndecorated(true);
@@ -33,7 +35,7 @@ public class LeaderboardWindow extends javax.swing.JFrame {
         leaderboardSort();
         mainWindow = m;
     }
-    
+
     public void leaderboardSort() {
         try {
             FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
@@ -55,19 +57,19 @@ public class LeaderboardWindow extends javax.swing.JFrame {
             for (int i = 0; i < leaderboard.length; i++) {
                 sLeaderboard[i] = "#" + (i + 1) + " " + leaderboard[i].toString();
             }
-            leaderboardList.setListData(sLeaderboard); 
+            leaderboardList.setListData(sLeaderboard);
             try {
                 out2.write("".getBytes());
                 for (int i = 0; i < sLeaderboard.length; i++) {
                     out.write(sLeaderboard[i].getBytes());
                 }
-            } catch(IOException e) {
-                warningWindow = new WarningWindow(this, "There was an error with the parsing the Users or Leaderboard file. Please see user manual for more help.");    
+            } catch (IOException e) {
+                warningWindow = new WarningWindow(this, "There was an error with the parsing the Users or Leaderboard file. Please see user manual for more help.");
                 warningWindow.setVisible(true);
             }
         } catch (FileNotFoundException e) {
             warningWindow = new WarningWindow(this, "There was an error with the location of the Users or Leaderboard file. Please see user manual for more help.");
-            warningWindow.setVisible(true);    
+            warningWindow.setVisible(true);
         }
     }
 
@@ -121,11 +123,6 @@ public class LeaderboardWindow extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
 
-        leaderboardList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "placeholder" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         leaderboardList.setOpaque(false);
         jScrollPane1.setViewportView(leaderboardList);
 
@@ -253,11 +250,11 @@ public class LeaderboardWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_loadButtonActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        
+
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

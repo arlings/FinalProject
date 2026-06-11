@@ -6,18 +6,20 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class EnterUsername extends javax.swing.JFrame {
-    
+
     private MainWindow mainWindow;
     private GameWindow gameWindow;
     private WarningWindow warningWindow;
-    
+
     static int numOfUsers;
     static String[] users = new String[2];
-    
+
     /**
-     * A method designed to move the frame white preventing the user from accessing a hard-coded way to exit the frame.
-     * https://stackoverflow.com/questions/16046824/making-a-java-swing-frame-movable-and-setundecorated was used as a resource to
-     * find a clean way to hide the top menu of the window.
+     * A method designed to move the frame white preventing the user from
+     * accessing a hard-coded way to exit the frame.
+     * https://stackoverflow.com/questions/16046824/making-a-java-swing-frame-movable-and-setundecorated
+     * was used as a resource to find a clean way to hide the top menu of the
+     * window.
      */
     public void MoveJFrame() {
         this.setUndecorated(true);
@@ -28,7 +30,7 @@ public class EnterUsername extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
-    
+
     public EnterUsername(MainWindow m, int chosenTime) {
         MoveJFrame();
         initComponents();
@@ -141,22 +143,24 @@ public class EnterUsername extends javax.swing.JFrame {
         if (users == null) {
             users = new String[2];
         }
-        try {   
+        try {
             FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
             Scanner s = new Scanner(in);
             boolean found = false;
-            
-            int prevIndex = 0; 
-            
+
+            int prevIndex = 0;
+
             while (s.hasNextLine()) {
                 String line = s.nextLine();
-                if (line.trim().isEmpty()) continue;
-                
+                if (line.trim().isEmpty()) {
+                    continue;
+                }
+
                 String[] items = line.split(":");
-                
+
                 for (int i = 0; i < items.length; i++) {
                     String[] currentUserData = items[i].split(",");
-                    
+
                     // Fixed: Access the array at index 0 using usernames[0]
                     if (users[0] != null && currentUserData[0].equalsIgnoreCase(users[0])) {
                         prevIndex = i;
@@ -174,14 +178,14 @@ public class EnterUsername extends javax.swing.JFrame {
                             if (gameWindow == null && numOfUsers == 2) {
                                 // Fixed: Store player 2 name into usernames[1]
                                 users[1] = userNameField.getText();
-                                
+
                                 String[] p1Data = items[prevIndex].split(",");
                                 String[] p2Data = items[i].split(",");
-                                gameWindow = new GameWindow(this, 
-                                    new User(users[1], Integer.parseInt(p2Data[1]) - Integer.parseInt(p2Data[3]), p2Data[4]), // user2 slot = Player 2
-                                    new User(users[0], Integer.parseInt(p1Data[1]) - Integer.parseInt(p1Data[3]), p1Data[4]), // user1 slot = Player 1
-                                    chosenTime, false);
-                                
+                                gameWindow = new GameWindow(this,
+                                        new User(users[1], Integer.parseInt(p2Data[1]) - Integer.parseInt(p2Data[3]), p2Data[4]), // user2 slot = Player 2
+                                        new User(users[0], Integer.parseInt(p1Data[1]) - Integer.parseInt(p1Data[3]), p1Data[4]), // user1 slot = Player 1
+                                        chosenTime, false);
+
                                 gameWindow.setVisible(true);
                                 s.close();
                                 this.dispose();
@@ -199,7 +203,7 @@ public class EnterUsername extends javax.swing.JFrame {
                 }
             }
             s.close();
-            
+
             if (!found) {
                 warningWindow = new WarningWindow(this, "This username does not exist. Please create an account first");
                 warningWindow.setVisible(true);
@@ -211,7 +215,7 @@ public class EnterUsername extends javax.swing.JFrame {
             resetSystem();
             warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help");
             warningWindow.setVisible(true);
-        } 
+        }
     }//GEN-LAST:event_goBtnActionPerformed
 
     private void resetSystem() {
@@ -222,7 +226,7 @@ public class EnterUsername extends javax.swing.JFrame {
         userNameField.setText("");
         this.dispose();
     }
-    
+
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         numOfUsers = 0;
         users = null;
