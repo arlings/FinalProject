@@ -25,7 +25,7 @@ abstract public class AbstractPiece implements Piece {
      * Abstract Piece constructor
      *
      * @param rowNum - row number
-     * @param columnNum - colomn number
+     * @param columnNum - column number
      * @param sprite - the buffered image
      * @param isWhite - boolean of if the piece is white or not
      * @param value - value of the piece

@@ -51,6 +51,8 @@ public class SkinWindow extends javax.swing.JFrame {
             for (int i = 0; i < userInfo.length; i++) {
                 userDropdown.addItem(userInfo[i].split(",")[0]);
             }
+        } catch (NoSuchElementException e) {
+
         } catch (FileNotFoundException e) {
 
         }
@@ -221,6 +223,8 @@ public class SkinWindow extends javax.swing.JFrame {
             } catch (IOException e) {
 
             }
+        } catch (NoSuchElementException e) {
+            
         } catch (FileNotFoundException e) {
             warningWindow = new WarningWindow(this, "There was an error with the location of the Users or Leaderboard file. Please see user manual for more help.");
             warningWindow.setVisible(true);
