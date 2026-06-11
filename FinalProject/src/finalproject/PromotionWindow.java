@@ -205,7 +205,6 @@ public class PromotionWindow extends javax.swing.JFrame {
 
         int col = gameWindow.getPromotionCol();
         int row = gameWindow.getPromotionRow();
-        System.out.println(hiddenInfo.getText());
         boolean promotionIsWhite = gameWindow.getPromotionIsWhite();
         gameWindow.fixBoardAfterPromotion(col, row, "Queen", promotionIsWhite, "Default", "Default");//replace the promoted pawn with queen
         PromotionWindow.this.dispose();//dispose the window

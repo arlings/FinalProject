@@ -168,7 +168,6 @@ public class SkinWindow extends javax.swing.JFrame {
             // Get the file called Users.txt beside the JAR file in the same folder and put it into a Scanner to be read.
             String[] userInfo = s.nextLine().split(":");
             // Split this line based on regex of :, that separates each user. Store this in an array.
-            System.out.println(Arrays.toString(userInfo));
             for (int i = 0; i < userInfo.length; i++) {
                 // For each user information bit in the array, split this on regex of "," to select for specific user information.
                 if (userInfo[i].split(",")[0].equalsIgnoreCase(userDropdown.getItemAt(userDropdown.getSelectedIndex()))) {
@@ -231,7 +230,6 @@ public class SkinWindow extends javax.swing.JFrame {
             warningWindow = new WarningWindow(this, "There was an error with the location of the Users or Leaderboard file. Please see user manual for more help.");
             warningWindow.setVisible(true);
         }
-        System.out.println("Hi");
         this.dispose();
     }//GEN-LAST:event_exitButtonActionPerformed
 

@@ -407,10 +407,10 @@ public class CustomPiece extends AbstractPiece {
     }
 
     /**
-     * Removes a knight jump
+     * Removes a knight jump. Note this method was made with help from ai
      *
      * @param dx row offset
-     * @param dy col offset Note this method was made with help from ai
+     * @param dy col offset 
      */
     public void removeKnightMove(int dx, int dy) {
         knightJumps.removeIf(j -> j[0] == dx && j[1] == dy); // remove matching jump

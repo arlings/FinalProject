@@ -1159,14 +1159,10 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
 
             this.dispose();
 
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
             warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help. (You probably haven't made any users yet!)");
             warningWindow.setVisible(true);
-            e.printStackTrace();
-        } catch (Exception e) {
-            System.out.println("Error parsing user data: " + e.getMessage());
-            e.printStackTrace();
-        }
+        } 
     }
 
     /**

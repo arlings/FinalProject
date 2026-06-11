@@ -3582,10 +3582,8 @@ public class SandboxWindow extends javax.swing.JFrame {
 
     private void startGameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startGameBtnActionPerformed
         CustomPiece customPiece = (CustomPiece) pieces[3][4];
-        //System.out.println(customPiece);
         CustomPiece copiedPiece = customPiece.copy(0, 0);
         if (customPieceFilePath.equals("")) {
-            System.out.println("Image was null");
             customPieceFilePath = "/images/DefaultWhite_Pawn.png";
         }
         if (gameWindow == null) {
