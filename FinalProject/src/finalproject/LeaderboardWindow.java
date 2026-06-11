@@ -246,8 +246,6 @@ public class LeaderboardWindow extends javax.swing.JFrame {
 
         jLabel1.setText("Search");
 
-        jLabel2.setText("Info:");
-
         jButton1.setText("Go");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -286,7 +284,7 @@ public class LeaderboardWindow extends javax.swing.JFrame {
                     .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         pack();
