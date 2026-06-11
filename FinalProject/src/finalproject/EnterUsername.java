@@ -35,7 +35,12 @@ public class EnterUsername extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
-
+    
+    /**
+     * EnterUsername constructor
+     * @param m - main window
+     * @param chosenTime - time of the game
+     */
     public EnterUsername(MainWindow m, int chosenTime) {
         MoveJFrame();
         initComponents();
@@ -223,19 +228,22 @@ public class EnterUsername extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_goBtnActionPerformed
 
+    /**
+     * Safely reinstantiates the array so it's never null
+     */
     private void resetSystem() {
         users = new String[2]; // Safely reinstantiates the array so it's never null
         users[0] = "";
         users[1] = "";
         numOfUsers = 0;
         userNameField.setText("");
-        this.dispose();
+        this.dispose();//dispose of EnterUsername window
     }
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         numOfUsers = 0;
         users = null;
-        this.dispose();
+        this.dispose();//dispose of EnterUsername window
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

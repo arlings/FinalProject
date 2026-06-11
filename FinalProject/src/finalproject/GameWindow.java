@@ -58,8 +58,6 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
     private int blackTime;
     private Timer matchTimer;
     private boolean ended = false;
-    private int numWhiteKings = 0;
-    private int numBlackKings = 0;
 
     private User[] users = new User[2];
 
@@ -375,7 +373,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
                 Piece piece = pieces[r][c];
                 //if the piece is not the one currently moving and is a pawn we clear its flag
                 if (piece != movingPiece && piece instanceof Pawn) {
-                    Pawn pawn = (Pawn) movingPiece;
+                    Pawn pawn = (Pawn) piece;
                     //sets enpassant eligible to false since it expired after one turn
                     pawn.setEnPassantEligible(false);
                 }
@@ -602,10 +600,12 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         java.awt.Dimension currentSize = this.getSize();
         if (isSandbox) {
             JOptionPane.showMessageDialog(null, "Sandbox Rules"
-                    + "\n1. Left Click to add your custom piece to any tile"
-                    + "\n2. Right Click to delete any piece on any tile "
-                    + "\n3. Exceptions: Kings cannot be deleted."
-                    + "\nSee user manual for more details.");
+                    + "\n1. Select any piece from the piece select side bar to add it"
+                    + "\n2. Right click to add a piece, left click to remove a piece"
+                    + "\n3. To start the game, there must be EXACTLY 1 white and 1 black king on the board"
+                    + "\n4. Custom Pieces will be highlighted yellow for clarity while playing"
+                    + "\nHave fun customising the board and using your custom piece!");
+
             customPieceBtn.setIcon(new ImageIcon(customPiece.getSprite()));
         } else {
             pieces = loadPieces(user1.getSkin(), user2.getSkin());
@@ -833,9 +833,13 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         for (int row = 0; row < 8; row++) {
             //loops through all board columns to synchronize graphic frame boxes
             for (int col = 0; col < 8; col++) {
-
                 Piece piece = pieces[row][col];
-
+                if (piece instanceof CustomPiece) {
+                    board[row][col].setOpaque(true);
+                    board[row][col].setBackground(new Color(255, 255, 180)); // light yellow
+                } else {
+                    board[row][col].setOpaque(false);
+                }
                 //if a piece sits on this array slot it pulls its sprite image file
                 if (piece != null) {
                     BufferedImage img = piece.getSprite();
@@ -1091,11 +1095,13 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
      */
     public void win(boolean isWhiteTurn) {
         try {
+            // 1. Convert via URI to cleanly parse spaces and special characters
+            File usersFile = new File(System.getProperty("user.dir") + "/Users.txt");
             // Convert via URI to cleanly parse spaces and special characters
             java.net.URI jarURI = getClass().getProtectionDomain().getCodeSource().getLocation().toURI();
             File jarLocation = new File(jarURI);
             String actualFolder = jarLocation.getParent();
-            File usersFile = new File(actualFolder, "Users.txt");
+            usersFile = new File(actualFolder, "Users.txt");
 
             // Read all the data into memory first
             String fileContent = "";
@@ -1156,6 +1162,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         } catch (FileNotFoundException e) {
             warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help. (You probably haven't made any users yet!)");
             warningWindow.setVisible(true);
+            e.printStackTrace();
         } catch (Exception e) {
             System.out.println("Error parsing user data: " + e.getMessage());
             e.printStackTrace();
@@ -1225,7 +1232,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
             }
         } else {//if the colour is black
             if (piece.equalsIgnoreCase("Queen")) {//if queen create new queen
-                pieces[row][col] = new Queen(row, col, loadImage("/images/" + blackSkin + "Black_Queen.png"), isWhite);
+                pieces[row][col] = new Queen(row, col, loadImage("/images/" + blackSkin + "White_Knight.png"), isWhite);
             } else if (piece.equalsIgnoreCase("Rook")) {//if rook create new rook
                 pieces[row][col] = new Rook(row, col, loadImage("/images/" + blackSkin + "Black_Rook.png"), isWhite, true);
             } else if (piece.equalsIgnoreCase("Bishop")) {//if bishop create new bishop
@@ -1246,48 +1253,15 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         }
     }
 
-    /**
-     * Handles sandbox board clicks for placing or removing pieces. Left‑click
-     * places the currently selected piece type. Right‑click removes a piece
-     * from the board.
-     */
-    private void handleSandboxClick(int r, int c, java.awt.event.MouseEvent evt) {
-
-        // Only allow sandbox editing before the game starts AND when sandbox mode is active
-        if (startGameBtn.isEnabled() && isSandbox) {
-
-            // LEFT CLICK → place a piece
-            if (evt.getButton() == java.awt.event.MouseEvent.BUTTON1) {
-
-                // getPieceButton(r,c) returns a NEW piece instance based on the selected type
-                if (getPieceButton(r, c) != null) {
-
-                    // Track king counts for validation
-                    if (getPieceButton(r, c) instanceof King && getPieceButton(r, c).isWhite()) {
-                        numWhiteKings++;
-                    } else if (getPieceButton(r, c) instanceof King && !getPieceButton(r, c).isWhite()) {
-                        numBlackKings++;
-                    }
-
-                    // Place the new piece on the board
-                    pieces[r][c] = getPieceButton(r, c);
+    private void handleSandboxClick(int r, int c, java.awt.event.MouseEvent evt){
+        if(startGameBtn.isEnabled() && isSandbox){
+            if(evt.getButton() == java.awt.event.MouseEvent.BUTTON1){
+                if(getPieceButton(r,c) != null){
+                    pieces[r][c] = getPieceButton(r,c); 
                 }
-
-                // RIGHT CLICK → remove a piece
-            } else if (evt.getButton() == java.awt.event.MouseEvent.BUTTON3) {
-
-                // Adjust king counters if removing a king
-                if (pieces[r][c] instanceof King && pieces[r][c].isWhite()) {
-                    numWhiteKings--;
-                } else if (pieces[r][c] instanceof King && !pieces[r][c].isWhite()) {
-                    numBlackKings--;
-                }
-
-                // Remove the piece
+            }else if(evt.getButton() == java.awt.event.MouseEvent.BUTTON3){
                 pieces[r][c] = null;
             }
-
-            // Refresh UI after any change
             updateBoardUI();
         }
     }
@@ -1300,35 +1274,33 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
      * @return a new Piece placed at (r, c), or null if no type is selected
      */
     private Piece getPieceButton(int r, int c) {
-
-        // Determine team color based on UI selection
-        boolean isWhite = whiteTeamBtn.isSelected();
-        String team = isWhite ? "White" : "Black";
-
-        // Create the appropriate piece type with its default sprite
-        if (selectedPieceType.equals("Pawn")) {
-            return new Pawn(r, c, loadImage("/images/Default" + team + "_Pawn.png"), isWhite);
-
-        } else if (selectedPieceType.equals("Knight")) {
-            return new Knight(r, c, loadImage("/images/Default" + team + "_Knight.png"), isWhite);
-
-        } else if (selectedPieceType.equals("Bishop")) {
-            return new Bishop(r, c, loadImage("/images/Default" + team + "_Bishop.png"), isWhite);
-
-        } else if (selectedPieceType.equals("Rook")) {
-            return new Rook(r, c, loadImage("/images/Default" + team + "_Rook.png"), isWhite, false);
-
-        } else if (selectedPieceType.equals("Queen")) {
-            return new Queen(r, c, loadImage("/images/Default" + team + "_Queen.png"), isWhite);
-
-        } else if (selectedPieceType.equals("King")) {
-            return new King(r, c, loadImage("/images/Default" + team + "_King.png"), isWhite, false, false, false);
-
-        } else if (selectedPieceType.equals("Custom")) {
-            // Copy the custom piece's rules but place it at (r, c)
-            return ((CustomPiece) customPiece).copy(r, c);
+        boolean isWhite = false;
+        String team = "Black";
+        if (whiteTeamBtn.isSelected()) {
+            isWhite = true;
+            team = "White";
         }
 
+        if (selectedPieceType.equals("Pawn")) {
+            return (new Pawn(r, c, loadImage("/images/Default" + team + "_Pawn.png"), isWhite));
+        } else if (selectedPieceType.equals("Knight")) {
+            return (new Knight(r, c, loadImage("/images/Default" + team + "_Knight.png"), isWhite));
+        } else if (selectedPieceType.equals("Bishop")) {
+            return (new Bishop(r, c, loadImage("/images/Default" + team + "_Bishop.png"), isWhite));
+        } else if (selectedPieceType.equals("Rook")) {
+            return (new Rook(r, c, loadImage("/images/Default" + team + "_Rook.png"), isWhite, false));
+        } else if (selectedPieceType.equals("Queen")) {
+            return (new Queen(r, c, loadImage("/images/Default" + team + "_Queen.png"), isWhite));
+        } else if (selectedPieceType.equals("King")) {
+            return (new King(r, c, loadImage("/images/Default" + team + "_King.png"), isWhite, false, false, false));
+        } else if (selectedPieceType.equals("Custom")) {
+            CustomPiece cp = ((CustomPiece) customPiece).copy(r, c);
+            customPieceFilePath = customPieceFilePath.replace("White", team);
+            cp.setWhite(isWhite);
+            cp.setSprite(loadImage(customPieceFilePath));
+            return cp;
+
+        }
         return null;
     }
 
@@ -3964,13 +3936,31 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_B7LabelMousePressed
 
     private void startGameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startGameBtnActionPerformed
-        if (isSandbox && !(numWhiteKings == 1 && numBlackKings == 1)) {
+        int whiteKings = 0;
+        int blackKings = 0;
+        for (int r = 0; r < 8; r++) {
+            for (int c = 0; c < 8; c++) {
+                if (pieces[r][c] instanceof King) {
+                    if (pieces[r][c].isWhite()) {
+                        whiteKings++;
+                    } else {
+                        blackKings++;
+                    }
+                }
+            }
+        }
+
+        java.awt.Dimension currentSize = this.getSize();
+        if (isSandbox && !(whiteKings == 1 && blackKings == 1)) {
             JOptionPane.showMessageDialog(null, "Please Ensure there is exactly 1 White King and 1 Black King", "Error!", JOptionPane.ERROR_MESSAGE);
         } else {
+            this.remove(pieceSelectPanel);
+            this.setSize(currentSize.width - 135, currentSize.height);
+            this.revalidate();
+            this.repaint();
             startTimer();
             startGameBtn.setEnabled(false);
         }
-
     }//GEN-LAST:event_startGameBtnActionPerformed
 
     private void pawnBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pawnBtnActionPerformed
@@ -4046,6 +4036,8 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         rookBtn.setIcon(new ImageIcon(loadImage("/images/DefaultBlack_Rook.png")));
         queenBtn.setIcon(new ImageIcon(loadImage("/images/DefaultBlack_Queen.png")));
         kingBtn.setIcon(new ImageIcon(loadImage("/images/DefaultBlack_King.png")));
+        customPieceFilePath = customPieceFilePath.replace("White", "Black");
+        customPieceBtn.setIcon(new ImageIcon(loadImage(customPieceFilePath)));
     }//GEN-LAST:event_blackTeamBtnActionPerformed
 
     private void customPieceBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customPieceBtnActionPerformed
@@ -4066,6 +4058,8 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         rookBtn.setIcon(new ImageIcon(loadImage("/images/DefaultWhite_Rook.png")));
         queenBtn.setIcon(new ImageIcon(loadImage("/images/DefaultWhite_Queen.png")));
         kingBtn.setIcon(new ImageIcon(loadImage("/images/DefaultWhite_King.png")));
+        customPieceFilePath = customPieceFilePath.replace("Black", "White");
+        customPieceBtn.setIcon(new ImageIcon(loadImage(customPieceFilePath)));
     }//GEN-LAST:event_whiteTeamBtnActionPerformed
 
 
@@ -4223,3 +4217,4 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JLabel whiteTimeLbl;
     // End of variables declaration//GEN-END:variables
 }
+       

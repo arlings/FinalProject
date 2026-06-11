@@ -24,7 +24,7 @@ public class SandboxWindow extends javax.swing.JFrame {
 
     private Piece[][] exportBoard;
     private GameWindow gameWindow;
-    MainWindow mainWindow;
+    private MainWindow mainWindow;
     private JLabel[][] board = new JLabel[8][8];
     private Piece[][] pieces = new Piece[8][8];
     private FileImporter fileImporter = new FileImporter();
@@ -222,24 +222,17 @@ public class SandboxWindow extends javax.swing.JFrame {
 
         // Load the green dot image used to mark valid squares
         BufferedImage dot = loadImage("/images/LightGreenPicture.png");
-
-        // Place a green dot icon on each valid move square
-        for (Move move : validMoves) {
+        for (Move move : validMoves) {//go through all the valid moves
             int r = move.getRowNum();
             int c = move.getColumnNum();
 
             ImageIcon dotIcon = new ImageIcon(dot);
             dotIcon.setDescription("GREEN_DOT"); // used to identify dot icons later
-
             board[r][c].setIcon(dotIcon);
         }
     }
 
     /**
-     * Updates movement rules when a preset button is toggled
-     *
-     * @param preset the movement preset name
-     * @param button the UI button that was clicked
      */
     private void updateMoves(String preset, JRadioButton button) {
 
@@ -259,11 +252,10 @@ public class SandboxWindow extends javax.swing.JFrame {
     }
 
     /**
-     * Syncs pawn movement buttons between the global pawn toggle and the two
-     * local pawn options
+     * Updates movement rules when a preset button is toggled
      *
-     * @param isGlobalBtn true if the global pawn button was clicked, false if a
-     * local button was clicked
+     * @param preset the movement preset name
+     * @param button the UI button that was clicked
      */
     private void checkPawnButtons(boolean isGlobalBtn) {
 
@@ -3139,7 +3131,7 @@ public class SandboxWindow extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>                        
+    }                       
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
@@ -3591,9 +3583,13 @@ public class SandboxWindow extends javax.swing.JFrame {
     private void startGameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startGameBtnActionPerformed
         CustomPiece customPiece = (CustomPiece) pieces[3][4];
         //System.out.println(customPiece);
-        CustomPiece copiedPiece = customPiece.copy(0, 0);
+        CustomPiece copiedPiece = customPiece.copy(0,0);
+        if(customPieceFilePath.equals("")){
+            System.out.println("Image was null");
+            customPieceFilePath = "/images/DefaultWhite_Pawn.png";
+        }
         if (gameWindow == null) {
-            gameWindow = new GameWindow(this, new User("Sandbox 2", 0), new User("Player 1", 0), 300, true, copiedPiece, customPieceFilePath);
+            gameWindow = new GameWindow(this, new User("Sandbox 2", 0), new User("Player 1", 0), 3599, true, copiedPiece, customPieceFilePath);
         }
         this.dispose();
         gameWindow.setVisible(true);

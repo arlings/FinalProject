@@ -1,8 +1,9 @@
 /*
 L Necakov, A Zalli, Neo Wang
 May 21-June 10
-Skin window
- */
+The skin window, which allows the user to customize the appearance of their chess pieces based on their achievements.
+*/
+
 package finalproject;
 
 import static finalproject.LeaderboardWindow.mergeSort;
@@ -10,6 +11,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -17,7 +19,7 @@ public class SkinWindow extends javax.swing.JFrame {
 
     private MainWindow mainWindow;
     private WarningWindow warningWindow;
-
+    
     /**
      * A method designed to move the frame white preventing the user from
      * accessing a hard-coded way to exit the frame.
@@ -36,25 +38,28 @@ public class SkinWindow extends javax.swing.JFrame {
     }
 
     /**
-     * skin window constructor
-     *
-     * @param m - main window
+     * The primary and only constructor for the skin window.
+     * @param m The main window of type MainWindow, that flows into the opening of the skin window.
      */
     public SkinWindow(MainWindow m) {
         MoveJFrame();
         initComponents();
         mainWindow = m;
-        try {
+        try { // Try the following code,
             FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
             Scanner s = new Scanner(in);
+            // Get the file called Users.txt beside the JAR file in the same folder and put it into a Scanner to be read.
             String[] userInfo = s.nextLine().split(":");
+            // Split this line based on regex of :, that separates each user. Store this in an array.
             for (int i = 0; i < userInfo.length; i++) {
+            // For each user information bit in the array, split this on regex of "," to select for specific user information. 
                 userDropdown.addItem(userInfo[i].split(",")[0]);
+                // In this case, we are just getting the username of the user and adding it to the users dropdown.
             }
-        } catch (NoSuchElementException e) {
-
-        } catch (FileNotFoundException e) {
-
+        } catch (FileNotFoundException e) { // If the code is not able to run properly because a file is not found,
+            warningWindow = new WarningWindow(this, "There was an error with the location of the Users or Leaderboard file. Please see user manual for more help.");
+            warningWindow.setVisible(true); 
+            // Inform the user.
         }
     }
 
@@ -125,7 +130,7 @@ public class SkinWindow extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(skinDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addContainerGap(111, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -155,80 +160,78 @@ public class SkinWindow extends javax.swing.JFrame {
     private void userDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userDropdownActionPerformed
         skinDropdown.removeAllItems();
         skinDropdown.addItem("Default");
+        // Remove all items from the skin dropdown once a new user is being selected, and add the defualt skin option.
         int wins = 0;
-        try {
+        try { // Try the following code,
             FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
             Scanner s = new Scanner(in);
+            // Get the file called Users.txt beside the JAR file in the same folder and put it into a Scanner to be read.
             String[] userInfo = s.nextLine().split(":");
+            // Split this line based on regex of :, that separates each user. Store this in an array.
+            System.out.println(Arrays.toString(userInfo));
             for (int i = 0; i < userInfo.length; i++) {
+                // For each user information bit in the array, split this on regex of "," to select for specific user information.
                 if (userInfo[i].split(",")[0].equalsIgnoreCase(userDropdown.getItemAt(userDropdown.getSelectedIndex()))) {
+                // If the user that is being analyzed in the for loop is the same as the one that is selected in the dropdown,
                     wins = Integer.parseInt(userInfo[i].split(",")[1]);
+                    // Store their amount of wins in a variable.
                 }
             }
-            User[] leaderboard = new User[userInfo.length];
-            int[] scores = new int[userInfo.length];
-            for (int i = 0; i < userInfo.length; i++) {
-                int losses = Integer.parseInt(userInfo[i].split(",")[3]);
-                scores[i] = (wins - losses);
-                leaderboard[i] = new User(userInfo[i].split(",")[0], scores[i]);
-            }
-            mergeSort(leaderboard, 0, leaderboard.length - 1);
-            try {
-                if (leaderboard[0].getUserName().equalsIgnoreCase(userDropdown.getItemAt(userDropdown.getSelectedIndex())) && leaderboard[0].getScore() > 3) {
-                    skinDropdown.addItem("1stplace");
-                } else if (leaderboard[1].getUserName().equalsIgnoreCase(userDropdown.getItemAt(userDropdown.getSelectedIndex())) && leaderboard[0].getScore() > 3) {
-                    skinDropdown.addItem("2ndplace");
-                } else if (leaderboard[2].getUserName().equalsIgnoreCase(userDropdown.getItemAt(userDropdown.getSelectedIndex())) && leaderboard[0].getScore() > 3) {
-                    skinDropdown.addItem("3rdplace");
-                }
-            } catch (ArrayIndexOutOfBoundsException e) {
-
-            }
-        } catch (NoSuchElementException e) {
-
-        } catch (FileNotFoundException e) {
-            warningWindow = new WarningWindow(this, "There was an error with the location of the Users file. Please see user manual for more help.");
+        } catch (NoSuchElementException e) { // If there is an error with the scanner, do nothing. This means the file is empty and it isnt an error.
+            
+        } catch (FileNotFoundException e) { // If there is an error with the file, 
+            warningWindow = new WarningWindow(this, "There was an error with the location of the Users file. Please see user manual for more help.");    
+            // Inform the user.
         }
-
-        if (wins >= 30) {
+        
+        if (wins >= 30) { // If the users wins are equal to or exceed 30, add all items to the skin dropdown.
             skinDropdown.addItem("30Wins");
             skinDropdown.addItem("20Wins");
             skinDropdown.addItem("10Wins");
-        } else if (wins >= 20) {
+        } else if (wins >= 20) { // Otherwise, if the users wins are equal to or exceed 20, add 20 wins and 10 wins to the skin dropdown.
             skinDropdown.addItem("20Wins");
             skinDropdown.addItem("10Wins");
-        } else if (wins >= 10) {
+        } else if (wins >= 10) { // Otherwise, if the users wins are equal to or exceed 10, add 10 wins to the skin dropdown.
             skinDropdown.addItem("10Wins");
         }
     }//GEN-LAST:event_userDropdownActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
-        try {
+        try { // Try the following code
             FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
-            FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/Users.txt");
             Scanner s = new Scanner(in);
+            // Get the file called Users.txt beside the JAR file in the same folder and put it into a Scanner to be read.
+            // Create an output stream to write to the Users.txt file in the same location.
             String[] userInfo = s.nextLine().split(":");
+            // Split this line based on regex of :, that separates each user. Store this in an array.
             String user = userDropdown.getItemAt(userDropdown.getSelectedIndex());
             for (int i = 0; i < userInfo.length; i++) {
+                // For each user information bit in the array, split this on regex of "," to select for specific user information.
                 if (user.equals(userInfo[i].split(",")[0])) {
                     userInfo[i] = userInfo[i].split(",")[0] + "," + userInfo[i].split(",")[1] + "," + userInfo[i].split(",")[2] + "," + userInfo[i].split(",")[3] + "," + skinDropdown.getItemAt(skinDropdown.getSelectedIndex());
                 }
             }
             String changedFile = "";
             for (int i = 0; i < userInfo.length; i++) {
+            // Go through the edited user info 
                 changedFile += userInfo[i] + ":";
             }
+            
+            in.close();
+            FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/Users.txt");
             try {
                 out.write(changedFile.getBytes());
             } catch (IOException e) {
 
             }
-        } catch (NoSuchElementException e) {
             
-        } catch (FileNotFoundException e) {
+            s.close();
+            out.close();
+        } catch (Exception e) {
             warningWindow = new WarningWindow(this, "There was an error with the location of the Users or Leaderboard file. Please see user manual for more help.");
             warningWindow.setVisible(true);
-        }
+        } 
+        System.out.println("Hi");
         this.dispose();
     }//GEN-LAST:event_exitButtonActionPerformed
 

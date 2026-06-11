@@ -25,7 +25,11 @@ public class HelpWindow extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
-
+    
+    /**
+     * help window constructor
+     * @param m - main window
+     */
     public HelpWindow(MainWindow m) {
         MoveJFrame();
         initComponents();
@@ -108,7 +112,7 @@ public class HelpWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
-        this.dispose();
+        this.dispose();//dispose of the window when the user selects exit
     }//GEN-LAST:event_exitButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

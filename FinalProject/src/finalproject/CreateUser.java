@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 public class CreateUser extends javax.swing.JFrame {
 
@@ -157,7 +158,7 @@ public class CreateUser extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-        this.dispose();
+        this.dispose();//dispose of the window if the cancel button is selected
     }//GEN-LAST:event_cancelButtonActionPerformed
 
 
@@ -166,6 +167,8 @@ public class CreateUser extends javax.swing.JFrame {
             FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
             Scanner s = new Scanner(in);
             numUsers = s.nextLine().split(":").length;
+            s.close();
+            in.close();
         } catch (Exception e) {
 
         }
@@ -179,6 +182,10 @@ public class CreateUser extends javax.swing.JFrame {
             try {
                 FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
                 Scanner s = new Scanner(in);
+                
+                if(!s.hasNext())
+                    return;
+                
                 String[] items = s.nextLine().split(":");
                 for (int i = 0; i < items.length; i++) {
                     if (!done) {
@@ -191,6 +198,7 @@ public class CreateUser extends javax.swing.JFrame {
                     }
                 }
             } catch (Exception e) {
+                e.printStackTrace();
                 if (numUsers > 1) {
                     warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help");
                 }
@@ -203,6 +211,7 @@ public class CreateUser extends javax.swing.JFrame {
                     out.write((userNameField.getText() + ",0,0,0,Default:").getBytes());
                     userNameField.setText("");
                 } catch (IOException e) {
+                    e.printStackTrace();
                     warningWindow = new WarningWindow(this, "There was an error with the Users file. Please see user manual for more help");
                 }
             }
@@ -211,7 +220,7 @@ public class CreateUser extends javax.swing.JFrame {
     }//GEN-LAST:event_goBtnActionPerformed
 
     private void userNameFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_userNameFieldKeyTyped
-        if (userNameField.getText().length() > 15) {
+        if (userNameField.getText().length() > 15) {//if the username is over 15 characters then just make the username the first 14 characters
             userNameField.setText(userNameField.getText().substring(0, 15));
         }
     }//GEN-LAST:event_userNameFieldKeyTyped

@@ -49,12 +49,18 @@ public class MainWindow extends javax.swing.JFrame {
         this.setVisible(true);
     }
 
+    /**
+     * main window constructor
+     */
     public MainWindow() {
         MoveJFrame();
         initComponents();
         getTop3();
     }
-
+    
+    /**
+     * get the top 3 users according to their amount of comeptitive wins
+     */
     public void getTop3() {
         try {
             FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
@@ -65,6 +71,7 @@ public class MainWindow extends javax.swing.JFrame {
             User[] leaderboard = new User[items.length];
             int[] scores = new int[items.length];
             for (int i = 0; i < items.length; i++) {
+                System.out.println(items[i]);
                 int wins = Integer.parseInt(items[i].split(",")[1]);
                 int losses = Integer.parseInt(items[i].split(",")[3]);
                 scores[i] = (wins - losses);

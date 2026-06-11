@@ -204,9 +204,10 @@ public class PromotionWindow extends javax.swing.JFrame {
 
         int col = gameWindow.getPromotionCol();
         int row = gameWindow.getPromotionRow();
+        System.out.println(hiddenInfo.getText());
         boolean promotionIsWhite = gameWindow.getPromotionIsWhite();
-        gameWindow.fixBoardAfterPromotion(col, row, "Queen", promotionIsWhite, hiddenInfo.getText().split(",")[0], hiddenInfo.getText().split(",")[1]);
-        this.setVisible(false);
+        gameWindow.fixBoardAfterPromotion(col, row, "Queen", promotionIsWhite, "Default", "Default");//replace the promoted pawn with queen
+        PromotionWindow.this.dispose();//dispose the window
         gameWindow.setVisible(true);
         // When the user promotes to a queen, replace their pawn with a queen at the exact same position in the same turn
     }//GEN-LAST:event_queenPromotionBtnActionPerformed
@@ -216,9 +217,9 @@ public class PromotionWindow extends javax.swing.JFrame {
         int row = gameWindow.getPromotionRow();
         boolean promotionIsWhite = gameWindow.getPromotionIsWhite();
         if (promotionIsWhite) {
-            gameWindow.fixBoardAfterPromotion(col, row, "Bishop", promotionIsWhite, hiddenInfo.getText().split(",")[0], hiddenInfo.getText().split(",")[1]);
+            gameWindow.fixBoardAfterPromotion(col, row, "Bishop", promotionIsWhite, "Default", "Default");//replace the promoted pawn with bishop
         }
-        this.setVisible(false);
+        PromotionWindow.this.dispose();//dispose the window
         gameWindow.setVisible(true);
         // When the user promotes to a bishop, replace their pawn with a bishop at the exact same position in the same turn
     }//GEN-LAST:event_bishopPromotionBtnActionPerformed
@@ -227,8 +228,8 @@ public class PromotionWindow extends javax.swing.JFrame {
         int col = gameWindow.getPromotionCol();
         int row = gameWindow.getPromotionRow();
         boolean promotionIsWhite = gameWindow.getPromotionIsWhite();
-        gameWindow.fixBoardAfterPromotion(col, row, "Knight", promotionIsWhite, hiddenInfo.getText().split(",")[0], hiddenInfo.getText().split(",")[1]);
-        PromotionWindow.this.setVisible(false);
+        gameWindow.fixBoardAfterPromotion(col, row, "Knight", promotionIsWhite, "Default", "Default");//replace the promoted pawn with the bishop
+        PromotionWindow.this.dispose();//dispose the window
         gameWindow.setVisible(true);
         // When the user promotes to a knight, replace their pawn with a knight at the exact same position in the same turn
     }//GEN-LAST:event_knightPromotionBtnActionPerformed
@@ -237,7 +238,7 @@ public class PromotionWindow extends javax.swing.JFrame {
         int col = gameWindow.getPromotionCol();
         int row = gameWindow.getPromotionRow();
         boolean promotionIsWhite = gameWindow.getPromotionIsWhite();
-        gameWindow.fixBoardAfterPromotion(col, row, "Rook", promotionIsWhite, hiddenInfo.getText().split(",")[0], hiddenInfo.getText().split(",")[1]);
+        gameWindow.fixBoardAfterPromotion(col, row, "Rook", promotionIsWhite, "Default", "Default");//replace the promoted pawn with a rook
         PromotionWindow.this.setVisible(false);
         gameWindow.setVisible(true);
         // When the user promotes to a rook, replace their pawn with a rook at the exact same position in the same turn

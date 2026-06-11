@@ -1,8 +1,8 @@
 /*
-A Zalli, L Necakov, N Wang
-May 21- June 10
-A window where the user can view the other users on the leaderboard based on points.
- */
+ L Necakov, A Zalli, N Wang
+ May 21- June 10, 2026
+ Leaderboard Window which displays all the users starting with the user with the highest points(i.e. wins-loses)
+*/
 package finalproject;
 
 import java.io.FileInputStream;
@@ -35,27 +35,33 @@ public class LeaderboardWindow extends javax.swing.JFrame {
         this.setVisible(true);
     }
 
+    /**
+     * leaderboardWindow constructor
+     * @param m - main window
+     */
     public LeaderboardWindow(MainWindow m) {
         MoveJFrame();
         initComponents();
         leaderboardSort();
         mainWindow = m;
     }
-
+    
+    /**
+     * sorts the leaderboard in descending order according to their number of points(i.e. wins-losses)
+     */
     public void leaderboardSort() {
         try {
             FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
-            FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/Leaderboard.txt", true);
-            FileOutputStream out2 = new FileOutputStream(System.getProperty("user.dir") + "/Leaderboard.txt", false);
+            FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/Leaderboard.txt");
             Scanner s = new Scanner(in);
             String[] items = s.nextLine().split(":");
             String[] userData = new String[items.length];
             User[] leaderboard = new User[items.length];
             int[] scores = new int[items.length];
-            for (int i = 0; i < items.length; i++) {
-                int wins = Integer.parseInt(items[i].split(",")[1]);
-                int losses = Integer.parseInt(items[i].split(",")[3]);
-                scores[i] = (wins - losses);
+            for (int i = 0; i < items.length; i++) {//goes through all the users
+                int wins = Integer.parseInt(items[i].split(",")[1]);//wins
+                int losses = Integer.parseInt(items[i].split(",")[3]);//losses
+                scores[i] = (wins - losses);//score = wins - losses
                 leaderboard[i] = new User(items[i].split(",")[0], scores[i]);
             }
             mergeSort(leaderboard, 0, leaderboard.length - 1);
@@ -65,7 +71,6 @@ public class LeaderboardWindow extends javax.swing.JFrame {
             }
             leaderboardList.setListData(sLeaderboard);
             try {
-                out2.write("".getBytes());
                 for (int i = 0; i < sLeaderboard.length; i++) {
                     out.write(sLeaderboard[i].getBytes());
                 }
@@ -73,12 +78,15 @@ public class LeaderboardWindow extends javax.swing.JFrame {
                 warningWindow = new WarningWindow(this, "There was an error with the parsing the Users or Leaderboard file. Please see user manual for more help.");
                 warningWindow.setVisible(true);
             }
-        } catch (NoSuchElementException e) {
             
-        } catch (FileNotFoundException e) {
+            s.close();
+            in.close();
+            out.close();
+        } catch (Exception e) {
             warningWindow = new WarningWindow(this, "There was an error with the location of the Users or Leaderboard file. Please see user manual for more help.");
             warningWindow.setVisible(true);
         }
+        
     }
 
     public static void mergeSort(User[] arr, int l, int r) {
