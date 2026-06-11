@@ -1,3 +1,9 @@
+/*
+L Necakov, A Zalli, N Wang
+May 21- June 10, 2026
+This class is the base for all chess pieces
+*/
+
 package pieces;
 
 import java.awt.image.BufferedImage;
@@ -15,20 +21,19 @@ abstract public class AbstractPiece implements Piece {
     protected int value;
 
     /**
-     * Basic constructor with no parameters
+     * Default constructor
+     * Creates an empty piece
      */
     public AbstractPiece() {
-
     }
 
     /**
-     * Abstract Piece constructor
-     *
-     * @param rowNum - row number
-     * @param columnNum - column number
-     * @param sprite - the buffered image
-     * @param isWhite - boolean of if the piece is white or not
-     * @param value - value of the piece
+     * Piece constructor
+     * @param rowNum board row
+     * @param columnNum board column
+     * @param sprite piece image
+     * @param isWhite piece color
+     * @param value piece value
      */
     public AbstractPiece(int rowNum, int columnNum, BufferedImage sprite, boolean isWhite, int value) {
         this.rowNum = rowNum;
@@ -39,148 +44,143 @@ abstract public class AbstractPiece implements Piece {
     }
 
     /**
-     * get the row number
-     *
-     * @return - the row number
+     * Gets row number
+     * @return row index
      */
     public int getRowNum() {
         return rowNum;
     }
 
     /**
-     * get the column number
-     *
-     * @return - the column number
+     * Gets column number
+     * @return column index
      */
     public int getColumnNum() {
         return columnNum;
     }
 
     /**
-     * get the Sprite
-     *
-     * @return Sprite
+     * Gets sprite image
+     * @return sprite
      */
     public BufferedImage getSprite() {
         return sprite;
     }
 
     /**
-     * get the boolean of if the piece is white
-     *
-     * @return - the boolean isWhite
+     * Checks if piece is white
+     * @return true if white
      */
     public boolean isWhite() {
         return isWhite;
     }
 
     /**
-     * returns the team
-     *
-     * @return - the team
+     * Gets team name
+     * @return White or Black
      */
     public String getTeam() {
-        if (isWhite) {//if the piece is white it belongs to the white team
+        if (isWhite) {
             return "White";
         }
-        return "Black";//otherwise it belongs to the black team.
+        return "Black";
     }
 
     /**
-     * get the value
-     *
-     * @return - the value
+     * Gets piece value
+     * @return value
      */
     public int getValue() {
         return value;
     }
 
     /**
-     * set the rown numer
-     *
-     * @param rowNum - the row number
+     * Sets row number
+     * @param rowNum new row
      */
     public void setRowNum(int rowNum) {
         this.rowNum = rowNum;
     }
 
     /**
-     * set the column number
-     *
-     * @param columnNum - the column number
+     * Sets column number
+     * @param columnNum new column
      */
     public void setColumnNum(int columnNum) {
         this.columnNum = columnNum;
     }
 
     /**
-     * set the Sprite
-     *
-     * @param sprite - the Sprite
+     * Sets sprite image
+     * @param sprite new sprite
      */
     public void setSprite(BufferedImage sprite) {
         this.sprite = sprite;
     }
 
     /**
-     * set if the piece is white
-     *
-     * @param isWhite - boolean isWhite
+     * Sets piece color
+     * @param isWhite new color
      */
     public void setWhite(boolean isWhite) {
         this.isWhite = isWhite;
     }
 
     /**
-     * set the number of pieces
-     *
-     * @param numPieces - the number of pieces
+     * Sets total number of pieces
+     * @param numPieces count
      */
     public static void setNumPieces(int numPieces) {
         AbstractPiece.numPieces = numPieces;
     }
 
     /**
-     * set the value of the piece
-     *
-     * @param value - the value of the piece
+     * Sets piece value
+     * @param value new value
      */
     public void setValue(int value) {
         this.value = value;
     }
 
     /**
-     * set the valid moves
-     *
-     * @param validMoves - array list of valid moves
+     * Sets valid moves list
+     * @param validMoves list of moves
      */
     public void setValidMoves(ArrayList<Move> validMoves) {
         this.validMoves = validMoves;
     }
 
-    abstract public ArrayList<Move> getValidMoves(Piece pieces[][]);//abstract
+    /**
+     * Gets valid moves for this piece
+     * @param pieces board state
+     * @return list of moves
+     */
+    abstract public ArrayList<Move> getValidMoves(Piece pieces[][]);
 
     /**
-     * search the direction
-     *
-     * @param moves - the array list of moves
-     * @param pieces - 2d array of pieces
-     * @param currentRow - current row
-     * @param currentCol - current coloum
-     * @param dRow - delta row
-     * @param dCol - delta colums
+     * Searches in a direction for sliding moves
+     * @param moves list to add to
+     * @param pieces board state
+     * @param currentRow start row
+     * @param currentCol start col
+     * @param dRow row step
+     * @param dCol col step
      */
     public void searchDirection(ArrayList<Move> moves, Piece[][] pieces, int currentRow, int currentCol, int dRow, int dCol) {
-        if (!isInsideBoard(currentRow, currentCol)) {//if it is outside the board
+
+        // stop if outside board
+        if (!isInsideBoard(currentRow, currentCol)) {
             return;
         }
 
         Piece piece = getPieceAt(currentRow, currentCol, pieces);
 
-        if (piece == null) {//if the piece is null
-            moves.add(new Move(currentRow, currentCol));//add that to the moves
+        if (piece == null) {
+            // empty square, add move and keep going
+            moves.add(new Move(currentRow, currentCol));
             searchDirection(moves, pieces, currentRow + dRow, currentCol + dCol, dRow, dCol);
         } else {
+            // enemy piece can be captured
             if (piece.isWhite() != this.isWhite()) {
                 moves.add(new Move(currentRow, currentCol));
             }
@@ -188,74 +188,74 @@ abstract public class AbstractPiece implements Piece {
     }
 
     /**
-     * if inside the board
-     *
-     * @param row - the row
-     * @param col- the column
-     * @return - true if inside the board and false otherwise
+     * Checks if position is inside board
+     * @param row row index
+     * @param col col index
+     * @return true if inside
      */
     public boolean isInsideBoard(int row, int col) {
         return (row >= 0 && row <= 7 && col >= 0 && col <= 7);
     }
 
     /**
-     * get piece at a given index
-     *
-     * @param row - the row
-     * @param col - the col
-     * @param pieces- 2d array of pieces
-     * @return - piece at the given row+column
+     * Gets piece at board position
+     * @param row row index
+     * @param col col index
+     * @param pieces board state
+     * @return piece at position
      */
     public Piece getPieceAt(int row, int col, Piece[][] pieces) {
         return pieces[row][col];
     }
 
     /**
-     * get the number of pieces
-     *
-     * @return - the number of pieces
+     * Gets number of pieces created
+     * @return count
      */
     public static int getNumPieces() {
         return numPieces;
     }
 
     /**
-     * checks if 2 pieces are equal
-     *
-     * @param - a piece
-     * @return - true if equal and false otherwise
+     * Checks if two pieces are equal
+     * @param p piece to compare
+     * @return true if equal
      */
     public boolean equals(Piece p) {
         if (this == p) {
             return true;
         }
-        if (p == null) {// if p is null
+        if (p == null) {
             return false;
         }
-        if (getClass() != p.getClass()) {// if the classes aren't equal
+        if (getClass() != p.getClass()) {
             return false;
         }
-        final AbstractPiece other = (AbstractPiece) p;
-        if (this.isWhite != other.isWhite) {//if the team of the pieces are oposite
+
+        AbstractPiece other = (AbstractPiece) p;
+
+        // compare color and value
+        if (this.isWhite != other.isWhite) {
             return false;
         }
-        if (this.value != other.value) {//if the values are not the same
+        if (this.value != other.value) {
             return false;
         }
+
+        // compare sprite
         return Objects.equals(this.sprite, other.sprite);
     }
 
     /**
-     * toString - returns the toString
-     *
-     * @return - the status of the piece
+     * Returns piece info as text
+     * @return string with details
      */
     public String toString() {
-        return ("Piece Information"
+        return "Piece Information"
                 + "\nRow Position: " + rowNum
                 + "\nColumn Position: " + columnNum
                 + "\nTeam: " + this.getTeam()
                 + "\nNumber of Valid Moves: " + validMoves
-                + "\nValue: " + value);
+                + "\nValue: " + value;
     }
 }

@@ -1,7 +1,7 @@
 /*
 L Necakov, A Zalli, N Wang
 May 21- June 10, 2026
-Sandbox Window
+Sandbox Window where the user can customize the movement style of pieces and spawn in new ones.
  */
 package finalproject;
 

@@ -1,3 +1,9 @@
+/*
+L Necakov, A Zalli, N Wang
+May 21- June 10, 2026
+This class handles bishop movement and bishop data
+ */
+
 package pieces;
 
 import java.awt.image.BufferedImage;
@@ -8,36 +14,35 @@ public class Bishop extends AbstractPiece {
     private static int numBishop = 0;
 
     /**
-     * basic constructor for Bishop
+     * Default bishop constructor
+     * Creates an empty bishop and updates count
      */
     public Bishop() {
-        super();//calles the constructor with no paramaters from the super class
-        numBishop++;//number of bishop pieces increase
+        super(); // call parent default constructor
+        numBishop++; // track number of bishops
     }
 
     /**
-     * Constructor of Bishop
-     *
-     * @param rowNum - row number
-     * @param columnNum - column number
-     * @param sprite - sprite
-     * @param isWhite - if piece is on white team
+     * Bishop constructor
+     * @param rowNum board row
+     * @param columnNum board column
+     * @param sprite piece image
+     * @param isWhite piece color
      */
     public Bishop(int rowNum, int columnNum, BufferedImage sprite, boolean isWhite) {
-        super(rowNum, columnNum, sprite, isWhite, 3);//calls the constructor with the following paramaters from the super class
-        numBishop++;//number of bishops increase
+        super(rowNum, columnNum, sprite, isWhite, 3); // bishop value is 3
+        numBishop++; // update count
     }
 
     /**
-     * Get the valid moves for a specific array of pieces of type Piece
-     *
-     * @param pieces - 2d array of piece
-     * @return - the array list
+     * Gets all valid bishop moves
+     * @param pieces board state
+     * @return list of valid moves
      */
     public ArrayList<Move> getValidMoves(Piece pieces[][]) {
-        ArrayList<Move> moves = new ArrayList();
+        ArrayList<Move> moves = new ArrayList<>();
 
-        //the 4 possible options that a bishop could possibly move
+        // bishop moves in four diagonal directions
         searchDirection(moves, pieces, rowNum + 1, columnNum + 1, 1, 1);
         searchDirection(moves, pieces, rowNum - 1, columnNum + 1, -1, 1);
         searchDirection(moves, pieces, rowNum + 1, columnNum - 1, 1, -1);
@@ -47,21 +52,18 @@ public class Bishop extends AbstractPiece {
     }
 
     /**
-     * Get the number of instantiated bishops as an integer
-     *
-     * @return - the number of bishops
+     * Gets number of bishops created
+     * @return bishop count
      */
     public static int getNumBishop() {
         return numBishop;
     }
 
     /**
-     * Returns a string that describes the bishops properties.
-     *
-     * @return - the String
+     * Returns bishop info as text
+     * @return string with bishop details
      */
     public String toString() {
-        return ("Piece Type: Bishop"
-                + super.toString());//calls super toString class
+        return "Piece Type: Bishop" + super.toString(); // add parent info
     }
 }

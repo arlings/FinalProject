@@ -1,3 +1,9 @@
+/*
+L Necakov, A Zalli, N Wang
+May 21- June 10, 2026
+This class handles king movement and king data
+*/
+
 package pieces;
 
 import java.awt.image.BufferedImage;
@@ -6,55 +12,60 @@ import java.util.ArrayList;
 public class King extends AbstractPiece {
 
     private static int numKings;
-    private boolean inCheck; //add logic later
+    private boolean inCheck;
     private boolean inCheckMate;
     private boolean hasMoved;
 
     /**
-     * Default default constructor
+     * Default constructor
+     * Creates a king with preset values
      */
     public King() {
-        this(0, 4, null, true, false, false, false);//calls the King constructor with the following paramaters
+        this(0, 4, null, true, false, false, false); // call main constructor
     }
 
     /**
      * King constructor
-     *
-     * @param rowNum - row number
-     * @param columnNum - column number
-     * @param sprite - sprite
-     * @param isWhite- is the piece is white
-     * @param inCheck- if king is in check
-     * @param inCheckMate- if king is in check mate
-     * @param hasMoved - if king has moved
+     * @param rowNum board row
+     * @param columnNum board column
+     * @param sprite piece image
+     * @param isWhite piece color
+     * @param inCheck check state
+     * @param inCheckMate checkmate state
+     * @param hasMoved move state
      */
-    public King(int rowNum, int columnNum, BufferedImage sprite, boolean isWhite, boolean inCheck, boolean inCheckMate, boolean hasMoved) {
-        super(rowNum, columnNum, sprite, isWhite, 0);//calls super class with the following paramaters
+    public King(int rowNum, int columnNum, BufferedImage sprite, boolean isWhite,
+                boolean inCheck, boolean inCheckMate, boolean hasMoved) {
+
+        super(rowNum, columnNum, sprite, isWhite, 0); // king has no point value
         this.inCheck = inCheck;
         this.inCheckMate = inCheckMate;
         this.hasMoved = hasMoved;
     }
 
     /**
-     * get the valid moves
-     *
-     * @param pieces- 2d array of pieces
-     * @return - array list of valid moves
+     * Gets valid king moves
+     * @param pieces board state
+     * @return list of moves
      */
     public ArrayList<Move> getValidMoves(Piece[][] pieces) {
+
         ArrayList<Move> moves = new ArrayList<>();
-        // Straight directions
+
+        // straight moves
         searchDirection(moves, pieces, rowNum + 1, columnNum, 1, 0);
         searchDirection(moves, pieces, rowNum - 1, columnNum, -1, 0);
         searchDirection(moves, pieces, rowNum, columnNum + 1, 0, 1);
         searchDirection(moves, pieces, rowNum, columnNum - 1, 0, -1);
-        // Diagonal directions
+
+        // diagonal moves
         searchDirection(moves, pieces, rowNum + 1, columnNum + 1, 1, 1);
         searchDirection(moves, pieces, rowNum - 1, columnNum + 1, -1, 1);
         searchDirection(moves, pieces, rowNum + 1, columnNum - 1, 1, -1);
         searchDirection(moves, pieces, rowNum - 1, columnNum - 1, -1, -1);
 
-        if (!this.hasMoved) {//for castling
+        // castling if king has not moved
+        if (!this.hasMoved) {
             checkCastling(moves, pieces);
         }
 
@@ -62,108 +73,108 @@ public class King extends AbstractPiece {
     }
 
     /**
-     * check for castling
-     *
-     * @param moves - array list of moves
-     * @param pieces - 2d array of pieces
+     * Checks castling options
+     * @param moves list to add moves to
+     * @param pieces board state
      */
     private void checkCastling(ArrayList<Move> moves, Piece[][] pieces) {
-        Piece kingSidePiece = pieces[this.rowNum][7];
+
+        // king side rook at column 7
+        Piece kingSidePiece = pieces[rowNum][7];
         if (kingSidePiece instanceof Rook && !((Rook) kingSidePiece).hasMoved()) {
-            if (pieces[this.rowNum][5] == null && pieces[this.rowNum][6] == null) {
-                moves.add(new Move(this.rowNum, 6));
+
+            // squares between must be empty
+            if (pieces[rowNum][5] == null && pieces[rowNum][6] == null) {
+                moves.add(new Move(rowNum, 6));
             }
         }
 
-        Piece queenSidePiece = pieces[this.rowNum][0];
+        // queen side rook at column 0
+        Piece queenSidePiece = pieces[rowNum][0];
         if (queenSidePiece instanceof Rook && !((Rook) queenSidePiece).hasMoved()) {
-            if (pieces[this.rowNum][1] == null && pieces[this.rowNum][2] == null && pieces[this.rowNum][3] == null) {
-                moves.add(new Move(this.rowNum, 2));
+
+            // squares between must be empty
+            if (pieces[rowNum][1] == null &&
+                pieces[rowNum][2] == null &&
+                pieces[rowNum][3] == null) {
+
+                moves.add(new Move(rowNum, 2));
             }
         }
     }
 
     /**
-     * search direction
-     *
-     * @param moves - array list of moves
-     * @param pieces - 2d array of pieces
-     * @param currentRow - current row
-     * @param currentCol - current col
-     * @param dRow - delta row
-     * @param dCol - delta col
+     * Searches one square in a direction
+     * @param moves list to add to
+     * @param pieces board state
+     * @param currentRow target row
+     * @param currentCol target col
+     * @param dRow row step
+     * @param dCol col step
      */
-    public void searchDirection(ArrayList<Move> moves, Piece[][] pieces, int currentRow, int currentCol, int dRow, int dCol) {
-        if (!isInsideBoard(currentRow, currentCol)) {//if it isn't inside of the board
+    public void searchDirection(ArrayList<Move> moves, Piece[][] pieces,
+                                int currentRow, int currentCol, int dRow, int dCol) {
+
+        // stop if outside board
+        if (!isInsideBoard(currentRow, currentCol)) {
             return;
         }
 
         Piece piece = getPieceAt(currentRow, currentCol, pieces);
 
         if (piece == null) {
-            moves.add(new Move(currentRow, currentCol));
-        } else {
-            // Capture enemy piece, but block further movement
-            if (piece.isWhite() != this.isWhite()) {
-                moves.add(new Move(currentRow, currentCol));
-            }
+            moves.add(new Move(currentRow, currentCol)); // empty square
+        } else if (piece.isWhite() != this.isWhite()) {
+            moves.add(new Move(currentRow, currentCol)); // capture enemy
         }
     }
 
     /**
-     * get the number of kings
-     *
-     * @return - number of kings
+     * Gets number of kings created
+     * @return count
      */
     public static int getNumKings() {
         return numKings;
     }
 
     /**
-     * get if king is in check
-     *
-     * @return - true if in check false otherwise
+     * Checks if king is in check
+     * @return true if in check
      */
     public boolean isInCheck() {
         return inCheck;
     }
 
     /**
-     * get if king is in check mate
-     *
-     * @return - true if in check mate false otherwise
+     * Checks if king is in checkmate
+     * @return true if in checkmate
      */
     public boolean isInCheckMate() {
-        inCheckMate = validMoves.isEmpty();
+        inCheckMate = validMoves.isEmpty(); // simple check
         return inCheckMate;
     }
 
     /**
-     * check if king has moved
-     *
-     * @return - true if king has moved false otherwise
+     * Checks if king has moved
+     * @return true if moved
      */
     public boolean hasMoved() {
-        return this.hasMoved;
+        return hasMoved;
     }
 
     /**
-     * set if king has moved
-     *
-     * @param hasMoved - boolean if king has moved
+     * Sets moved state
+     * @param hasMoved new state
      */
     public void setHasMoved(boolean hasMoved) {
         this.hasMoved = hasMoved;
     }
 
     /**
-     * return toString of king class
-     *
-     * @return - toString
+     * Returns king info as text
+     * @return string
      */
     public String toString() {
-        return ("Piece Type: King"
-                + super.toString());//calls super toString class
+        return "Piece Type: King" + super.toString();
     }
-
 }

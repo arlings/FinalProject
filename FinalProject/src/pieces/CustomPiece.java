@@ -1,3 +1,8 @@
+/*
+L Necakov, A Zalli, N Wang
+May 21- June 10, 2026
+This class handles custom piece movement rules
+ */
 package pieces;
 
 import java.util.ArrayList;
@@ -9,6 +14,7 @@ public class CustomPiece extends AbstractPiece {
     private boolean pawnCaptures = false;
     private boolean isFirstMove = true;
     private boolean isSandboxMode = false;
+
     private ArrayList<int[]> slideDirections = new ArrayList<>();
     private ArrayList<int[]> knightJumps = new ArrayList<>();
     private ArrayList<Move> customJumps = new ArrayList<>();
@@ -16,33 +22,34 @@ public class CustomPiece extends AbstractPiece {
     /**
      * Custom piece constructor
      *
-     * @param row - row
-     * @param col - col
-     * @param sprite - image
-     * @param isWhite- if piece is White
-     * @param isSandboxMode - if it is sandbox mode
+     * @param row board row
+     * @param col board column
+     * @param sprite piece image
+     * @param isWhite piece color
+     * @param isSandboxMode sandbox mode flag
      */
     public CustomPiece(int row, int col, BufferedImage sprite, boolean isWhite, boolean isSandboxMode) {
-        super(row, col, sprite, isWhite, 0);//calls super constructor with the paramaters
+        super(row, col, sprite, isWhite, 0); // custom piece has no fixed value
         this.isSandboxMode = isSandboxMode;
     }
 
     /**
-     * set the sandbox mode
+     * Sets sandbox mode
      *
-     * @param isSandboxMode- boolean of if it is the sandbox mode
+     * @param isSandboxMode new mode
      */
     public void setSandboxMode(boolean isSandboxMode) {
         this.isSandboxMode = isSandboxMode;
     }
 
     /**
-     * add move rules
+     * Adds movement rules based on preset name
      *
-     * @param preset - String of move
+     * @param preset rule name
      */
     public void addMoveRules(String preset) {
-        // Rook-like
+
+        // Rook directions
         if (preset.equalsIgnoreCase("UP_ROOK")) {
             slideDirections.add(new int[]{1, 0});
         } else if (preset.equalsIgnoreCase("DOWN_ROOK")) {
@@ -51,9 +58,8 @@ public class CustomPiece extends AbstractPiece {
             slideDirections.add(new int[]{0, -1});
         } else if (preset.equalsIgnoreCase("RIGHT_ROOK")) {
             slideDirections.add(new int[]{0, 1});
-        } // Bishop-like
+        } // Bishop directions
         else if (preset.equalsIgnoreCase("TOP_LEFT_BISHOP")) {
-            //System.out.println("Adding top left bishop");
             slideDirections.add(new int[]{1, -1});
         } else if (preset.equalsIgnoreCase("TOP_RIGHT_BISHOP")) {
             slideDirections.add(new int[]{1, 1});
@@ -61,7 +67,7 @@ public class CustomPiece extends AbstractPiece {
             slideDirections.add(new int[]{-1, -1});
         } else if (preset.equalsIgnoreCase("BOTTOM_RIGHT_BISHOP")) {
             slideDirections.add(new int[]{-1, 1});
-        } // Knight-like
+        } // Knight jumps
         else if (preset.equalsIgnoreCase("TOP_LEFT_VERT_KNIGHT")) {
             knightJumps.add(new int[]{2, -1});
         } else if (preset.equalsIgnoreCase("TOP_RIGHT_VERT_KNIGHT")) {
@@ -78,14 +84,15 @@ public class CustomPiece extends AbstractPiece {
             knightJumps.add(new int[]{-1, -2});
         } else if (preset.equalsIgnoreCase("BOTTOM_RIGHT_HORZ_KNIGHT")) {
             knightJumps.add(new int[]{-1, 2});
-        } else if (preset.equalsIgnoreCase("PAWN_MOVE")) {
+        } // Pawn rules
+        else if (preset.equalsIgnoreCase("PAWN_MOVE")) {
             pawnMoves = true;
         } else if (preset.equalsIgnoreCase("PAWN_CAPTURE")) {
             pawnCaptures = true;
         } else if (preset.equalsIgnoreCase("PAWN")) {
             pawnMoves = true;
             pawnCaptures = true;
-        } // Combinations (Recursive calls)
+        } // Group presets
         else if (preset.equalsIgnoreCase("ROOK")) {
             addMoveRules("UP_ROOK");
             addMoveRules("DOWN_ROOK");
@@ -111,14 +118,14 @@ public class CustomPiece extends AbstractPiece {
         }
     }
 
-    //fully just copied pasted from AI
     /**
-     * removes the move rules
+     * Removes movement rules based on preset name
      *
-     * @param preset - String
+     * @param preset rule name
      */
     public void removeMoveRules(String preset) {
-        // Rook-like
+
+        // Rook directions
         if (preset.equalsIgnoreCase("UP_ROOK")) {
             slideDirections.removeIf(dir -> dir[0] == 1 && dir[1] == 0);
             customJumps.removeIf(m -> m.getRowNum() > 0 && m.getColumnNum() == 0);
@@ -131,8 +138,8 @@ public class CustomPiece extends AbstractPiece {
         } else if (preset.equalsIgnoreCase("RIGHT_ROOK")) {
             slideDirections.removeIf(dir -> dir[0] == 0 && dir[1] == 1);
             customJumps.removeIf(m -> m.getRowNum() == 0 && m.getColumnNum() > 0);
-            // Bishop-like
-        } else if (preset.equalsIgnoreCase("TOP_LEFT_BISHOP")) {
+        } // Bishop directions
+        else if (preset.equalsIgnoreCase("TOP_LEFT_BISHOP")) {
             slideDirections.removeIf(dir -> dir[0] == 1 && dir[1] == -1);
             customJumps.removeIf(m -> m.getRowNum() > 0 && m.getColumnNum() < 0);
         } else if (preset.equalsIgnoreCase("TOP_RIGHT_BISHOP")) {
@@ -144,7 +151,8 @@ public class CustomPiece extends AbstractPiece {
         } else if (preset.equalsIgnoreCase("BOTTOM_RIGHT_BISHOP")) {
             slideDirections.removeIf(dir -> dir[0] == -1 && dir[1] == 1);
             customJumps.removeIf(m -> m.getRowNum() < 0 && m.getColumnNum() > 0);
-        } else if (preset.equalsIgnoreCase("TOP_LEFT_VERT_KNIGHT")) {
+        } // Knight jumps
+        else if (preset.equalsIgnoreCase("TOP_LEFT_VERT_KNIGHT")) {
             knightJumps.removeIf(j -> j[0] == 2 && j[1] == -1);
         } else if (preset.equalsIgnoreCase("TOP_RIGHT_VERT_KNIGHT")) {
             knightJumps.removeIf(j -> j[0] == 2 && j[1] == 1);
@@ -160,15 +168,15 @@ public class CustomPiece extends AbstractPiece {
             knightJumps.removeIf(j -> j[0] == -1 && j[1] == -2);
         } else if (preset.equalsIgnoreCase("BOTTOM_RIGHT_HORZ_KNIGHT")) {
             knightJumps.removeIf(j -> j[0] == -1 && j[1] == 2);
-        } // Pawn-like
+        } // Pawn rules
         else if (preset.equalsIgnoreCase("PAWN_MOVE")) {
-            this.pawnMoves = false;
+            pawnMoves = false;
         } else if (preset.equalsIgnoreCase("PAWN_CAPTURE")) {
-            this.pawnCaptures = false;
+            pawnCaptures = false;
         } else if (preset.equalsIgnoreCase("PAWN")) {
-            this.pawnMoves = false;
-            this.pawnCaptures = false;
-        } // Group Preset Removal (Recursive)
+            pawnMoves = false;
+            pawnCaptures = false;
+        } // Group presets
         else if (preset.equalsIgnoreCase("ROOK")) {
             removeMoveRules("UP_ROOK");
             removeMoveRules("DOWN_ROOK");
@@ -194,31 +202,34 @@ public class CustomPiece extends AbstractPiece {
         }
     }
 
-    private boolean matchesDirection(Move m, int dx, int dy) {
-        return m.getRowNum() == dx && m.getColumnNum() == dy;
-    }
-
     /**
-     * clear the rules
+     * Clears all movement rules
      */
     public void clearRules() {
-        this.slideDirections.clear();
-        this.knightJumps.clear();
-        this.customJumps.clear();
-        this.pawnMoves = false;
-        this.pawnCaptures = false;
+        slideDirections.clear();
+        knightJumps.clear();
+        customJumps.clear();
+        pawnMoves = false;
+        pawnCaptures = false;
     }
 
     /**
-     * add the move rules
+     * Adds a custom jump move
      *
-     * @param dx - delta x
-     * @param dy - delta y
+     * @param dx row offset
+     * @param dy col offset
      */
     public void addMoveRules(int dx, int dy) {
         customJumps.add(new Move(dx, dy));
     }
 
+    /**
+     * Removes a custom jump move
+     *
+     * @param dx row offset
+     * @param dy col offset
+     * @return true if removed
+     */
     public boolean removeMoveRule(int dx, int dy) {
         for (int i = 0; i < customJumps.size(); i++) {
             Move m = customJumps.get(i);
@@ -231,12 +242,7 @@ public class CustomPiece extends AbstractPiece {
     }
 
     /**
-     * jump the knight
-     *
-     * @param moves - array list of moves
-     * @param pieces - 2d array of pieces
-     * @param dRow - delta row
-     * @param dCol - delta col
+     * Adds knight jump to move list
      */
     private void knightJump(ArrayList<Move> moves, Piece[][] pieces, int dRow, int dCol) {
         int targetRow = rowNum + dRow;
@@ -244,7 +250,8 @@ public class CustomPiece extends AbstractPiece {
 
         if (isInsideBoard(targetRow, targetCol)) {
             Piece piece = getPieceAt(targetRow, targetCol, pieces);
-            // Can move if square is empty or has an opponent
+
+            // can move if empty or enemy
             if (piece == null || piece.isWhite() != this.isWhite()) {
                 moves.add(new Move(targetRow, targetCol));
             }
@@ -252,13 +259,7 @@ public class CustomPiece extends AbstractPiece {
     }
 
     /**
-     * searc
-     *
-     * @param moves
-     * @param pieces
-     * @param targetRow
-     * @param targetCol
-     * @param direction
+     * Pawn forward movement
      */
     private void searchPawnForward(ArrayList<Move> moves, Piece[][] pieces, int targetRow, int targetCol, int direction) {
         if (isInsideBoard(targetRow, targetCol)) {
@@ -269,11 +270,17 @@ public class CustomPiece extends AbstractPiece {
         }
     }
 
+    /**
+     * Pawn capture movement
+     */
     private void searchPawnCaptures(ArrayList<Move> moves, Piece[][] pieces, int targetRow) {
         int[] captureCols = {columnNum - 1, columnNum + 1};
+
         for (int col : captureCols) {
             if (isInsideBoard(targetRow, col)) {
                 Piece targetPiece = getPieceAt(targetRow, col, pieces);
+
+                // sandbox allows capturing empty squares
                 if (isSandboxMode || (targetPiece != null && targetPiece.isWhite() != this.isWhite())) {
                     moves.add(new Move(targetRow, col));
                 }
@@ -281,51 +288,73 @@ public class CustomPiece extends AbstractPiece {
         }
     }
 
+    /**
+     * Gets all valid moves for this custom piece
+     *
+     * @param pieces board state
+     * @return list of moves
+     */
     public ArrayList<Move> getValidMoves(Piece[][] pieces) {
-        //System.out.println("slideDirections size = " + slideDirections.size());
+
         ArrayList<Move> moves = new ArrayList<>();
+
+        // sliding moves
         for (int[] dir : slideDirections) {
             searchDirection(moves, pieces, rowNum + dir[0], columnNum + dir[1], dir[0], dir[1]);
         }
+
+        // knight jumps
         for (int[] jump : knightJumps) {
             knightJump(moves, pieces, jump[0], jump[1]);
         }
 
+        // custom jumps
         for (Move m : customJumps) {
             int targetRow = rowNum + m.getRowNum();
             int targetCol = columnNum + m.getColumnNum();
 
             if (isInsideBoard(targetRow, targetCol)) {
                 Piece target = getPieceAt(targetRow, targetCol, pieces);
+
                 if (target == null || target.isWhite() != this.isWhite()) {
                     moves.add(new Move(targetRow, targetCol));
                 }
             }
         }
+
+        // pawn movement
         if (pawnMoves || pawnCaptures) {
+
             int direction = this.isWhite() ? 1 : -1;
 
             if (pawnMoves) {
                 searchPawnForward(moves, pieces, rowNum + direction, columnNum, direction);
 
+                // first move two step
                 if (isFirstMove) {
                     int targetRow = rowNum + direction;
                     int twoStepRow = rowNum + (2 * direction);
+
                     if (isInsideBoard(twoStepRow, columnNum)
                             && getPieceAt(targetRow, columnNum, pieces) == null
                             && getPieceAt(twoStepRow, columnNum, pieces) == null) {
+
                         moves.add(new Move(twoStepRow, columnNum));
                     }
                 }
             }
+
             if (pawnCaptures) {
                 searchPawnCaptures(moves, pieces, rowNum + direction);
             }
         }
-        //System.out.println("Valid moves: " + moves.size());
+
         return moves;
     }
 
+    /**
+     * Checks if knight jump exists
+     */
     public boolean hasKnight(int dx, int dy) {
         for (int[] jump : knightJumps) {
             if (jump[0] == dx && jump[1] == dy) {
@@ -335,50 +364,83 @@ public class CustomPiece extends AbstractPiece {
         return false;
     }
 
-    private boolean containsMove(ArrayList<Move> list, int dx, int dy) {
-        for (Move m : list) {
-            if (m.getRowNum() == dx && m.getColumnNum() == dy) {
-                return true;
-            }
-        }
-        return false;
-    }
-
+    /**
+     * Checks if pawn forward is enabled
+     */
     public boolean hasPawnMove() {
         return pawnMoves;
     }
 
+    /**
+     * Checks if pawn capture is enabled
+     */
     public boolean hasPawnCapture() {
         return pawnCaptures;
     }
 
+    /**
+     * Sets pawn forward movement
+     *
+     * @param value true or false
+     */
     public void setPawnMoves(boolean value) {
-        this.pawnMoves = value;
+        pawnMoves = value; // update flag
     }
 
+    /**
+     * Sets pawn capture movement
+     *
+     * @param value true or false
+     */
     public void setPawnCaptures(boolean value) {
-        this.pawnCaptures = value;
+        pawnCaptures = value; // update flag
     }
 
+    /**
+     * Adds a knight jump
+     *
+     * @param dx row offset
+     * @param dy col offset
+     */
     public void addKnightMove(int dx, int dy) {
-        knightJumps.add(new int[]{dx, dy});
+        knightJumps.add(new int[]{dx, dy}); // store jump
     }
 
+    /**
+     * Removes a knight jump
+     *
+     * @param dx row offset
+     * @param dy col offset Note this method was made with help from ai
+     */
     public void removeKnightMove(int dx, int dy) {
-        knightJumps.removeIf(j -> j[0] == dx && j[1] == dy);
+        knightJumps.removeIf(j -> j[0] == dx && j[1] == dy); // remove matching jump
     }
 
+    /**
+     * Creates a copy of this custom piece
+     *
+     * @param newRow new row
+     * @param newCol new col
+     * @return new CustomPiece with same rules
+     */
     public CustomPiece copy(int newRow, int newCol) {
         CustomPiece cp = new CustomPiece(newRow, newCol, this.getSprite(), this.isWhite(), this.isSandboxMode);
+
         cp.slideDirections = new ArrayList<>(this.slideDirections);
         cp.knightJumps = new ArrayList<>(this.knightJumps);
         cp.customJumps = new ArrayList<>(this.customJumps);
+
         cp.pawnMoves = this.pawnMoves;
         cp.pawnCaptures = this.pawnCaptures;
+
         return cp;
     }
 
-    @Override //generated by AI for
+    @Override
+    /**
+     * Method that prints all the information about a piece into a string. Made
+     * with help from ai.
+     */
     public String toString() {
         StringBuilder sb = new StringBuilder();
 

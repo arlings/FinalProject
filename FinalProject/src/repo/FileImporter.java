@@ -1,7 +1,7 @@
 /*
  L Necakov, A Zalli, N Wang
  May 21- June 10, 2026
- Creater a file importer 
+ Creating a file importer adjusted for the main board
 */
 package repo;
 

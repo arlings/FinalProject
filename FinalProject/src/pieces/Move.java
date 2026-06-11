@@ -1,3 +1,9 @@
+/*
+L Necakov, A Zalli, N Wang
+May 21- June 10, 2026
+This class stores a move position on the board
+*/
+
 package pieces;
 
 public class Move {
@@ -6,7 +12,8 @@ public class Move {
     private int columnNum;
 
     /**
-     * default constructor
+     * Default constructor
+     * Creates a move at row 0 col 0
      */
     public Move() {
         rowNum = 0;
@@ -15,9 +22,8 @@ public class Move {
 
     /**
      * Move constructor
-     *
-     * @param rowNum- row number
-     * @param columnNum - column number
+     * @param rowNum row index
+     * @param columnNum column index
      */
     public Move(int rowNum, int columnNum) {
         this.rowNum = rowNum;
@@ -25,72 +31,68 @@ public class Move {
     }
 
     /**
-     * get the row number
-     *
-     * @return - the row number
+     * Gets row number
+     * @return row index
      */
     public int getRowNum() {
         return rowNum;
     }
 
     /**
-     * get the column number
-     *
-     * @return - the column number
+     * Gets column number
+     * @return column index
      */
     public int getColumnNum() {
         return columnNum;
     }
 
     /**
-     * set the row number
-     *
-     * @param rowNum - new row number
+     * Sets row number
+     * @param rowNum new row
      */
     public void setRowNum(int rowNum) {
         this.rowNum = rowNum;
     }
 
     /**
-     * set the column number
-     *
-     * @param columnNum - new column number
+     * Sets column number
+     * @param columnNum new column
      */
     public void setColumnNum(int columnNum) {
         this.columnNum = columnNum;
     }
 
     /**
-     * check if 2 objects are the same
-     *
-     * @param obj - the second object or the object that is being compared to
-     * the given index
-     * @return
+     * Checks if two moves are equal
+     * @param obj object to compare
+     * @return true if same row and column
      */
     public boolean equals(Object obj) {
-        if (this == obj) {//if the same reference
-            return true;
+
+        if (this == obj) {
+            return true; // same reference
         }
-        if (obj == null) {//if object is null
-            return false;
+        if (obj == null) {
+            return false; // null check
         }
         if (getClass() != obj.getClass()) {
-            return false;
+            return false; // must be same class
         }
-        final Move other = (Move) obj;
-        if (this.rowNum != other.rowNum) {//if row number are different
+
+        Move other = (Move) obj;
+
+        // compare row and column
+        if (this.rowNum != other.rowNum) {
             return false;
         }
         return this.columnNum == other.columnNum;
     }
 
     /**
-     * return the status of the current move object
-     *
-     * @return - the status
+     * Returns move info as text
+     * @return string with row and column
      */
     public String toString() {
-        return "Move{" + "rowNum=" + rowNum + ", columnNum=" + columnNum + '}';
+        return "Move{rowNum=" + rowNum + ", columnNum=" + columnNum + "}";
     }
-
 }

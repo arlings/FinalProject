@@ -1,3 +1,9 @@
+/*
+L Necakov, A Zalli, N Wang
+May 21- June 10, 2026
+This class handles rook movement and rook data
+*/
+
 package pieces;
 
 import java.awt.image.BufferedImage;
@@ -9,36 +15,36 @@ public class Rook extends AbstractPiece {
     private boolean hasMoved;
 
     /**
-     * default constructor
+     * Default rook constructor
+     * Creates a rook with preset values
      */
     public Rook() {
-        this(0, 0, null, true, false);//calls Rook constructor with 5 paramaters
+        this(0, 0, null, true, false); // call main constructor
     }
 
     /**
      * Rook constructor
-     *
-     * @param rowNum- row number
-     * @param columnNum- column number
-     * @param sprite- sprite
-     * @param isWhite- if the piece is white
-     * @param hasMoved - if the piece has moved
+     * @param rowNum board row
+     * @param columnNum board column
+     * @param sprite piece image
+     * @param isWhite piece color
+     * @param hasMoved move state
      */
     public Rook(int rowNum, int columnNum, BufferedImage sprite, boolean isWhite, boolean hasMoved) {
-        super(rowNum, columnNum, sprite, isWhite, 5);//calls the super constructor with the following paramaters
+        super(rowNum, columnNum, sprite, isWhite, 5); // rook value is 5
         this.hasMoved = hasMoved;
     }
 
     /**
-     * returns the valid moves
-     *
-     * @param pieces- 2d array of pieces
-     * @return - array list of valid moves
+     * Gets valid rook moves
+     * @param pieces board state
+     * @return list of moves
      */
     public ArrayList<Move> getValidMoves(Piece pieces[][]) {
-        ArrayList<Move> moves = new ArrayList();
 
-        //possible options for the rook
+        ArrayList<Move> moves = new ArrayList<>();
+
+        // rook moves in four straight directions
         searchDirection(moves, pieces, rowNum + 1, columnNum, 1, 0);
         searchDirection(moves, pieces, rowNum - 1, columnNum, -1, 0);
         searchDirection(moves, pieces, rowNum, columnNum + 1, 0, 1);
@@ -48,40 +54,34 @@ public class Rook extends AbstractPiece {
     }
 
     /**
-     * get if the rook has moved yet
-     *
-     * @return - true if rook has already moved and false otherwise
+     * Checks if rook has moved
+     * @return true if moved
      */
     public boolean hasMoved() {
         return hasMoved;
     }
 
     /**
-     * set if the rook has moved yet
-     *
-     * @param hasMoved - boolean of if the rook has moved yet
+     * Sets moved state
+     * @param hasMoved new state
      */
     public void setHasMoved(boolean hasMoved) {
         this.hasMoved = hasMoved;
     }
 
     /**
-     * get the number of rooks
-     *
-     * @return - the number of rooks
+     * Gets number of rooks created
+     * @return count
      */
     public static int getNumRooks() {
         return numRooks;
     }
 
     /**
-     * returns the status of the current instance of the rook
-     *
-     * @return - the status
+     * Returns rook info as text
+     * @return string
      */
     public String toString() {
-        return ("Piece Type: Rook"
-                + super.toString());//calls the super constructor for toString()
+        return "Piece Type: Rook" + super.toString();
     }
-
 }

@@ -1,3 +1,8 @@
+/*
+L Necakov, A Zalli, N Wang
+May 21- June 10, 2026
+This class handles knight movement and knight data
+ */
 package pieces;
 
 import java.awt.image.BufferedImage;
@@ -8,34 +13,35 @@ public class Knight extends AbstractPiece {
     private static int numKnights = 0;
 
     /**
-     * default Knight constructor
+     * Default knight constructor Creates an empty knight
      */
     public Knight() {
-        super();//calls super class constructor with no paramaters
+        super(); // call parent default constructor
     }
 
     /**
      * Knight constructor
      *
-     * @param rowNum - row number
-     * @param columnNum - col number
-     * @param sprite - sprite
-     * @param isWhite - boolean of if team is white
+     * @param rowNum board row
+     * @param columnNum board column
+     * @param sprite piece image
+     * @param isWhite piece color
      */
     public Knight(int rowNum, int columnNum, BufferedImage sprite, boolean isWhite) {
-        super(rowNum, columnNum, sprite, isWhite, 3);//calls super class constructor with the following paramaters
+        super(rowNum, columnNum, sprite, isWhite, 3); // knight value is 3
     }
 
     /**
-     * ger the valid moves
+     * Gets valid knight moves
      *
-     * @param pieces - 2d array of pieces
-     * @return - array list of valid moves
+     * @param pieces board state
+     * @return list of moves
      */
     public ArrayList<Move> getValidMoves(Piece[][] pieces) {
+
         ArrayList<Move> moves = new ArrayList<>();
 
-        //possible moves for knight
+        // all eight knight jumps
         searchDirection(moves, pieces, rowNum, columnNum, 1, -2);
         searchDirection(moves, pieces, rowNum, columnNum, -1, -2);
         searchDirection(moves, pieces, rowNum, columnNum, 1, 2);
@@ -49,47 +55,48 @@ public class Knight extends AbstractPiece {
     }
 
     /**
-     * search the direction
+     * Checks one knight jump
      *
-     * @param moves - array list of moves
-     * @param pieces - 2d array of pieces
-     * @param currentRow - current row
-     * @param currentCol - current col
-     * @param dRow - delta row
-     * @param dCol - delta col
+     * @param moves list to add to
+     * @param pieces board state
+     * @param currentRow starting row
+     * @param currentCol starting col
+     * @param dRow row offset
+     * @param dCol col offset
      */
-    public void searchDirection(ArrayList<Move> moves, Piece[][] pieces, int currentRow, int currentCol, int dRow, int dCol) {
+    public void searchDirection(ArrayList<Move> moves, Piece[][] pieces,
+            int currentRow, int currentCol, int dRow, int dCol) {
+
         int targetRow = currentRow + dRow;
         int targetCol = currentCol + dCol;
 
+        // check board bounds
         if (targetRow >= 0 && targetRow < 8 && targetCol >= 0 && targetCol < 8) {
 
             Piece piece = getPieceAt(targetRow, targetCol, pieces);
 
-            if (piece == null) {
-                moves.add(new Move(targetRow, targetCol));
-            } else if (piece.isWhite() != this.isWhite()) {
+            // empty or enemy square
+            if (piece == null || piece.isWhite() != this.isWhite()) {
                 moves.add(new Move(targetRow, targetCol));
             }
         }
     }
 
     /**
-     * get the number of knights
+     * Gets number of knights created
      *
-     * @return - the number of knights
+     * @return count
      */
     public static int getNumKnights() {
         return numKnights;
     }
 
     /**
-     * return the status of the knight
+     * Returns knight info as text
      *
-     * @return - toString status
+     * @return string
      */
     public String toString() {
-        return ("Piece Type: Knight"
-                + super.toString());//calls toString in the super class
+        return "Piece Type: Knight" + super.toString();
     }
 }

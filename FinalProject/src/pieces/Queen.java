@@ -1,3 +1,9 @@
+/*
+L Necakov, A Zalli, N Wang
+May 21- June 10, 2026
+This class handles queen movement and queen data
+*/
+
 package pieces;
 
 import java.awt.image.BufferedImage;
@@ -8,40 +14,42 @@ public class Queen extends AbstractPiece {
     private static int numQueens = 0;
 
     /**
-     * default queen constructor
+     * Default queen constructor
+     * Creates an empty queen and updates count
      */
     public Queen() {
-        super();//calls the default super constructor
-        numQueens++;//number of queens increase
+        super(); // call parent default constructor
+        numQueens++; // track number of queens
     }
 
     /**
      * Queen constructor
-     *
-     * @param rowNum - row number
-     * @param columnNum - column number
-     * @param sprite - sprite
-     * @param isWhite - if the piece is on the white team
+     * @param rowNum board row
+     * @param columnNum board column
+     * @param sprite piece image
+     * @param isWhite piece color
      */
     public Queen(int rowNum, int columnNum, BufferedImage sprite, boolean isWhite) {
-        super(rowNum, columnNum, sprite, isWhite, 9);//calls the super constructor with the following paramaters
-        numQueens++;//number of queens increase
+        super(rowNum, columnNum, sprite, isWhite, 9); // queen value is 9
+        numQueens++; // update count
     }
 
     /**
-     * get the valid moves
-     *
-     * @param pieces- d2 array of pieces
-     * @return - an array list of all the valid moves
+     * Gets valid queen moves
+     * @param pieces board state
+     * @return list of moves
      */
     public ArrayList<Move> getValidMoves(Piece pieces[][]) {
-        ArrayList<Move> moves = new ArrayList();
 
+        ArrayList<Move> moves = new ArrayList<>();
+
+        // rook style moves
         searchDirection(moves, pieces, rowNum + 1, columnNum, 1, 0);
         searchDirection(moves, pieces, rowNum - 1, columnNum, -1, 0);
         searchDirection(moves, pieces, rowNum, columnNum + 1, 0, 1);
         searchDirection(moves, pieces, rowNum, columnNum - 1, 0, -1);
 
+        // bishop style moves
         searchDirection(moves, pieces, rowNum + 1, columnNum + 1, 1, 1);
         searchDirection(moves, pieces, rowNum - 1, columnNum + 1, -1, 1);
         searchDirection(moves, pieces, rowNum + 1, columnNum - 1, 1, -1);
@@ -51,22 +59,18 @@ public class Queen extends AbstractPiece {
     }
 
     /**
-     * get the number of queens
-     *
-     * @return - the number of queens
+     * Gets number of queens created
+     * @return count
      */
     public static int getNumQueens() {
         return numQueens;
     }
 
     /**
-     * return the status of an instance of the queen
-     *
-     * @return - the status
+     * Returns queen info as text
+     * @return string
      */
     public String toString() {
-        return ("Piece Type: Queen"
-                + super.toString());//calls the super constructor for toString
+        return "Piece Type: Queen" + super.toString();
     }
-
 }

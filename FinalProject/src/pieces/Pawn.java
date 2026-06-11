@@ -1,3 +1,9 @@
+/*
+L Necakov, A Zalli, N Wang
+May 21- June 10, 2026
+This class handles pawn movement and pawn data
+*/
+
 package pieces;
 
 import java.awt.image.BufferedImage;
@@ -10,51 +16,53 @@ public class Pawn extends AbstractPiece {
     private boolean enPassantEligible = false;
 
     /**
-     * default Pawn constructor
+     * Default pawn constructor
      */
     public Pawn() {
     }
 
     /**
      * Pawn constructor
-     *
-     * @param rowNum - row number
-     * @param columnNum - column number
-     * @param sprite - sprite
-     * @param isWhite - if the piece is on the white team or not
+     * @param rowNum board row
+     * @param columnNum board column
+     * @param sprite piece image
+     * @param isWhite piece color
      */
     public Pawn(int rowNum, int columnNum, BufferedImage sprite, boolean isWhite) {
-        super(rowNum, columnNum, sprite, isWhite, 1);//calls super class with the following constructors
+        super(rowNum, columnNum, sprite, isWhite, 1); // pawn value is 1
     }
 
     /**
-     * returns all the valid moves
-     *
-     * @param pieces - 2d array of pieces
-     * @return - array list of all possible moves
+     * Gets valid pawn moves
+     * @param pieces board state
+     * @return list of moves
      */
     public ArrayList<Move> getValidMoves(Piece[][] pieces) {
+
         ArrayList<Move> moves = new ArrayList<>();
 
-        int direction;
-        if (this.isWhite()) {//if on the white team
-            direction = 1;
-        } else {//on the black team
-            direction = -1;
-        }
+        // white moves up, black moves down
+        int direction = this.isWhite() ? 1 : -1;
 
+        // forward one square
         searchDirection(moves, pieces, rowNum + direction, columnNum, direction);
+
+        // forward two squares on first move
         if (firstMove) {
             int twoStepRow = rowNum + (2 * direction);
+
             if (isInsideBoard(twoStepRow, columnNum)
                     && getPieceAt(rowNum + direction, columnNum, pieces) == null
                     && getPieceAt(twoStepRow, columnNum, pieces) == null) {
+
                 moves.add(new Move(twoStepRow, columnNum));
             }
         }
 
+        // en passant left
         if (columnNum - 1 >= 0) {
             Piece leftPiece = pieces[rowNum][columnNum - 1];
+
             if (leftPiece instanceof Pawn && leftPiece.isWhite() != this.isWhite()) {
                 if (((Pawn) leftPiece).isEnPassantEligible()) {
                     moves.add(new Move(rowNum + direction, columnNum - 1));
@@ -62,44 +70,58 @@ public class Pawn extends AbstractPiece {
             }
         }
 
+        // en passant right
         if (columnNum + 1 < 8) {
             Piece rightPiece = pieces[rowNum][columnNum + 1];
+
             if (rightPiece instanceof Pawn && rightPiece.isWhite() != this.isWhite()) {
                 if (((Pawn) rightPiece).isEnPassantEligible()) {
                     moves.add(new Move(rowNum + direction, columnNum + 1));
                 }
             }
         }
+
         return moves;
     }
 
     /**
-     * gets the direction
-     *
-     * @param moves - array list of moves
-     * @param pieces - 2d array of pieces
-     * @param targetRow - target row
-     * @param targetCol - target column
-     * @param direction - direction
+     * Handles forward and diagonal pawn movement
+     * @param moves list to add to
+     * @param pieces board state
+     * @param targetRow row to check
+     * @param targetCol col to check
+     * @param direction move direction
      */
-    public void searchDirection(ArrayList<Move> moves, Piece[][] pieces, int targetRow, int targetCol, int direction) {
+    public void searchDirection(ArrayList<Move> moves, Piece[][] pieces,
+                                int targetRow, int targetCol, int direction) {
+
+        // forward move
         if (isInsideBoard(targetRow, targetCol)) {
             Piece pieceForward = getPieceAt(targetRow, targetCol, pieces);
+
             if (pieceForward == null) {
                 moves.add(new Move(targetRow, targetCol));
             }
         }
+
+        // diagonal captures
         int leftCol = columnNum - 1;
         int rightCol = columnNum + 1;
         int diagonalRow = rowNum + direction;
+
+        // capture left
         if (isInsideBoard(diagonalRow, leftCol)) {
             Piece targetPiece = getPieceAt(diagonalRow, leftCol, pieces);
+
             if (targetPiece != null && targetPiece.isWhite() != this.isWhite()) {
                 moves.add(new Move(diagonalRow, leftCol));
             }
         }
+
+        // capture right
         if (isInsideBoard(diagonalRow, rightCol)) {
             Piece targetPiece = getPieceAt(diagonalRow, rightCol, pieces);
+
             if (targetPiece != null && targetPiece.isWhite() != this.isWhite()) {
                 moves.add(new Move(diagonalRow, rightCol));
             }
@@ -107,49 +129,42 @@ public class Pawn extends AbstractPiece {
     }
 
     /**
-     * get the number of pawns
-     *
-     * @return - the number of pawns
+     * Gets number of pawns created
+     * @return count
      */
     public static int getNumPawns() {
         return numPawns;
     }
 
     /**
-     * if enPassang is eligible
-     *
-     * @return - true if eligible false otherwise
+     * Checks if pawn is en passant eligible
+     * @return true if eligible
      */
     public boolean isEnPassantEligible() {
         return enPassantEligible;
     }
 
     /**
-     * set first move
-     *
-     * @param firstMove- the first move
+     * Sets first move state
+     * @param firstMove new state
      */
     public void setFirstMove(boolean firstMove) {
         this.firstMove = firstMove;
     }
 
     /**
-     * set if enPassang is eligible
-     *
-     * @param enPassantEligible - boolean of if enPassant is eligible
+     * Sets en passant eligibility
+     * @param enPassantEligible new state
      */
     public void setEnPassantEligible(boolean enPassantEligible) {
         this.enPassantEligible = enPassantEligible;
     }
 
     /**
-     * returns the status of the current pawn
-     *
-     * @return - the status
+     * Returns pawn info as text
+     * @return string
      */
     public String toString() {
-        return ("Piece Type: Pawn"
-                + super.toString());//calls the toString in the super class
+        return "Piece Type: Pawn" + super.toString();
     }
-
 }
