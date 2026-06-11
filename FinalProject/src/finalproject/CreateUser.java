@@ -8,10 +8,7 @@ package finalproject;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.util.Scanner;
-import javax.swing.JOptionPane;
 
 public class CreateUser extends javax.swing.JFrame {
 
@@ -182,10 +179,11 @@ public class CreateUser extends javax.swing.JFrame {
             try {
                 FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Users.txt");
                 Scanner s = new Scanner(in);
-                
-                if(!s.hasNext())
+
+                if (!s.hasNext()) {
                     return;
-                
+                }
+
                 String[] items = s.nextLine().split(":");
                 for (int i = 0; i < items.length; i++) {
                     if (!done) {

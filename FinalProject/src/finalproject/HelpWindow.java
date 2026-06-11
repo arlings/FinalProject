@@ -25,9 +25,10 @@ public class HelpWindow extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
-    
+
     /**
      * help window constructor
+     *
      * @param m - main window
      */
     public HelpWindow(MainWindow m) {

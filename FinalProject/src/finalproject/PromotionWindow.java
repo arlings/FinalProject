@@ -25,9 +25,10 @@ public class PromotionWindow extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
-    
+
     /**
      * The constructor for the promotion window, coming from GameWindow.
+     *
      * @param m The game window the promotion window is being created from.
      * @param user1 User1 playing the chess game
      * @param user2 User2 playing the chess game

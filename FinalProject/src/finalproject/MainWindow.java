@@ -9,16 +9,13 @@ import static finalproject.LeaderboardWindow.mergeSort;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class MainWindow extends javax.swing.JFrame {
 
@@ -57,7 +54,7 @@ public class MainWindow extends javax.swing.JFrame {
         initComponents();
         getTop3();
     }
-    
+
     /**
      * get the top 3 users according to their amount of comeptitive wins
      */

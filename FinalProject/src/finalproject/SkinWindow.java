@@ -2,11 +2,9 @@
 L Necakov, A Zalli, Neo Wang
 May 21-June 10
 The skin window, which allows the user to customize the appearance of their chess pieces based on their achievements.
-*/
-
+ */
 package finalproject;
 
-import static finalproject.LeaderboardWindow.mergeSort;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -19,7 +17,7 @@ public class SkinWindow extends javax.swing.JFrame {
 
     private MainWindow mainWindow;
     private WarningWindow warningWindow;
-    
+
     /**
      * A method designed to move the frame white preventing the user from
      * accessing a hard-coded way to exit the frame.
@@ -39,7 +37,9 @@ public class SkinWindow extends javax.swing.JFrame {
 
     /**
      * The primary and only constructor for the skin window.
-     * @param m The main window of type MainWindow, that flows into the opening of the skin window.
+     *
+     * @param m The main window of type MainWindow, that flows into the opening
+     * of the skin window.
      */
     public SkinWindow(MainWindow m) {
         MoveJFrame();
@@ -52,13 +52,13 @@ public class SkinWindow extends javax.swing.JFrame {
             String[] userInfo = s.nextLine().split(":");
             // Split this line based on regex of :, that separates each user. Store this in an array.
             for (int i = 0; i < userInfo.length; i++) {
-            // For each user information bit in the array, split this on regex of "," to select for specific user information. 
+                // For each user information bit in the array, split this on regex of "," to select for specific user information. 
                 userDropdown.addItem(userInfo[i].split(",")[0]);
                 // In this case, we are just getting the username of the user and adding it to the users dropdown.
             }
         } catch (FileNotFoundException e) { // If the code is not able to run properly because a file is not found,
             warningWindow = new WarningWindow(this, "There was an error with the location of the Users or Leaderboard file. Please see user manual for more help.");
-            warningWindow.setVisible(true); 
+            warningWindow.setVisible(true);
             // Inform the user.
         }
     }
@@ -172,18 +172,18 @@ public class SkinWindow extends javax.swing.JFrame {
             for (int i = 0; i < userInfo.length; i++) {
                 // For each user information bit in the array, split this on regex of "," to select for specific user information.
                 if (userInfo[i].split(",")[0].equalsIgnoreCase(userDropdown.getItemAt(userDropdown.getSelectedIndex()))) {
-                // If the user that is being analyzed in the for loop is the same as the one that is selected in the dropdown,
+                    // If the user that is being analyzed in the for loop is the same as the one that is selected in the dropdown,
                     wins = Integer.parseInt(userInfo[i].split(",")[1]);
                     // Store their amount of wins in a variable.
                 }
             }
         } catch (NoSuchElementException e) { // If there is an error with the scanner, do nothing. This means the file is empty and it isnt an error.
-            
+
         } catch (FileNotFoundException e) { // If there is an error with the file, 
-            warningWindow = new WarningWindow(this, "There was an error with the location of the Users file. Please see user manual for more help.");    
+            warningWindow = new WarningWindow(this, "There was an error with the location of the Users file. Please see user manual for more help.");
             // Inform the user.
         }
-        
+
         if (wins >= 30) { // If the users wins are equal to or exceed 30, add all items to the skin dropdown.
             skinDropdown.addItem("30Wins");
             skinDropdown.addItem("20Wins");
@@ -213,10 +213,10 @@ public class SkinWindow extends javax.swing.JFrame {
             }
             String changedFile = "";
             for (int i = 0; i < userInfo.length; i++) {
-            // Go through the edited user info 
+                // Go through the edited user info 
                 changedFile += userInfo[i] + ":";
             }
-            
+
             in.close();
             FileOutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/Users.txt");
             try {
@@ -224,13 +224,13 @@ public class SkinWindow extends javax.swing.JFrame {
             } catch (IOException e) {
 
             }
-            
+
             s.close();
             out.close();
         } catch (Exception e) {
             warningWindow = new WarningWindow(this, "There was an error with the location of the Users or Leaderboard file. Please see user manual for more help.");
             warningWindow.setVisible(true);
-        } 
+        }
         System.out.println("Hi");
         this.dispose();
     }//GEN-LAST:event_exitButtonActionPerformed

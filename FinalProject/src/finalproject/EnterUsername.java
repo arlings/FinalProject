@@ -35,9 +35,10 @@ public class EnterUsername extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
-    
+
     /**
      * EnterUsername constructor
+     *
      * @param m - main window
      * @param chosenTime - time of the game
      */

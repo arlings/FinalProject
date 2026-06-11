@@ -1253,13 +1253,13 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         }
     }
 
-    private void handleSandboxClick(int r, int c, java.awt.event.MouseEvent evt){
-        if(startGameBtn.isEnabled() && isSandbox){
-            if(evt.getButton() == java.awt.event.MouseEvent.BUTTON1){
-                if(getPieceButton(r,c) != null){
-                    pieces[r][c] = getPieceButton(r,c); 
+    private void handleSandboxClick(int r, int c, java.awt.event.MouseEvent evt) {
+        if (startGameBtn.isEnabled() && isSandbox) {
+            if (evt.getButton() == java.awt.event.MouseEvent.BUTTON1) {
+                if (getPieceButton(r, c) != null) {
+                    pieces[r][c] = getPieceButton(r, c);
                 }
-            }else if(evt.getButton() == java.awt.event.MouseEvent.BUTTON3){
+            } else if (evt.getButton() == java.awt.event.MouseEvent.BUTTON3) {
                 pieces[r][c] = null;
             }
             updateBoardUI();
@@ -4217,4 +4217,3 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JLabel whiteTimeLbl;
     // End of variables declaration//GEN-END:variables
 }
-       

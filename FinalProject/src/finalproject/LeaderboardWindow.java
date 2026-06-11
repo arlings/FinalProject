@@ -2,15 +2,13 @@
  L Necakov, A Zalli, N Wang
  May 21- June 10, 2026
  Leaderboard Window which displays all the users starting with the user with the highest points(i.e. wins-loses)
-*/
+ */
 package finalproject;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class LeaderboardWindow extends javax.swing.JFrame {
@@ -37,6 +35,7 @@ public class LeaderboardWindow extends javax.swing.JFrame {
 
     /**
      * leaderboardWindow constructor
+     *
      * @param m - main window
      */
     public LeaderboardWindow(MainWindow m) {
@@ -45,9 +44,10 @@ public class LeaderboardWindow extends javax.swing.JFrame {
         leaderboardSort();
         mainWindow = m;
     }
-    
+
     /**
-     * sorts the leaderboard in descending order according to their number of points(i.e. wins-losses)
+     * sorts the leaderboard in descending order according to their number of
+     * points(i.e. wins-losses)
      */
     public void leaderboardSort() {
         try {
@@ -78,7 +78,7 @@ public class LeaderboardWindow extends javax.swing.JFrame {
                 warningWindow = new WarningWindow(this, "There was an error with the parsing the Users or Leaderboard file. Please see user manual for more help.");
                 warningWindow.setVisible(true);
             }
-            
+
             s.close();
             in.close();
             out.close();
@@ -86,7 +86,7 @@ public class LeaderboardWindow extends javax.swing.JFrame {
             warningWindow = new WarningWindow(this, "There was an error with the location of the Users or Leaderboard file. Please see user manual for more help.");
             warningWindow.setVisible(true);
         }
-        
+
     }
 
     public static void mergeSort(User[] arr, int l, int r) {
