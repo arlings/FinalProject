@@ -47,7 +47,7 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     /**
-     * main window constructor
+     * Main window constructor
      */
     public MainWindow() {
         MoveJFrame();
@@ -56,7 +56,7 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     /**
-     * get the top 3 users according to their amount of comeptitive wins
+     * Get the top 3 users according to their amount of competitive wins
      */
     public void getTop3() {
         try {
@@ -65,17 +65,22 @@ public class MainWindow extends javax.swing.JFrame {
             FileOutputStream out2 = new FileOutputStream(System.getProperty("user.dir") + "/Leaderboard.txt", false);
             Scanner s = new Scanner(in);
             String[] items = s.nextLine().split(":");
+            // Import user data and store it in an array
             User[] leaderboard = new User[items.length];
             int[] scores = new int[items.length];
             for (int i = 0; i < items.length; i++) {
+            // For each user,
                 int wins = Integer.parseInt(items[i].split(",")[1]);
                 int losses = Integer.parseInt(items[i].split(",")[3]);
                 scores[i] = (wins - losses);
                 leaderboard[i] = new User(items[i].split(",")[0], scores[i]);
+                // Get individual data by splitting using regex ","
             }
             mergeSort(leaderboard, 0, leaderboard.length - 1);
+            // Sort the leaderboard
             String[] sLeaderboard = new String[leaderboard.length];
             for (int i = 0; i < leaderboard.length; i++) {
+                // Write the leaderboard info to a string
                 sLeaderboard[i] = "#" + (i + 1) + " " + leaderboard[i].toString();
             }
             try {
@@ -86,47 +91,72 @@ public class MainWindow extends javax.swing.JFrame {
             } catch (IOException e) {
                 warningWindow = new WarningWindow(this, "There was an error with the parsing the Users file. Please see user manual for more help.");
             }
+            // Write to the leaderboard file, catching and informing of any errors
         } catch (NoSuchElementException e) {
-
+            // Catch any issues with the scanner if a file is empty
         } catch (FileNotFoundException e) {
+            // Catch if the file is not found, and inform the user
             warningWindow = new WarningWindow(this, "There was an error with the location of the Users file. Please see user manual for more help.");
         }
-        try {
+        try { // Try the following code,
             FileInputStream in = new FileInputStream(System.getProperty("user.dir") + "/Leaderboard.txt");
             Scanner s = new Scanner(in);
+            // Import the leaderboard file,
             String nextLine = s.nextLine();
             try {
                 firstPlaceLabel.setText("#" + nextLine.split("#")[1].split(",")[0]);
                 secondPlaceLabel.setText("#" + nextLine.split("#")[2].split(",")[0]);
                 thirdPlaceLabel.setText("#" + nextLine.split("#")[3].split(",")[0]);
+                // Set first second, and third place labels based on the leaderboard file.
             } catch (ArrayIndexOutOfBoundsException e) {
 
             }
         } catch (NoSuchElementException e) {
-
+            // If a file is empty, nothing happens, not an error.
         } catch (FileNotFoundException e) {
             warningWindow = new WarningWindow(this, "There was an error with the location of the Leaderboard file. Please see user manual for more help");
             warningWindow.setVisible(true);
+            // If a file is not found notify the user of this error.
         }
+        
     }
 
+    /**
+     * A class that allows the user to drag all of the windows in this game. Is implemented in other files.
+     */
     public static class FrameDragListener extends MouseAdapter {
 
         private final JFrame frame;
         private Point mouseDownCompCoords = null;
 
+        /**
+         * Constructor that instantiates the jFrame.
+         * @param frame the target frame
+         */
         public FrameDragListener(JFrame frame) {
             this.frame = frame;
         }
 
+        /**
+         * Detects when the mouse is released based on a mouse event.
+         * @param e MouseEvent
+         */
         public void mouseReleased(MouseEvent e) {
             mouseDownCompCoords = null;
         }
 
+        /**
+         * Detects when the mouse is pressed based on a mouse event.
+         * @param e MouseEvent
+         */
         public void mousePressed(MouseEvent e) {
             mouseDownCompCoords = e.getPoint();
         }
 
+        /**
+         * Detects when the mouse is dragged based on a mouse event, updates its position
+         * @param e MouseEvent
+         */
         public void mouseDragged(MouseEvent e) {
             Point currCoords = e.getLocationOnScreen();
             frame.setLocation(currCoords.x - mouseDownCompCoords.x, currCoords.y - mouseDownCompCoords.y);
@@ -422,6 +452,7 @@ public class MainWindow extends javax.swing.JFrame {
             sandboxWindow = new SandboxWindow(this);
         }
         sandboxWindow.setVisible(true);
+        // Open a sandbox game for both users
     }//GEN-LAST:event_newGameButtonActionPerformed
 
     private void viewFullLeaderboardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewFullLeaderboardButtonActionPerformed
@@ -430,6 +461,7 @@ public class MainWindow extends javax.swing.JFrame {
             leaderboardWindow = new LeaderboardWindow(mainWindow);
         }
         leaderboardWindow.setVisible(true);
+        // Open a leaderboard window for the user
     }//GEN-LAST:event_viewFullLeaderboardButtonActionPerformed
 
     private void helpMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_helpMenuMouseClicked
@@ -437,11 +469,12 @@ public class MainWindow extends javax.swing.JFrame {
             helpWindow = new HelpWindow(mainWindow);
         }
         helpWindow.setVisible(true);
+        // Open the help menu for the user
     }//GEN-LAST:event_helpMenuMouseClicked
 
     private void exitMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMenuMouseClicked
         System.exit(0);
-
+        // Exit and close all windows.
     }//GEN-LAST:event_exitMenuMouseClicked
 
     private void customizeMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customizeMenuMouseClicked
@@ -449,6 +482,7 @@ public class MainWindow extends javax.swing.JFrame {
             skinWindow = new SkinWindow(mainWindow);
         }
         skinWindow.setVisible(true);
+        // Open the skin window
     }//GEN-LAST:event_customizeMenuMouseClicked
 
     private void tenMinMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tenMinMenuItemActionPerformed
@@ -456,6 +490,7 @@ public class MainWindow extends javax.swing.JFrame {
             enterUsername = new EnterUsername(mainWindow, 600);
         }
         enterUsername.setVisible(true);
+        // Open the game with 10 minutes on the timer for both users
     }//GEN-LAST:event_tenMinMenuItemActionPerformed
 
     private void oneMinMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_oneMinMenuItemActionPerformed
@@ -463,6 +498,7 @@ public class MainWindow extends javax.swing.JFrame {
             enterUsername = new EnterUsername(mainWindow, 60);
         }
         enterUsername.setVisible(true);
+        // Open the game with 1 minute on the timer for both users
     }//GEN-LAST:event_oneMinMenuItemActionPerformed
 
     private void twoMinMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_twoMinMenuItemActionPerformed
@@ -470,6 +506,7 @@ public class MainWindow extends javax.swing.JFrame {
             enterUsername = new EnterUsername(mainWindow, 120);
         }
         enterUsername.setVisible(true);
+        // Open the game with 2 minutes on the timer for both users
     }//GEN-LAST:event_twoMinMenuItemActionPerformed
 
     private void fiveMinMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fiveMinMenuItemActionPerformed
@@ -477,6 +514,7 @@ public class MainWindow extends javax.swing.JFrame {
             enterUsername = new EnterUsername(mainWindow, 300);
         }
         enterUsername.setVisible(true);
+        // Open the game with 5 minutes on the timer for both users
     }//GEN-LAST:event_fiveMinMenuItemActionPerformed
 
     private void thirtyMinMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thirtyMinMenuItemActionPerformed
@@ -484,6 +522,7 @@ public class MainWindow extends javax.swing.JFrame {
             enterUsername = new EnterUsername(mainWindow, 1800);
         }
         enterUsername.setVisible(true);
+        // Open the game with 30 minutes on the timer for both users
     }//GEN-LAST:event_thirtyMinMenuItemActionPerformed
 
     public static void main(String args[]) {
