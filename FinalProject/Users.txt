@@ -1,1 +1,1 @@
-Chris,10,0,0,Default:Luca,10,0,0,Default:Elliot,0,0,0,Default:
+Chris,10,0,0,10Wins:Luca,10,0,0,10Wins:Elliot,0,0,0,Default:

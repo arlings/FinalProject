@@ -8,7 +8,8 @@ package finalproject;
 public class PromotionWindow extends javax.swing.JFrame {
 
     private GameWindow gameWindow;
-
+    private String user1Skin = "";
+    private String user2Skin = "";
     /**
      * A method designed to move the frame white preventing the user from
      * accessing a hard-coded way to exit the frame.
@@ -38,6 +39,8 @@ public class PromotionWindow extends javax.swing.JFrame {
         initComponents();
         gameWindow = m;
         hiddenInfo.setText(user1.getUserName() + "," + user2.getUserName());
+        user1Skin = user1.getSkin();
+        user2Skin = user2.getSkin();
     }
 
     @SuppressWarnings("unchecked")
@@ -206,7 +209,7 @@ public class PromotionWindow extends javax.swing.JFrame {
         int col = gameWindow.getPromotionCol();
         int row = gameWindow.getPromotionRow();
         boolean promotionIsWhite = gameWindow.getPromotionIsWhite();
-        gameWindow.fixBoardAfterPromotion(col, row, "Queen", promotionIsWhite, "Default", "Default");//replace the promoted pawn with queen
+        gameWindow.fixBoardAfterPromotion(col, row, "Queen", promotionIsWhite, user2Skin, user1Skin);//replace the promoted pawn with queen
         PromotionWindow.this.dispose();//dispose the window
         gameWindow.setVisible(true);
         // When the user promotes to a queen, replace their pawn with a queen at the exact same position in the same turn
@@ -217,7 +220,7 @@ public class PromotionWindow extends javax.swing.JFrame {
         int row = gameWindow.getPromotionRow();
         boolean promotionIsWhite = gameWindow.getPromotionIsWhite();
         if (promotionIsWhite) {
-            gameWindow.fixBoardAfterPromotion(col, row, "Bishop", promotionIsWhite, "Default", "Default");//replace the promoted pawn with bishop
+            gameWindow.fixBoardAfterPromotion(col, row, "Bishop", promotionIsWhite, user2Skin, user1Skin);//replace the promoted pawn with bishop
         }
         PromotionWindow.this.dispose();//dispose the window
         gameWindow.setVisible(true);
@@ -228,7 +231,7 @@ public class PromotionWindow extends javax.swing.JFrame {
         int col = gameWindow.getPromotionCol();
         int row = gameWindow.getPromotionRow();
         boolean promotionIsWhite = gameWindow.getPromotionIsWhite();
-        gameWindow.fixBoardAfterPromotion(col, row, "Knight", promotionIsWhite, "Default", "Default");//replace the promoted pawn with the bishop
+        gameWindow.fixBoardAfterPromotion(col, row, "Knight", promotionIsWhite, user2Skin, user1Skin);//replace the promoted pawn with the bishop
         PromotionWindow.this.dispose();//dispose the window
         gameWindow.setVisible(true);
         // When the user promotes to a knight, replace their pawn with a knight at the exact same position in the same turn
@@ -238,7 +241,7 @@ public class PromotionWindow extends javax.swing.JFrame {
         int col = gameWindow.getPromotionCol();
         int row = gameWindow.getPromotionRow();
         boolean promotionIsWhite = gameWindow.getPromotionIsWhite();
-        gameWindow.fixBoardAfterPromotion(col, row, "Rook", promotionIsWhite, "Default", "Default");//replace the promoted pawn with a rook
+        gameWindow.fixBoardAfterPromotion(col, row, "Rook", promotionIsWhite, user2Skin, user1Skin);//replace the promoted pawn with a rook
         PromotionWindow.this.setVisible(false);
         gameWindow.setVisible(true);
         // When the user promotes to a rook, replace their pawn with a rook at the exact same position in the same turn

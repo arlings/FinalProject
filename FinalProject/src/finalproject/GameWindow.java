@@ -1228,7 +1228,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
             }
         } else {//if the colour is black
             if (piece.equalsIgnoreCase("Queen")) {//if queen create new queen
-                pieces[row][col] = new Queen(row, col, loadImage("/images/" + blackSkin + "White_Knight.png"), isWhite);
+                pieces[row][col] = new Queen(row, col, loadImage("/images/" + blackSkin + "Black_Queen.png"), isWhite);
             } else if (piece.equalsIgnoreCase("Rook")) {//if rook create new rook
                 pieces[row][col] = new Rook(row, col, loadImage("/images/" + blackSkin + "Black_Rook.png"), isWhite, true);
             } else if (piece.equalsIgnoreCase("Bishop")) {//if bishop create new bishop
