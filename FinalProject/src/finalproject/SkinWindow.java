@@ -103,7 +103,7 @@ public class SkinWindow extends javax.swing.JFrame {
             .addComponent(jLabel1)
         );
 
-        exitButton.setText("Done");
+        exitButton.setText("Save");
         exitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitButtonActionPerformed(evt);
@@ -118,7 +118,7 @@ public class SkinWindow extends javax.swing.JFrame {
 
         jLabel2.setText("Skin");
 
-        jLabel3.setText("Click done to save an individual skin.");
+        jLabel3.setText("Click save to save an individual skin.");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -130,7 +130,7 @@ public class SkinWindow extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                         .addComponent(exitButton))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
