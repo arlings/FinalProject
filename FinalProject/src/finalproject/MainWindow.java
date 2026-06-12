@@ -184,6 +184,8 @@ public class MainWindow extends javax.swing.JFrame {
         firstPlaceLabel = new javax.swing.JLabel();
         thirdPlaceLabel = new javax.swing.JLabel();
         viewFullLeaderboardButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         topBar = new javax.swing.JMenuBar();
         newMenu = new javax.swing.JMenu();
         newUserMenuItem = new javax.swing.JMenuItem();
@@ -284,32 +286,41 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGap(12, 12, 12))
         );
 
+        jLabel1.setText("Created By: Creative Developers,");
+
+        jLabel3.setText("Arlind Zalli, Luca Necakov, Neo Wang");
+
         javax.swing.GroupLayout leaderboardPanelLayout = new javax.swing.GroupLayout(leaderboardPanel);
         leaderboardPanel.setLayout(leaderboardPanelLayout);
         leaderboardPanelLayout.setHorizontalGroup(
             leaderboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(leaderboardPanelLayout.createSequentialGroup()
                 .addGroup(leaderboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(leaderboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(leaderboardPanelLayout.createSequentialGroup()
+                            .addGap(23, 23, 23)
+                            .addGroup(leaderboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(chessIconDecoration2)
+                                .addComponent(newGameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(chessIconDecoration))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, leaderboardPanelLayout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(leaderboardPanelLayout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(leaderboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(chessIconDecoration2)
-                            .addComponent(newGameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(chessIconDecoration))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, leaderboardPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(leaderboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3))))
                 .addGap(24, 24, 24)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         leaderboardPanelLayout.setVerticalGroup(
             leaderboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(leaderboardPanelLayout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addGroup(leaderboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(leaderboardPanelLayout.createSequentialGroup()
                         .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -319,7 +330,11 @@ public class MainWindow extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(chessIconDecoration2))
                             .addComponent(chessIconDecoration))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addGap(4, 4, 4)
+                        .addComponent(jLabel3))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -423,7 +438,7 @@ public class MainWindow extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(leaderboardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(leaderboardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -569,7 +584,9 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel firstPlaceLabel;
     private javax.swing.JMenuItem fiveMinMenuItem;
     private javax.swing.JMenu helpMenu;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel leaderboardPanel;
     private javax.swing.JButton newGameButton;
