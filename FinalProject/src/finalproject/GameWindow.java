@@ -603,7 +603,8 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
                     + "\n1. Select any piece from the piece select side bar to add it"
                     + "\n2. Right click to add a piece, left click to remove a piece"
                     + "\n3. To start the game, there must be EXACTLY 1 white and 1 black king on the board"
-                    + "\n4. Custom Pieces will be highlighted yellow for clarity while playing"
+                    + "\n4. To start the game, ther black king ust not be in check on the first move"
+                    + "\n5. Custom Pieces will be highlighted yellow for clarity while playing"
                     + "\nHave fun customising the board and using your custom piece!");
 
             customPieceBtn.setIcon(new ImageIcon(customPiece.getSprite()));
@@ -1022,7 +1023,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
 
     /**
      * formats the time
-     *
+     
      * @param time - the time in ints
      * @return - format
      */
