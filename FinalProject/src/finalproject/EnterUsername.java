@@ -16,8 +16,8 @@ public class EnterUsername extends javax.swing.JFrame {
     private GameWindow gameWindow;
     private WarningWindow warningWindow;
 
-    static int numOfUsers;
-    static String[] users = new String[2];
+    int numOfUsers;
+    String[] users = new String[2];
 
     /**
      * A method designed to move the frame white preventing the user from

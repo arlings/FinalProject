@@ -970,6 +970,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
                 //if white turn flag is active it decrements white player countdown variable
                 if (whiteTurn) {
                     whiteTime--;
+                    updateTime();
                     //if white time expires it zeros out variable and stops game with black victory
                     if (whiteTime <= 0) {
                         whiteTime = 0;
@@ -983,7 +984,9 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
                     }
                     //if black turn flag is active it decrements black player countdown variable
                 } else {
+                    
                     blackTime--;
+                    updateTime();
                     //if black time expires it zeros out variable and stops game with white victory
                     if (blackTime <= 0) {
                         blackTime = 0;
@@ -997,7 +1000,7 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
                     }
                 }
                 //updates display clocks after updating time tracking counters
-                updateTime();
+                
             }
         });
         //starts game loop thread execution block
@@ -3947,17 +3950,23 @@ public class GameWindow extends javax.swing.JFrame implements ActionListener {
         }
 
         java.awt.Dimension currentSize = this.getSize();
+        
         if (isSandbox && !(whiteKings == 1 && blackKings == 1)) {
             JOptionPane.showMessageDialog(null, "Please Ensure there is exactly 1 White King and 1 Black King", "Error!", JOptionPane.ERROR_MESSAGE);
         } else {
-            if(isSandbox){
+            Piece blackKing = findKing(pieces, false);
+            if(isKingInCheck(blackKing, pieces)){
+                JOptionPane.showMessageDialog(null, "Plase ensure the black king is not in check on the first move", "Error!", JOptionPane.ERROR_MESSAGE);
+            }else{
+                if(isSandbox){
                 this.remove(pieceSelectPanel);
                 this.setSize(currentSize.width - 135, currentSize.height);
                 this.revalidate();
                 this.repaint();
+                }
+                startTimer();
+                startGameBtn.setEnabled(false);
             }
-            startTimer();
-            startGameBtn.setEnabled(false);
         }
     }//GEN-LAST:event_startGameBtnActionPerformed
 

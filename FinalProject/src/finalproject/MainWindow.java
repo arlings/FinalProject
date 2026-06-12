@@ -69,7 +69,7 @@ public class MainWindow extends javax.swing.JFrame {
             User[] leaderboard = new User[items.length];
             int[] scores = new int[items.length];
             for (int i = 0; i < items.length; i++) {
-            // For each user,
+                // For each user,
                 int wins = Integer.parseInt(items[i].split(",")[1]);
                 int losses = Integer.parseInt(items[i].split(",")[3]);
                 scores[i] = (wins - losses);
@@ -118,11 +118,12 @@ public class MainWindow extends javax.swing.JFrame {
             warningWindow.setVisible(true);
             // If a file is not found notify the user of this error.
         }
-        
+
     }
 
     /**
-     * A class that allows the user to drag all of the windows in this game. Is implemented in other files.
+     * A class that allows the user to drag all of the windows in this game. Is
+     * implemented in other files.
      */
     public static class FrameDragListener extends MouseAdapter {
 
@@ -131,6 +132,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         /**
          * Constructor that instantiates the jFrame.
+         *
          * @param frame the target frame
          */
         public FrameDragListener(JFrame frame) {
@@ -139,6 +141,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         /**
          * Detects when the mouse is released based on a mouse event.
+         *
          * @param e MouseEvent
          */
         public void mouseReleased(MouseEvent e) {
@@ -147,6 +150,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         /**
          * Detects when the mouse is pressed based on a mouse event.
+         *
          * @param e MouseEvent
          */
         public void mousePressed(MouseEvent e) {
@@ -154,7 +158,9 @@ public class MainWindow extends javax.swing.JFrame {
         }
 
         /**
-         * Detects when the mouse is dragged based on a mouse event, updates its position
+         * Detects when the mouse is dragged based on a mouse event, updates its
+         * position
+         *
          * @param e MouseEvent
          */
         public void mouseDragged(MouseEvent e) {
@@ -486,41 +492,41 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_customizeMenuMouseClicked
 
     private void tenMinMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tenMinMenuItemActionPerformed
-        if (enterUsername == null) {
+        
             enterUsername = new EnterUsername(mainWindow, 600);
-        }
+        
         enterUsername.setVisible(true);
         // Open the game with 10 minutes on the timer for both users
     }//GEN-LAST:event_tenMinMenuItemActionPerformed
 
     private void oneMinMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_oneMinMenuItemActionPerformed
-        if (enterUsername == null) {
-            enterUsername = new EnterUsername(mainWindow, 60);
-        }
+
+        enterUsername = new EnterUsername(mainWindow, 60);
+
         enterUsername.setVisible(true);
         // Open the game with 1 minute on the timer for both users
     }//GEN-LAST:event_oneMinMenuItemActionPerformed
 
     private void twoMinMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_twoMinMenuItemActionPerformed
-        if (enterUsername == null) {
-            enterUsername = new EnterUsername(mainWindow, 120);
-        }
+
+        enterUsername = new EnterUsername(mainWindow, 120);
+
         enterUsername.setVisible(true);
         // Open the game with 2 minutes on the timer for both users
     }//GEN-LAST:event_twoMinMenuItemActionPerformed
 
     private void fiveMinMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fiveMinMenuItemActionPerformed
-        if (enterUsername == null) {
-            enterUsername = new EnterUsername(mainWindow, 300);
-        }
+
+        enterUsername = new EnterUsername(mainWindow, 300);
+
         enterUsername.setVisible(true);
         // Open the game with 5 minutes on the timer for both users
     }//GEN-LAST:event_fiveMinMenuItemActionPerformed
 
     private void thirtyMinMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thirtyMinMenuItemActionPerformed
-        if (enterUsername == null) {
-            enterUsername = new EnterUsername(mainWindow, 1800);
-        }
+
+        enterUsername = new EnterUsername(mainWindow, 1800);
+
         enterUsername.setVisible(true);
         // Open the game with 30 minutes on the timer for both users
     }//GEN-LAST:event_thirtyMinMenuItemActionPerformed
